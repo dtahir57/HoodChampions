@@ -15,6 +15,7 @@ class RoleSeeder extends Seeder
         $super_user = Role::create(['name' => 'Super_User']);
         $super_user->givePermissionTo(['View_Permission', 'Add_Permission', 'Edit_Permission', 'Delete_Permission',
                                         'View_Role', 'Add_Role', 'Edit_Role', 'Delete_Role',
-                                        'View_User', 'Add_User', 'Edit_User', 'Delete_User']);
+                                        'View_User', 'Add_User', 'Edit_User', 'Delete_User',
+                                        'View_Hood', 'Add_Hood', 'Edit_Hood', 'Delete_Hood']);
     }
 }
