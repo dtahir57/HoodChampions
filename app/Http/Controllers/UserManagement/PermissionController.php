@@ -68,6 +68,7 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
+        return view('admin.UserManagement.permission.edit', compact('permission'));
     }
 
     /**
@@ -82,6 +83,10 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->name = $request->name;
         $permission->update();
+        if ($permission) {
+            Session::flash('updated', 'Permission Updated Successfully');
+            return redirect()->route('permission.index');
+        }
     }
 
     /**
@@ -90,9 +95,13 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PermissionRequest $request)
     {
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail($request->id);
         $permission->delete();
+        if ($permission) {
+            Session::flash('deleted', 'Permission Deleted Successfully');
+            return redirect()->route('permission.index');
+        }
     }
 }

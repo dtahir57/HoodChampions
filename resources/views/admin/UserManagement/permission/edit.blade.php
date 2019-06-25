@@ -23,7 +23,7 @@
                     <li class="breadcrumb-item"><a href="{{ route('permission.index') }}">Permissions</a>
                     </li>
                     @endif
-                    <li class="breadcrumb-item active">Create
+                    <li class="breadcrumb-item active">Update
                     </li>
                 </ol>
             </div>
@@ -47,7 +47,7 @@
                     @endforeach
                     <div class="card">
                         <div class="card-header">
-                        <h4 class="card-title">Create Permission</h4>
+                        <h4 class="card-title">Edit Permission</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
@@ -58,16 +58,17 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
-                                <form action="{{ route('permission.store') }}" method="post">
+                                <form action="{{ route('permission.update', $permission->id) }}" method="post">
                                     @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="card-block">
                                                 <fieldset>
                                                     <div class="input-group">
-                                                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" placeholder="Permission Name" aria-describedby="button-addon2">
+                                                        <input type="text" name="name" class="form-control" value="{{ $permission->name }}" placeholder="Permission Name" aria-describedby="button-addon2">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-primary" type="submit">Save</button>
+                                                            <button class="btn btn-primary" type="submit">Update</button>
                                                         </div>
                                                     </div>
                                                 </fieldset>
@@ -86,6 +87,4 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
-<script src="{{ asset('app-assets/js/scripts/tables/datatables/datatable-basic.js') }}"></script>
 @endsection

@@ -297,16 +297,24 @@
                         Dashboard
                     </a>
                 </li>
+                <li class="nav-item {{ (Request::is('admin/hoods') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('hood.index') }}">
+                        <i class="material-icons">home</i>
+                        Hoods
+                    </a>
+                </li>
                 @if(auth::user()->can('View_Permission') OR auth::user()->can('View_Role') OR auth::user()->can('View_User'))
                 <li class="nav-item">
                     <a href="#"><i class="material-icons">accessibility</i><span class="menu-title" data-i18n="nav.invoice.main">User Management</span></a>
                     <ul class="menu-content">
                         @if(auth::user()->can('View_Permission'))
-                        <li class="{{(Request::is('admin/permissions') ? 'active' : '')}}"><a class="menu-item" href="{{ route('permission.index') }}">Permissions</a>
+                        <li class="{{(Request::is('admin/permissions') ? 'active' : '')}}
+                                    {{(Request::is('admin/permission/'.request()->route('id').'/edit') ? 'active' : '')}}"><a class="menu-item" href="{{ route('permission.index') }}">Permissions</a>
                         </li>
                         @endif
                         @if(auth::user()->can('View_Role'))
-                        <li class="{{(Request::is('admin/roles') ? 'active' : '')}}"><a class="menu-item" href="{{ route('role.index') }}">Roles</a>
+                        <li class="{{(Request::is('admin/roles') ? 'active' : '')}}
+                                    {{ (Request::is('admin/role/'.request()->route('id').'/edit') ? 'active' : '') }}"><a class="menu-item" href="{{ route('role.index') }}">Roles</a>
                         </li>
                         @endif
                         @if(auth::user()->can('View_User'))

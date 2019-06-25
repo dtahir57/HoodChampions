@@ -5,6 +5,9 @@ namespace App\Http\Controllers\UserManagement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Http\Requests\RoleRequest;
+use Session;
 
 class RoleController extends Controller
 {
@@ -26,7 +29,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::latest()->get();
+        return view('admin.UserManagement.role.create', compact('permissions'));
     }
 
     /**
@@ -35,9 +39,17 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $role = new Role;
+        $role->name = $request->name;
+        $role->save();
+
+        $role->givePermissionTo($request->permissions);
+        if ($role) {
+            Session::flash('created', 'New Role Created Successfully');
+            return redirect()->route('role.index');
+        }
     }
 
     /**
@@ -59,7 +71,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $permissions = Permission::latest()->get();
+        return view('admin.UserManagement.role.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -69,9 +83,20 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        //
+        $role = Role::find($id);
+        $role->name = $request->name;
+        if (count($request->permissions) > 0) {
+            $role->syncPermissions($request->permissions);
+        } else {
+            $role->revokePermissionTo(Permission::all());
+        }
+        $role->update();
+        if ($role) {
+            Session::flash('updated', 'Role Updated Successfully!');
+            return redirect()->route('role.index');
+        }
     }
 
     /**
@@ -80,8 +105,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RoleRequest $request)
     {
-        //
+        $role = Role::find($request->id);
+        $role->delete();
+        if ($role) {
+            Session::flash('deleted', 'Role Deleted Successfully');
+            return redirect()->route('role.index');
+        }
     }
 }

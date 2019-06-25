@@ -41,6 +41,12 @@
                     @if(session('created'))
                     <li class="alert alert-success">{{ session('created') }}</li>
                     @endif
+                    @if(session('updated'))
+                    <li class="alert alert-success">{{ session('updated') }}</li>
+                    @endif
+                    @if(session('deleted'))
+                    <li class="alert alert-success">{{ session('deleted') }}</li>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                         <h4 class="card-title">Permissions</h4>
@@ -67,10 +73,10 @@
                                                 <td>{{ $permission->name }}</td>
                                                 <td>
                                                     @if(auth::user()->can('Edit_Permission'))
-                                                    <a href="#" type="button"><i class="material-icons text-info">edit</i></a>
+                                                    <a href="{{ route('permission.edit', $permission->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
                                                     @endif
                                                     @if(auth::user()->can('Delete_Permission'))
-                                                    <a href="#" type="button"><i class="material-icons text-danger">delete</i></a>
+                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $permission->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -91,9 +97,42 @@
         </section>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger white">
+                <h4 class="modal-title white" id="myModalLabel10">Delete Permission</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Are You Sure You Want To Delete Permission?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ route('permission.destroy') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <input type="hidden" name="id" id="permission" value="" />
+                    <button type="submit" class="btn btn-outline-danger">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
 <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/tables/datatables/datatable-basic.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on("click", ".deleteModal", function() {
+        var id = $(this).data('id');
+        $(".modal-footer #permission").val( id );
+    });
+});
+</script>
 @endsection

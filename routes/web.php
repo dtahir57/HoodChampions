@@ -35,7 +35,7 @@ Route::group(['prefix' => '/admin'], function() {
         Route::patch('/permission/{id}', 'UserManagement\PermissionController@update')->name('permission.update');
     });
     Route::group(['middleware' => ['permission:Delete_Permission']], function () {
-        Route::delete('/permission/{id}', 'UserManagement\PermissionController@destroy')->name('permission.destroy');
+        Route::delete('/permission/destroy', 'UserManagement\PermissionController@destroy')->name('permission.destroy');
     });
     /**
     * Ending Routes For Permissions
@@ -52,11 +52,11 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/role', 'UserManagement\RoleController@store')->name('role.store');
     });
     Route::group(['middleware' => ['permission:Edit_Role']], function() {
-        Route::get('/role/{id}/edit', 'RoleController@edit')->name('role.edit');
+        Route::get('/role/{id}/edit', 'UserManagement\RoleController@edit')->name('role.edit');
         Route::patch('/role/{id}', 'UserManagement\RoleController@update')->name('role.update');
     });
     Route::group(['middleware' => ['permission:Delete_Role']], function() {
-        Route::delete('/role/{id}', 'UserManagement\RoleController@destroy')->name('role.destroy');
+        Route::delete('/role', 'UserManagement\RoleController@destroy')->name('role.destroy');
     });
     /**
     * Ending Routes For Roles
