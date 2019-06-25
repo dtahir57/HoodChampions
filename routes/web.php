@@ -77,7 +77,7 @@ Route::group(['prefix' => '/admin'], function() {
         Route::patch('/user/{id}', 'UserManagement\UserController@update')->name('user.update');
     });
     Route::group(['middleware' => ['permission:Delete_User']], function() {
-        Route::delete('/user/{id}', 'UserManagement\UserController@destroy')->name('user.destroy');
+        Route::delete('/user', 'UserManagement\UserController@destroy')->name('user.destroy');
     });
     /**
     * Starting Routes For Users
@@ -98,7 +98,7 @@ Route::group(['prefix' => '/admin'], function() {
         Route::patch('/hood/{id}', 'Admin\HoodController@update')->name('hood.update');
     });
     Route::group(['middleware' => ['permission:Delete_Hood']], function() {
-        Route::delete('/hood/{id}', 'Admin\HoodController@destroy')->name('hood.destroy');
+        Route::delete('/hood', 'Admin\HoodController@destroy')->name('hood.destroy');
     });
     /**
     * Ending Routes For Hoods

@@ -297,7 +297,9 @@
                         Dashboard
                     </a>
                 </li>
-                <li class="nav-item {{ (Request::is('admin/hoods') ? 'active' : '') }}">
+                <li class="nav-item {{ (Request::is('admin/hoods') ? 'active' : '') }}
+                                    {{ (Request::is('admin/hood/create') ? 'active' : '') }}
+                                    {{ (Request::is('admin/hood/'.request()->route('id').'/edit') ? 'active' : '') }}">
                     <a class="menu-item" href="{{ route('hood.index') }}">
                         <i class="material-icons">home</i>
                         Hoods
@@ -309,16 +311,20 @@
                     <ul class="menu-content">
                         @if(auth::user()->can('View_Permission'))
                         <li class="{{(Request::is('admin/permissions') ? 'active' : '')}}
-                                    {{(Request::is('admin/permission/'.request()->route('id').'/edit') ? 'active' : '')}}"><a class="menu-item" href="{{ route('permission.index') }}">Permissions</a>
+                                    {{(Request::is('admin/permission/'.request()->route('id').'/edit') ? 'active' : '')}}
+                                    {{ (Request::is('admin/permission/create') ? 'active' : '') }}"><a class="menu-item" href="{{ route('permission.index') }}">Permissions</a>
                         </li>
                         @endif
                         @if(auth::user()->can('View_Role'))
                         <li class="{{(Request::is('admin/roles') ? 'active' : '')}}
-                                    {{ (Request::is('admin/role/'.request()->route('id').'/edit') ? 'active' : '') }}"><a class="menu-item" href="{{ route('role.index') }}">Roles</a>
+                                    {{ (Request::is('admin/role/'.request()->route('id').'/edit') ? 'active' : '') }}
+                                    {{ (Request::is('admin/role/create') ? 'active' : '') }}"><a class="menu-item" href="{{ route('role.index') }}">Roles</a>
                         </li>
                         @endif
                         @if(auth::user()->can('View_User'))
-                        <li class="{{(Request::is('admin/users') ? 'active' : '')}}"><a class="menu-item" href="{{ route('user.index') }}">Users</a>
+                        <li class="{{(Request::is('admin/users') ? 'active' : '')}}
+                                    {{ (Request::is('admin/user/create') ? 'active' : '') }}
+                                    {{ (Request::is('admin/user/'.request()->route('id').'/edit') ? 'active' : '') }}"><a class="menu-item" href="{{ route('user.index') }}">Users</a>
                         </li>
                         @endif
                     </ul>

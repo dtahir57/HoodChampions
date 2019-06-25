@@ -28,7 +28,7 @@
     <div class="content-header-right text-md-right col-md-6 col-12">
         @if(auth::user()->can('Add_User'))
         <div class="btn-group">
-            <a href="{{ route('user.create') }}" class="btn btn-round btn-success" type="button"><i class="material-icons">add</i> User</a>
+            <a href="{{ route('user.create') }}" class="btn btn-round btn-success btn-glow" type="button"><i class="material-icons">add</i> User</a>
         </div>
         @endif
     </div>
@@ -38,6 +38,15 @@
         <section id="configuration">
             <div class="row">
                 <div class="col-12">
+                    @if(session('created'))
+                    <li class="alert alert-success">{{ session('created') }}</li>
+                    @endif
+                    @if(session('updated'))
+                    <li class="alert alert-success">{{ session('updated') }}</li>
+                    @endif
+                    @if(session('deleted'))
+                    <li class="alert alert-success">{{ session('deleted') }}</li>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                         <h4 class="card-title">Users</h4>
@@ -57,7 +66,9 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Phone Number</th>
+                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
                                                 <th style="max-width: 50px;">Actions</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -66,21 +77,27 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->phone_number }}</td>
+                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
                                                 <td>
                                                     @if(auth::user()->can('Edit_User'))
-                                                    <a href="#" type="button"><i class="material-icons text-info">edit</i></a>
+                                                    <a href="{{ route('user.edit', $user->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
                                                     @endif
                                                     @if(auth::user()->can('Delete_User'))
-                                                    <a href="#" type="button"><i class="material-icons text-danger">delete</i></a>
+                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $user->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
                                                     @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone Number</th>
+                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
                                                 <th style="max-width: 50px;">Actions</th>
+                                                @endif
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -92,9 +109,42 @@
         </section>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger white">
+                <h4 class="modal-title white" id="myModalLabel10">Delete User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Are You Sure You Want To Delete User?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ route('user.destroy') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <input type="hidden" name="id" id="user" value="" />
+                    <button type="submit" class="btn btn-outline-danger">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
 <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/tables/datatables/datatable-basic.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on("click", ".deleteModal", function() {
+        var id = $(this).data('id');
+        $(".modal-footer #user").val( id );
+    });
+});
+</script>
 @endsection

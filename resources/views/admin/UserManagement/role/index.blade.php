@@ -64,13 +64,16 @@
                                         <thead>
                                             <tr>
                                                 <th>Role Name</th>
+                                                @if(auth::user()->can('Edit_Role') OR auth::user()->can('Delete_Role'))
                                                 <th style="max-width: 50px;">Actions</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($roles as $role)
                                             <tr>
                                                 <td>{{ $role->name }}</td>
+                                                @if(auth::user()->can('Edit_Role') OR auth::user()->can('Delete_Role'))
                                                 <td>
                                                     @if(auth::user()->can('Edit_Role'))
                                                     <a href="{{ route('role.edit', $role->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
@@ -79,13 +82,16 @@
                                                     <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $role->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
                                                     @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>Name</th>
+                                                @if(auth::user()->can('Edit_Role') OR auth::user()->can('Delete_Role'))
                                                 <th style="max-width: 50px;">Actions</th>
+                                                @endif
                                             </tr>
                                         </tfoot>
                                     </table>
