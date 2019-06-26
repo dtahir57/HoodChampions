@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Http\Models\Hood;
+use App\Http\Models\Service;
+use App\Http\Models\Team;
 
 class User extends Authenticatable
 {
@@ -42,5 +44,15 @@ class User extends Authenticatable
     public function hood()
     {
         return $this->belongsTo(Hood::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 }

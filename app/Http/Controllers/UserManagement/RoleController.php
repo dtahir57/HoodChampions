@@ -72,7 +72,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
-        $permissions = Permission::latest()->get();
+        $permissions = Permission::all();
         return view('admin.UserManagement.role.edit', compact('role', 'permissions'));
     }
 

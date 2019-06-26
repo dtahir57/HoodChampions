@@ -1,6 +1,6 @@
 @extends('layouts.admin-app')
 
-@section('title', 'User Management | Manage Users')
+@section('title', 'User Management | Manage Services')
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
@@ -13,22 +13,22 @@
 @section('content')
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Manage Users</h3>
+        <h3 class="content-header-title mb-0">Manage Services</h3>
         <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Users
+                    <li class="breadcrumb-item active">Services
                     </li>
                 </ol>
             </div>
         </div>
     </div>
     <div class="content-header-right text-md-right col-md-6 col-12">
-        @if(auth::user()->can('Add_User'))
+        @if(auth::user()->can('Add_Service'))
         <div class="btn-group">
-            <a href="{{ route('user.create') }}" class="btn btn-round btn-success btn-glow" type="button"><i class="material-icons">add</i> User</a>
+            <a href="{{ route('service.create') }}" class="btn btn-round btn-success btn-glow" type="button"><i class="material-icons">add</i> Service</a>
         </div>
         @endif
     </div>
@@ -49,7 +49,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                        <h4 class="card-title">Users</h4>
+                        <h4 class="card-title">Services</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
@@ -63,29 +63,29 @@
                                 <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
+                                                <th>Image</th>
+                                                <th>Title</th>
                                                 <th>Email</th>
-                                                <th>Phone Number</th>
-                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
+                                                <th>Contact No</th>
+                                                @if(auth::user()->can('Edit_Service') OR auth::user()->can('Delete_Service'))
                                                 <th style="max-width: 50px;">Actions</th>
                                                 @endif
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($users as $user)
+                                            @foreach($services as $service)
                                             <tr>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->phone_number }}</td>
-                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
+                                                <td><img src="{{ $service->image }}"></td>
+                                                <td>{{ $service->title }}</td>
+                                                <td>{{ $service->email }}</td>
+                                                <td>{{ $service->contact_no }}</td>
+                                                @if(auth::user()->can('Edit_Service') OR auth::user()->can('Delete_Service'))
                                                 <td>
-                                                    @if(auth::user()->can('Edit_User'))
-                                                    <a href="{{ route('user.edit', $user->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
+                                                    @if(auth::user()->can('Edit_Service'))
+                                                    <a href="{{ route('service.edit', $service->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
                                                     @endif
-                                                    @if(auth::user()->can('Delete_User'))
-                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $user->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
+                                                    @if(auth::user()->can('Delete_Service'))
+                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $service->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
                                                     @endif
                                                 </td>
                                                 @endif
@@ -94,11 +94,11 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
+                                                <th>Image</th>
+                                                <th>Title</th>
                                                 <th>Email</th>
-                                                <th>Phone Number</th>
-                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
+                                                <th>Contact No</th>
+                                                @if(auth::user()->can('Edit_Hood') OR auth::user()->can('Delete_Hood'))
                                                 <th style="max-width: 50px;">Actions</th>
                                                 @endif
                                             </tr>
@@ -117,20 +117,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger white">
-                <h4 class="modal-title white" id="myModalLabel10">Delete User</h4>
+                <h4 class="modal-title white" id="myModalLabel10">Delete Service</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Are You Sure You Want To Delete User?</h5>
+                <h5>Are You Sure You Want To Delete Service?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <form action="{{ route('user.destroy') }}" method="post">
+                <form action="{{ route('service.destroy') }}" method="post">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE" />
-                    <input type="hidden" name="id" id="user" value="" />
+                    <input type="hidden" name="id" id="service" value="" />
                     <button type="submit" class="btn btn-outline-danger">Save Changes</button>
                 </form>
             </div>
@@ -146,7 +146,7 @@
 $(document).ready(function(){
     $(document).on("click", ".deleteModal", function() {
         var id = $(this).data('id');
-        $(".modal-footer #user").val( id );
+        $(".modal-footer #service").val( id );
     });
 });
 </script>

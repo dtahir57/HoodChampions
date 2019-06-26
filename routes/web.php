@@ -103,4 +103,46 @@ Route::group(['prefix' => '/admin'], function() {
     /**
     * Ending Routes For Hoods
     */
+   
+   /**
+   * Starting Routes For Services
+   */
+   Route::group(['middleware' => ['permission:View_Service']], function() {
+       Route::get('/services', 'Admin\ServiceController@index')->name('service.index');
+   });
+   Route::group(['middleware' => ['permission:Add_Service']], function() {
+       Route::get('/service/create', 'Admin\ServiceController@create')->name('service.create');
+       Route::post('/service', 'Admin\ServiceController@store')->name('service.store');
+   });
+   Route::group(['middleware' => ['permission:Edit_Service']], function() {
+       Route::get('/service/{id}/edit', 'Admin\ServiceController@edit')->name('service.edit');
+       Route::patch('/service/{id}', 'Admin\ServiceController@update')->name('service.update');
+   });
+   Route::group(['middleware' => ['permission:Delete_Service']], function() {
+       Route::delete('/service', 'Admin\ServiceController@destroy')->name('service.destroy');
+   });
+   /**
+   * Ending Routes For Services
+   */
+  
+  /**
+  * Starting Routes For Teams
+  */
+  Route::group(['middleware' => ['permission:View_Team']], function() {
+      Route::get('/teams', 'Admin\TeamController@index')->name('team.index');
+  });
+  Route::group(['middleware' => ['permission:Add_Team']], function() {
+      Route::get('/team/create', 'Admin\TeamController@create')->name('team.create');
+      Route::post('/team', 'Admin\TeamController@store')->name('team.store');
+  });
+  Route::group(['middleware' => ['permission:Edit_Team']], function() {
+      Route::get('/team/{id}/edit', 'Admin\TeamController@edit')->name('team.edit');
+      Route::patch('/team/{id}', 'Admin\TeamController@update')->name('team.update');
+  });
+  Route::group(['middleware' => ['permission:Delete_Team']], function() {
+      Route::delete('/team', 'Admin\TeamController@destroy')->name('team.destroy');
+  });
+  /**
+  * Ending Routes For Teams
+  */
 });

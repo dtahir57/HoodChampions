@@ -297,6 +297,7 @@
                         Dashboard
                     </a>
                 </li>
+                @if(auth::user()->can('View_Hood'))
                 <li class="nav-item {{ (Request::is('admin/hoods') ? 'active' : '') }}
                                     {{ (Request::is('admin/hood/create') ? 'active' : '') }}
                                     {{ (Request::is('admin/hood/'.request()->route('id').'/edit') ? 'active' : '') }}">
@@ -305,6 +306,44 @@
                         Hoods
                     </a>
                 </li>
+                @endif
+                @if(auth::user()->can('View_Group_Categories') OR auth::user()->can('View_Interest_Groups'))
+                <li class="nav-item">
+                    <a href="#"><i class="material-icons">group_work</i><span class="menu-title" data-i18n="nav.invoice.main">Interest Groups</span></a>
+                    <ul class="menu-content">
+                        @if(auth::user()->can('View_Group_Categories'))
+                        <li>
+                            <a class="menu-item" href="javascript:void(0)">Categories</a>
+                        </li>
+                        @endif
+                        @if(auth::user()->can('View_Interest_Groups'))
+                        <li>
+                            <a class="menu-item" href="javascript:void(0)">Groups</a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
+                @endif
+                @if(auth::user()->can('View_Service'))
+                <li class="nav-item {{ (Request::is('admin/services') ? 'active' : '') }}
+                                    {{ (Request::is('admin/service/create') ? 'active' : '') }}
+                                    {{ (Request::is('admin/service'.request()->route('id').'/edit') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('service.index') }}">
+                        <i class="material-icons">settings_overscan</i>
+                        Services
+                    </a>
+                </li>
+                @endif
+                @if(auth::user()->can('View_Team'))
+                <li class="nav-item {{ (Request::is('admin/teams') ? 'active' : '') }}
+                                    {{ (Request::is('admin/team/create') ? 'active' : '') }}
+                                    {{ (Request::is('admin/team'.request()->route('id').'/edit') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('team.index') }}">
+                        <i class="material-icons">people</i>
+                        Teams
+                    </a>
+                </li>
+                @endif
                 @if(auth::user()->can('View_Permission') OR auth::user()->can('View_Role') OR auth::user()->can('View_User'))
                 <li class="nav-item">
                     <a href="#"><i class="material-icons">accessibility</i><span class="menu-title" data-i18n="nav.invoice.main">User Management</span></a>
