@@ -1,6 +1,6 @@
 @extends('layouts.admin-app')
 
-@section('title', 'User Management | Manage Hoods')
+@section('title', 'Manage Hoods')
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">

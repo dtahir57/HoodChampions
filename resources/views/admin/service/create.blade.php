@@ -1,6 +1,6 @@
 @extends('layouts.admin-app')
 
-@section('title', 'User Management | Manage Services')
+@section('title', 'Manage Services')
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/material-vendors.min.css')}}">
@@ -106,7 +106,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="Price">Price</label>
-                                                            <input type="text" name="price" class="form-control" placeholder="price" value="{{ old('price') }}" />
+                                                            <input type="text" name="price" class="form-control" placeholder="Price" value="{{ old('price') }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

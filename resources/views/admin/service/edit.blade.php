@@ -1,6 +1,6 @@
 @extends('layouts.admin-app')
 
-@section('title', 'User Management | Manage Services')
+@section('title', 'Manage Services')
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/material-vendors.min.css')}}">

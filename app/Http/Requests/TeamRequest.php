@@ -34,6 +34,7 @@ class TeamRequest extends FormRequest
                 {
                     return [
                         'hood_id' => 'required',
+                        'users' => 'required|array',
                         'title' => 'required|max:255|string',
                         'max_no_of_players' => 'required|min:1',
                         'description' => 'required|max:1000',
@@ -50,6 +51,7 @@ class TeamRequest extends FormRequest
                 {
                     return [
                         'hood_id' => 'required',
+                        'users' => 'required|array',
                         'title' => 'required|max:255|string',
                         'max_no_of_players' => 'required|min:1',
                         'description' => 'required|max:1000',

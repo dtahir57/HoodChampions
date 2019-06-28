@@ -1,6 +1,6 @@
 @extends('layouts.admin-app')
 
-@section('title', 'User Management | Manage Services')
+@section('title', 'Manage Services')
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
@@ -100,7 +100,7 @@
                                                 <th>Title</th>
                                                 <th>Email</th>
                                                 <th>Contact No</th>
-                                                @if(auth::user()->can('Edit_Hood') OR auth::user()->can('Delete_Hood'))
+                                                @if(auth::user()->can('Edit_Service') OR auth::user()->can('Delete_Service'))
                                                 <th style="max-width: 50px;">Actions</th>
                                                 @endif
                                             </tr>

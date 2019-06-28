@@ -13,18 +13,18 @@ class CreateUserInterestGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_interest_group', function (Blueprint $table) {
+        Schema::create('interest_group_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
             $table->unsignedBigInteger('interest_group_id')->unsigned();
             $table->foreign('interest_group_id')
                     ->references('id')
                     ->on('interest_groups')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
@@ -38,6 +38,6 @@ class CreateUserInterestGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_interest_group');
+        Schema::dropIfExists('interest_group_user');
     }
 }

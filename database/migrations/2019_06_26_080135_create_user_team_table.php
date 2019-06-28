@@ -13,18 +13,18 @@ class CreateUserTeamTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_team', function (Blueprint $table) {
+        Schema::create('team_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
             $table->unsignedBigInteger('team_id')->unsigned();
             $table->foreign('team_id')
                     ->references('id')
                     ->on('teams')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->timestamps();
@@ -38,6 +38,6 @@ class CreateUserTeamTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_team');
+        Schema::dropIfExists('team_user');
     }
 }
