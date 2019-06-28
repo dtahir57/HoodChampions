@@ -15,6 +15,6 @@ $factory->define(Team::class, function (Faker $faker) {
         'email' => $faker->safeEmail,
         'contact_no' => $faker->phoneNumber,
         'meetup_place' => $faker->postcode,
-        'image' => $faker->imageURL($width = 200, $height = 200)
+        'image' => $faker->imageURL($min = 150, $max = 150, null, false)
     ];
 });

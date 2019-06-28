@@ -9,6 +9,8 @@ use App\Http\Models\Hood;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\ServiceRequest;
+use Session;
+use Storage;
 
 class ServiceController extends Controller
 {
@@ -33,13 +35,8 @@ class ServiceController extends Controller
         $hoods = Hood::latest()->get();
         $users = User::all();
 
-        $kakis = [];
-
-        foreach($users as $user) {
-            if( !$user->hasAnyRole(Role::all()) ) {
-                array_push($kakis, $user);
-            }
-        }
+        $kakis = $this->getKakis($users);
+        
         return view('admin.service.create', compact('kakis', 'hoods'));
     }
 
@@ -51,7 +48,22 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
-        //
+        $service = new Service;
+        $service->hood_id = $request->hood_id;
+        $service->user_id = $request->user_id;
+        $service->title = $request->title;
+        $service->description = $request->description;
+        $service->price = $request->price;
+        $service->email = $request->email;
+        $service->contact_no = $request->contact_no;
+        if ($request->hasFile('image')) {
+            $service->image = $request->image->store('public/services/');
+        }
+        $service->save();
+        if ($service) {
+            Session::flash('created', 'New Service Created Successfully');
+            return redirect()->route('service.index');
+        }
     }
 
     /**
@@ -73,7 +85,14 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $hoods = Hood::latest()->get();
+        $users = User::all();
+
+        $kakis = $this->getKakis($users);
+        $service = Service::findOrFail($id);
+
+        return view('admin.service.edit', compact('hoods', 'kakis', 'service'));
+
     }
 
     /**
@@ -85,7 +104,23 @@ class ServiceController extends Controller
      */
     public function update(ServiceRequest $request, $id)
     {
-        //
+        $service = Service::findOrFail($id);
+        $service->hood_id = $request->hood_id;
+        $service->user_id = $request->user_id;
+        $service->title = $request->title;
+        $service->description = $request->description;
+        $service->price = $request->price;
+        $service->email = $request->email;
+        $service->contact_no = $request->contact_no;
+        if ($request->hasFile('image')) {
+            Storage::delete($service->image);
+            $service->image = $request->image->store('public/services/');
+        }
+        $service->update();
+        if ($service) {
+            Session::flash('updated', 'Service Updated Successfully');
+            return redirect()->route('service.index');
+        }
     }
 
     /**
@@ -94,8 +129,27 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ServiceRequest $request)
     {
-        //
+        $service = Service::findOrFail($request->id);
+        Storage::delete($service->image);
+        $service->delete();
+        if ($service) {
+            Session::flash('deleted', 'Service Deleted Successfully');
+            return redirect()->route('service.index');
+        }
+
+    }
+
+    public function getKakis($users)
+    {
+        $kakis = [];
+
+        foreach($users as $user) {
+            if( !$user->hasAnyRole(Role::all()) ) {
+                array_push($kakis, $user);
+            }
+        }
+        return $kakis;    
     }
 }

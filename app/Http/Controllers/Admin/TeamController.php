@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Models\Team;
+use App\Http\Requests\TeamRequest;
+use Session;
+use Storage;
+use App\Http\Models\Hood;
+use App\User;
 
 class TeamController extends Controller
 {
@@ -14,7 +20,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::all();
+        return view('admin.team.index', compact('teams'));
     }
 
     /**
@@ -24,7 +31,11 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        $hoods = Hood::all();
+        $users = User::all();
+
+        $kakis = $this->getKakis($users);
+        return view('admin.team.create', compact('hoods', 'kakis'));
     }
 
     /**
@@ -33,7 +44,7 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeamRequest $request)
     {
         //
     }
@@ -67,7 +78,7 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TeamRequest $request, $id)
     {
         //
     }
@@ -78,8 +89,20 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TeamRequest $request)
     {
         //
+    }
+
+    public function getKakis($users)
+    {
+        $kakis = [];
+
+        foreach($users as $user) {
+            if( !$user->hasAnyRole(Role::all()) ) {
+                array_push($kakis, $user);
+            }
+        }
+        return $kakis;    
     }
 }

@@ -12,7 +12,7 @@ $factory->define(Service::class, function (Faker $faker) {
         'price' => $faker->randomDigitNotNull,
         'email' => $faker->safeEmail,
         'contact_no' => $faker->phoneNumber,
-        'image' => $faker->imageUrl($width = 200, $height = 200),
+        'image' => $faker->imageURL($min = 150, $max = 150, null, false),
         'hood_id' => $faker->numberBetween($min = 1, $max = 10)
     ];
 });

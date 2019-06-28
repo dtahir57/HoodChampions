@@ -75,7 +75,9 @@
                                         <tbody>
                                             @foreach($services as $service)
                                             <tr>
-                                                <td><img src="{{ $service->image }}"></td>
+                                                <td>
+                                                    <img src="{{ Storage::url($service->image) }}" width="150" height="150">
+                                                </td>
                                                 <td>{{ $service->title }}</td>
                                                 <td>{{ $service->email }}</td>
                                                 <td>{{ $service->contact_no }}</td>

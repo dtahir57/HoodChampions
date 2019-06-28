@@ -4,13 +4,15 @@
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/material-vendors.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/icheck/icheck.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/icheck/custom.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/selects/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/ui/prism.min.css')}}">
 @endsection
 
 @section('page-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/material-vertical-menu-modern.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/checkboxes-radios.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/file-uploaders/dropzone.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/dropzone.css')}}">
 @endsection
 
 @section('content')
@@ -69,53 +71,69 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="Name">Name</label>
-                                                            <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}" />
+                                                            <div class="text-bold-600 font-medium-2">
+                                                                Select Hood Name
+                                                            </div>
+                                                            <select class="select2 form-control" name="hood_id">
+                                                                <optgroup label="Planning Area Name">
+                                                                    @foreach($hoods as $hood)
+                                                                    <option value="{{ $hood->id }}">{{ $hood->planning_area_name }}</option>
+                                                                    @endforeach
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="text-bold-600 font-medium-2">
+                                                                Select User
+                                                            </div>
+                                                            <select class="select2 form-control" name="user_id">
+                                                                <optgroup label="Planning Area Name">
+                                                                    @foreach($kakis as $kaki)
+                                                                    <option value="{{ $kaki->id }}">{{ $kaki->name }} | {{ $kaki->email }}</option>
+                                                                    @endforeach
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="Title">Title</label>
+                                                            <input type="text" name="title" class="form-control" placeholder="Title" value="{{ old('title') }}" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="Price">Price</label>
+                                                            <input type="text" name="price" class="form-control" placeholder="price" value="{{ old('price') }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="Email">Email</label>
-                                                            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" />
+                                                            <input type="text" name="email" class="form-control" placeholder="email" value="{{ old('email') }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="Phone Number">Phone Number</label>
-                                                            <input type="text" name="phone_number" placeholder="Phone Number" class="form-control" value="{{ old('phone_number') }}" />
+                                                            <label for="ContactNo">Contact No</label>
+                                                            <input type="text" name="contact_no" class="form-control" placeholder="contact_no" value="{{ old('contact_no') }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="Password">Password</label>
-                                                            <input type="password" name="password" placeholder="Password" class="form-control" />
+                                                            <label for="Description">Description</label>
+                                                            <textarea class="form-control" name="description" placeholder="Description">{{ old('description') }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="ConfirmPassword">Confirm Password</label>
-                                                            <input type="password" name="password_confirmation" placeholder="Confirm Password" class="form-control" />
-                                                        </div>
+                                                        <input type="file" name="image" />
+                                                        <pre>Allowed file types (.png, .jpg, .gif). Max:300kb</pre>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <button type="submit" class="btn btn-primary btn-glow mt-2">Save</button>
-                                                        </div>
+                                                        <button type="submit" class="btn btn-primary btn-glow">Save</button>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <h4>Assign Roles | Please Choose at least one Role</h4>
-                                            <hr>
-                                            <div class="card-block">
-                                                <div class="input-group skin skin-square">
-                                                    @foreach($roles as $role)
-                                                    <div class="col-lg-3 col-md-4 col-sm-6">
-                                                        <fieldset>
-                                                            <input type="checkbox" name="roles[]" value="{{ $role->name }}"/>
-                                                            <label for="role">{{ $role->name }}</label>
-                                                        </fieldset>
-                                                    </div>
-                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -132,7 +150,10 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('app-assets/vendors/js/forms/icheck/icheck.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/js/ui/prism.min.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/extensions/dropzone.js')}}"></script>
+<script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{ asset('app-assets/js/scripts/pages/material-app.js') }}"></script>
-<script src="{{ asset('app-assets/js/scripts/forms/checkbox-radio.js') }}"></script>
+<script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
 @endsection

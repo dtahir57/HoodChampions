@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServiceRequest extends FormRequest
+class TeamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,13 +33,14 @@ class ServiceRequest extends FormRequest
             case 'POST':
                 {
                     return [
-                        'user_id' => 'required',
                         'hood_id' => 'required',
                         'title' => 'required|max:255|string',
+                        'max_no_of_players' => 'required|min:1',
                         'description' => 'required|max:1000',
-                        'price' => 'required|min:0',
-                        'email' => 'required|max:255|string',
-                        'contact_no' => 'required|max:255|string',
+                        'about_us' => 'required|max:30',
+                        'email' => 'required|string',
+                        'contact_no' => 'required|string',
+                        'meetup_place' => 'required|string|max:30',
                         'image' => 'required',
                         'image.*' => 'image|mimes:png,jpg,gif|max:300'
                     ];
@@ -48,13 +49,14 @@ class ServiceRequest extends FormRequest
             case 'PATCH':
                 {
                     return [
-                        'user_id' => 'required',
                         'hood_id' => 'required',
                         'title' => 'required|max:255|string',
+                        'max_no_of_players' => 'required|min:1',
                         'description' => 'required|max:1000',
-                        'price' => 'required|min:0',
-                        'email' => 'required|max:255|string',
-                        'contact_no' => 'required|max:255|string',
+                        'about_us' => 'required|max:30',
+                        'email' => 'required|string',
+                        'contact_no' => 'required|string',
+                        'meetup_place' => 'required|string|max:30',
                         'image' => 'required',
                         'image.*' => 'image|mimes:png,jpg,gif|max:300'
                     ];
