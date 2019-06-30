@@ -44,10 +44,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Edit_Team']);
         Permission::create(['name' => 'Delete_Team']);
 
-        Permission::create(['name' => 'View_Group_Categories']);
-        Permission::create(['name' => 'Add_Group_Categories']);
-        Permission::create(['name' => 'Edit_Group_Categories']);
-        Permission::create(['name' => 'Delete_Group_Categories']);
+        Permission::create(['name' => 'View_Categories']);
+        Permission::create(['name' => 'Add_Categories']);
+        Permission::create(['name' => 'Edit_Categories']);
+        Permission::create(['name' => 'Delete_Categories']);
 
         Permission::create(['name' => 'View_Interest_Groups']);
         Permission::create(['name' => 'Add_Interest_Groups']);

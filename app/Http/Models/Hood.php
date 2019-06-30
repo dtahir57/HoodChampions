@@ -21,4 +21,9 @@ class Hood extends Model
     {
     	return $this->hasMany(Team::class);
     }
+
+    public function interest_groups()
+    {
+        return $this->hasMany(InterestGroup::class);
+    }
 }

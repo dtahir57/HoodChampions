@@ -13,11 +13,13 @@ class CreateGroupCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('image');
             $table->boolean('is_active')->default(1);
+            $table->integer('categoryable_id')->nullable();
+            $table->string('categoryable_type');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateGroupCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_categories');
+        Schema::dropIfExists('categories');
     }
 }

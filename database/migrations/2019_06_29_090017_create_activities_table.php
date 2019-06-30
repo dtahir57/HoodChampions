@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInterestGroupsTable extends Migration
+class CreateActivitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInterestGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('interest_groups', function (Blueprint $table) {
+        Schema::create('activities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('hood_id')->unsigned();
             $table->foreign('hood_id')
@@ -21,13 +21,14 @@ class CreateInterestGroupsTable extends Migration
                     ->on('hoods')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->string('type');
             $table->string('title');
             $table->text('description');
             $table->string('about_us');
             $table->string('email');
             $table->string('contact_no');
             $table->string('meetup_place');
-            $table->string('photo');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -39,6 +40,6 @@ class CreateInterestGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interest_groups');
+        Schema::dropIfExists('activities');
     }
 }

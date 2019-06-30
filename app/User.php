@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Http\Models\Hood;
 use App\Http\Models\Service;
 use App\Http\Models\Team;
+use App\Http\Models\InterestGroup;
 
 class User extends Authenticatable
 {
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function teams()
     {
         return $this->belongsToMany(Team::class);
+    }
+
+    public function interest_groups()
+    {
+        return $this->hasMany(InterestGroup::class);
     }
 }

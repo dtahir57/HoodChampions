@@ -307,27 +307,30 @@
                     </a>
                 </li>
                 @endif
-                @if(auth::user()->can('View_Group_Categories') OR auth::user()->can('View_Interest_Groups'))
-                <li class="nav-item">
-                    <a href="#"><i class="material-icons">group_work</i><span class="menu-title" data-i18n="nav.invoice.main">Interest Groups</span></a>
-                    <ul class="menu-content">
-                        @if(auth::user()->can('View_Group_Categories'))
-                        <li>
-                            <a class="menu-item" href="javascript:void(0)">Categories</a>
-                        </li>
-                        @endif
-                        @if(auth::user()->can('View_Interest_Groups'))
-                        <li>
-                            <a class="menu-item" href="javascript:void(0)">Groups</a>
-                        </li>
-                        @endif
-                    </ul>
+                @if(auth::user()->can('View_Categories'))
+                <li class="nav-item {{ (Request::is('admin/categories') ? 'active' : '') }}
+                                    {{ (Request::is('admin/category/'.request()->route('id').'/edit') ? 'active' : '') }}
+                                    {{ (Request::is('admin/category/create') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('category.index') }}">
+                        <i class="material-icons">category</i>
+                        Categories
+                    </a>
+                </li>
+                @endif
+                @if(auth::user()->can('View_Interest_Groups'))
+                <li class="nav-item {{ Request::is('admin/interest_groups') ? 'active' : '' }}
+                                    {{ Request::is('admin/interest_group/create') ? 'active' : '' }}
+                                    {{ Request::is('admin/interest_group/'.request()->route('id').'/edit') ? 'active' : '' }}">
+                    <a class="menu-item" href="{{ route('interest_group.index') }}">
+                        <i class="material-icons">group_work</i>
+                        Interest Groups
+                    </a>
                 </li>
                 @endif
                 @if(auth::user()->can('View_Service'))
                 <li class="nav-item {{ (Request::is('admin/services') ? 'active' : '') }}
                                     {{ (Request::is('admin/service/create') ? 'active' : '') }}
-                                    {{ (Request::is('admin/service'.request()->route('id').'/edit') ? 'active' : '') }}">
+                                    {{ (Request::is('admin/service/'.request()->route('id').'/edit') ? 'active' : '') }}">
                     <a class="menu-item" href="{{ route('service.index') }}">
                         <i class="material-icons">settings_overscan</i>
                         Services
@@ -337,7 +340,7 @@
                 @if(auth::user()->can('View_Team'))
                 <li class="nav-item {{ (Request::is('admin/teams') ? 'active' : '') }}
                                     {{ (Request::is('admin/team/create') ? 'active' : '') }}
-                                    {{ (Request::is('admin/team'.request()->route('id').'/edit') ? 'active' : '') }}">
+                                    {{ (Request::is('admin/team/'.request()->route('id').'/edit') ? 'active' : '') }}">
                     <a class="menu-item" href="{{ route('team.index') }}">
                         <i class="material-icons">people</i>
                         Teams

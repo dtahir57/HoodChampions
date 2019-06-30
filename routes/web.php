@@ -145,4 +145,45 @@ Route::group(['prefix' => '/admin'], function() {
   /**
   * Ending Routes For Teams
   */
+ 
+   /**
+   * Starting Routes For Categories
+   */
+   Route::group(['middleware' => ['permission:View_Categories']], function() {
+       Route::get('/categories', 'Admin\CategoryController@index')->name('category.index');
+   });
+   Route::group(['middleware' => ['permission:Add_Categories']], function() {
+       Route::get('/category/create', 'Admin\CategoryController@create')->name('category.create');
+       Route::post('/category', 'Admin\CategoryController@store')->name('category.store');
+   });
+   Route::group(['middleware' => ['permission:Edit_Categories']], function() {
+       Route::get('/category/{id}/edit', 'Admin\CategoryController@edit')->name('category.edit');
+       Route::patch('/category/{id}', 'Admin\CategoryController@update')->name('category.update');
+   });
+   Route::group(['middleware' => ['permission:Delete_Categories']], function() {
+       Route::delete('/category', 'Admin\CategoryController@destroy')->name('category.destroy');
+   });
+   /**
+   * Ending Routes For Categories
+   */
+  /**
+  * Starting Routes For InterestGroups
+  */
+  Route::group(['middleware' => ['permission:View_Interest_Groups']], function() {
+      Route::get('/interest_groups', 'Admin\InterestGroupController@index')->name('interest_group.index');
+  });
+  Route::group(['middleware' => ['permission:Add_Interest_Groups']], function() {
+      Route::get('/interest_group/create', 'Admin\InterestGroupController@create')->name('interest_group.create');
+      Route::post('/interest_group', 'Admin\InterestGroupController@store')->name('interest_group.store');
+  });
+  Route::group(['middleware' => ['permission:Edit_Interest_Groups']], function() {
+      Route::get('/interest_group/{id}/edit', 'Admin\InterestGroupController@edit')->name('interest_group.edit');
+      Route::patch('/interest_group/{id}', 'Admin\InterestGroupController@update')->name('interest_group.update');
+  });
+  Route::group(['middleware' => ['permission:Delete_Interest_Groups']], function() {
+      Route::delete('/interest_group', 'Admin\InterestGroupController@destroy')->name('interest_group.destroy');
+  });
+  /**
+  * Ending Routes For InterestGroups
+  */
 });

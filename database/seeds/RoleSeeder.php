@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
                                         'View_Hood', 'Add_Hood', 'Edit_Hood', 'Delete_Hood',
                                         'View_Service', 'Add_Service', 'Edit_Service', 'Delete_Service',
                                         'View_Team', 'Add_Team', 'Edit_Team', 'Delete_Team',
-                                        'View_Group_Categories', 'Add_Group_Categories', 'Edit_Group_Categories', 'Delete_Group_Categories',
+                                        'View_Categories', 'Add_Categories', 'Edit_Categories', 'Delete_Categories',
                                         'View_Interest_Groups', 'Add_Interest_Groups', 'Edit_Interest_Groups', 'Delete_Interest_Groups']);
         $captain = Role::create(['name' => 'Captain']);
     }
