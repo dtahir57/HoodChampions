@@ -76,7 +76,7 @@
                                             @foreach($interest_groups as $interest_group)
                                             <tr>
                                                 <td>
-                                                    <img src="{{ Storage::url($interest_group->image) }}" width="150" height="150">
+                                                    <img src="{{ Storage::url($interest_group->photo) }}" width="150" height="150">
                                                 </td>
                                                 <td>{{ $interest_group->title }}</td>
                                                 <td>{{ $interest_group->email }}</td>

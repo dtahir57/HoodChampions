@@ -88,6 +88,7 @@
                                                                 <optgroup label="Category Type">
                                                                     <option value="{{ \App\Http\Models\InterestGroup::class }}">Interest Group</option>
                                                                     <option value="{{ \App\Http\Models\Activity::class }}">Activity</option>
+                                                                    <option value="{{ \App\Http\Models\LostAndFound::class }}">Lost And Found</option>
                                                                 </optgroup>
                                                             </select>
                                                         </div>

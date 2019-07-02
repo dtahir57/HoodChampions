@@ -10,6 +10,8 @@ use App\Http\Models\Hood;
 use App\Http\Models\Service;
 use App\Http\Models\Team;
 use App\Http\Models\InterestGroup;
+use App\Http\Models\Activity;
+use App\Http\Models\LostAndFound;
 
 class User extends Authenticatable
 {
@@ -59,6 +61,16 @@ class User extends Authenticatable
 
     public function interest_groups()
     {
-        return $this->hasMany(InterestGroup::class);
+        return $this->belongsToMany(InterestGroup::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function lost_and_founds()
+    {
+        return $this->hasMany(LostAndFound::class);
     }
 }

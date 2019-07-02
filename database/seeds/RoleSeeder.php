@@ -20,7 +20,10 @@ class RoleSeeder extends Seeder
                                         'View_Service', 'Add_Service', 'Edit_Service', 'Delete_Service',
                                         'View_Team', 'Add_Team', 'Edit_Team', 'Delete_Team',
                                         'View_Categories', 'Add_Categories', 'Edit_Categories', 'Delete_Categories',
-                                        'View_Interest_Groups', 'Add_Interest_Groups', 'Edit_Interest_Groups', 'Delete_Interest_Groups']);
+                                        'View_Interest_Groups', 'Add_Interest_Groups', 'Edit_Interest_Groups', 'Delete_Interest_Groups',
+                                        'View_Activities', 'Add_Activities', 'Edit_Activities', 'Delete_Activities',
+                                        'View_Lost_And_Found', 'Add_Lost_And_Found', 'Edit_Lost_And_Found', 'Delete_Lost_And_Found',
+                                        'View_Battles', 'Add_Battles', 'Edit_Battles', 'Delete_Battles']);
         $captain = Role::create(['name' => 'Captain']);
     }
 }

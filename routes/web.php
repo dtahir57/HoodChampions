@@ -186,4 +186,46 @@ Route::group(['prefix' => '/admin'], function() {
   /**
   * Ending Routes For InterestGroups
   */
+ 
+  /**
+  * Starting Routes For Activities
+  */
+  Route::group(['middleware' => ['permission:View_Activities']], function() {
+      Route::get('/activities', 'Admin\ActivityController@index')->name('activity.index');
+  });
+  Route::group(['middleware' => ['permission:Add_Activities']], function() {
+      Route::get('/activity/create', 'Admin\ActivityController@create')->name('activity.create');
+      Route::post('/activity', 'Admin\ActivityController@store')->name('activity.store');
+  });
+  Route::group(['middleware' => ['permission:Edit_Activities']], function() {
+      Route::get('/activity/{id}/edit', 'Admin\ActivityController@edit')->name('activity.edit');
+      Route::patch('/activity/{id}', 'Admin\ActivityController@update')->name('activity.update');
+  });
+  Route::group(['middleware' => ['permission:Delete_Activities']], function() {
+      Route::delete('/activity', 'Admin\ActivityController@destroy')->name('activity.destroy');
+  });
+  /**
+  * Ending Routes For Activities
+  */
+  
+  /**
+  * Starting Routes For LostAndFound
+  */
+  Route::group(['middleware' => ['permission:View_Lost_And_Found']], function() {
+      Route::get('/lost_and_founds', 'Admin\LostAndFoundController@index')->name('lost_and_found.index');
+  });
+  Route::group(['middleware' => ['permission:Add_Lost_And_Found']], function() {
+      Route::get('/lost_and_found/create', 'Admin\LostAndFoundController@create')->name('lost_and_found.create');
+      Route::post('/lost_and_found', 'Admin\LostAndFoundController@store')->name('lost_and_found.store');
+  });
+  Route::group(['middleware' => ['permission:Edit_Lost_And_Found']], function() {
+      Route::get('/lost_and_found/{id}/edit', 'Admin\LostAndFoundController@edit')->name('lost_and_found.edit');
+      Route::patch('/lost_and_found/{id}', 'Admin\LostAndFoundController@update')->name('lost_and_found.update');
+  });
+  Route::group(['middleware' => ['permission:Delete_Lost_And_Found']], function() {
+      Route::delete('/lost_and_found', 'Admin\LostAndFoundController@destroy')->name('lost_and_found.destroy');
+  });
+  /**
+  * Ending Routes For LostAndFound
+  */
 });

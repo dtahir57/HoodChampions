@@ -53,5 +53,20 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Add_Interest_Groups']);
         Permission::create(['name' => 'Edit_Interest_Groups']);
         Permission::create(['name' => 'Delete_Interest_Groups']);
+
+        Permission::create(['name' => 'View_Activities']);
+        Permission::create(['name' => 'Add_Activities']);
+        Permission::create(['name' => 'Edit_Activities']);
+        Permission::create(['name' => 'Delete_Activities']);
+
+        Permission::create(['name' => 'View_Lost_And_Found']);
+        Permission::create(['name' => 'Add_Lost_And_Found']);
+        Permission::create(['name' => 'Edit_Lost_And_Found']);
+        Permission::create(['name' => 'Delete_Lost_And_Found']);
+
+        Permission::create(['name' => 'View_Battles']);
+        Permission::create(['name' => 'Add_Battles']);
+        Permission::create(['name' => 'Edit_Battles']);
+        Permission::create(['name' => 'Delete_Battles']);
     }
 }

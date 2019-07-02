@@ -21,6 +21,18 @@ class CreateActivitiesTable extends Migration
                     ->on('hoods')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->foreign('category_id')
+                    ->references('id')
+                    ->on('categories')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->string('type');
             $table->string('title');
             $table->text('description');

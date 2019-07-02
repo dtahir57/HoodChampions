@@ -26,4 +26,14 @@ class Hood extends Model
     {
         return $this->hasMany(InterestGroup::class);
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function lost_and_founds()
+    {
+        return $this->hasMany(LostAndFound::class);
+    }
 }

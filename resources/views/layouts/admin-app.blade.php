@@ -327,6 +327,16 @@
                     </a>
                 </li>
                 @endif
+                @if(auth::user()->can('View_Activities'))
+                <li class="nav-item {{ Request::is('admin/activities') ? 'active' : '' }}
+                                    {{ Request::is('admin/activitie/create') ? 'active' : '' }}
+                                    {{ Request::is('admin/activitie/'.request()->route('id').'/edit') ? 'active' : '' }}">
+                    <a class="menu-item" href="{{ route('activity.index') }}">
+                        <i class="material-icons">local_activity</i>
+                        Activities
+                    </a>
+                </li>
+                @endif
                 @if(auth::user()->can('View_Service'))
                 <li class="nav-item {{ (Request::is('admin/services') ? 'active' : '') }}
                                     {{ (Request::is('admin/service/create') ? 'active' : '') }}
@@ -343,6 +353,16 @@
                                     {{ (Request::is('admin/team/'.request()->route('id').'/edit') ? 'active' : '') }}">
                     <a class="menu-item" href="{{ route('team.index') }}">
                         <i class="material-icons">people</i>
+                        Teams
+                    </a>
+                </li>
+                @endif
+                @if(auth::user()->can('View_Lost_And_Found'))
+                <li class="nav-item {{ (Request::is('admin/lost_and_founds') ? 'active' : '') }}
+                                    {{ (Request::is('admin/lost_and_found/create') ? 'active' : '') }}
+                                    {{ (Request::is('admin/lost_and_found/'.request()->route('id').'/edit') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('lost_and_found.index') }}">
+                        <i class="material-icons">find_replace</i>
                         Teams
                     </a>
                 </li>

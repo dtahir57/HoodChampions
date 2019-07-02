@@ -21,6 +21,12 @@ class CreateInterestGroupsTable extends Migration
                     ->on('hoods')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->foreign('category_id')
+                    ->references('id')
+                    ->on('categories')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->string('about_us');
