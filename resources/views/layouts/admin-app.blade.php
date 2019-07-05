@@ -257,7 +257,7 @@
                                 <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all messages</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">John Doe</span><span class="avatar avatar-online"><img src="../../../app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
+                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">{{Auth::user()->name}}</span><span class="avatar avatar-online"><img src="../../../app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="user-profile.html"><i class="material-icons">person_outline</i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="material-icons">mail_outline</i> My Inbox</a><a class="dropdown-item" href="user-cards.html"><i class="material-icons">content_paste</i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="material-icons">chat_bubble_outline</i> Chats</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -297,6 +297,16 @@
                         Dashboard
                     </a>
                 </li>
+                @if(auth::user()->can('View_Region'))
+                <li class="nav-item {{ (Request::is('admin/regions') ? 'active' : '') }}
+                                    {{ (Request::is('admin/region/create') ? 'active' : '') }}
+                                    {{ (Request::is('admin/region/'.request()->route('id').'/edit') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('region.index') }}">
+                        <i class="material-icons">place</i>
+                        Regions
+                    </a>
+                </li>
+                @endif
                 @if(auth::user()->can('View_Hood'))
                 <li class="nav-item {{ (Request::is('admin/hoods') ? 'active' : '') }}
                                     {{ (Request::is('admin/hood/create') ? 'active' : '') }}
@@ -314,6 +324,16 @@
                     <a class="menu-item" href="{{ route('category.index') }}">
                         <i class="material-icons">category</i>
                         Categories
+                    </a>
+                </li>
+                @endif
+                @if(auth::user()->can('View_Battles'))
+                <li class="nav-item {{ (Request::is('admin/battles') ? 'active' : '') }}
+                                    {{ (Request::is('admin/battle/'.request()->route('id').'/edit') ? 'active' : '') }}
+                                    {{ (Request::is('admin/battle/create') ? 'active' : '') }}">
+                    <a class="menu-item" href="{{ route('battle.index') }}">
+                        <i class="material-icons">compare</i>
+                        Battles
                     </a>
                 </li>
                 @endif
@@ -363,7 +383,7 @@
                                     {{ (Request::is('admin/lost_and_found/'.request()->route('id').'/edit') ? 'active' : '') }}">
                     <a class="menu-item" href="{{ route('lost_and_found.index') }}">
                         <i class="material-icons">find_replace</i>
-                        Teams
+                        Lost And Found
                     </a>
                 </li>
                 @endif

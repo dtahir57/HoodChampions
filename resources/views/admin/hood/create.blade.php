@@ -4,13 +4,11 @@
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/material-vendors.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/icheck/icheck.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/icheck/custom.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/selects/select2.min.css')}}">
 @endsection
 
 @section('page-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/material-vertical-menu-modern.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/checkboxes-radios.css')}}">
 @endsection
 
 @section('content')
@@ -74,8 +72,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="Region">Region</label>
-                                                        <input type="text" name="region" class="form-control" placeholder="Region" required value="{{ old('region') }}" />
+                                                        <div class="form-group">
+                                                            <div class="text-bold-600 font-medium-2">
+                                                                Select Region
+                                                            </div>
+                                                            <select class="select2 form-control" name="region_id">
+                                                                <optgroup label="Planning Area Name">
+                                                                    @foreach($regions as $region)
+                                                                    <option value="{{ $region->id }}">{{ $region->region }}</option>
+                                                                    @endforeach
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <button type="submit" class="btn btn-glow btn-primary mt-2">Save</button>
@@ -96,7 +104,7 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('app-assets/vendors/js/forms/icheck/icheck.min.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/pages/material-app.js') }}"></script>
-<script src="{{ asset('app-assets/js/scripts/forms/checkbox-radio.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
 @endsection

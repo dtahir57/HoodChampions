@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HoodRequest extends FormRequest
+class RegionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,13 +29,11 @@ class HoodRequest extends FormRequest
                 return [];
             case 'POST':
                 return [
-                    'planning_area_name' => 'required|max:225|unique:hoods',
-                    'region_id' => 'required'
+                    'region' => 'required|max:255|string|unique:regions'
                 ];
             case 'UPDATE':
                 return [
-                    'planning_area_name' => 'required|max:225',
-                    'region_id' => 'required'
+                    'region' => 'required|max:255|string'
                 ];
             default:
                 return [];

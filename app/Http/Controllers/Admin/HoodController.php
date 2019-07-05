@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Hood;
 use App\Http\Requests\HoodRequest;
 use Session;
+use App\Http\Models\Region;
 
 class HoodController extends Controller
 {
@@ -28,7 +29,8 @@ class HoodController extends Controller
      */
     public function create()
     {
-        return view('admin.hood.create');
+        $regions = Region::all();
+        return view('admin.hood.create', compact('regions'));
     }
 
     /**
@@ -41,7 +43,7 @@ class HoodController extends Controller
     {
         $hood = new Hood;
         $hood->planning_area_name = $request->planning_area_name;
-        $hood->region = $request->region;
+        $hood->region_id = $request->region_id;
         $hood->save();
         if ($hood) {
             Session::flash('created', 'Hood Created Successfully');
@@ -69,7 +71,8 @@ class HoodController extends Controller
     public function edit($id)
     {
         $hood = Hood::findOrFail($id);
-        return view('admin.hood.edit', compact('hood'));
+        $regions = Region::all();
+        return view('admin.hood.edit', compact('hood', 'regions'));
     }
 
     /**
@@ -83,7 +86,7 @@ class HoodController extends Controller
     {
         $hood = Hood::findOrFail($id);
         $hood->planning_area_name = $request->planning_area_name;
-        $hood->region = $request->region;
+        $hood->region_id = $request->region_id;
         $hood->update();
         if ($hood) {
             Session::flash('updated', 'Hood Information updated Successfully');

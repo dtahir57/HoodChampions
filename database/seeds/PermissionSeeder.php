@@ -29,6 +29,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Edit_User']);
         Permission::create(['name' => 'Delete_User']);
 
+        Permission::create(['name' => 'View_Region']);
+        Permission::create(['name' => 'Add_Region']);
+        Permission::create(['name' => 'Edit_Region']);
+        Permission::create(['name' => 'Delete_Region']);
+
         Permission::create(['name' => 'View_Hood']);
         Permission::create(['name' => 'Add_Hood']);
         Permission::create(['name' => 'Edit_Hood']);

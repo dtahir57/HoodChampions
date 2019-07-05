@@ -36,4 +36,9 @@ class Hood extends Model
     {
         return $this->hasMany(LostAndFound::class);
     }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
 }

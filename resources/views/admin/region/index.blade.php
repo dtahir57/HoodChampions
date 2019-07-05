@@ -1,6 +1,6 @@
 @extends('layouts.admin-app')
 
-@section('title', 'Manage Hoods')
+@section('title', 'Manage Regions')
 
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
@@ -13,22 +13,22 @@
 @section('content')
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Manage Hoods</h3>
+        <h3 class="content-header-title mb-0">Manage Regions</h3>
         <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Hoods
+                    <li class="breadcrumb-item active">Regions
                     </li>
                 </ol>
             </div>
         </div>
     </div>
     <div class="content-header-right text-md-right col-md-6 col-12">
-        @if(auth::user()->can('Add_Hood'))
+        @if(auth::user()->can('Add_Region'))
         <div class="btn-group">
-            <a href="{{ route('hood.create') }}" class="btn btn-round btn-success btn-glow" type="button"><i class="material-icons">add</i> Hood</a>
+            <a href="{{ route('region.create') }}" class="btn btn-round btn-success btn-glow" type="button"><i class="material-icons">add</i> Region</a>
         </div>
         @endif
     </div>
@@ -49,7 +49,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                        <h4 class="card-title">Hoods</h4>
+                        <h4 class="card-title">Regions</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
@@ -63,25 +63,23 @@
                                 <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>Planning Area Name</th>
                                                 <th>Region</th>
-                                                @if(auth::user()->can('Edit_Hood') OR auth::user()->can('Delete_Hood'))
+                                                @if(auth::user()->can('Edit_Region') OR auth::user()->can('Delete_Region'))
                                                 <th style="max-width: 50px;">Actions</th>
                                                 @endif
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($hoods as $hood)
+                                            @foreach($regions as $region)
                                             <tr>
-                                                <td>{{ $hood->planning_area_name }}</td>
-                                                <td>{{ $hood->region->region }}</td>
-                                                @if(auth::user()->can('Edit_Hood') OR auth::user()->can('Delete_Hood'))
+                                                <td>{{ $region->region }}</td>
+                                                @if(auth::user()->can('Edit_Region') OR auth::user()->can('Delete_Region'))
                                                 <td>
-                                                    @if(auth::user()->can('Edit_Hood'))
-                                                    <a href="{{ route('hood.edit', $hood->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
+                                                    @if(auth::user()->can('Edit_Region'))
+                                                    <a href="{{ route('region.edit', $region->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
                                                     @endif
-                                                    @if(auth::user()->can('Delete_Hood'))
-                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $hood->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
+                                                    @if(auth::user()->can('Delete_Region'))
+                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $region->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
                                                     @endif
                                                 </td>
                                                 @endif
@@ -90,9 +88,8 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Planning Area Name</th>
                                                 <th>Region</th>
-                                                @if(auth::user()->can('Edit_Hood') OR auth::user()->can('Delete_Hood'))
+                                                @if(auth::user()->can('Edit_Region') OR auth::user()->can('Delete_Region'))
                                                 <th style="max-width: 50px;">Actions</th>
                                                 @endif
                                             </tr>
@@ -111,20 +108,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger white">
-                <h4 class="modal-title white" id="myModalLabel10">Delete Hood</h4>
+                <h4 class="modal-title white" id="myModalLabel10">Delete Region</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Are You Sure You Want To Delete Hood?</h5>
+                <h5>Are You Sure You Want To Delete Region?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <form action="{{ route('hood.destroy') }}" method="post">
+                <form action="{{ route('region.destroy') }}" method="post">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE" />
-                    <input type="hidden" name="id" id="hood" value="" />
+                    <input type="hidden" name="id" id="region" value="" />
                     <button type="submit" class="btn btn-outline-danger">Save Changes</button>
                 </form>
             </div>
@@ -140,7 +137,7 @@
 $(document).ready(function(){
     $(document).on("click", ".deleteModal", function() {
         var id = $(this).data('id');
-        $(".modal-footer #hood").val( id );
+        $(".modal-footer #region").val( id );
     });
 });
 </script>

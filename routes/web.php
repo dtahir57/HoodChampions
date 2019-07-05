@@ -104,6 +104,27 @@ Route::group(['prefix' => '/admin'], function() {
     * Ending Routes For Hoods
     */
    
+    /**
+    * Starting Routes For Regions
+    */
+    Route::group(['middleware' => ['permission:View_Region']], function() {
+        Route::get('/regions', 'Admin\RegionController@index')->name('region.index');
+    });
+    Route::group(['middleware' => ['permission:Add_Region']], function() {
+        Route::get('/region/create', 'Admin\RegionController@create')->name('region.create');
+        Route::post('/region', 'Admin\RegionController@store')->name('region.store');
+    });
+    Route::group(['middleware' => ['permission:Edit_Region']], function() {
+        Route::get('/region/{id}/edit', 'Admin\RegionController@edit')->name('region.edit');
+        Route::patch('/region/{id}', 'Admin\RegionController@update')->name('region.update');
+    });
+    Route::group(['middleware' => ['permission:Delete_Region']], function() {
+        Route::delete('/region', 'Admin\RegionController@destroy')->name('region.destroy');
+    });
+    /**
+    * Ending Routes For Regions
+    */
+   
    /**
    * Starting Routes For Services
    */
@@ -227,5 +248,26 @@ Route::group(['prefix' => '/admin'], function() {
   });
   /**
   * Ending Routes For LostAndFound
+  */
+  
+  /**
+  * Starting Routes For Battles
+  */
+  Route::group(['middleware' => ['permission:View_Battles']], function() {
+      Route::get('/battles', 'Admin\BattleController@index')->name('battle.index');
+  });
+  Route::group(['middleware' => ['permission:Add_Battles']], function() {
+      Route::get('/battle/create', 'Admin\BattleController@create')->name('battle.create');
+      Route::post('/battle', 'Admin\BattleController@store')->name('battle.store');
+  });
+  Route::group(['middleware' => ['permission:Edit_Battles']], function() {
+      Route::get('/battle/{id}/edit', 'Admin\BattleController@edit')->name('battle.edit');
+      Route::patch('/battle/{id}', 'Admin\BattleController@update')->name('battle.update');
+  });
+  Route::group(['middleware' => ['permission:Delete_Battles']], function() {
+      Route::delete('/battle', 'Admin\BattleController@destroy')->name('battle.destroy');
+  });
+  /**
+  * Ending Routes For Battles
   */
 });

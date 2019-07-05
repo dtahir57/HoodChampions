@@ -89,6 +89,7 @@
                                                                     <option value="{{ \App\Http\Models\InterestGroup::class }}">Interest Group</option>
                                                                     <option value="{{ \App\Http\Models\Activity::class }}">Activity</option>
                                                                     <option value="{{ \App\Http\Models\LostAndFound::class }}">Lost And Found</option>
+                                                                    <option value="{{ \App\Http\Models\Battle::class }}">Battle</option>
                                                                 </optgroup>
                                                             </select>
                                                         </div>
