@@ -11,6 +11,7 @@ use App\Http\Models\Hood;
 use App\User;
 use App\Http\Requests\ActivityRequest;
 use Spatie\Permission\Models\Role;
+use App\Http\Models\Category;
 
 class ActivityController extends Controller
 {
@@ -36,8 +37,11 @@ class ActivityController extends Controller
         $users = User::all();
 
         $kakis = $this->getKakis($users);
-        $categories = Category::where('categoryable_type', Activity::class)->get();
-        return view('admin.activity.index', compact('hoods', 'kakis', 'categories'));
+        $categories = Category::where([
+            ['categoryable_type', Activity::class],
+            ['is_active', 1]
+        ])->get();
+        return view('admin.activity.create', compact('hoods', 'kakis', 'categories'));
     }
 
     /**

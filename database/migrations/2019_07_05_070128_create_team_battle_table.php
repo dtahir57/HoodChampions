@@ -13,18 +13,18 @@ class CreateTeamBattleTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_battle', function (Blueprint $table) {
+        Schema::create('battle_team', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('team_id');
-            $table->foreign('team_id')
-                    ->references('id')
-                    ->on('teams')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
             $table->unsignedBigInteger('battle_id');
             $table->foreign('battle_id')
                     ->references('id')
                     ->on('battles')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')
+                    ->references('id')
+                    ->on('teams')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             $table->timestamps();

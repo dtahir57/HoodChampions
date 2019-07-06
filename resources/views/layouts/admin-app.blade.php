@@ -349,8 +349,8 @@
                 @endif
                 @if(auth::user()->can('View_Activities'))
                 <li class="nav-item {{ Request::is('admin/activities') ? 'active' : '' }}
-                                    {{ Request::is('admin/activitie/create') ? 'active' : '' }}
-                                    {{ Request::is('admin/activitie/'.request()->route('id').'/edit') ? 'active' : '' }}">
+                                    {{ Request::is('admin/activity/create') ? 'active' : '' }}
+                                    {{ Request::is('admin/activity/'.request()->route('id').'/edit') ? 'active' : '' }}">
                     <a class="menu-item" href="{{ route('activity.index') }}">
                         <i class="material-icons">local_activity</i>
                         Activities

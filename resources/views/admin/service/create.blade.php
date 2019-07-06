@@ -89,7 +89,7 @@
                                                                 Select User
                                                             </div>
                                                             <select class="select2 form-control" name="user_id">
-                                                                <optgroup label="Planning Area Name">
+                                                                <optgroup label="Select Kaki">
                                                                     @foreach($kakis as $kaki)
                                                                     <option value="{{ $kaki->id }}">{{ $kaki->name }} | {{ $kaki->email }}</option>
                                                                     @endforeach

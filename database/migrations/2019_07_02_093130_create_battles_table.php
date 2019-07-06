@@ -21,6 +21,12 @@ class CreateBattlesTable extends Migration
                     ->on('categories')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->unsignedBigInteger('hood_id')->unsigned();
+            $table->foreign('hood_id')
+                    ->references('id')
+                    ->on('hoods')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->string('title');
             $table->integer('max_no_of_teams');
             $table->text('description');

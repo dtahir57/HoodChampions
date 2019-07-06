@@ -66,8 +66,9 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
-                                <form action="{{ route('category.store') }}" method="post" class="form" enctype="multipart/form-data">
+                                <form action="{{ route('category.update', $category->id) }}" method="post" class="form" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="card-block">
@@ -85,6 +86,8 @@
                                                                 <optgroup label="Category Type">
                                                                     <option value="{{ \App\Http\Models\InterestGroup::class }}" @if($category->categoryable_type == \App\Http\Models\InterestGroup::class) selected @endif>Interest Group</option>
                                                                     <option value="{{ \App\Http\Models\Activity::class }}" @if($category->categoryable_type == \App\Http\Models\Activity::class) selected @endif>Activity</option>
+                                                                    <option value="{{ \App\Http\Models\LostAndFound::class }}" @if($category->categoryable_type == \App\Http\Models\LostAndFound::class) selected @endif>Lost And Found</option>
+                                                                    <option value="{{ \App\Http\Models\Battle::class }}" @if($category->categoryable_type == \App\Http\Models\Battle::class) selected @endif>Battle</option>
                                                                 </optgroup>
                                                             </select>
                                                         </div>

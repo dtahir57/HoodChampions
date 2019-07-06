@@ -17,49 +17,49 @@ class CategorySeeder extends Seeder
     {
         $interest_group_category = new Category;
         $interest_group_category->title = 'Art';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Photography';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Cooking';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Music';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Sports';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Gardening';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Mahjong';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
 
         $interest_group_category = new Category;
         $interest_group_category->title = 'Others';
-        $interest_group_category->image = Storage::putFile('public/categories/', new File(asset('assets/graphics/Battles.svg')));
+        $interest_group_category->image = Storage::putFile('public/categories/', asset('assets/graphics/Battles.svg'));
         $interest_group_category->categoryable_type = InterestGroup::class;
         $interest_group_category->save();
     }

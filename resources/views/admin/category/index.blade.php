@@ -63,7 +63,7 @@
                                 <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>Image</th>
+                                                <th style="max-width: 200px;">Image</th>
                                                 <th>Title</th>
                                                 <th>Category Type</th>
                                                 <th>Active</th>

@@ -35,10 +35,10 @@ class ActivityRequest extends FormRequest
                     return [
                         'hood_id' => 'required',
                         'category_id' => 'required',
-                        'category_id' => 'required',
+                        'user_id' => 'required',
                         'type' => 'required',
-                        'title' => 'required|max:30|string'
-                        'description' => 'required|max:1000|string',
+                        'title' => 'required|max:30|string',
+                        'description' => 'required|max:1000',
                         'about_us' => 'required|max:30|string',
                         'email' => 'required|max:30|string',
                         'contact_no' => 'required|max:30|string',
@@ -53,10 +53,10 @@ class ActivityRequest extends FormRequest
                     return [
                         'hood_id' => 'required',
                         'category_id' => 'required',
-                        'category_id' => 'required',
+                        'user_id' => 'required',
                         'type' => 'required',
-                        'title' => 'required|max:30|string'
-                        'description' => 'required|max:1000|string',
+                        'title' => 'required|max:30|string',
+                        'description' => 'required|max:1000',
                         'about_us' => 'required|max:30|string',
                         'email' => 'required|max:30|string',
                         'contact_no' => 'required|max:30|string',

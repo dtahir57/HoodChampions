@@ -37,7 +37,10 @@ class LostAndFoundController extends Controller
         $users = User::all();
 
         $kakis = $this->getKakis($users);
-        $categories = Category::where('categoryable_type', Activity::class)->get();
+        $categories = Category::where([
+            ['categoryable_type', LostAndFound::class],
+            ['is_active', 1]
+        ])->get();
         return view('admin.lost_and_found.create', compact('hoods', 'kakis', 'categories'));
     }
 
@@ -87,7 +90,10 @@ class LostAndFoundController extends Controller
         $users = User::all();
 
         $kakis = $this->getKakis($users);
-        $categories = Category::where('categoryable_type', Activity::class)->get();
+        $categories = Category::where([
+            ['categoryable_type', LostAndFound::class],
+            ['is_active' , 1]
+        ])->get();
         return view('admin.lost_and_found.edit', compact('lost_and_found', 'hoods', 'kakis', 'categories'));
     }
 

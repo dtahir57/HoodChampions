@@ -37,7 +37,10 @@ class InterestGroupController extends Controller
         $users = User::all();
 
         $kakis = $this->getKakis($users);
-        $categories = Category::where('categoryable_type', InterestGroup::class)->get();
+        $categories = Category::where([
+            ['categoryable_type', InterestGroup::class],
+            ['is_active', 1]
+        ])->get();
         return view('admin.interest_group.create', compact('hoods', 'kakis', 'categories'));
     }
 
