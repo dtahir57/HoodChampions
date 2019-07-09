@@ -104,4 +104,14 @@ class RegionController extends Controller
             return redirect()->route('region.index');
         }
     }
+
+    public function bulk_destroy(RegionRequest $request)
+    {
+        foreach($request->regions as $id) {
+            $region = Region::findOrFail($id);
+            $region->delete();
+        }
+        Session::flash('bulk_delete', 'Regions Removed Successfully');
+        return redirect()->back();
+    }
 }

@@ -28,6 +28,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Add_User']);
         Permission::create(['name' => 'Edit_User']);
         Permission::create(['name' => 'Delete_User']);
+        Permission::create(['name' => 'Export_Users']);
 
         Permission::create(['name' => 'View_Region']);
         Permission::create(['name' => 'Add_Region']);
@@ -38,6 +39,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'Add_Hood']);
         Permission::create(['name' => 'Edit_Hood']);
         Permission::create(['name' => 'Delete_Hood']);
+        Permission::create(['name' => 'Export_Hoods']);
 
         Permission::create(['name' => 'View_Service']);
         Permission::create(['name' => 'Add_Service']);

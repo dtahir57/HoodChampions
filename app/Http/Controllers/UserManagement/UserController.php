@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\UserManagement;
 
-use Illuminate\Http\Request;
+use App\Exports\UserManagementExport;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-use App\User;
 use App\Http\Requests\UserRequest;
+use App\User;
 use Hash;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Session;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -118,5 +120,21 @@ class UserController extends Controller
             Session::flash('deleted', 'User Account Deleted Permanently');
             return redirect()->route('user.index');
         }
+    }
+
+    public function bulk_destroy(UserRequest $request)
+    {
+        foreach($request->users as $id)
+        {
+            $user = User::findById($id);
+            $user->delete();
+        }
+        Session::flash('bulk_destroy', 'Users Removed Successfully');
+        return redirect()->back();
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UserManagementExport, 'users.xlsx');
     }
 }

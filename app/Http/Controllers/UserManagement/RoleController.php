@@ -114,4 +114,15 @@ class RoleController extends Controller
             return redirect()->route('role.index');
         }
     }
+
+    public function bulk_destroy(RoleRequest $request)
+    {
+        foreach($request->roles as $id)
+        {
+            $role = Role::findById($id);
+            $role->delete();
+        }
+        Session::flash('bulk_destroy', 'Roles Removed Successfully');
+        return redirect()->back();
+    }
 }

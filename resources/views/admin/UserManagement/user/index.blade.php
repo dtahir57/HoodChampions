@@ -26,11 +26,14 @@
         </div>
     </div>
     <div class="content-header-right text-md-right col-md-6 col-12">
-        @if(auth::user()->can('Add_User'))
         <div class="btn-group">
+            @if(auth::user()->can('Add_User'))
             <a href="{{ route('user.create') }}" class="btn btn-round btn-success btn-glow" type="button"><i class="material-icons">add</i> User</a>
+            @endif
+            @if(auth::user()->can('Export_Users'))
+            <a href="{{ route('user.export') }}" type="button" class="btn btn-primary btn-glow btn-round"><i class="material-icons">import_export</i> Export</a>
+            @endif
         </div>
-        @endif
     </div>
 </div>
 <div class="content-wrapper">
@@ -60,50 +63,7 @@
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body card-dashboard">
-                                <table class="table table-striped table-bordered zero-configuration">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone Number</th>
-                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
-                                                <th style="max-width: 50px;">Actions</th>
-                                                @endif
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($users as $user)
-                                            <tr>
-                                                <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->phone_number }}</td>
-                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
-                                                <td>
-                                                    @if(auth::user()->can('Edit_User'))
-                                                    <a href="{{ route('user.edit', $user->id) }}" type="button"><i class="material-icons text-info">edit</i></a>
-                                                    @endif
-                                                    @if(auth::user()->can('Delete_User'))
-                                                    <a href="javascript:void(0);" class="deleteModal" type="button" data-toggle="modal" data-id="{{ $user->id }}" data-target="#danger"><i class="material-icons text-danger">delete</i></a>
-                                                    @endif
-                                                </td>
-                                                @endif
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone Number</th>
-                                                @if(auth::user()->can('Edit_User') OR auth::user()->can('Delete_User'))
-                                                <th style="max-width: 50px;">Actions</th>
-                                                @endif
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                @include('admin.UserManagement.user.table')
                             </div>
                         </div>
                     </div>
@@ -113,30 +73,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-danger white">
-                <h4 class="modal-title white" id="myModalLabel10">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>Are You Sure You Want To Delete User?</h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <form action="{{ route('user.destroy') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="_method" value="DELETE" />
-                    <input type="hidden" name="id" id="user" value="" />
-                    <button type="submit" class="btn btn-outline-danger">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@include('admin.UserManagement.user._delete_modal')
 @endsection
 
 @section('script')

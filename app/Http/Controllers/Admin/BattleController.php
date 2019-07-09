@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Battle;
-use Session;
-use Storage;
+use App\Http\Models\Category;
 use App\Http\Models\Hood;
 use App\Http\Models\Team;
-use App\Http\Models\Category;
 use App\Http\Requests\BattleRequest;
+use Illuminate\Http\Request;
+use Session;
+use Storage;
 
 class BattleController extends Controller
 {

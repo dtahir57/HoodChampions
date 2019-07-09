@@ -104,4 +104,15 @@ class PermissionController extends Controller
             return redirect()->route('permission.index');
         }
     }
+
+    public function bulk_destroy(PermissionRequest $request)
+    {
+        foreach($request->permissions as $id)
+        {
+            $permission = Permission::findById($id);
+            $permission->delete();
+        }
+        Session::flash('bulk_destroy', 'Permissions Removed Successfully');
+        return redirect()->back();
+    }
 }

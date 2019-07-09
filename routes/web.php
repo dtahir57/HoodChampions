@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -36,6 +32,7 @@ Route::group(['prefix' => '/admin'], function() {
     });
     Route::group(['middleware' => ['permission:Delete_Permission']], function () {
         Route::delete('/permission/destroy', 'UserManagement\PermissionController@destroy')->name('permission.destroy');
+        Route::delete('/permissions', 'UserManagement\PermissionController@bulk_destroy')->name('bulk_destroy.permission');
     });
     /**
     * Ending Routes For Permissions
@@ -57,6 +54,7 @@ Route::group(['prefix' => '/admin'], function() {
     });
     Route::group(['middleware' => ['permission:Delete_Role']], function() {
         Route::delete('/role', 'UserManagement\RoleController@destroy')->name('role.destroy');
+        Route::delete('/roles', 'UserManagement\RoleController@bulk_destroy')->name('bulk_destroy.role');
     });
     /**
     * Ending Routes For Roles
@@ -78,6 +76,10 @@ Route::group(['prefix' => '/admin'], function() {
     });
     Route::group(['middleware' => ['permission:Delete_User']], function() {
         Route::delete('/user', 'UserManagement\UserController@destroy')->name('user.destroy');
+        Route::delete('/users', 'UserManagement\UserController@bulk_destroy')->name('bulk_destroy.user');
+    });
+    Route::group(['middleware' => ['permission:Export_Users']], function() {
+      Route::get('/users/export', 'UserManagement\UserController@export')->name('user.export');
     });
     /**
     * Starting Routes For Users
@@ -99,6 +101,10 @@ Route::group(['prefix' => '/admin'], function() {
     });
     Route::group(['middleware' => ['permission:Delete_Hood']], function() {
         Route::delete('/hood', 'Admin\HoodController@destroy')->name('hood.destroy');
+        Route::delete('/hoods', 'Admin\HoodController@bulk_destroy')->name('hood.bulk_destroy');
+    });
+    Route::group(['middleware' => ['permission:Export_Hoods']], function() {
+      Route::get('/hoods/download', 'Admin\HoodController@export')->name('hood.export');
     });
     /**
     * Ending Routes For Hoods
@@ -120,6 +126,7 @@ Route::group(['prefix' => '/admin'], function() {
     });
     Route::group(['middleware' => ['permission:Delete_Region']], function() {
         Route::delete('/region', 'Admin\RegionController@destroy')->name('region.destroy');
+        Route::delete('/regions', 'Admin\RegionController@bulk_destroy')->name('region.bulk_destroy');
     });
     /**
     * Ending Routes For Regions
@@ -141,6 +148,7 @@ Route::group(['prefix' => '/admin'], function() {
    });
    Route::group(['middleware' => ['permission:Delete_Service']], function() {
        Route::delete('/service', 'Admin\ServiceController@destroy')->name('service.destroy');
+       Route::delete('/services', 'Admin\ServiceController@bulk_destroy')->name('bulk_destroy.service');
    });
    /**
    * Ending Routes For Services
@@ -162,6 +170,7 @@ Route::group(['prefix' => '/admin'], function() {
   });
   Route::group(['middleware' => ['permission:Delete_Team']], function() {
       Route::delete('/team', 'Admin\TeamController@destroy')->name('team.destroy');
+      Route::delete('/teams', 'Admin\TeamController@bulk_destroy')->name('bulk_destroy.team');
   });
   /**
   * Ending Routes For Teams
@@ -183,6 +192,7 @@ Route::group(['prefix' => '/admin'], function() {
    });
    Route::group(['middleware' => ['permission:Delete_Categories']], function() {
        Route::delete('/category', 'Admin\CategoryController@destroy')->name('category.destroy');
+       Route::delete('/categories', 'Admin\CategoryController@bulk_destroy')->name('category.bulk_destroy');
    });
    /**
    * Ending Routes For Categories
@@ -203,6 +213,7 @@ Route::group(['prefix' => '/admin'], function() {
   });
   Route::group(['middleware' => ['permission:Delete_Interest_Groups']], function() {
       Route::delete('/interest_group', 'Admin\InterestGroupController@destroy')->name('interest_group.destroy');
+      Route::delete('/interest_groups', 'Admin\InterestGroupController@bulk_destroy')->name('interest_group.bulk_destroy');
   });
   /**
   * Ending Routes For InterestGroups
@@ -224,6 +235,7 @@ Route::group(['prefix' => '/admin'], function() {
   });
   Route::group(['middleware' => ['permission:Delete_Activities']], function() {
       Route::delete('/activity', 'Admin\ActivityController@destroy')->name('activity.destroy');
+      Route::delete('/activities', 'Admin\ActivityController@bulk_destroy')->name('activity.bulk_destroy');
   });
   /**
   * Ending Routes For Activities
@@ -245,6 +257,7 @@ Route::group(['prefix' => '/admin'], function() {
   });
   Route::group(['middleware' => ['permission:Delete_Lost_And_Found']], function() {
       Route::delete('/lost_and_found', 'Admin\LostAndFoundController@destroy')->name('lost_and_found.destroy');
+      Route::delete('/lost_and_founds', 'Admin\LostAndFoundController@bulk_destroy')->name('lost_and_found.bulk_destroy');
   });
   /**
   * Ending Routes For LostAndFound
@@ -266,8 +279,12 @@ Route::group(['prefix' => '/admin'], function() {
   });
   Route::group(['middleware' => ['permission:Delete_Battles']], function() {
       Route::delete('/battle', 'Admin\BattleController@destroy')->name('battle.destroy');
+      Route::delete('/battles', 'Admin\BattleController@bulk_destroy')->name('battle.bulk_detsroy');
   });
   /**
   * Ending Routes For Battles
   */
 });
+
+
+Route::get('/{any}', 'SPAController@index')->where('any', '.*');

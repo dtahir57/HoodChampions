@@ -8,6 +8,8 @@ use App\Http\Models\Hood;
 use App\Http\Requests\HoodRequest;
 use Session;
 use App\Http\Models\Region;
+use App\Exports\HoodsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HoodController extends Controller
 {
@@ -109,4 +111,21 @@ class HoodController extends Controller
             return redirect()->route('hood.index');
         }
     }
+
+    public function bulk_destroy(HoodRequest $request)
+    {
+        foreach($request->hoods as $id)
+        {
+            $hood = Hood::findOrFail($id);
+            $hood->delete();
+        }
+        Session::flash('bulk_destroy', 'Hoods Removed Successfully');
+        return redirect()->back();
+    }
+
+    public function export() 
+    {
+        return Excel::download(new HoodsExport, 'hoods.xlsx');
+    }
+
 }
