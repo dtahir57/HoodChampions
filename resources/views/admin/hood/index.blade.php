@@ -36,7 +36,7 @@
                 @if(auth::user()->can('Export_Hoods'))
                 <a href="{{ route('hood.export') }}" type="button" class="btn btn-primary btn-round btn-glow"><i class="material-icons">import_export</i>Export</a>
                 @endif
-                <button id="bulk_delete" type="submit" class="btn btn-danger btn-round btn-glow" hidden><i class="material-icons">delete</i></button>
+                <button id="bulk_delete" type="submit" class="btn btn-danger btn-round btn-glow mr-2" hidden><i class="material-icons">delete</i></button>
             </div>
         </div>
     </div>

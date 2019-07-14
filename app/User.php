@@ -2,20 +2,21 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
+use App\Http\Models\Activity;
 use App\Http\Models\Hood;
+use App\Http\Models\InterestGroup;
+use App\Http\Models\LostAndFound;
 use App\Http\Models\Service;
 use App\Http\Models\Team;
-use App\Http\Models\InterestGroup;
-use App\Http\Models\Activity;
-use App\Http\Models\LostAndFound;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use HasApiTokens, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

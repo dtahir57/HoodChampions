@@ -35,6 +35,7 @@ class CreateBattlesTable extends Migration
             $table->string('contact_no');
             $table->string('meetup_place');
             $table->string('image');
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });
     }

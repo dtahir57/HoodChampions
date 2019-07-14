@@ -71,4 +71,9 @@ class Hood extends Model
     {
         return $this->hasMany(Battle::class);
     }
+
+    public function standings()
+    {
+        return $this->hasMany(Standing::class);
+    }
 }

@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"/js/app": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,67 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -78,6 +183,16 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -1703,7 +1818,129 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {// 
+  },
   data: function data() {
     return {// 
     };
@@ -6153,6 +6390,179 @@ __webpack_require__.r(__webpack_exports__);
 
 }));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/master.css":
+/*!*********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/css/master.css ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face {\n  font-family: plex;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/ibmplex.ttf */ "./resources/js/css/fonts/ibmplex.ttf")) + "); }\n\n@font-face {\n  font-family: light;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/light.ttf */ "./resources/js/css/fonts/light.ttf")) + "); }\n\n@font-face {\n  font-family: medium;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/medium.ttf */ "./resources/js/css/fonts/medium.ttf")) + "); }\n\n@font-face {\n  font-family: semibold;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/semibold.ttf */ "./resources/js/css/fonts/semibold.ttf")) + "); }\n\n@font-face {\n  font-family: bold;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/bold.ttf */ "./resources/js/css/fonts/bold.ttf")) + "); }\n\n* {\n  box-sizing: border-box;\n  font-family: \"plex\", sans-serif; }\n\n*::-moz-selection {\n  background-color: #b95d5d;\n  color: #fff; }\n\n*::selection {\n  background-color: #b95d5d;\n  color: #fff; }\n\nul {\n  margin: 0px;\n  padding: 0px; }\n  ul li {\n    list-style-type: none;\n    display: inline-block; }\n\na {\n  text-decoration: none !important;\n  color: #333; }\n  a:hover {\n    color: #dd2927; }\n\nhtml {\n  overflow-x: hidden !important;\n  scroll-behavior: smooth; }\n\nbody {\n  background-color: #fff;\n  margin: 0px;\n  position: relative;\n  padding: 0px;\n  width: 100%; }\n\nbody::-webkit-scrollbar {\n  width: 12px;\n  background-color: transparent;\n  position: absolute; }\n\nbody::-webkit-scrollbar-thumb {\n  background-color: #a30f17;\n  border-radius: 6px; }\n\nbody::-webkit-scrollbar-track {\n  background-color: #e2e2e2; }\n\n.fluid {\n  padding-left: 7px !important;\n  padding-right: 7px !important; }\n\n.mx-none {\n  margin: 0px -15px 0px -15px; }\n\n.mx-7p {\n  margin: 0px -7px 0px -7px; }\n\n.hidden {\n  display: none; }\n\n*:focus {\n  outline-color: transparent !important; }\n\n.btn:focus,\n.form-control:focus {\n  box-shadow: none !important; }\n\n.form-control {\n  border-radius: 0px; }\n\n.btn-outline {\n  background: transparent;\n  color: #a30f17;\n  border: 1px solid #a30f17;\n  border-radius: 0px;\n  font-size: 17px;\n  padding: 10px 30px;\n  -webkit-transition: .1s linear;\n  transition: .1s linear;\n  font-family: medium; }\n  @media (max-width: 1199px) {\n    .btn-outline {\n      font-size: 16px;\n      padding: 9px 28px; } }\n  @media (max-width: 991px) {\n    .btn-outline {\n      font-size: 15px;\n      padding: 8px 26px; } }\n  @media (max-width: 767px) {\n    .btn-outline {\n      font-size: 14px;\n      padding: 7px 24px; } }\n  .btn-outline:hover {\n    color: #dd2927;\n    border: 1px solid #dd2927; }\n  .btn-outline:active {\n    -webkit-transform: scale(0.97);\n    transform: scale(0.97); }\n\n.btn-default {\n  color: #fff;\n  background-color: #a30f17;\n  border: 1px solid #a30f17;\n  border-radius: 0px;\n  font-size: 16px;\n  padding: 10px 30px;\n  -webkit-transition: .1s linear;\n  transition: .1s linear;\n  font-family: medium; }\n  @media (max-width: 1199px) {\n    .btn-default {\n      font-size: 16px;\n      padding: 9px 28px; } }\n  @media (max-width: 991px) {\n    .btn-default {\n      font-size: 15px;\n      padding: 8px 26px; } }\n  @media (max-width: 767px) {\n    .btn-default {\n      font-size: 14px;\n      padding: 7px 24px; } }\n  .btn-default:hover {\n    background: #dd2927;\n    color: #fff;\n    border: 1px solid #dd2927; }\n  .btn-default:active {\n    -webkit-transform: scale(0.97);\n    transform: scale(0.97); }\n\n.link {\n  color: #dd2927;\n  text-decoration: none; }\n  .link:hover {\n    color: #dd2927; }\n\n@media (max-width: 420px) {\n  .col-xs-12 {\n    -webkit-box-flex: 0 !important;\n    flex: 0 0 100% !important;\n    max-width: 100% !important; } }\n\n.common-h {\n  font-size: 18px;\n  text-transform: uppercase;\n  color: #dd2927;\n  margin: 0px 0px 30px;\n  font-family: medium; }\n\ninput.form-control {\n  border: none;\n  border-bottom: 2px solid #a30f17;\n  height: 50px;\n  font-family: medium; }\n  input.form-control:focus {\n    border-color: #dd2927;\n    background: #fff3e6; }\n\nlabel {\n  text-transform: uppercase;\n  font-family: semibold;\n  color: #9a9a9a;\n  font-size: 14px; }\n  @media (max-width: 991px) {\n    label {\n      font-size: 13px; } }\n  @media (max-width: 767px) {\n    label {\n      font-size: 12px; } }\n\ntextarea.form-control {\n  border: none !important;\n  background: #fffbf8;\n  height: 200px;\n  padding: 10px 15px;\n  font-family: medium; }\n  textarea.form-control:focus {\n    background: #fff3e6; }\n\n.group-btns {\n  display: -webkit-box;\n  display: flex; }\n  .group-btns .btn {\n    width: 50%;\n    -webkit-box-flex: 1;\n    flex-grow: 1; }\n\n.main {\n  min-height: 100vh;\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n  margin: 0px;\n  padding: 0px;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  flex-direction: column; }\n  .main .main-wrapper {\n    -webkit-box-flex: 1;\n    flex-grow: 1; }\n\n.navbar {\n  border: none;\n  border-radius: 0px;\n  padding: 0px 15px;\n  background: #fff; }\n  .navbar .navbar-brand {\n    padding: 0px 0px 6px; }\n    @media (max-width: 767px) {\n      .navbar .navbar-brand {\n        padding: 5px 0px 10px; } }\n    .navbar .navbar-brand img {\n      height: 30px; }\n      @media (max-width: 1199px) {\n        .navbar .navbar-brand img {\n          height: 25px; } }\n  .navbar .navbar-toggler {\n    font-size: 25px;\n    padding: 5px 5px 0px 5px; }\n    .navbar .navbar-toggler:hover {\n      color: #dd2927; }\n  .navbar .navbar-nav {\n    margin-right: 50px; }\n    @media (max-width: 991px) {\n      .navbar .navbar-nav {\n        margin-right: 0px; } }\n    .navbar .navbar-nav .nav-item {\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-align: center;\n      align-items: center;\n      position: relative; }\n      .navbar .navbar-nav .nav-item .nav-link {\n        font-size: 18px;\n        padding: 20px 30px;\n        font-family: medium;\n        color: #9a9a9a; }\n        @media (max-width: 1199px) {\n          .navbar .navbar-nav .nav-item .nav-link {\n            font-size: 16px;\n            padding: 15px 20px; } }\n        @media (max-width: 991px) {\n          .navbar .navbar-nav .nav-item .nav-link {\n            font-size: 15px;\n            padding: 15px 12px;\n            font-family: plex; } }\n        .navbar .navbar-nav .nav-item .nav-link:hover {\n          color: #dd2927; }\n      .navbar .navbar-nav .nav-item > ul.sub-drop {\n        position: absolute;\n        top: 100%;\n        left: 50%;\n        -webkit-transform: translateX(-50%);\n        transform: translateX(-50%);\n        background: #fff3e6;\n        display: none;\n        z-index: 200; }\n        .navbar .navbar-nav .nav-item > ul.sub-drop li {\n          display: block; }\n          .navbar .navbar-nav .nav-item > ul.sub-drop li a {\n            text-align: center;\n            display: inline-block;\n            text-transform: uppercase;\n            color: #dd2927;\n            width: 100%;\n            white-space: nowrap;\n            padding: 15px 18px; }\n            .navbar .navbar-nav .nav-item > ul.sub-drop li a:hover {\n              background: #dd2927;\n              color: #fff; }\n      .navbar .navbar-nav .nav-item:hover a {\n        color: #dd2927; }\n      .navbar .navbar-nav .nav-item:hover .sub-drop, .navbar .navbar-nav .nav-item .sub-drop:hover {\n        display: block; }\n    .navbar .navbar-nav .profile-item .nav-link {\n      padding: 5px 15px; }\n    .navbar .navbar-nav .profile-item .profile-circle {\n      border-radius: 100%;\n      width: 45px;\n      height: 45px; }\n      .navbar .navbar-nav .profile-item .profile-circle img {\n        border-radius: 100%;\n        width: 100%; }\n\n.powered-bar {\n  background: #000;\n  padding: 20px 0px; }\n  .powered-bar .bar {\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: start;\n    justify-content: flex-start; }\n    @media (max-width: 991px) {\n      .powered-bar .bar {\n        -webkit-box-pack: justify;\n        justify-content: space-between; } }\n    .powered-bar .bar p {\n      color: #fff;\n      margin: 0px 20px 0px 0px;\n      font-size: 18px; }\n    .powered-bar .bar img {\n      height: 70px; }\n\n.footer {\n  padding: 20px 0px;\n  background: #2f2f2f;\n  color: #999; }\n  .footer .frow {\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center; }\n    @media (max-width: 991px) {\n      .footer .frow {\n        flex-wrap: wrap;\n        text-align: center;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n        flex-direction: column; } }\n    .footer .frow p {\n      margin-right: auto;\n      margin-bottom: 0px;\n      font-size: 16px; }\n      @media (max-width: 991px) {\n        .footer .frow p {\n          width: 100%;\n          -webkit-box-flex: 1;\n          flex-grow: 1;\n          margin-bottom: 10px; }\n          .footer .frow p br {\n            display: none; } }\n    .footer .frow ul li a {\n      color: #999;\n      padding: 5px 10px; }\n      .footer .frow ul li a:hover {\n        color: #dd2927; }\n    .footer .frow .social {\n      margin-left: 20px; }\n      @media (max-width: 991px) {\n        .footer .frow .social {\n          margin-left: 0px;\n          margin-top: 10px; } }\n      .footer .frow .social li a {\n        font-size: 24px; }\n\n.newsstream {\n  padding: 40px 0px;\n  background: #fffbf8;\n  position: relative; }\n\n.single-feed img {\n  width: 100%; }\n\n.single-feed .stream-text {\n  height: 100%; }\n  .single-feed .stream-text .text {\n    max-height: 130px;\n    overflow: hidden; }\n  @media (max-width: 767px) {\n    .single-feed .stream-text {\n      display: -webkit-box;\n      display: flex;\n      padding: 15px 0px;\n      -webkit-box-align: start;\n      align-items: flex-start;\n      -webkit-box-pack: justify;\n      justify-content: space-between; }\n      .single-feed .stream-text .text {\n        -webkit-box-flex: 1;\n        flex-grow: 1; } }\n  .single-feed .stream-text h2 {\n    margin: 0px;\n    font-size: 18px;\n    color: #dd2927;\n    text-transform: uppercase; }\n  .single-feed .stream-text h3 {\n    font-size: 17px;\n    line-height: 16px;\n    color: #000;\n    font-family: semibold;\n    margin: 10px 0px; }\n    .single-feed .stream-text h3 a {\n      font-family: semibold; }\n      .single-feed .stream-text h3 a:hover {\n        color: #dd2927; }\n  .single-feed .stream-text p {\n    font-size: 18px;\n    color: #707070; }\n  .single-feed .stream-text .icon {\n    position: absolute;\n    bottom: 0px;\n    right: 0px;\n    width: 50%; }\n    @media (max-width: 767px) {\n      .single-feed .stream-text .icon {\n        position: relative;\n        max-width: 120px; } }\n\n.ad-box {\n  padding: 50px 0px; }\n  .ad-box .box {\n    width: 380px;\n    height: 280px;\n    background: #888;\n    text-align: center;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: center;\n    justify-content: center;\n    margin: 0 auto; }\n    .ad-box .box h1 {\n      color: #fff;\n      font-size: calc(1.2vw + 1.2em); }\n\n.battles {\n  background: #fff;\n  padding: 30px 0px; }\n  .battles .battle-box {\n    margin-bottom: 30px;\n    -webkit-transition: .1s ease;\n    transition: .1s ease; }\n    .battles .battle-box:hover {\n      box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3); }\n    .battles .battle-box a {\n      display: inline-block;\n      width: 100%; }\n    .battles .battle-box .img-holder {\n      position: relative;\n      padding-top: 60%; }\n      .battles .battle-box .img-holder img {\n        position: absolute;\n        top: 0px;\n        left: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center; }\n    .battles .battle-box .content {\n      background: #fffbf8;\n      text-align: center;\n      padding: 20px; }\n      .battles .battle-box .content img {\n        height: 70px; }\n      .battles .battle-box .content h4 {\n        font-size: 18px;\n        margin: 5px 0px 0px;\n        color: #a30f17;\n        font-family: bold;\n        text-transform: uppercase; }\n      .battles .battle-box .content h5 {\n        color: #dd2927;\n        font-size: 16px;\n        margin: 10px 0px;\n        text-transform: uppercase; }\n      .battles .battle-box .content h6 {\n        font-family: semibold;\n        font-size: 18px;\n        color: #000; }\n      .battles .battle-box .content p {\n        font-size: 15px;\n        margin: 0px;\n        height: 70px;\n        overflow: hidden; }\n\n.display {\n  padding: 30px 0px;\n  background: #fffbf8; }\n  .display img {\n    display: block;\n    width: 80%;\n    margin: 0 auto; }\n    @media (max-width: 991px) {\n      .display img {\n        width: 90%; } }\n    @media (max-width: 576px) {\n      .display img {\n        width: 100%; } }\n  .display .table {\n    margin: 20px 0px; }\n    .display .table thead {\n      background: #a30f17; }\n      .display .table thead th {\n        color: #fff;\n        text-align: center;\n        font-weight: 500;\n        font-family: bold; }\n    .display .table tbody td {\n      text-align: center;\n      border: none;\n      font-size: 18px;\n      font-family: medium;\n      color: #707070;\n      padding: 20px 10px; }\n      @media (max-width: 991px) {\n        .display .table tbody td {\n          font-size: 16px; } }\n      @media (max-width: 767px) {\n        .display .table tbody td {\n          font-size: 15px; } }\n      @media (max-width: 576px) {\n        .display .table tbody td {\n          font-size: 14px; } }\n    .display .table tbody tr:first-child td {\n      color: #dd2927; }\n\n.hood-ranking .content {\n  padding: 40px 0px; }\n  .hood-ranking .content p {\n    color: #707070; }\n    @media (max-width: 991px) {\n      .hood-ranking .content p {\n        font-size: 14px; } }\n    @media (max-width: 576px) {\n      .hood-ranking .content p {\n        font-size: 13px; } }\n\n.hood-ranking .table td {\n  border: none;\n  color: #707070;\n  padding: 15px; }\n  .hood-ranking .table td ~ td {\n    text-align: center; }\n\n.hood-ranking .table .lead {\n  background: #fff3e6;\n  margin-bottom: 30px; }\n  .hood-ranking .table .lead td {\n    padding: 15px;\n    font-size: 17px;\n    color: #a30f17;\n    font-family: bold; }\n    @media (max-width: 991px) {\n      .hood-ranking .table .lead td {\n        font-size: 16px; } }\n    @media (max-width: 767px) {\n      .hood-ranking .table .lead td {\n        font-size: 15px; } }\n    @media (max-width: 576px) {\n      .hood-ranking .table .lead td {\n        font-size: 14px; } }\n\n.hood-ranking .table .lag td {\n  padding: 15px 15px 50px; }\n  @media (max-width: 991px) {\n    .hood-ranking .table .lag td {\n      font-size: 15px; } }\n  @media (max-width: 767px) {\n    .hood-ranking .table .lag td {\n      font-size: 14px; } }\n  @media (max-width: 576px) {\n    .hood-ranking .table .lag td {\n      font-size: 13px; } }\n\n.hood-ranking .table .total {\n  background: #a30f17;\n  margin-bottom: 30px; }\n  .hood-ranking .table .total td {\n    padding: 15px;\n    font-size: 17px;\n    color: #fff;\n    font-family: bold; }\n    @media (max-width: 991px) {\n      .hood-ranking .table .total td {\n        font-size: 16px; } }\n    @media (max-width: 767px) {\n      .hood-ranking .table .total td {\n        font-size: 15px; } }\n    @media (max-width: 576px) {\n      .hood-ranking .table .total td {\n        font-size: 14px; } }\n\n.about {\n  background: #fffbf8;\n  padding: 40px 0px 30px; }\n  .about .content {\n    margin-bottom: 30px; }\n    .about .content .common-h {\n      margin-bottom: 20px; }\n    .about .content p {\n      margin: 0px 0px 15px; }\n\n.contact-box {\n  padding: 40px 0px; }\n  .contact-box .container {\n    position: relative; }\n  .contact-box .form-group {\n    margin-bottom: 40px; }\n  .contact-box .corner-icon {\n    position: absolute;\n    right: 0px;\n    top: -40px;\n    z-index: 10;\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%);\n    width: 7vw; }\n    @media (max-width: 1199px) {\n      .contact-box .corner-icon {\n        width: 8vw; } }\n    @media (max-width: 991px) {\n      .contact-box .corner-icon {\n        width: 9vw; } }\n    @media (max-width: 767px) {\n      .contact-box .corner-icon {\n        width: 60px;\n        right: 15px; } }\n\n.friends {\n  background: #fffbf8;\n  padding: 50px 0px; }\n  .friends .no-friends {\n    padding: 30px 0px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: center;\n    justify-content: center;\n    text-align: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    .friends .no-friends img {\n      width: 40%; }\n      @media (max-width: 991px) {\n        .friends .no-friends img {\n          width: 50%; } }\n      @media (max-width: 576px) {\n        .friends .no-friends img {\n          width: 60%; } }\n    .friends .no-friends p {\n      margin: 0px;\n      color: #707070;\n      font-family: medium; }\n      .friends .no-friends p strong {\n        color: #dd2927;\n        font-family: medium; }\n\n.nearby {\n  padding: 50px 0px;\n  background: #fff; }\n  .nearby .common-h i {\n    margin-left: 40px; }\n\n.person-box {\n  padding: 0px 15px;\n  text-align: center;\n  margin-bottom: 25px; }\n  .person-box a {\n    display: inline-block;\n    width: 100%; }\n  .person-box .img-holder {\n    border-radius: 100%;\n    padding-top: 100%;\n    position: relative; }\n    .person-box .img-holder img {\n      border-radius: 100%;\n      position: absolute;\n      top: 0px;\n      left: 0px;\n      height: 100%;\n      width: 100%;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center; }\n  .person-box h4 {\n    font-family: medium;\n    font-size: 16px;\n    margin: 10px 0px; }\n\n.friend-requests {\n  padding: 50px 0px; }\n  .friend-requests .request {\n    margin-bottom: 40px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: end;\n    align-items: flex-end; }\n    @media (max-width: 991px) {\n      .friend-requests .request {\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n        flex-direction: column;\n        -webkit-box-pack: justify;\n        justify-content: space-between;\n        text-align: center; } }\n    .friend-requests .request .img-holder {\n      border-radius: 100%;\n      width: 20%;\n      margin-right: 20px; }\n      @media (max-width: 991px) {\n        .friend-requests .request .img-holder {\n          width: 120px;\n          margin: 0 auto; } }\n      @media (max-width: 767px) {\n        .friend-requests .request .img-holder {\n          width: 100px;\n          margin: 0 auto; } }\n      .friend-requests .request .img-holder img {\n        width: 100%;\n        border-radius: 100%; }\n    .friend-requests .request .name-action {\n      width: 60%; }\n      @media (max-width: 991px) {\n        .friend-requests .request .name-action {\n          width: 100%; } }\n      .friend-requests .request .name-action a {\n        font-size: 17px;\n        font-family: medium;\n        color: #9a9a9a;\n        padding: 10px 0px;\n        display: inline-block;\n        margin-bottom: 5px; }\n        .friend-requests .request .name-action a:hover {\n          color: #dd2927; }\n      .friend-requests .request .name-action .group-btns {\n        max-width: 350px;\n        margin: 0 auto; }\n\n.friend-profile .profile-details {\n  height: 100%;\n  text-align: center;\n  padding: 50px 50px;\n  background: #fffbf8; }\n  @media (max-width: 1199px) {\n    .friend-profile .profile-details {\n      padding: 50px 30px; } }\n  @media (max-width: 767px) {\n    .friend-profile .profile-details {\n      padding: 40px 30px 30px; } }\n  .friend-profile .profile-details .img-holder {\n    border-radius: 100%;\n    width: 120px;\n    margin: 0 auto 20px; }\n    .friend-profile .profile-details .img-holder img {\n      width: 100%;\n      border-radius: 100%; }\n  .friend-profile .profile-details h6 {\n    margin: 0px 0px 5px;\n    font-family: medium;\n    color: #9a9a9a;\n    font-size: 18px; }\n  .friend-profile .profile-details p {\n    margin: 0px;\n    color: #9a9a9a;\n    font-display: 16px;\n    font-family: medium; }\n  .friend-profile .profile-details ul {\n    margin: 15px 0px 30px; }\n    .friend-profile .profile-details ul li {\n      padding: 0px 16px;\n      font-size: 16px;\n      font-family: medium;\n      color: #9a9a9a;\n      position: relative; }\n      .friend-profile .profile-details ul li::after {\n        position: absolute;\n        content: \"\";\n        height: 15px;\n        width: 1px;\n        background: #ddd;\n        top: 50%;\n        -webkit-transform: translateY(-50%);\n        transform: translateY(-50%);\n        right: -1px; }\n      .friend-profile .profile-details ul li:last-child::after {\n        display: none; }\n  .friend-profile .profile-details .btn-outline {\n    width: 90%;\n    max-width: 330px;\n    margin: 0 auto;\n    display: block; }\n\n.friend-profile .hood-services {\n  margin-top: 40px;\n  border-top: 1px solid #ddd;\n  padding: 40px 15px;\n  text-align: left; }\n  .friend-profile .hood-services ul li {\n    padding: 0px; }\n    .friend-profile .hood-services ul li h5 {\n      font-size: 18px;\n      font-family: medium;\n      color: #000;\n      margin: 0px 0px 3px; }\n    .friend-profile .hood-services ul li p {\n      margin: 0px 0px 4px;\n      color: #9a9a9a;\n      font-size: 17px;\n      font-family: medium; }\n\n.friend-profile .about-profile {\n  padding: 50px 50px 50px 80px; }\n  @media (max-width: 1199px) {\n    .friend-profile .about-profile {\n      padding: 50px 30px; } }\n  @media (max-width: 767px) {\n    .friend-profile .about-profile {\n      padding: 40px 20px; } }\n  .friend-profile .about-profile .block {\n    margin-bottom: 100px; }\n    .friend-profile .about-profile .block ~ .block:last-child {\n      margin-bottom: 50px; }\n    .friend-profile .about-profile .block .group {\n      margin-bottom: 20px; }\n      .friend-profile .about-profile .block .group .img-holder {\n        position: relative;\n        padding-top: 60%;\n        margin-bottom: 5px; }\n        .friend-profile .about-profile .block .group .img-holder img {\n          -o-object-fit: cover;\n          object-fit: cover;\n          -o-object-position: center;\n          object-position: center;\n          width: 100%;\n          height: 100%;\n          position: absolute;\n          left: 0px;\n          top: 0px; }\n      .friend-profile .about-profile .block .group a {\n        color: #111;\n        font-family: semibold;\n        font-size: 18px; }\n        .friend-profile .about-profile .block .group a:hover {\n          color: #dd2927; }\n      .friend-profile .about-profile .block .group p {\n        color: #9a9a9a;\n        margin: 0px; }\n    .friend-profile .about-profile .block .not-any p {\n      margin: 0px 0px 50px; }\n    .friend-profile .about-profile .block .not-any .btn-default {\n      min-width: 300px; }\n      @media (max-width: 991px) {\n        .friend-profile .about-profile .block .not-any .btn-default {\n          min-width: 270px; } }\n      @media (max-width: 767px) {\n        .friend-profile .about-profile .block .not-any .btn-default {\n          min-width: 250px; } }\n\n.not-found-error {\n  padding: 80px 0px;\n  text-align: center; }\n  .not-found-error p {\n    font-family: semibold;\n    font-size: 18px;\n    color: #9a9a9a;\n    margin: 20px 0px; }\n\n.login {\n  padding: 60px 0px 80px;\n  text-align: center; }\n  .login .common-h {\n    margin-bottom: 60px; }\n  .login p {\n    font-family: medium;\n    color: #9a9a9a;\n    margin: 10px 0px; }\n  .login a {\n    font-size: 16px;\n    font-family: semibold;\n    color: #a30f17; }\n    .login a:hover {\n      color: #dd2927; }\n  .login input.form-control {\n    position: relative;\n    background: #fff3e6;\n    border: 1px solid #fff3e6; }\n  .login .btn-fb {\n    background: #3366c3;\n    color: #fff;\n    width: 100%;\n    border-radius: 0px;\n    display: block;\n    padding: 10px 20px; }\n    .login .btn-fb i {\n      margin-right: 15px; }\n  .login .or {\n    padding: 20px 0px; }\n    .login .or p {\n      margin: 0px;\n      font-family: medium;\n      color: #9a9a9a; }\n  .login .v-text {\n    font-size: 14px;\n    margin: 10px 0px;\n    height: 45px;\n    overflow: hidden; }\n    .login .v-text p {\n      text-align: left;\n      margin: 0px;\n      color: #9a9a9a;\n      font-family: medium; }\n    .login .v-text .valid {\n      display: none;\n      color: #00af57; }\n    .login .v-text .invalid {\n      display: none;\n      color: #be2e2e; }\n  .login .form-control.correct {\n    border: 1px solid #00af57; }\n    .login .form-control.correct ~ .v-text .requirement {\n      display: none; }\n    .login .form-control.correct ~ .v-text .valid {\n      display: block; }\n    .login .form-control.correct ~ .mark {\n      display: block; }\n      .login .form-control.correct ~ .mark .fa-times {\n        display: none; }\n  .login .form-control.incorrect {\n    border: 1px solid #be2e2e; }\n    .login .form-control.incorrect ~ .v-text .requirement, .login .form-control.incorrect ~ .v-text .invalid {\n      display: block;\n      color: #be2e2e; }\n    .login .form-control.incorrect ~ .v-text .valid {\n      display: none; }\n    .login .form-control.incorrect ~ .mark {\n      display: block; }\n      .login .form-control.incorrect ~ .mark .fa-check {\n        display: none; }\n  .login .form-group {\n    position: relative;\n    min-height: 100px;\n    text-align: left; }\n    .login .form-group .mark {\n      position: absolute;\n      display: inline-block;\n      right: 15px;\n      top: 10px;\n      z-index: 10;\n      display: none; }\n      .login .form-group .mark .fa-times {\n        color: #be2e2e; }\n      .login .form-group .mark .fa-check {\n        color: #00af57; }\n\n.block-btn {\n  width: 100%; }\n\n.modal-open {\n  padding-right: 0px !important; }\n\n.modal-open section {\n  padding-right: 0px !important;\n  -webkit-filter: blur(3px);\n  filter: blur(3px); }\n\n.modal .modal-header {\n  border: none; }\n  .modal .modal-header .close {\n    color: #a30f17;\n    opacity: 1; }\n    .modal .modal-header .close:hover {\n      color: #dd2927;\n      opacity: 1; }\n\n.modal .modal-body .btn-default {\n  min-height: 50px; }\n\n.login-modal {\n  text-align: center; }\n  .login-modal .modal-body p {\n    color: #9a9a9a; }\n\n.modal-backdrop.show {\n  opacity: .9; }\n\n.modal-dialog {\n  top: 40%;\n  margin-top: 0px !important;\n  -webkit-transform: translateY(-50%) !important;\n  transform: translateY(-50%) !important; }\n\n.select2 {\n  text-align: left; }\n\n.select2-results__options li {\n  display: block !important;\n  padding: 15px 10px; }\n\n.select2-search {\n  display: none; }\n\n.select2-container--default .select2-selection--single {\n  background: #fff3e6;\n  border: 1px solid #fff3e6;\n  height: 50px; }\n\n.select2-container--default .select2-selection--single .select2-selection__rendered {\n  line-height: 46px;\n  color: #333;\n  font-family: medium; }\n\n.select2-selection__arrow b {\n  border: none !important; }\n\n.select2-selection__arrow::after {\n  content: \"\\F107\";\n  font-family: \"Font Awesome 5 Pro\";\n  font-weight: 400;\n  position: absolute;\n  z-index: 100;\n  top: 7px;\n  color: #a30f17;\n  font-size: 24px;\n  right: 10px; }\n\n.select2-container--default .select2-results__option--highlighted[aria-selected] {\n  background: #dd2927;\n  color: #fff; }\n\n.select2-dropdown {\n  background-color: #fff3e6;\n  border: 1px solid #fff3e6; }\n\n.datepicker--day-name {\n  font-size: 14px;\n  font-family: medium;\n  color: #dd2927; }\n\n.datepicker--cell.datepicker--cell-day.-selected- {\n  background: #dd2927;\n  color: #fff; }\n\n.terms-check {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n  align-items: center;\n  -webkit-box-pack: center !important;\n  justify-content: center !important;\n  margin-bottom: 15px; }\n  .terms-check input {\n    display: none; }\n  .terms-check label {\n    position: relative;\n    text-transform: none !important; }\n    .terms-check label::-moz-selection {\n      background: white;\n      color: #9a9a9a; }\n    .terms-check label::selection {\n      background: white;\n      color: #9a9a9a; }\n    .terms-check label::before {\n      content: \" \";\n      height: 20px;\n      width: 20px;\n      border: 2px solid #a30f17;\n      position: absolute;\n      left: -30px;\n      z-index: 10;\n      top: 3px;\n      border-radius: 100%; }\n    .terms-check label::after {\n      content: \"\\F00C\";\n      font-family: \"Font Awesome 5 Pro\";\n      font-weight: 400;\n      font-size: 14px;\n      position: absolute;\n      left: -27.5px;\n      z-index: 10;\n      top: 3px;\n      color: #a30f17;\n      display: none; }\n  .terms-check input[type=checkbox]:checked ~ label::after {\n    display: block; }\n\n.form-check {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n  align-items: center;\n  -webkit-box-pack: start;\n  justify-content: flex-start;\n  margin: 10px 0px 20px;\n  padding-left: 0px; }\n  .form-check input {\n    display: none; }\n  .form-check label {\n    position: relative;\n    text-transform: none !important;\n    padding-left: 30px;\n    font-size: 16px !important; }\n    .form-check label a {\n      padding-left: 4px; }\n    .form-check label::-moz-selection {\n      background: white;\n      color: #9a9a9a; }\n    .form-check label::selection {\n      background: white;\n      color: #9a9a9a; }\n    .form-check label::before {\n      content: \" \";\n      height: 20px;\n      width: 20px;\n      border: 2px solid #a30f17;\n      position: absolute;\n      left: 0px;\n      z-index: 10;\n      top: 3px;\n      border-radius: 100%; }\n    .form-check label::after {\n      content: \"\\F00C\";\n      font-family: \"Font Awesome 5 Pro\";\n      font-weight: 400;\n      font-size: 14px;\n      position: absolute;\n      left: 3px;\n      z-index: 10;\n      top: 3px;\n      color: #a30f17;\n      display: none; }\n  .form-check input[type=checkbox]:checked ~ label::after {\n    display: block; }\n\n.news-stream {\n  padding: 60px 0px;\n  background: #fffbf8;\n  position: relative; }\n  .news-stream .single-feed {\n    margin-bottom: 100px; }\n    .news-stream .single-feed:last-child {\n      margin-bottom: 0px; }\n    @media (max-width: 767px) {\n      .news-stream .single-feed {\n        margin-bottom: 60px; } }\n    @media (max-width: 576px) {\n      .news-stream .single-feed {\n        margin-bottom: 50px; } }\n\n.teams .create-team-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .teams .create-team-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .teams .create-team-banner .text {\n      margin-bottom: 30px; } }\n  .teams .create-team-banner img {\n    max-width: 400px;\n    display: block;\n    margin: 0 auto; }\n\n.my-teams {\n  padding: 50px 0px; }\n\n.team-box {\n  margin-bottom: 20px; }\n  .team-box .img-holder {\n    position: relative;\n    padding-top: 60%;\n    margin-bottom: 5px; }\n    .team-box .img-holder img {\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      width: 100%;\n      height: 100%;\n      position: absolute;\n      left: 0px;\n      top: 0px; }\n  .team-box a {\n    color: #111;\n    font-family: semibold;\n    font-size: 18px; }\n    .team-box a:hover {\n      color: #dd2927; }\n  .team-box p {\n    color: #9a9a9a;\n    margin: 0px; }\n\n.all-teams {\n  padding: 50px 0px;\n  background: #fffbf8; }\n\n.join-team {\n  padding: 40px 0px 60px; }\n  .join-team .img-holder {\n    position: relative;\n    padding-top: 60%; }\n    .join-team .img-holder img {\n      width: 100%;\n      position: absolute;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      left: 0px;\n      top: 0px;\n      height: 100%; }\n  .join-team .team-info {\n    height: 100%;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    @media (max-width: 767px) {\n      .join-team .team-info {\n        margin-top: 10px; } }\n    .join-team .team-info .text {\n      -webkit-box-flex: 1;\n      flex-grow: 1;\n      overflow: hidden; }\n    .join-team .team-info h3 {\n      font-size: 17px;\n      line-height: 16px;\n      color: #000;\n      font-family: semibold;\n      margin: 10px 0px; }\n    .join-team .team-info span {\n      color: #707070;\n      display: block;\n      padding: 0px 0px 5px 0px; }\n    .join-team .team-info p {\n      font-size: 16px;\n      color: #000; }\n\n.info-msg {\n  background: #fff3e6;\n  width: 100%;\n  padding: 15px 20px;\n  margin: 10px 0px 20px;\n  text-align: left !important;\n  display: inline-block; }\n  .info-msg p {\n    margin: 0px;\n    color: #707070; }\n\n.team-posts {\n  padding: 60px 0px 80px;\n  background: #fffbf8;\n  border-top: 2px solid #eee;\n  border-bottom: 2px solid #eee; }\n  @media (max-width: 767px) {\n    .team-posts {\n      padding: 40px 0px 60px; } }\n  .team-posts .publisher {\n    text-align: center; }\n    .team-posts .publisher .img-holder {\n      height: 100px;\n      width: 100px;\n      position: relative;\n      display: block;\n      margin: 0 auto 20px; }\n      .team-posts .publisher .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n  @media (max-width: 767px) {\n    .team-posts .posts {\n      margin-top: 20px; } }\n\n.team-details {\n  padding: 60px 0px; }\n  .team-details .common-h {\n    text-align: center; }\n  .team-details .about-team ul li {\n    display: block;\n    margin-bottom: 20px; }\n    .team-details .about-team ul li:last-child {\n      margin-bottom: 0px; }\n    .team-details .about-team ul li p {\n      margin: 0px;\n      color: #000; }\n    .team-details .about-team ul li span {\n      color: #9a9a9a; }\n  .team-details .members .single-member {\n    margin-bottom: 30px; }\n    .team-details .members .single-member a {\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-align: center;\n      align-items: center; }\n    .team-details .members .single-member .img-holder {\n      height: 50px;\n      width: 50px;\n      position: relative;\n      display: block;\n      margin-right: 15px; }\n      .team-details .members .single-member .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n    .team-details .members .single-member .name-place {\n      -webkit-box-flex: 1;\n      flex-grow: 1; }\n      .team-details .members .single-member .name-place h4 {\n        font-family: medium;\n        font-size: 16px;\n        margin: 0px;\n        color: #9a9a9a; }\n        .team-details .members .single-member .name-place h4:hover {\n          color: #dd2927; }\n      .team-details .members .single-member .name-place p {\n        font-size: 14px;\n        color: #9a9a9a;\n        margin: 2px 0px 0px; }\n\n.create-battle-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .create-battle-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .create-battle-banner .text {\n      margin-bottom: 30px; } }\n  .create-battle-banner img {\n    max-width: 180px;\n    display: block;\n    margin: 0 auto; }\n\n.create-battle {\n  padding: 40px 0px 60px; }\n  .create-battle .img-holder {\n    position: relative;\n    padding-top: 60%; }\n    .create-battle .img-holder img {\n      width: 100%;\n      position: absolute;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      left: 0px;\n      top: 0px;\n      height: 100%; }\n  .create-battle .team-info {\n    height: 100%;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    @media (max-width: 767px) {\n      .create-battle .team-info {\n        margin-top: 10px; } }\n    .create-battle .team-info .text {\n      -webkit-box-flex: 1;\n      flex-grow: 1;\n      overflow: hidden; }\n    .create-battle .team-info h3 {\n      font-size: 17px;\n      line-height: 16px;\n      color: #000;\n      font-family: semibold;\n      margin: 10px 0px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-pack: justify;\n      justify-content: space-between;\n      -webkit-box-align: center;\n      align-items: center; }\n      .create-battle .team-info h3 a {\n        color: #a30f17; }\n        .create-battle .team-info h3 a:hover {\n          color: #dd2927; }\n    .create-battle .team-info span {\n      color: #707070;\n      display: block;\n      padding: 0px 0px 5px 0px; }\n    .create-battle .team-info p {\n      font-size: 16px;\n      color: #000; }\n\n.team-battles {\n  padding: 60px 0px 80px;\n  background: #fffbf8;\n  border-top: 2px solid #eee;\n  border-bottom: 2px solid #eee; }\n  @media (max-width: 767px) {\n    .team-battles {\n      padding: 40px 0px 60px; } }\n  .team-battles .row > div {\n    position: relative; }\n  .team-battles .publisher {\n    text-align: center;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 15px; }\n    .team-battles .publisher .img-holder {\n      height: 100px;\n      width: 100px;\n      position: relative;\n      display: block;\n      margin: 0 auto 20px; }\n      .team-battles .publisher .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n  .team-battles .battles {\n    background: #fffbf8; }\n    @media (max-width: 767px) {\n      .team-battles .battles {\n        margin-top: 20px; } }\n    .team-battles .battles > ul > li {\n      display: inline-block;\n      padding: 15px 0px;\n      border-bottom: 1px solid #ddd;\n      width: 100% !important; }\n      .team-battles .battles > ul > li .strip {\n        display: -webkit-box;\n        display: flex;\n        -webkit-box-align: center;\n        align-items: center;\n        -webkit-box-pack: justify;\n        justify-content: space-between;\n        background: #fff;\n        border: 1px solid #fff3e6;\n        padding: 6px 20px; }\n        .team-battles .battles > ul > li .strip .img-holder {\n          width: 40px;\n          border-radius: 100%;\n          height: 40px; }\n          .team-battles .battles > ul > li .strip .img-holder img {\n            border-radius: 100%;\n            width: 100%;\n            height: 100%;\n            -o-object-fit: cover;\n            object-fit: cover;\n            -o-object-position: center;\n            object-position: center; }\n        .team-battles .battles > ul > li .strip p {\n          color: #707070;\n          margin: 0px; }\n      .team-battles .battles > ul > li .bdate {\n        padding-top: 5px;\n        text-align: right; }\n        .team-battles .battles > ul > li .bdate span {\n          font-size: 12px;\n          color: #707070; }\n        .team-battles .battles > ul > li .bdate .remove-action {\n          display: inline-block;\n          margin: 0px 5px;\n          width: 0px;\n          height: 0px;\n          white-space: nowrap;\n          opacity: 0;\n          -webkit-transition: width .2s linear;\n          transition: width .2s linear; }\n          .team-battles .battles > ul > li .bdate .remove-action.show {\n            width: auto;\n            height: auto;\n            opacity: 1;\n            margin: 0px 10px; }\n          .team-battles .battles > ul > li .bdate .remove-action li a {\n            font-size: 13px;\n            padding: 0px 5px;\n            font-family: medium; }\n          .team-battles .battles > ul > li .bdate .remove-action li::after {\n            content: \"/\";\n            font-size: 11px;\n            color: #9a9a9a; }\n          .team-battles .battles > ul > li .bdate .remove-action li:last-child:after {\n            display: none; }\n        .team-battles .battles > ul > li .bdate .trash {\n          font-size: 13px;\n          color: #a30f17;\n          display: none; }\n          .team-battles .battles > ul > li .bdate .trash.stay {\n            display: inline-block !important; }\n          @media (max-width: 767px) {\n            .team-battles .battles > ul > li .bdate .trash {\n              display: inline-block !important; } }\n          .team-battles .battles > ul > li .bdate .trash:hover {\n            color: #dd2927; }\n      .team-battles .battles > ul > li:hover .trash {\n        display: inline-block; }\n\n.battle-details {\n  padding: 60px 0px; }\n  .battle-details .common-h {\n    text-align: center; }\n  .battle-details .about-team ul li {\n    display: block;\n    margin-bottom: 20px; }\n    .battle-details .about-team ul li:last-child {\n      margin-bottom: 0px; }\n    .battle-details .about-team ul li p {\n      margin: 0px;\n      color: #000; }\n    .battle-details .about-team ul li span {\n      color: #9a9a9a; }\n  .battle-details .members .single-member {\n    margin-bottom: 30px; }\n    .battle-details .members .single-member a {\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-align: center;\n      align-items: center; }\n    .battle-details .members .single-member .img-holder {\n      height: 50px;\n      width: 50px;\n      position: relative;\n      display: block;\n      margin-right: 15px; }\n      .battle-details .members .single-member .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n    .battle-details .members .single-member .name-place {\n      -webkit-box-flex: 1;\n      flex-grow: 1; }\n      .battle-details .members .single-member .name-place h4 {\n        font-family: medium;\n        font-size: 16px;\n        margin: 0px;\n        color: #9a9a9a; }\n        .battle-details .members .single-member .name-place h4:hover {\n          color: #dd2927; }\n      .battle-details .members .single-member .name-place p {\n        font-size: 14px;\n        color: #9a9a9a;\n        margin: 2px 0px 0px; }\n  .battle-details .f-row {\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: start;\n    align-items: flex-start;\n    -webkit-box-pack: justify;\n    justify-content: space-between; }\n    @media (max-width: 767px) {\n      .battle-details .f-row {\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n        flex-direction: column;\n        justify-content: space-around !important; }\n        .battle-details .f-row .column {\n          margin: 0 auto 40px; }\n        .battle-details .f-row .column:first-child,\n        .battle-details .f-row .column:last-child {\n          text-align: center; }\n        .battle-details .f-row .column:last-child {\n          margin: 0 auto 0px; } }\n    .battle-details .f-row .column {\n      min-width: 120px; }\n  .battle-details .results h5 {\n    display: inline-block;\n    width: 100%;\n    color: #9a9a9a;\n    text-transform: uppercase;\n    font-size: 14px;\n    margin: 0px 0px 10px; }\n  .battle-details .results table {\n    margin: 10px 0px; }\n    .battle-details .results table tr td {\n      padding: 5px 7px;\n      font-family: medium; }\n    .battle-details .results table .winner td {\n      color: #dd2927; }\n\n.edit-battle {\n  padding: 60px 0px;\n  background: #fffbf8; }\n  .edit-battle .common-h {\n    border-bottom: 2px solid #dd2927;\n    display: inline-block;\n    padding-bottom: 5px; }\n  .edit-battle h5 {\n    font-size: 14px;\n    color: #dd2927;\n    margin: 0px;\n    text-transform: uppercase;\n    margin: 20px 0px 30px; }\n  .edit-battle label {\n    font-size: 14px;\n    font-family: plex;\n    font-weight: 400;\n    color: #9a9a9a;\n    letter-spacing: 1px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: justify;\n    justify-content: space-between; }\n    .edit-battle label span {\n      font-size: 14px;\n      font-family: plex;\n      font-weight: 400;\n      color: #9a9a9a;\n      letter-spacing: 1px; }\n  .edit-battle .form-group {\n    margin-bottom: 30px;\n    display: inline-block;\n    width: 100%; }\n    .edit-battle .form-group input.form-control {\n      background: #fffbf8; }\n      .edit-battle .form-group input.form-control:focus {\n        background: #fff3e6; }\n    .edit-battle .form-group textarea {\n      background: #fff3e6;\n      height: 160px; }\n    .edit-battle .form-group .img-box {\n      position: relative;\n      padding-top: 60%;\n      background: #f1f1f1;\n      border: none; }\n      .edit-battle .form-group .img-box .remove-img {\n        background: #a30f17;\n        padding: 0px 7px;\n        color: #fff;\n        font-size: 20px;\n        position: absolute;\n        top: 0px;\n        right: 0px;\n        z-index: 60; }\n      .edit-battle .form-group .img-box::after {\n        content: \"\\F03E\";\n        font-family: \"Font Awesome 5 Pro\";\n        font-weight: 400;\n        position: absolute;\n        z-index: 10;\n        font-size: 5vw;\n        top: 50%;\n        left: 50%;\n        -webkit-transform: translate(-50%, -50%);\n        transform: translate(-50%, -50%);\n        color: #9a9a9a; }\n      .edit-battle .form-group .img-box img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        height: 100%;\n        width: 100%;\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        z-index: 50;\n        opacity: 0; }\n        .edit-battle .form-group .img-box img.visible {\n          opacity: 1; }\n    .edit-battle .form-group .file-holder {\n      display: none; }\n    .edit-battle .form-group .img-uploader {\n      margin: 20px 0px 10px; }\n    .edit-battle .form-group p {\n      color: #9a9a9a; }\n\n.select2-results__options::-webkit-scrollbar {\n  width: 6px;\n  background-color: #707070;\n  position: absolute; }\n\n.select2-results__options::-webkit-scrollbar-thumb {\n  background-color: #fff;\n  border-radius: 6px;\n  border: 2px solid #707070; }\n\n.select2-results__options::-webkit-scrollbar-track {\n  background-color: #707070; }\n\n.select2-results__options {\n  max-height: 220px !important; }\n\n.search-bar {\n  background: #fff3e6;\n  display: inline-block;\n  width: 100%; }\n  .search-bar .input-group {\n    margin-bottom: 0px; }\n    .search-bar .input-group .input-group-prepend .input-group-text {\n      background-color: transparent;\n      border: none;\n      padding: 0px;\n      color: #9a9a9a;\n      font-size: 18px; }\n    .search-bar .input-group .form-control {\n      background: transparent;\n      border: none !important;\n      font-size: 18px;\n      color: #111;\n      font-family: medium;\n      height: 50px; }\n      .search-bar .input-group .form-control::-webkit-input-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control:-ms-input-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control::-ms-input-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control::-moz-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control::placeholder {\n        color: #9a9a9a; }\n\n.upcoming-battles {\n  padding: 50px 0px;\n  background: #fffbf8; }\n  .upcoming-battles .battle-box {\n    margin-bottom: 20px; }\n    .upcoming-battles .battle-box a {\n      display: inline-block;\n      width: 100%; }\n    .upcoming-battles .battle-box .img-holder {\n      position: relative;\n      padding-top: 60%;\n      margin-bottom: 5px; }\n      .upcoming-battles .battle-box .img-holder img {\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0px;\n        top: 0px; }\n    .upcoming-battles .battle-box .text span {\n      display: block;\n      color: #dd2927;\n      font-size: 16px;\n      text-transform: uppercase; }\n    .upcoming-battles .battle-box .text h4 {\n      margin: 5px 0px;\n      color: #111;\n      font-family: semibold;\n      font-size: 18px; }\n      .upcoming-battles .battle-box .text h4:hover {\n        color: #dd2927; }\n    .upcoming-battles .battle-box .text p {\n      color: #9a9a9a;\n      margin: 0px; }\n\n.ad-holder {\n  clear: both;\n  padding: 15px 0px; }\n  .ad-holder .ad {\n    background: #707070;\n    color: #fff;\n    max-width: 800px;\n    margin: 0 auto; }\n    .ad-holder .ad h1 {\n      font-size: calc(1vw + 2em);\n      text-align: center;\n      padding: 20px 0px; }\n\n.head-title-icon {\n  display: -webkit-box;\n  display: flex;\n  margin-bottom: 30px;\n  -webkit-box-align: end;\n  align-items: flex-end;\n  -webkit-box-pack: justify;\n  justify-content: space-between;\n  position: relative; }\n  .head-title-icon .common-h {\n    margin-bottom: 0px !important; }\n  .head-title-icon .icon {\n    position: absolute;\n    bottom: 0px;\n    right: 0px; }\n    .head-title-icon .icon img {\n      height: calc(2.5em + 3vw); }\n\n.featured {\n  padding: 60px 0px; }\n  .featured .group {\n    margin-bottom: 20px; }\n    .featured .group .img-holder {\n      position: relative;\n      padding-top: 60%;\n      margin-bottom: 5px; }\n      .featured .group .img-holder img {\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0px;\n        top: 0px; }\n    .featured .group a {\n      color: #111;\n      font-family: semibold;\n      font-size: 18px; }\n      .featured .group a:hover {\n        color: #dd2927; }\n    .featured .group p {\n      color: #9a9a9a;\n      margin: 0px; }\n\n.interest .interest-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .interest .interest-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .interest .interest-banner .text {\n      margin-bottom: 30px; } }\n  .interest .interest-banner img {\n    max-width: 100px;\n    display: block;\n    margin: 0 auto; }\n\n.categories {\n  padding: 50px 0px; }\n  .categories .categories-slider .item {\n    text-align: center; }\n    .categories .categories-slider .item .img-holder {\n      position: relative;\n      padding-top: 100%;\n      max-width: 120px;\n      display: block;\n      margin: 0 auto; }\n      @media (max-width: 1400px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 100px; } }\n      @media (max-width: 1199px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 90px; } }\n      @media (max-width: 767px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 80px; } }\n      @media (max-width: 576px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 60px; } }\n      .categories .categories-slider .item .img-holder img {\n        position: absolute;\n        left: 0px;\n        right: 0px;\n        top: 0px;\n        height: 100%;\n        width: 100%;\n        -o-object-fit: contain;\n        object-fit: contain;\n        -o-object-position: center;\n        object-position: center; }\n  .categories .categories-slider h5.ctg-title {\n    margin: 0px 0px 10px;\n    font-size: 16px;\n    text-align: center !important;\n    font-family: bold; }\n    @media (max-width: 1199px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 15px; } }\n    @media (max-width: 991px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 14px; } }\n    @media (max-width: 767px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 13px; } }\n    @media (max-width: 576px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 12px; } }\n\n.owl-carousel {\n  position: relative; }\n  .owl-carousel .owl-nav {\n    position: absolute;\n    top: 50%;\n    width: 100%;\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%); }\n    .owl-carousel .owl-nav .owl-prev,\n    .owl-carousel .owl-nav .owl-next {\n      position: absolute;\n      padding: 2px 10px; }\n      .owl-carousel .owl-nav .owl-prev i,\n      .owl-carousel .owl-nav .owl-next i {\n        color: #a30f17;\n        font-size: calc(1.5vw + 1em); }\n      .owl-carousel .owl-nav .owl-prev:hover i,\n      .owl-carousel .owl-nav .owl-next:hover i {\n        color: #dd2927; }\n    .owl-carousel .owl-nav .owl-prev {\n      left: -1vw; }\n    .owl-carousel .owl-nav .owl-next {\n      right: -1vw; }\n\n.mi-groups {\n  background: #fffbf8; }\n\n.interest-group-none {\n  background: #fffbf8;\n  text-align: center;\n  padding: 50px 0px; }\n  .interest-group-none img {\n    margin-bottom: 20px; }\n  .interest-group-none p {\n    margin: 0px 0px;\n    font-family: medium;\n    color: #9a9a9a; }\n  .interest-group-none a {\n    font-family: semibold;\n    color: #dd2927;\n    font-size: 16px; }\n    .interest-group-none a:hover {\n      color: #a30f17; }\n\n.join-interest-group {\n  padding: 40px 0px 60px; }\n  .join-interest-group .img-holder {\n    position: relative;\n    padding-top: 60%; }\n    .join-interest-group .img-holder img {\n      width: 100%;\n      position: absolute;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      left: 0px;\n      top: 0px;\n      height: 100%; }\n  .join-interest-group .ig-info {\n    height: 100%;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    @media (max-width: 767px) {\n      .join-interest-group .ig-info {\n        margin-top: 10px; } }\n    .join-interest-group .ig-info .text {\n      -webkit-box-flex: 1;\n      flex-grow: 1;\n      overflow: hidden; }\n    .join-interest-group .ig-info h3 {\n      font-size: 17px;\n      line-height: 16px;\n      color: #000;\n      font-family: semibold;\n      margin: 10px 0px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-pack: justify;\n      justify-content: space-between;\n      -webkit-box-align: center;\n      align-items: center; }\n      .join-interest-group .ig-info h3 a {\n        color: #a30f17; }\n        .join-interest-group .ig-info h3 a:hover {\n          color: #dd2927; }\n    .join-interest-group .ig-info span {\n      color: #707070;\n      display: block;\n      padding: 0px 0px 5px 0px; }\n    .join-interest-group .ig-info p {\n      font-size: 16px;\n      color: #000; }\n\n.ig-activities {\n  padding: 60px 0px 80px;\n  background: #fffbf8;\n  border-top: 2px solid #eee;\n  border-bottom: 2px solid #eee; }\n  @media (max-width: 767px) {\n    .ig-activities {\n      padding: 40px 0px 60px; } }\n  .ig-activities .row > div {\n    position: relative; }\n  .ig-activities .publisher {\n    text-align: center;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 15px; }\n    .ig-activities .publisher .img-holder {\n      height: 100px;\n      width: 100px;\n      position: relative;\n      display: block;\n      margin: 0 auto 20px; }\n      .ig-activities .publisher .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n  .ig-activities .activities {\n    background: #fffbf8; }\n    @media (max-width: 767px) {\n      .ig-activities .activities {\n        margin-top: 20px; } }\n    .ig-activities .activities > ul > li {\n      display: inline-block;\n      padding: 15px 0px;\n      border-bottom: 1px solid #ddd;\n      width: 100% !important; }\n      .ig-activities .activities > ul > li .strip {\n        display: -webkit-box;\n        display: flex;\n        -webkit-box-align: center;\n        align-items: center;\n        -webkit-box-pack: justify;\n        justify-content: space-between;\n        background: #fff;\n        border: 1px solid #fff3e6;\n        padding: 6px 20px; }\n        .ig-activities .activities > ul > li .strip .img-holder {\n          width: 40px;\n          border-radius: 100%;\n          height: 40px; }\n          .ig-activities .activities > ul > li .strip .img-holder img {\n            border-radius: 100%;\n            width: 100%;\n            height: 100%;\n            -o-object-fit: cover;\n            object-fit: cover;\n            -o-object-position: center;\n            object-position: center; }\n        .ig-activities .activities > ul > li .strip p {\n          color: #707070;\n          margin: 0px; }\n      .ig-activities .activities > ul > li .adate {\n        padding-top: 5px;\n        text-align: right; }\n        .ig-activities .activities > ul > li .adate span {\n          font-size: 12px;\n          color: #707070; }\n        .ig-activities .activities > ul > li .adate .remove-action {\n          display: inline-block;\n          margin: 0px 5px;\n          width: 0px;\n          height: 0px;\n          white-space: nowrap;\n          opacity: 0;\n          -webkit-transition: width .2s linear;\n          transition: width .2s linear; }\n          .ig-activities .activities > ul > li .adate .remove-action.show {\n            width: auto;\n            height: auto;\n            opacity: 1;\n            margin: 0px 10px; }\n          .ig-activities .activities > ul > li .adate .remove-action li a {\n            font-size: 13px;\n            padding: 0px 5px;\n            font-family: medium; }\n          .ig-activities .activities > ul > li .adate .remove-action li::after {\n            content: \"/\";\n            font-size: 11px;\n            color: #9a9a9a; }\n          .ig-activities .activities > ul > li .adate .remove-action li:last-child:after {\n            display: none; }\n        .ig-activities .activities > ul > li .adate .trash {\n          font-size: 13px;\n          color: #a30f17;\n          display: none; }\n          .ig-activities .activities > ul > li .adate .trash.stay {\n            display: inline-block !important; }\n          @media (max-width: 767px) {\n            .ig-activities .activities > ul > li .adate .trash {\n              display: inline-block !important; } }\n          .ig-activities .activities > ul > li .adate .trash:hover {\n            color: #dd2927; }\n      .ig-activities .activities > ul > li:hover .trash {\n        display: inline-block; }\n\n.other-hoods-ctg {\n  background: #fffbf8; }\n\n.other-upcomming-battles {\n  background: #fff; }\n\n.past-battles {\n  padding: 50px 0px;\n  background: #fffbf8; }\n  .past-battles .battle-box {\n    margin-bottom: 20px; }\n    .past-battles .battle-box a {\n      display: inline-block;\n      width: 100%; }\n    .past-battles .battle-box .img-holder {\n      position: relative;\n      padding-top: 60%;\n      margin-bottom: 5px; }\n      .past-battles .battle-box .img-holder img {\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0px;\n        top: 0px; }\n    .past-battles .battle-box .text h4 {\n      margin: 10px 0px 5px;\n      color: #111;\n      font-family: semibold;\n      font-size: 18px; }\n      .past-battles .battle-box .text h4:hover {\n        color: #dd2927; }\n    .past-battles .battle-box .text p {\n      color: #9a9a9a;\n      margin: 0px; }\n\n.btn-logout {\n  font-family: medium;\n  font-size: 17px; }\n\n#logout p {\n  margin: 0px; }\n  #logout p a {\n    color: #dd2927;\n    font-size: 17px; }\n\n.leong .leong-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .leong .leong-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .leong .leong-banner .text {\n      margin-bottom: 30px; } }\n  .leong .leong-banner img {\n    max-width: 150px;\n    display: block;\n    margin: 0 auto; }\n\n.lost-found .lf-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .lost-found .lf-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .lost-found .lf-banner .text {\n      margin-bottom: 30px; } }\n  .lost-found .lf-banner img {\n    max-width: 120px;\n    display: block;\n    margin: 0 auto; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/select.css":
+/*!*********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/css/select.css ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".select2-container {\n  box-sizing: border-box;\n  display: inline-block;\n  margin: 0;\n  position: relative;\n  vertical-align: middle; }\n  .select2-container .select2-selection--single {\n    box-sizing: border-box;\n    cursor: pointer;\n    display: block;\n    height: 28px;\n    -moz-user-select: none;\n     -ms-user-select: none;\n         user-select: none;\n    -webkit-user-select: none; }\n    .select2-container .select2-selection--single .select2-selection__rendered {\n      display: block;\n      padding-left: 8px;\n      padding-right: 20px;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap; }\n    .select2-container .select2-selection--single .select2-selection__clear {\n      position: relative; }\n  .select2-container[dir=\"rtl\"] .select2-selection--single .select2-selection__rendered {\n    padding-right: 8px;\n    padding-left: 20px; }\n  .select2-container .select2-selection--multiple {\n    box-sizing: border-box;\n    cursor: pointer;\n    display: block;\n    min-height: 32px;\n    -moz-user-select: none;\n     -ms-user-select: none;\n         user-select: none;\n    -webkit-user-select: none; }\n    .select2-container .select2-selection--multiple .select2-selection__rendered {\n      display: inline-block;\n      overflow: hidden;\n      padding-left: 8px;\n      text-overflow: ellipsis;\n      white-space: nowrap; }\n  .select2-container .select2-search--inline {\n    float: left; }\n    .select2-container .select2-search--inline .select2-search__field {\n      box-sizing: border-box;\n      border: none;\n      font-size: 100%;\n      margin-top: 5px;\n      padding: 0; }\n      .select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button {\n        -webkit-appearance: none; }\n\n.select2-dropdown {\n  background-color: white;\n  border: 1px solid #aaa;\n  border-radius: 4px;\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  left: -100000px;\n  width: 100%;\n  z-index: 1051; }\n\n.select2-results {\n  display: block; }\n\n.select2-results__options {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\n.select2-results__option {\n  padding: 6px;\n  -moz-user-select: none;\n   -ms-user-select: none;\n       user-select: none;\n  -webkit-user-select: none; }\n  .select2-results__option[aria-selected] {\n    cursor: pointer; }\n\n.select2-container--open .select2-dropdown {\n  left: 0; }\n\n.select2-container--open .select2-dropdown--above {\n  border-bottom: none;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.select2-container--open .select2-dropdown--below {\n  border-top: none;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0; }\n\n.select2-search--dropdown {\n  display: block;\n  padding: 4px; }\n  .select2-search--dropdown .select2-search__field {\n    padding: 4px;\n    width: 100%;\n    box-sizing: border-box; }\n    .select2-search--dropdown .select2-search__field::-webkit-search-cancel-button {\n      -webkit-appearance: none; }\n  .select2-search--dropdown.select2-search--hide {\n    display: none; }\n\n.select2-close-mask {\n  border: 0;\n  margin: 0;\n  padding: 0;\n  display: block;\n  position: fixed;\n  left: 0;\n  top: 0;\n  min-height: 100%;\n  min-width: 100%;\n  height: auto;\n  width: auto;\n  opacity: 0;\n  z-index: 99;\n  background-color: #fff;\n  filter: alpha(opacity=0); }\n\n.select2-hidden-accessible {\n  border: 0 !important;\n  clip: rect(0 0 0 0) !important;\n  -webkit-clip-path: inset(50%) !important;\n  clip-path: inset(50%) !important;\n  height: 1px !important;\n  overflow: hidden !important;\n  padding: 0 !important;\n  position: absolute !important;\n  width: 1px !important;\n  white-space: nowrap !important; }\n\n.select2-container--default .select2-selection--single {\n  background-color: #fff;\n  border: 1px solid #aaa;\n  border-radius: 4px; }\n  .select2-container--default .select2-selection--single .select2-selection__rendered {\n    color: #444;\n    line-height: 28px; }\n  .select2-container--default .select2-selection--single .select2-selection__clear {\n    cursor: pointer;\n    float: right;\n    font-weight: bold; }\n  .select2-container--default .select2-selection--single .select2-selection__placeholder {\n    color: #999; }\n  .select2-container--default .select2-selection--single .select2-selection__arrow {\n    height: 26px;\n    position: absolute;\n    top: 1px;\n    right: 1px;\n    width: 20px; }\n    .select2-container--default .select2-selection--single .select2-selection__arrow b {\n      border-color: #888 transparent transparent transparent;\n      border-style: solid;\n      border-width: 5px 4px 0 4px;\n      height: 0;\n      left: 50%;\n      margin-left: -4px;\n      margin-top: -2px;\n      position: absolute;\n      top: 50%;\n      width: 0; }\n\n.select2-container--default[dir=\"rtl\"] .select2-selection--single .select2-selection__clear {\n  float: left; }\n\n.select2-container--default[dir=\"rtl\"] .select2-selection--single .select2-selection__arrow {\n  left: 1px;\n  right: auto; }\n\n.select2-container--default.select2-container--disabled .select2-selection--single {\n  background-color: #eee;\n  cursor: default; }\n  .select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__clear {\n    display: none; }\n\n.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {\n  border-color: transparent transparent #888 transparent;\n  border-width: 0 4px 5px 4px; }\n\n.select2-container--default .select2-selection--multiple {\n  background-color: white;\n  border: 1px solid #aaa;\n  border-radius: 4px;\n  cursor: text; }\n  .select2-container--default .select2-selection--multiple .select2-selection__rendered {\n    box-sizing: border-box;\n    list-style: none;\n    margin: 0;\n    padding: 0 5px;\n    width: 100%; }\n    .select2-container--default .select2-selection--multiple .select2-selection__rendered li {\n      list-style: none; }\n  .select2-container--default .select2-selection--multiple .select2-selection__placeholder {\n    color: #999;\n    margin-top: 5px;\n    float: left; }\n  .select2-container--default .select2-selection--multiple .select2-selection__clear {\n    cursor: pointer;\n    float: right;\n    font-weight: bold;\n    margin-top: 5px;\n    margin-right: 10px; }\n  .select2-container--default .select2-selection--multiple .select2-selection__choice {\n    background-color: #e4e4e4;\n    border: 1px solid #aaa;\n    border-radius: 4px;\n    cursor: default;\n    float: left;\n    margin-right: 5px;\n    margin-top: 5px;\n    padding: 0 5px; }\n  .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {\n    color: #999;\n    cursor: pointer;\n    display: inline-block;\n    font-weight: bold;\n    margin-right: 2px; }\n    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {\n      color: #333; }\n\n.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice, .select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__placeholder, .select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-search--inline {\n  float: right; }\n\n.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice {\n  margin-left: 5px;\n  margin-right: auto; }\n\n.select2-container--default[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice__remove {\n  margin-left: 2px;\n  margin-right: auto; }\n\n.select2-container--default.select2-container--focus .select2-selection--multiple {\n  border: solid black 1px;\n  outline: 0; }\n\n.select2-container--default.select2-container--disabled .select2-selection--multiple {\n  background-color: #eee;\n  cursor: default; }\n\n.select2-container--default.select2-container--disabled .select2-selection__choice__remove {\n  display: none; }\n\n.select2-container--default.select2-container--open.select2-container--above .select2-selection--single, .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0; }\n\n.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.select2-container--default .select2-search--dropdown .select2-search__field {\n  border: 1px solid #aaa; }\n\n.select2-container--default .select2-search--inline .select2-search__field {\n  background: transparent;\n  border: none;\n  outline: 0;\n  box-shadow: none;\n  -webkit-appearance: textfield; }\n\n.select2-container--default .select2-results > .select2-results__options {\n  max-height: 200px;\n  overflow-y: auto; }\n\n.select2-container--default .select2-results__option[role=group] {\n  padding: 0; }\n\n.select2-container--default .select2-results__option[aria-disabled=true] {\n  color: #999; }\n\n.select2-container--default .select2-results__option[aria-selected=true] {\n  background-color: #ddd; }\n\n.select2-container--default .select2-results__option .select2-results__option {\n  padding-left: 1em; }\n  .select2-container--default .select2-results__option .select2-results__option .select2-results__group {\n    padding-left: 0; }\n  .select2-container--default .select2-results__option .select2-results__option .select2-results__option {\n    margin-left: -1em;\n    padding-left: 2em; }\n    .select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option {\n      margin-left: -2em;\n      padding-left: 3em; }\n      .select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {\n        margin-left: -3em;\n        padding-left: 4em; }\n        .select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {\n          margin-left: -4em;\n          padding-left: 5em; }\n          .select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {\n            margin-left: -5em;\n            padding-left: 6em; }\n\n.select2-container--default .select2-results__option--highlighted[aria-selected] {\n  background-color: #5897fb;\n  color: white; }\n\n.select2-container--default .select2-results__group {\n  cursor: default;\n  display: block;\n  padding: 6px; }\n\n.select2-container--classic .select2-selection--single {\n  background-color: #f7f7f7;\n  border: 1px solid #aaa;\n  border-radius: 4px;\n  outline: 0;\n  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), to(#eeeeee));\n  background-image: linear-gradient(to bottom, white 50%, #eeeeee 100%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE', GradientType=0); }\n  .select2-container--classic .select2-selection--single:focus {\n    border: 1px solid #5897fb; }\n  .select2-container--classic .select2-selection--single .select2-selection__rendered {\n    color: #444;\n    line-height: 28px; }\n  .select2-container--classic .select2-selection--single .select2-selection__clear {\n    cursor: pointer;\n    float: right;\n    font-weight: bold;\n    margin-right: 10px; }\n  .select2-container--classic .select2-selection--single .select2-selection__placeholder {\n    color: #999; }\n  .select2-container--classic .select2-selection--single .select2-selection__arrow {\n    background-color: #ddd;\n    border: none;\n    border-left: 1px solid #aaa;\n    border-top-right-radius: 4px;\n    border-bottom-right-radius: 4px;\n    height: 26px;\n    position: absolute;\n    top: 1px;\n    right: 1px;\n    width: 20px;\n    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #eeeeee), to(#cccccc));\n    background-image: linear-gradient(to bottom, #eeeeee 50%, #cccccc 100%);\n    background-repeat: repeat-x;\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#FFCCCCCC', GradientType=0); }\n    .select2-container--classic .select2-selection--single .select2-selection__arrow b {\n      border-color: #888 transparent transparent transparent;\n      border-style: solid;\n      border-width: 5px 4px 0 4px;\n      height: 0;\n      left: 50%;\n      margin-left: -4px;\n      margin-top: -2px;\n      position: absolute;\n      top: 50%;\n      width: 0; }\n\n.select2-container--classic[dir=\"rtl\"] .select2-selection--single .select2-selection__clear {\n  float: left; }\n\n.select2-container--classic[dir=\"rtl\"] .select2-selection--single .select2-selection__arrow {\n  border: none;\n  border-right: 1px solid #aaa;\n  border-radius: 0;\n  border-top-left-radius: 4px;\n  border-bottom-left-radius: 4px;\n  left: 1px;\n  right: auto; }\n\n.select2-container--classic.select2-container--open .select2-selection--single {\n  border: 1px solid #5897fb; }\n  .select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow {\n    background: transparent;\n    border: none; }\n    .select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow b {\n      border-color: transparent transparent #888 transparent;\n      border-width: 0 4px 5px 4px; }\n\n.select2-container--classic.select2-container--open.select2-container--above .select2-selection--single {\n  border-top: none;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n  background-image: -webkit-gradient(linear, left top, left bottom, from(white), color-stop(50%, #eeeeee));\n  background-image: linear-gradient(to bottom, white 0%, #eeeeee 50%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEEEEEE', GradientType=0); }\n\n.select2-container--classic.select2-container--open.select2-container--below .select2-selection--single {\n  border-bottom: none;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0;\n  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #eeeeee), to(white));\n  background-image: linear-gradient(to bottom, #eeeeee 50%, white 100%);\n  background-repeat: repeat-x;\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#FFFFFFFF', GradientType=0); }\n\n.select2-container--classic .select2-selection--multiple {\n  background-color: white;\n  border: 1px solid #aaa;\n  border-radius: 4px;\n  cursor: text;\n  outline: 0; }\n  .select2-container--classic .select2-selection--multiple:focus {\n    border: 1px solid #5897fb; }\n  .select2-container--classic .select2-selection--multiple .select2-selection__rendered {\n    list-style: none;\n    margin: 0;\n    padding: 0 5px; }\n  .select2-container--classic .select2-selection--multiple .select2-selection__clear {\n    display: none; }\n  .select2-container--classic .select2-selection--multiple .select2-selection__choice {\n    background-color: #e4e4e4;\n    border: 1px solid #aaa;\n    border-radius: 4px;\n    cursor: default;\n    float: left;\n    margin-right: 5px;\n    margin-top: 5px;\n    padding: 0 5px; }\n  .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove {\n    color: #888;\n    cursor: pointer;\n    display: inline-block;\n    font-weight: bold;\n    margin-right: 2px; }\n    .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove:hover {\n      color: #555; }\n\n.select2-container--classic[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice {\n  float: right;\n  margin-left: 5px;\n  margin-right: auto; }\n\n.select2-container--classic[dir=\"rtl\"] .select2-selection--multiple .select2-selection__choice__remove {\n  margin-left: 2px;\n  margin-right: auto; }\n\n.select2-container--classic.select2-container--open .select2-selection--multiple {\n  border: 1px solid #5897fb; }\n\n.select2-container--classic.select2-container--open.select2-container--above .select2-selection--multiple {\n  border-top: none;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0; }\n\n.select2-container--classic.select2-container--open.select2-container--below .select2-selection--multiple {\n  border-bottom: none;\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.select2-container--classic .select2-search--dropdown .select2-search__field {\n  border: 1px solid #aaa;\n  outline: 0; }\n\n.select2-container--classic .select2-search--inline .select2-search__field {\n  outline: 0;\n  box-shadow: none; }\n\n.select2-container--classic .select2-dropdown {\n  background-color: white;\n  border: 1px solid transparent; }\n\n.select2-container--classic .select2-dropdown--above {\n  border-bottom: none; }\n\n.select2-container--classic .select2-dropdown--below {\n  border-top: none; }\n\n.select2-container--classic .select2-results > .select2-results__options {\n  max-height: 200px;\n  overflow-y: auto; }\n\n.select2-container--classic .select2-results__option[role=group] {\n  padding: 0; }\n\n.select2-container--classic .select2-results__option[aria-disabled=true] {\n  color: grey; }\n\n.select2-container--classic .select2-results__option--highlighted[aria-selected] {\n  background-color: #3875d7;\n  color: white; }\n\n.select2-container--classic .select2-results__group {\n  cursor: default;\n  display: block;\n  padding: 6px; }\n\n.select2-container--classic.select2-container--open .select2-dropdown {\n  border-color: #5897fb; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/font-awesome/css/all.css":
+/*!*******************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/font-awesome/css/all.css ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/*!\n * Font Awesome Pro 5.8.2 by @fontawesome - https://fontawesome.com\n * License - https://fontawesome.com/license (Commercial License)\n */\n\n .fa,\n .fab,\n .fal,\n .far,\n .fas {\n     -moz-osx-font-smoothing: grayscale;\n     -webkit-font-smoothing: antialiased;\n     display: inline-block;\n     font-style: normal;\n     font-variant: normal;\n     text-rendering: auto;\n     line-height: 1\n }\n \n .fa-lg {\n     font-size: 1.33333em;\n     line-height: .75em;\n     vertical-align: -.0667em\n }\n \n .fa-xs {\n     font-size: .75em\n }\n \n .fa-sm {\n     font-size: .875em\n }\n \n .fa-1x {\n     font-size: 1em\n }\n \n .fa-2x {\n     font-size: 2em\n }\n \n .fa-3x {\n     font-size: 3em\n }\n \n .fa-4x {\n     font-size: 4em\n }\n \n .fa-5x {\n     font-size: 5em\n }\n \n .fa-6x {\n     font-size: 6em\n }\n \n .fa-7x {\n     font-size: 7em\n }\n \n .fa-8x {\n     font-size: 8em\n }\n \n .fa-9x {\n     font-size: 9em\n }\n \n .fa-10x {\n     font-size: 10em\n }\n \n .fa-fw {\n     text-align: center;\n     width: 1.25em\n }\n \n .fa-ul {\n     list-style-type: none;\n     margin-left: 2.5em;\n     padding-left: 0\n }\n \n .fa-ul>li {\n     position: relative\n }\n \n .fa-li {\n     left: -2em;\n     position: absolute;\n     text-align: center;\n     width: 2em;\n     line-height: inherit\n }\n \n .fa-border {\n     border: .08em solid #eee;\n     border-radius: .1em;\n     padding: .2em .25em .15em\n }\n \n .fa-pull-left {\n     float: left\n }\n \n .fa-pull-right {\n     float: right\n }\n \n .fa.fa-pull-left,\n .fab.fa-pull-left,\n .fal.fa-pull-left,\n .far.fa-pull-left,\n .fas.fa-pull-left {\n     margin-right: .3em\n }\n \n .fa.fa-pull-right,\n .fab.fa-pull-right,\n .fal.fa-pull-right,\n .far.fa-pull-right,\n .fas.fa-pull-right {\n     margin-left: .3em\n }\n \n .fa-spin {\n     -webkit-animation: fa-spin 2s infinite linear;\n             animation: fa-spin 2s infinite linear\n }\n \n .fa-pulse {\n     -webkit-animation: fa-spin 1s infinite steps(8);\n             animation: fa-spin 1s infinite steps(8)\n }\n \n @-webkit-keyframes fa-spin {\n     0% {\n         -webkit-transform: rotate(0deg);\n                 transform: rotate(0deg)\n     }\n     to {\n         -webkit-transform: rotate(1turn);\n                 transform: rotate(1turn)\n     }\n }\n \n @keyframes fa-spin {\n     0% {\n         -webkit-transform: rotate(0deg);\n                 transform: rotate(0deg)\n     }\n     to {\n         -webkit-transform: rotate(1turn);\n                 transform: rotate(1turn)\n     }\n }\n \n .fa-rotate-90 {\n     -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n     -webkit-transform: rotate(90deg);\n             transform: rotate(90deg)\n }\n \n .fa-rotate-180 {\n     -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n     -webkit-transform: rotate(180deg);\n             transform: rotate(180deg)\n }\n \n .fa-rotate-270 {\n     -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n     -webkit-transform: rotate(270deg);\n             transform: rotate(270deg)\n }\n \n .fa-flip-horizontal {\n     -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n     -webkit-transform: scaleX(-1);\n             transform: scaleX(-1)\n }\n \n .fa-flip-vertical {\n     -webkit-transform: scaleY(-1);\n             transform: scaleY(-1)\n }\n \n .fa-flip-both,\n .fa-flip-horizontal.fa-flip-vertical,\n .fa-flip-vertical {\n     -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\"\n }\n \n .fa-flip-both,\n .fa-flip-horizontal.fa-flip-vertical {\n     -webkit-transform: scale(-1);\n             transform: scale(-1)\n }\n \n :root .fa-flip-both,\n :root .fa-flip-horizontal,\n :root .fa-flip-vertical,\n :root .fa-rotate-90,\n :root .fa-rotate-180,\n :root .fa-rotate-270 {\n     -webkit-filter: none;\n             filter: none\n }\n \n .fa-stack {\n     display: inline-block;\n     height: 2em;\n     line-height: 2em;\n     position: relative;\n     vertical-align: middle;\n     width: 2.5em\n }\n \n .fa-stack-1x,\n .fa-stack-2x {\n     left: 0;\n     position: absolute;\n     text-align: center;\n     width: 100%\n }\n \n .fa-stack-1x {\n     line-height: inherit\n }\n \n .fa-stack-2x {\n     font-size: 2em\n }\n \n .fa-inverse {\n     color: #fff\n }\n \n .fa-500px:before {\n     content: \"\\F26E\"\n }\n \n .fa-abacus:before {\n     content: \"\\F640\"\n }\n \n .fa-accessible-icon:before {\n     content: \"\\F368\"\n }\n \n .fa-accusoft:before {\n     content: \"\\F369\"\n }\n \n .fa-acorn:before {\n     content: \"\\F6AE\"\n }\n \n .fa-acquisitions-incorporated:before {\n     content: \"\\F6AF\"\n }\n \n .fa-ad:before {\n     content: \"\\F641\"\n }\n \n .fa-address-book:before {\n     content: \"\\F2B9\"\n }\n \n .fa-address-card:before {\n     content: \"\\F2BB\"\n }\n \n .fa-adjust:before {\n     content: \"\\F042\"\n }\n \n .fa-adn:before {\n     content: \"\\F170\"\n }\n \n .fa-adobe:before {\n     content: \"\\F778\"\n }\n \n .fa-adversal:before {\n     content: \"\\F36A\"\n }\n \n .fa-affiliatetheme:before {\n     content: \"\\F36B\"\n }\n \n .fa-air-freshener:before {\n     content: \"\\F5D0\"\n }\n \n .fa-airbnb:before {\n     content: \"\\F834\"\n }\n \n .fa-alarm-clock:before {\n     content: \"\\F34E\"\n }\n \n .fa-algolia:before {\n     content: \"\\F36C\"\n }\n \n .fa-alicorn:before {\n     content: \"\\F6B0\"\n }\n \n .fa-align-center:before {\n     content: \"\\F037\"\n }\n \n .fa-align-justify:before {\n     content: \"\\F039\"\n }\n \n .fa-align-left:before {\n     content: \"\\F036\"\n }\n \n .fa-align-right:before {\n     content: \"\\F038\"\n }\n \n .fa-alipay:before {\n     content: \"\\F642\"\n }\n \n .fa-allergies:before {\n     content: \"\\F461\"\n }\n \n .fa-amazon:before {\n     content: \"\\F270\"\n }\n \n .fa-amazon-pay:before {\n     content: \"\\F42C\"\n }\n \n .fa-ambulance:before {\n     content: \"\\F0F9\"\n }\n \n .fa-american-sign-language-interpreting:before {\n     content: \"\\F2A3\"\n }\n \n .fa-amilia:before {\n     content: \"\\F36D\"\n }\n \n .fa-analytics:before {\n     content: \"\\F643\"\n }\n \n .fa-anchor:before {\n     content: \"\\F13D\"\n }\n \n .fa-android:before {\n     content: \"\\F17B\"\n }\n \n .fa-angel:before {\n     content: \"\\F779\"\n }\n \n .fa-angellist:before {\n     content: \"\\F209\"\n }\n \n .fa-angle-double-down:before {\n     content: \"\\F103\"\n }\n \n .fa-angle-double-left:before {\n     content: \"\\F100\"\n }\n \n .fa-angle-double-right:before {\n     content: \"\\F101\"\n }\n \n .fa-angle-double-up:before {\n     content: \"\\F102\"\n }\n \n .fa-angle-down:before {\n     content: \"\\F107\"\n }\n \n .fa-angle-left:before {\n     content: \"\\F104\"\n }\n \n .fa-angle-right:before {\n     content: \"\\F105\"\n }\n \n .fa-angle-up:before {\n     content: \"\\F106\"\n }\n \n .fa-angry:before {\n     content: \"\\F556\"\n }\n \n .fa-angrycreative:before {\n     content: \"\\F36E\"\n }\n \n .fa-angular:before {\n     content: \"\\F420\"\n }\n \n .fa-ankh:before {\n     content: \"\\F644\"\n }\n \n .fa-app-store:before {\n     content: \"\\F36F\"\n }\n \n .fa-app-store-ios:before {\n     content: \"\\F370\"\n }\n \n .fa-apper:before {\n     content: \"\\F371\"\n }\n \n .fa-apple:before {\n     content: \"\\F179\"\n }\n \n .fa-apple-alt:before {\n     content: \"\\F5D1\"\n }\n \n .fa-apple-crate:before {\n     content: \"\\F6B1\"\n }\n \n .fa-apple-pay:before {\n     content: \"\\F415\"\n }\n \n .fa-archive:before {\n     content: \"\\F187\"\n }\n \n .fa-archway:before {\n     content: \"\\F557\"\n }\n \n .fa-arrow-alt-circle-down:before {\n     content: \"\\F358\"\n }\n \n .fa-arrow-alt-circle-left:before {\n     content: \"\\F359\"\n }\n \n .fa-arrow-alt-circle-right:before {\n     content: \"\\F35A\"\n }\n \n .fa-arrow-alt-circle-up:before {\n     content: \"\\F35B\"\n }\n \n .fa-arrow-alt-down:before {\n     content: \"\\F354\"\n }\n \n .fa-arrow-alt-from-bottom:before {\n     content: \"\\F346\"\n }\n \n .fa-arrow-alt-from-left:before {\n     content: \"\\F347\"\n }\n \n .fa-arrow-alt-from-right:before {\n     content: \"\\F348\"\n }\n \n .fa-arrow-alt-from-top:before {\n     content: \"\\F349\"\n }\n \n .fa-arrow-alt-left:before {\n     content: \"\\F355\"\n }\n \n .fa-arrow-alt-right:before {\n     content: \"\\F356\"\n }\n \n .fa-arrow-alt-square-down:before {\n     content: \"\\F350\"\n }\n \n .fa-arrow-alt-square-left:before {\n     content: \"\\F351\"\n }\n \n .fa-arrow-alt-square-right:before {\n     content: \"\\F352\"\n }\n \n .fa-arrow-alt-square-up:before {\n     content: \"\\F353\"\n }\n \n .fa-arrow-alt-to-bottom:before {\n     content: \"\\F34A\"\n }\n \n .fa-arrow-alt-to-left:before {\n     content: \"\\F34B\"\n }\n \n .fa-arrow-alt-to-right:before {\n     content: \"\\F34C\"\n }\n \n .fa-arrow-alt-to-top:before {\n     content: \"\\F34D\"\n }\n \n .fa-arrow-alt-up:before {\n     content: \"\\F357\"\n }\n \n .fa-arrow-circle-down:before {\n     content: \"\\F0AB\"\n }\n \n .fa-arrow-circle-left:before {\n     content: \"\\F0A8\"\n }\n \n .fa-arrow-circle-right:before {\n     content: \"\\F0A9\"\n }\n \n .fa-arrow-circle-up:before {\n     content: \"\\F0AA\"\n }\n \n .fa-arrow-down:before {\n     content: \"\\F063\"\n }\n \n .fa-arrow-from-bottom:before {\n     content: \"\\F342\"\n }\n \n .fa-arrow-from-left:before {\n     content: \"\\F343\"\n }\n \n .fa-arrow-from-right:before {\n     content: \"\\F344\"\n }\n \n .fa-arrow-from-top:before {\n     content: \"\\F345\"\n }\n \n .fa-arrow-left:before {\n     content: \"\\F060\"\n }\n \n .fa-arrow-right:before {\n     content: \"\\F061\"\n }\n \n .fa-arrow-square-down:before {\n     content: \"\\F339\"\n }\n \n .fa-arrow-square-left:before {\n     content: \"\\F33A\"\n }\n \n .fa-arrow-square-right:before {\n     content: \"\\F33B\"\n }\n \n .fa-arrow-square-up:before {\n     content: \"\\F33C\"\n }\n \n .fa-arrow-to-bottom:before {\n     content: \"\\F33D\"\n }\n \n .fa-arrow-to-left:before {\n     content: \"\\F33E\"\n }\n \n .fa-arrow-to-right:before {\n     content: \"\\F340\"\n }\n \n .fa-arrow-to-top:before {\n     content: \"\\F341\"\n }\n \n .fa-arrow-up:before {\n     content: \"\\F062\"\n }\n \n .fa-arrows:before {\n     content: \"\\F047\"\n }\n \n .fa-arrows-alt:before {\n     content: \"\\F0B2\"\n }\n \n .fa-arrows-alt-h:before {\n     content: \"\\F337\"\n }\n \n .fa-arrows-alt-v:before {\n     content: \"\\F338\"\n }\n \n .fa-arrows-h:before {\n     content: \"\\F07E\"\n }\n \n .fa-arrows-v:before {\n     content: \"\\F07D\"\n }\n \n .fa-artstation:before {\n     content: \"\\F77A\"\n }\n \n .fa-assistive-listening-systems:before {\n     content: \"\\F2A2\"\n }\n \n .fa-asterisk:before {\n     content: \"\\F069\"\n }\n \n .fa-asymmetrik:before {\n     content: \"\\F372\"\n }\n \n .fa-at:before {\n     content: \"\\F1FA\"\n }\n \n .fa-atlas:before {\n     content: \"\\F558\"\n }\n \n .fa-atlassian:before {\n     content: \"\\F77B\"\n }\n \n .fa-atom:before {\n     content: \"\\F5D2\"\n }\n \n .fa-atom-alt:before {\n     content: \"\\F5D3\"\n }\n \n .fa-audible:before {\n     content: \"\\F373\"\n }\n \n .fa-audio-description:before {\n     content: \"\\F29E\"\n }\n \n .fa-autoprefixer:before {\n     content: \"\\F41C\"\n }\n \n .fa-avianex:before {\n     content: \"\\F374\"\n }\n \n .fa-aviato:before {\n     content: \"\\F421\"\n }\n \n .fa-award:before {\n     content: \"\\F559\"\n }\n \n .fa-aws:before {\n     content: \"\\F375\"\n }\n \n .fa-axe:before {\n     content: \"\\F6B2\"\n }\n \n .fa-axe-battle:before {\n     content: \"\\F6B3\"\n }\n \n .fa-baby:before {\n     content: \"\\F77C\"\n }\n \n .fa-baby-carriage:before {\n     content: \"\\F77D\"\n }\n \n .fa-backpack:before {\n     content: \"\\F5D4\"\n }\n \n .fa-backspace:before {\n     content: \"\\F55A\"\n }\n \n .fa-backward:before {\n     content: \"\\F04A\"\n }\n \n .fa-bacon:before {\n     content: \"\\F7E5\"\n }\n \n .fa-badge:before {\n     content: \"\\F335\"\n }\n \n .fa-badge-check:before {\n     content: \"\\F336\"\n }\n \n .fa-badge-dollar:before {\n     content: \"\\F645\"\n }\n \n .fa-badge-percent:before {\n     content: \"\\F646\"\n }\n \n .fa-badger-honey:before {\n     content: \"\\F6B4\"\n }\n \n .fa-balance-scale:before {\n     content: \"\\F24E\"\n }\n \n .fa-balance-scale-left:before {\n     content: \"\\F515\"\n }\n \n .fa-balance-scale-right:before {\n     content: \"\\F516\"\n }\n \n .fa-ball-pile:before {\n     content: \"\\F77E\"\n }\n \n .fa-ballot:before {\n     content: \"\\F732\"\n }\n \n .fa-ballot-check:before {\n     content: \"\\F733\"\n }\n \n .fa-ban:before {\n     content: \"\\F05E\"\n }\n \n .fa-band-aid:before {\n     content: \"\\F462\"\n }\n \n .fa-bandcamp:before {\n     content: \"\\F2D5\"\n }\n \n .fa-barcode:before {\n     content: \"\\F02A\"\n }\n \n .fa-barcode-alt:before {\n     content: \"\\F463\"\n }\n \n .fa-barcode-read:before {\n     content: \"\\F464\"\n }\n \n .fa-barcode-scan:before {\n     content: \"\\F465\"\n }\n \n .fa-bars:before {\n     content: \"\\F0C9\"\n }\n \n .fa-baseball:before {\n     content: \"\\F432\"\n }\n \n .fa-baseball-ball:before {\n     content: \"\\F433\"\n }\n \n .fa-basketball-ball:before {\n     content: \"\\F434\"\n }\n \n .fa-basketball-hoop:before {\n     content: \"\\F435\"\n }\n \n .fa-bat:before {\n     content: \"\\F6B5\"\n }\n \n .fa-bath:before {\n     content: \"\\F2CD\"\n }\n \n .fa-battery-bolt:before {\n     content: \"\\F376\"\n }\n \n .fa-battery-empty:before {\n     content: \"\\F244\"\n }\n \n .fa-battery-full:before {\n     content: \"\\F240\"\n }\n \n .fa-battery-half:before {\n     content: \"\\F242\"\n }\n \n .fa-battery-quarter:before {\n     content: \"\\F243\"\n }\n \n .fa-battery-slash:before {\n     content: \"\\F377\"\n }\n \n .fa-battery-three-quarters:before {\n     content: \"\\F241\"\n }\n \n .fa-battle-net:before {\n     content: \"\\F835\"\n }\n \n .fa-bed:before {\n     content: \"\\F236\"\n }\n \n .fa-beer:before {\n     content: \"\\F0FC\"\n }\n \n .fa-behance:before {\n     content: \"\\F1B4\"\n }\n \n .fa-behance-square:before {\n     content: \"\\F1B5\"\n }\n \n .fa-bell:before {\n     content: \"\\F0F3\"\n }\n \n .fa-bell-school:before {\n     content: \"\\F5D5\"\n }\n \n .fa-bell-school-slash:before {\n     content: \"\\F5D6\"\n }\n \n .fa-bell-slash:before {\n     content: \"\\F1F6\"\n }\n \n .fa-bells:before {\n     content: \"\\F77F\"\n }\n \n .fa-bezier-curve:before {\n     content: \"\\F55B\"\n }\n \n .fa-bible:before {\n     content: \"\\F647\"\n }\n \n .fa-bicycle:before {\n     content: \"\\F206\"\n }\n \n .fa-bimobject:before {\n     content: \"\\F378\"\n }\n \n .fa-binoculars:before {\n     content: \"\\F1E5\"\n }\n \n .fa-biohazard:before {\n     content: \"\\F780\"\n }\n \n .fa-birthday-cake:before {\n     content: \"\\F1FD\"\n }\n \n .fa-bitbucket:before {\n     content: \"\\F171\"\n }\n \n .fa-bitcoin:before {\n     content: \"\\F379\"\n }\n \n .fa-bity:before {\n     content: \"\\F37A\"\n }\n \n .fa-black-tie:before {\n     content: \"\\F27E\"\n }\n \n .fa-blackberry:before {\n     content: \"\\F37B\"\n }\n \n .fa-blanket:before {\n     content: \"\\F498\"\n }\n \n .fa-blender:before {\n     content: \"\\F517\"\n }\n \n .fa-blender-phone:before {\n     content: \"\\F6B6\"\n }\n \n .fa-blind:before {\n     content: \"\\F29D\"\n }\n \n .fa-blog:before {\n     content: \"\\F781\"\n }\n \n .fa-blogger:before {\n     content: \"\\F37C\"\n }\n \n .fa-blogger-b:before {\n     content: \"\\F37D\"\n }\n \n .fa-bluetooth:before {\n     content: \"\\F293\"\n }\n \n .fa-bluetooth-b:before {\n     content: \"\\F294\"\n }\n \n .fa-bold:before {\n     content: \"\\F032\"\n }\n \n .fa-bolt:before {\n     content: \"\\F0E7\"\n }\n \n .fa-bomb:before {\n     content: \"\\F1E2\"\n }\n \n .fa-bone:before {\n     content: \"\\F5D7\"\n }\n \n .fa-bone-break:before {\n     content: \"\\F5D8\"\n }\n \n .fa-bong:before {\n     content: \"\\F55C\"\n }\n \n .fa-book:before {\n     content: \"\\F02D\"\n }\n \n .fa-book-alt:before {\n     content: \"\\F5D9\"\n }\n \n .fa-book-dead:before {\n     content: \"\\F6B7\"\n }\n \n .fa-book-heart:before {\n     content: \"\\F499\"\n }\n \n .fa-book-medical:before {\n     content: \"\\F7E6\"\n }\n \n .fa-book-open:before {\n     content: \"\\F518\"\n }\n \n .fa-book-reader:before {\n     content: \"\\F5DA\"\n }\n \n .fa-book-spells:before {\n     content: \"\\F6B8\"\n }\n \n .fa-book-user:before {\n     content: \"\\F7E7\"\n }\n \n .fa-bookmark:before {\n     content: \"\\F02E\"\n }\n \n .fa-books:before {\n     content: \"\\F5DB\"\n }\n \n .fa-books-medical:before {\n     content: \"\\F7E8\"\n }\n \n .fa-boot:before {\n     content: \"\\F782\"\n }\n \n .fa-booth-curtain:before {\n     content: \"\\F734\"\n }\n \n .fa-bootstrap:before {\n     content: \"\\F836\"\n }\n \n .fa-bow-arrow:before {\n     content: \"\\F6B9\"\n }\n \n .fa-bowling-ball:before {\n     content: \"\\F436\"\n }\n \n .fa-bowling-pins:before {\n     content: \"\\F437\"\n }\n \n .fa-box:before {\n     content: \"\\F466\"\n }\n \n .fa-box-alt:before {\n     content: \"\\F49A\"\n }\n \n .fa-box-ballot:before {\n     content: \"\\F735\"\n }\n \n .fa-box-check:before {\n     content: \"\\F467\"\n }\n \n .fa-box-fragile:before {\n     content: \"\\F49B\"\n }\n \n .fa-box-full:before {\n     content: \"\\F49C\"\n }\n \n .fa-box-heart:before {\n     content: \"\\F49D\"\n }\n \n .fa-box-open:before {\n     content: \"\\F49E\"\n }\n \n .fa-box-up:before {\n     content: \"\\F49F\"\n }\n \n .fa-box-usd:before {\n     content: \"\\F4A0\"\n }\n \n .fa-boxes:before {\n     content: \"\\F468\"\n }\n \n .fa-boxes-alt:before {\n     content: \"\\F4A1\"\n }\n \n .fa-boxing-glove:before {\n     content: \"\\F438\"\n }\n \n .fa-brackets:before {\n     content: \"\\F7E9\"\n }\n \n .fa-brackets-curly:before {\n     content: \"\\F7EA\"\n }\n \n .fa-braille:before {\n     content: \"\\F2A1\"\n }\n \n .fa-brain:before {\n     content: \"\\F5DC\"\n }\n \n .fa-bread-loaf:before {\n     content: \"\\F7EB\"\n }\n \n .fa-bread-slice:before {\n     content: \"\\F7EC\"\n }\n \n .fa-briefcase:before {\n     content: \"\\F0B1\"\n }\n \n .fa-briefcase-medical:before {\n     content: \"\\F469\"\n }\n \n .fa-broadcast-tower:before {\n     content: \"\\F519\"\n }\n \n .fa-broom:before {\n     content: \"\\F51A\"\n }\n \n .fa-browser:before {\n     content: \"\\F37E\"\n }\n \n .fa-brush:before {\n     content: \"\\F55D\"\n }\n \n .fa-btc:before {\n     content: \"\\F15A\"\n }\n \n .fa-buffer:before {\n     content: \"\\F837\"\n }\n \n .fa-bug:before {\n     content: \"\\F188\"\n }\n \n .fa-building:before {\n     content: \"\\F1AD\"\n }\n \n .fa-bullhorn:before {\n     content: \"\\F0A1\"\n }\n \n .fa-bullseye:before {\n     content: \"\\F140\"\n }\n \n .fa-bullseye-arrow:before {\n     content: \"\\F648\"\n }\n \n .fa-bullseye-pointer:before {\n     content: \"\\F649\"\n }\n \n .fa-burn:before {\n     content: \"\\F46A\"\n }\n \n .fa-buromobelexperte:before {\n     content: \"\\F37F\"\n }\n \n .fa-burrito:before {\n     content: \"\\F7ED\"\n }\n \n .fa-bus:before {\n     content: \"\\F207\"\n }\n \n .fa-bus-alt:before {\n     content: \"\\F55E\"\n }\n \n .fa-bus-school:before {\n     content: \"\\F5DD\"\n }\n \n .fa-business-time:before {\n     content: \"\\F64A\"\n }\n \n .fa-buysellads:before {\n     content: \"\\F20D\"\n }\n \n .fa-cabinet-filing:before {\n     content: \"\\F64B\"\n }\n \n .fa-calculator:before {\n     content: \"\\F1EC\"\n }\n \n .fa-calculator-alt:before {\n     content: \"\\F64C\"\n }\n \n .fa-calendar:before {\n     content: \"\\F133\"\n }\n \n .fa-calendar-alt:before {\n     content: \"\\F073\"\n }\n \n .fa-calendar-check:before {\n     content: \"\\F274\"\n }\n \n .fa-calendar-day:before {\n     content: \"\\F783\"\n }\n \n .fa-calendar-edit:before {\n     content: \"\\F333\"\n }\n \n .fa-calendar-exclamation:before {\n     content: \"\\F334\"\n }\n \n .fa-calendar-minus:before {\n     content: \"\\F272\"\n }\n \n .fa-calendar-plus:before {\n     content: \"\\F271\"\n }\n \n .fa-calendar-star:before {\n     content: \"\\F736\"\n }\n \n .fa-calendar-times:before {\n     content: \"\\F273\"\n }\n \n .fa-calendar-week:before {\n     content: \"\\F784\"\n }\n \n .fa-camera:before {\n     content: \"\\F030\"\n }\n \n .fa-camera-alt:before {\n     content: \"\\F332\"\n }\n \n .fa-camera-retro:before {\n     content: \"\\F083\"\n }\n \n .fa-campfire:before {\n     content: \"\\F6BA\"\n }\n \n .fa-campground:before {\n     content: \"\\F6BB\"\n }\n \n .fa-canadian-maple-leaf:before {\n     content: \"\\F785\"\n }\n \n .fa-candle-holder:before {\n     content: \"\\F6BC\"\n }\n \n .fa-candy-cane:before {\n     content: \"\\F786\"\n }\n \n .fa-candy-corn:before {\n     content: \"\\F6BD\"\n }\n \n .fa-cannabis:before {\n     content: \"\\F55F\"\n }\n \n .fa-capsules:before {\n     content: \"\\F46B\"\n }\n \n .fa-car:before {\n     content: \"\\F1B9\"\n }\n \n .fa-car-alt:before {\n     content: \"\\F5DE\"\n }\n \n .fa-car-battery:before {\n     content: \"\\F5DF\"\n }\n \n .fa-car-bump:before {\n     content: \"\\F5E0\"\n }\n \n .fa-car-crash:before {\n     content: \"\\F5E1\"\n }\n \n .fa-car-garage:before {\n     content: \"\\F5E2\"\n }\n \n .fa-car-mechanic:before {\n     content: \"\\F5E3\"\n }\n \n .fa-car-side:before {\n     content: \"\\F5E4\"\n }\n \n .fa-car-tilt:before {\n     content: \"\\F5E5\"\n }\n \n .fa-car-wash:before {\n     content: \"\\F5E6\"\n }\n \n .fa-caret-circle-down:before {\n     content: \"\\F32D\"\n }\n \n .fa-caret-circle-left:before {\n     content: \"\\F32E\"\n }\n \n .fa-caret-circle-right:before {\n     content: \"\\F330\"\n }\n \n .fa-caret-circle-up:before {\n     content: \"\\F331\"\n }\n \n .fa-caret-down:before {\n     content: \"\\F0D7\"\n }\n \n .fa-caret-left:before {\n     content: \"\\F0D9\"\n }\n \n .fa-caret-right:before {\n     content: \"\\F0DA\"\n }\n \n .fa-caret-square-down:before {\n     content: \"\\F150\"\n }\n \n .fa-caret-square-left:before {\n     content: \"\\F191\"\n }\n \n .fa-caret-square-right:before {\n     content: \"\\F152\"\n }\n \n .fa-caret-square-up:before {\n     content: \"\\F151\"\n }\n \n .fa-caret-up:before {\n     content: \"\\F0D8\"\n }\n \n .fa-carrot:before {\n     content: \"\\F787\"\n }\n \n .fa-cart-arrow-down:before {\n     content: \"\\F218\"\n }\n \n .fa-cart-plus:before {\n     content: \"\\F217\"\n }\n \n .fa-cash-register:before {\n     content: \"\\F788\"\n }\n \n .fa-cat:before {\n     content: \"\\F6BE\"\n }\n \n .fa-cauldron:before {\n     content: \"\\F6BF\"\n }\n \n .fa-cc-amazon-pay:before {\n     content: \"\\F42D\"\n }\n \n .fa-cc-amex:before {\n     content: \"\\F1F3\"\n }\n \n .fa-cc-apple-pay:before {\n     content: \"\\F416\"\n }\n \n .fa-cc-diners-club:before {\n     content: \"\\F24C\"\n }\n \n .fa-cc-discover:before {\n     content: \"\\F1F2\"\n }\n \n .fa-cc-jcb:before {\n     content: \"\\F24B\"\n }\n \n .fa-cc-mastercard:before {\n     content: \"\\F1F1\"\n }\n \n .fa-cc-paypal:before {\n     content: \"\\F1F4\"\n }\n \n .fa-cc-stripe:before {\n     content: \"\\F1F5\"\n }\n \n .fa-cc-visa:before {\n     content: \"\\F1F0\"\n }\n \n .fa-centercode:before {\n     content: \"\\F380\"\n }\n \n .fa-centos:before {\n     content: \"\\F789\"\n }\n \n .fa-certificate:before {\n     content: \"\\F0A3\"\n }\n \n .fa-chair:before {\n     content: \"\\F6C0\"\n }\n \n .fa-chair-office:before {\n     content: \"\\F6C1\"\n }\n \n .fa-chalkboard:before {\n     content: \"\\F51B\"\n }\n \n .fa-chalkboard-teacher:before {\n     content: \"\\F51C\"\n }\n \n .fa-charging-station:before {\n     content: \"\\F5E7\"\n }\n \n .fa-chart-area:before {\n     content: \"\\F1FE\"\n }\n \n .fa-chart-bar:before {\n     content: \"\\F080\"\n }\n \n .fa-chart-line:before {\n     content: \"\\F201\"\n }\n \n .fa-chart-line-down:before {\n     content: \"\\F64D\"\n }\n \n .fa-chart-network:before {\n     content: \"\\F78A\"\n }\n \n .fa-chart-pie:before {\n     content: \"\\F200\"\n }\n \n .fa-chart-pie-alt:before {\n     content: \"\\F64E\"\n }\n \n .fa-chart-scatter:before {\n     content: \"\\F7EE\"\n }\n \n .fa-check:before {\n     content: \"\\F00C\"\n }\n \n .fa-check-circle:before {\n     content: \"\\F058\"\n }\n \n .fa-check-double:before {\n     content: \"\\F560\"\n }\n \n .fa-check-square:before {\n     content: \"\\F14A\"\n }\n \n .fa-cheese:before {\n     content: \"\\F7EF\"\n }\n \n .fa-cheese-swiss:before {\n     content: \"\\F7F0\"\n }\n \n .fa-cheeseburger:before {\n     content: \"\\F7F1\"\n }\n \n .fa-chess:before {\n     content: \"\\F439\"\n }\n \n .fa-chess-bishop:before {\n     content: \"\\F43A\"\n }\n \n .fa-chess-bishop-alt:before {\n     content: \"\\F43B\"\n }\n \n .fa-chess-board:before {\n     content: \"\\F43C\"\n }\n \n .fa-chess-clock:before {\n     content: \"\\F43D\"\n }\n \n .fa-chess-clock-alt:before {\n     content: \"\\F43E\"\n }\n \n .fa-chess-king:before {\n     content: \"\\F43F\"\n }\n \n .fa-chess-king-alt:before {\n     content: \"\\F440\"\n }\n \n .fa-chess-knight:before {\n     content: \"\\F441\"\n }\n \n .fa-chess-knight-alt:before {\n     content: \"\\F442\"\n }\n \n .fa-chess-pawn:before {\n     content: \"\\F443\"\n }\n \n .fa-chess-pawn-alt:before {\n     content: \"\\F444\"\n }\n \n .fa-chess-queen:before {\n     content: \"\\F445\"\n }\n \n .fa-chess-queen-alt:before {\n     content: \"\\F446\"\n }\n \n .fa-chess-rook:before {\n     content: \"\\F447\"\n }\n \n .fa-chess-rook-alt:before {\n     content: \"\\F448\"\n }\n \n .fa-chevron-circle-down:before {\n     content: \"\\F13A\"\n }\n \n .fa-chevron-circle-left:before {\n     content: \"\\F137\"\n }\n \n .fa-chevron-circle-right:before {\n     content: \"\\F138\"\n }\n \n .fa-chevron-circle-up:before {\n     content: \"\\F139\"\n }\n \n .fa-chevron-double-down:before {\n     content: \"\\F322\"\n }\n \n .fa-chevron-double-left:before {\n     content: \"\\F323\"\n }\n \n .fa-chevron-double-right:before {\n     content: \"\\F324\"\n }\n \n .fa-chevron-double-up:before {\n     content: \"\\F325\"\n }\n \n .fa-chevron-down:before {\n     content: \"\\F078\"\n }\n \n .fa-chevron-left:before {\n     content: \"\\F053\"\n }\n \n .fa-chevron-right:before {\n     content: \"\\F054\"\n }\n \n .fa-chevron-square-down:before {\n     content: \"\\F329\"\n }\n \n .fa-chevron-square-left:before {\n     content: \"\\F32A\"\n }\n \n .fa-chevron-square-right:before {\n     content: \"\\F32B\"\n }\n \n .fa-chevron-square-up:before {\n     content: \"\\F32C\"\n }\n \n .fa-chevron-up:before {\n     content: \"\\F077\"\n }\n \n .fa-child:before {\n     content: \"\\F1AE\"\n }\n \n .fa-chimney:before {\n     content: \"\\F78B\"\n }\n \n .fa-chrome:before {\n     content: \"\\F268\"\n }\n \n .fa-chromecast:before {\n     content: \"\\F838\"\n }\n \n .fa-church:before {\n     content: \"\\F51D\"\n }\n \n .fa-circle:before {\n     content: \"\\F111\"\n }\n \n .fa-circle-notch:before {\n     content: \"\\F1CE\"\n }\n \n .fa-city:before {\n     content: \"\\F64F\"\n }\n \n .fa-claw-marks:before {\n     content: \"\\F6C2\"\n }\n \n .fa-clinic-medical:before {\n     content: \"\\F7F2\"\n }\n \n .fa-clipboard:before {\n     content: \"\\F328\"\n }\n \n .fa-clipboard-check:before {\n     content: \"\\F46C\"\n }\n \n .fa-clipboard-list:before {\n     content: \"\\F46D\"\n }\n \n .fa-clipboard-list-check:before {\n     content: \"\\F737\"\n }\n \n .fa-clipboard-prescription:before {\n     content: \"\\F5E8\"\n }\n \n .fa-clipboard-user:before {\n     content: \"\\F7F3\"\n }\n \n .fa-clock:before {\n     content: \"\\F017\"\n }\n \n .fa-clone:before {\n     content: \"\\F24D\"\n }\n \n .fa-closed-captioning:before {\n     content: \"\\F20A\"\n }\n \n .fa-cloud:before {\n     content: \"\\F0C2\"\n }\n \n .fa-cloud-download:before {\n     content: \"\\F0ED\"\n }\n \n .fa-cloud-download-alt:before {\n     content: \"\\F381\"\n }\n \n .fa-cloud-drizzle:before {\n     content: \"\\F738\"\n }\n \n .fa-cloud-hail:before {\n     content: \"\\F739\"\n }\n \n .fa-cloud-hail-mixed:before {\n     content: \"\\F73A\"\n }\n \n .fa-cloud-meatball:before {\n     content: \"\\F73B\"\n }\n \n .fa-cloud-moon:before {\n     content: \"\\F6C3\"\n }\n \n .fa-cloud-moon-rain:before {\n     content: \"\\F73C\"\n }\n \n .fa-cloud-rain:before {\n     content: \"\\F73D\"\n }\n \n .fa-cloud-rainbow:before {\n     content: \"\\F73E\"\n }\n \n .fa-cloud-showers:before {\n     content: \"\\F73F\"\n }\n \n .fa-cloud-showers-heavy:before {\n     content: \"\\F740\"\n }\n \n .fa-cloud-sleet:before {\n     content: \"\\F741\"\n }\n \n .fa-cloud-snow:before {\n     content: \"\\F742\"\n }\n \n .fa-cloud-sun:before {\n     content: \"\\F6C4\"\n }\n \n .fa-cloud-sun-rain:before {\n     content: \"\\F743\"\n }\n \n .fa-cloud-upload:before {\n     content: \"\\F0EE\"\n }\n \n .fa-cloud-upload-alt:before {\n     content: \"\\F382\"\n }\n \n .fa-clouds:before {\n     content: \"\\F744\"\n }\n \n .fa-clouds-moon:before {\n     content: \"\\F745\"\n }\n \n .fa-clouds-sun:before {\n     content: \"\\F746\"\n }\n \n .fa-cloudscale:before {\n     content: \"\\F383\"\n }\n \n .fa-cloudsmith:before {\n     content: \"\\F384\"\n }\n \n .fa-cloudversify:before {\n     content: \"\\F385\"\n }\n \n .fa-club:before {\n     content: \"\\F327\"\n }\n \n .fa-cocktail:before {\n     content: \"\\F561\"\n }\n \n .fa-code:before {\n     content: \"\\F121\"\n }\n \n .fa-code-branch:before {\n     content: \"\\F126\"\n }\n \n .fa-code-commit:before {\n     content: \"\\F386\"\n }\n \n .fa-code-merge:before {\n     content: \"\\F387\"\n }\n \n .fa-codepen:before {\n     content: \"\\F1CB\"\n }\n \n .fa-codiepie:before {\n     content: \"\\F284\"\n }\n \n .fa-coffee:before {\n     content: \"\\F0F4\"\n }\n \n .fa-coffee-togo:before {\n     content: \"\\F6C5\"\n }\n \n .fa-coffin:before {\n     content: \"\\F6C6\"\n }\n \n .fa-cog:before {\n     content: \"\\F013\"\n }\n \n .fa-cogs:before {\n     content: \"\\F085\"\n }\n \n .fa-coins:before {\n     content: \"\\F51E\"\n }\n \n .fa-columns:before {\n     content: \"\\F0DB\"\n }\n \n .fa-comment:before {\n     content: \"\\F075\"\n }\n \n .fa-comment-alt:before {\n     content: \"\\F27A\"\n }\n \n .fa-comment-alt-check:before {\n     content: \"\\F4A2\"\n }\n \n .fa-comment-alt-dollar:before {\n     content: \"\\F650\"\n }\n \n .fa-comment-alt-dots:before {\n     content: \"\\F4A3\"\n }\n \n .fa-comment-alt-edit:before {\n     content: \"\\F4A4\"\n }\n \n .fa-comment-alt-exclamation:before {\n     content: \"\\F4A5\"\n }\n \n .fa-comment-alt-lines:before {\n     content: \"\\F4A6\"\n }\n \n .fa-comment-alt-medical:before {\n     content: \"\\F7F4\"\n }\n \n .fa-comment-alt-minus:before {\n     content: \"\\F4A7\"\n }\n \n .fa-comment-alt-plus:before {\n     content: \"\\F4A8\"\n }\n \n .fa-comment-alt-slash:before {\n     content: \"\\F4A9\"\n }\n \n .fa-comment-alt-smile:before {\n     content: \"\\F4AA\"\n }\n \n .fa-comment-alt-times:before {\n     content: \"\\F4AB\"\n }\n \n .fa-comment-check:before {\n     content: \"\\F4AC\"\n }\n \n .fa-comment-dollar:before {\n     content: \"\\F651\"\n }\n \n .fa-comment-dots:before {\n     content: \"\\F4AD\"\n }\n \n .fa-comment-edit:before {\n     content: \"\\F4AE\"\n }\n \n .fa-comment-exclamation:before {\n     content: \"\\F4AF\"\n }\n \n .fa-comment-lines:before {\n     content: \"\\F4B0\"\n }\n \n .fa-comment-medical:before {\n     content: \"\\F7F5\"\n }\n \n .fa-comment-minus:before {\n     content: \"\\F4B1\"\n }\n \n .fa-comment-plus:before {\n     content: \"\\F4B2\"\n }\n \n .fa-comment-slash:before {\n     content: \"\\F4B3\"\n }\n \n .fa-comment-smile:before {\n     content: \"\\F4B4\"\n }\n \n .fa-comment-times:before {\n     content: \"\\F4B5\"\n }\n \n .fa-comments:before {\n     content: \"\\F086\"\n }\n \n .fa-comments-alt:before {\n     content: \"\\F4B6\"\n }\n \n .fa-comments-alt-dollar:before {\n     content: \"\\F652\"\n }\n \n .fa-comments-dollar:before {\n     content: \"\\F653\"\n }\n \n .fa-compact-disc:before {\n     content: \"\\F51F\"\n }\n \n .fa-compass:before {\n     content: \"\\F14E\"\n }\n \n .fa-compass-slash:before {\n     content: \"\\F5E9\"\n }\n \n .fa-compress:before {\n     content: \"\\F066\"\n }\n \n .fa-compress-alt:before {\n     content: \"\\F422\"\n }\n \n .fa-compress-arrows-alt:before {\n     content: \"\\F78C\"\n }\n \n .fa-compress-wide:before {\n     content: \"\\F326\"\n }\n \n .fa-concierge-bell:before {\n     content: \"\\F562\"\n }\n \n .fa-confluence:before {\n     content: \"\\F78D\"\n }\n \n .fa-connectdevelop:before {\n     content: \"\\F20E\"\n }\n \n .fa-container-storage:before {\n     content: \"\\F4B7\"\n }\n \n .fa-contao:before {\n     content: \"\\F26D\"\n }\n \n .fa-conveyor-belt:before {\n     content: \"\\F46E\"\n }\n \n .fa-conveyor-belt-alt:before {\n     content: \"\\F46F\"\n }\n \n .fa-cookie:before {\n     content: \"\\F563\"\n }\n \n .fa-cookie-bite:before {\n     content: \"\\F564\"\n }\n \n .fa-copy:before {\n     content: \"\\F0C5\"\n }\n \n .fa-copyright:before {\n     content: \"\\F1F9\"\n }\n \n .fa-corn:before {\n     content: \"\\F6C7\"\n }\n \n .fa-couch:before {\n     content: \"\\F4B8\"\n }\n \n .fa-cow:before {\n     content: \"\\F6C8\"\n }\n \n .fa-cpanel:before {\n     content: \"\\F388\"\n }\n \n .fa-creative-commons:before {\n     content: \"\\F25E\"\n }\n \n .fa-creative-commons-by:before {\n     content: \"\\F4E7\"\n }\n \n .fa-creative-commons-nc:before {\n     content: \"\\F4E8\"\n }\n \n .fa-creative-commons-nc-eu:before {\n     content: \"\\F4E9\"\n }\n \n .fa-creative-commons-nc-jp:before {\n     content: \"\\F4EA\"\n }\n \n .fa-creative-commons-nd:before {\n     content: \"\\F4EB\"\n }\n \n .fa-creative-commons-pd:before {\n     content: \"\\F4EC\"\n }\n \n .fa-creative-commons-pd-alt:before {\n     content: \"\\F4ED\"\n }\n \n .fa-creative-commons-remix:before {\n     content: \"\\F4EE\"\n }\n \n .fa-creative-commons-sa:before {\n     content: \"\\F4EF\"\n }\n \n .fa-creative-commons-sampling:before {\n     content: \"\\F4F0\"\n }\n \n .fa-creative-commons-sampling-plus:before {\n     content: \"\\F4F1\"\n }\n \n .fa-creative-commons-share:before {\n     content: \"\\F4F2\"\n }\n \n .fa-creative-commons-zero:before {\n     content: \"\\F4F3\"\n }\n \n .fa-credit-card:before {\n     content: \"\\F09D\"\n }\n \n .fa-credit-card-blank:before {\n     content: \"\\F389\"\n }\n \n .fa-credit-card-front:before {\n     content: \"\\F38A\"\n }\n \n .fa-cricket:before {\n     content: \"\\F449\"\n }\n \n .fa-critical-role:before {\n     content: \"\\F6C9\"\n }\n \n .fa-croissant:before {\n     content: \"\\F7F6\"\n }\n \n .fa-crop:before {\n     content: \"\\F125\"\n }\n \n .fa-crop-alt:before {\n     content: \"\\F565\"\n }\n \n .fa-cross:before {\n     content: \"\\F654\"\n }\n \n .fa-crosshairs:before {\n     content: \"\\F05B\"\n }\n \n .fa-crow:before {\n     content: \"\\F520\"\n }\n \n .fa-crown:before {\n     content: \"\\F521\"\n }\n \n .fa-crutch:before {\n     content: \"\\F7F7\"\n }\n \n .fa-crutches:before {\n     content: \"\\F7F8\"\n }\n \n .fa-css3:before {\n     content: \"\\F13C\"\n }\n \n .fa-css3-alt:before {\n     content: \"\\F38B\"\n }\n \n .fa-cube:before {\n     content: \"\\F1B2\"\n }\n \n .fa-cubes:before {\n     content: \"\\F1B3\"\n }\n \n .fa-curling:before {\n     content: \"\\F44A\"\n }\n \n .fa-cut:before {\n     content: \"\\F0C4\"\n }\n \n .fa-cuttlefish:before {\n     content: \"\\F38C\"\n }\n \n .fa-d-and-d:before {\n     content: \"\\F38D\"\n }\n \n .fa-d-and-d-beyond:before {\n     content: \"\\F6CA\"\n }\n \n .fa-dagger:before {\n     content: \"\\F6CB\"\n }\n \n .fa-dashcube:before {\n     content: \"\\F210\"\n }\n \n .fa-database:before {\n     content: \"\\F1C0\"\n }\n \n .fa-deaf:before {\n     content: \"\\F2A4\"\n }\n \n .fa-debug:before {\n     content: \"\\F7F9\"\n }\n \n .fa-deer:before {\n     content: \"\\F78E\"\n }\n \n .fa-deer-rudolph:before {\n     content: \"\\F78F\"\n }\n \n .fa-delicious:before {\n     content: \"\\F1A5\"\n }\n \n .fa-democrat:before {\n     content: \"\\F747\"\n }\n \n .fa-deploydog:before {\n     content: \"\\F38E\"\n }\n \n .fa-deskpro:before {\n     content: \"\\F38F\"\n }\n \n .fa-desktop:before {\n     content: \"\\F108\"\n }\n \n .fa-desktop-alt:before {\n     content: \"\\F390\"\n }\n \n .fa-dev:before {\n     content: \"\\F6CC\"\n }\n \n .fa-deviantart:before {\n     content: \"\\F1BD\"\n }\n \n .fa-dewpoint:before {\n     content: \"\\F748\"\n }\n \n .fa-dharmachakra:before {\n     content: \"\\F655\"\n }\n \n .fa-dhl:before {\n     content: \"\\F790\"\n }\n \n .fa-diagnoses:before {\n     content: \"\\F470\"\n }\n \n .fa-diamond:before {\n     content: \"\\F219\"\n }\n \n .fa-diaspora:before {\n     content: \"\\F791\"\n }\n \n .fa-dice:before {\n     content: \"\\F522\"\n }\n \n .fa-dice-d10:before {\n     content: \"\\F6CD\"\n }\n \n .fa-dice-d12:before {\n     content: \"\\F6CE\"\n }\n \n .fa-dice-d20:before {\n     content: \"\\F6CF\"\n }\n \n .fa-dice-d4:before {\n     content: \"\\F6D0\"\n }\n \n .fa-dice-d6:before {\n     content: \"\\F6D1\"\n }\n \n .fa-dice-d8:before {\n     content: \"\\F6D2\"\n }\n \n .fa-dice-five:before {\n     content: \"\\F523\"\n }\n \n .fa-dice-four:before {\n     content: \"\\F524\"\n }\n \n .fa-dice-one:before {\n     content: \"\\F525\"\n }\n \n .fa-dice-six:before {\n     content: \"\\F526\"\n }\n \n .fa-dice-three:before {\n     content: \"\\F527\"\n }\n \n .fa-dice-two:before {\n     content: \"\\F528\"\n }\n \n .fa-digg:before {\n     content: \"\\F1A6\"\n }\n \n .fa-digital-ocean:before {\n     content: \"\\F391\"\n }\n \n .fa-digital-tachograph:before {\n     content: \"\\F566\"\n }\n \n .fa-diploma:before {\n     content: \"\\F5EA\"\n }\n \n .fa-directions:before {\n     content: \"\\F5EB\"\n }\n \n .fa-discord:before {\n     content: \"\\F392\"\n }\n \n .fa-discourse:before {\n     content: \"\\F393\"\n }\n \n .fa-disease:before {\n     content: \"\\F7FA\"\n }\n \n .fa-divide:before {\n     content: \"\\F529\"\n }\n \n .fa-dizzy:before {\n     content: \"\\F567\"\n }\n \n .fa-dna:before {\n     content: \"\\F471\"\n }\n \n .fa-do-not-enter:before {\n     content: \"\\F5EC\"\n }\n \n .fa-dochub:before {\n     content: \"\\F394\"\n }\n \n .fa-docker:before {\n     content: \"\\F395\"\n }\n \n .fa-dog:before {\n     content: \"\\F6D3\"\n }\n \n .fa-dog-leashed:before {\n     content: \"\\F6D4\"\n }\n \n .fa-dollar-sign:before {\n     content: \"\\F155\"\n }\n \n .fa-dolly:before {\n     content: \"\\F472\"\n }\n \n .fa-dolly-empty:before {\n     content: \"\\F473\"\n }\n \n .fa-dolly-flatbed:before {\n     content: \"\\F474\"\n }\n \n .fa-dolly-flatbed-alt:before {\n     content: \"\\F475\"\n }\n \n .fa-dolly-flatbed-empty:before {\n     content: \"\\F476\"\n }\n \n .fa-donate:before {\n     content: \"\\F4B9\"\n }\n \n .fa-door-closed:before {\n     content: \"\\F52A\"\n }\n \n .fa-door-open:before {\n     content: \"\\F52B\"\n }\n \n .fa-dot-circle:before {\n     content: \"\\F192\"\n }\n \n .fa-dove:before {\n     content: \"\\F4BA\"\n }\n \n .fa-download:before {\n     content: \"\\F019\"\n }\n \n .fa-draft2digital:before {\n     content: \"\\F396\"\n }\n \n .fa-drafting-compass:before {\n     content: \"\\F568\"\n }\n \n .fa-dragon:before {\n     content: \"\\F6D5\"\n }\n \n .fa-draw-circle:before {\n     content: \"\\F5ED\"\n }\n \n .fa-draw-polygon:before {\n     content: \"\\F5EE\"\n }\n \n .fa-draw-square:before {\n     content: \"\\F5EF\"\n }\n \n .fa-dreidel:before {\n     content: \"\\F792\"\n }\n \n .fa-dribbble:before {\n     content: \"\\F17D\"\n }\n \n .fa-dribbble-square:before {\n     content: \"\\F397\"\n }\n \n .fa-dropbox:before {\n     content: \"\\F16B\"\n }\n \n .fa-drum:before {\n     content: \"\\F569\"\n }\n \n .fa-drum-steelpan:before {\n     content: \"\\F56A\"\n }\n \n .fa-drumstick:before {\n     content: \"\\F6D6\"\n }\n \n .fa-drumstick-bite:before {\n     content: \"\\F6D7\"\n }\n \n .fa-drupal:before {\n     content: \"\\F1A9\"\n }\n \n .fa-duck:before {\n     content: \"\\F6D8\"\n }\n \n .fa-dumbbell:before {\n     content: \"\\F44B\"\n }\n \n .fa-dumpster:before {\n     content: \"\\F793\"\n }\n \n .fa-dumpster-fire:before {\n     content: \"\\F794\"\n }\n \n .fa-dungeon:before {\n     content: \"\\F6D9\"\n }\n \n .fa-dyalog:before {\n     content: \"\\F399\"\n }\n \n .fa-ear:before {\n     content: \"\\F5F0\"\n }\n \n .fa-ear-muffs:before {\n     content: \"\\F795\"\n }\n \n .fa-earlybirds:before {\n     content: \"\\F39A\"\n }\n \n .fa-ebay:before {\n     content: \"\\F4F4\"\n }\n \n .fa-eclipse:before {\n     content: \"\\F749\"\n }\n \n .fa-eclipse-alt:before {\n     content: \"\\F74A\"\n }\n \n .fa-edge:before {\n     content: \"\\F282\"\n }\n \n .fa-edit:before {\n     content: \"\\F044\"\n }\n \n .fa-egg:before {\n     content: \"\\F7FB\"\n }\n \n .fa-egg-fried:before {\n     content: \"\\F7FC\"\n }\n \n .fa-eject:before {\n     content: \"\\F052\"\n }\n \n .fa-elementor:before {\n     content: \"\\F430\"\n }\n \n .fa-elephant:before {\n     content: \"\\F6DA\"\n }\n \n .fa-ellipsis-h:before {\n     content: \"\\F141\"\n }\n \n .fa-ellipsis-h-alt:before {\n     content: \"\\F39B\"\n }\n \n .fa-ellipsis-v:before {\n     content: \"\\F142\"\n }\n \n .fa-ellipsis-v-alt:before {\n     content: \"\\F39C\"\n }\n \n .fa-ello:before {\n     content: \"\\F5F1\"\n }\n \n .fa-ember:before {\n     content: \"\\F423\"\n }\n \n .fa-empire:before {\n     content: \"\\F1D1\"\n }\n \n .fa-empty-set:before {\n     content: \"\\F656\"\n }\n \n .fa-engine-warning:before {\n     content: \"\\F5F2\"\n }\n \n .fa-envelope:before {\n     content: \"\\F0E0\"\n }\n \n .fa-envelope-open:before {\n     content: \"\\F2B6\"\n }\n \n .fa-envelope-open-dollar:before {\n     content: \"\\F657\"\n }\n \n .fa-envelope-open-text:before {\n     content: \"\\F658\"\n }\n \n .fa-envelope-square:before {\n     content: \"\\F199\"\n }\n \n .fa-envira:before {\n     content: \"\\F299\"\n }\n \n .fa-equals:before {\n     content: \"\\F52C\"\n }\n \n .fa-eraser:before {\n     content: \"\\F12D\"\n }\n \n .fa-erlang:before {\n     content: \"\\F39D\"\n }\n \n .fa-ethereum:before {\n     content: \"\\F42E\"\n }\n \n .fa-ethernet:before {\n     content: \"\\F796\"\n }\n \n .fa-etsy:before {\n     content: \"\\F2D7\"\n }\n \n .fa-euro-sign:before {\n     content: \"\\F153\"\n }\n \n .fa-evernote:before {\n     content: \"\\F839\"\n }\n \n .fa-exchange:before {\n     content: \"\\F0EC\"\n }\n \n .fa-exchange-alt:before {\n     content: \"\\F362\"\n }\n \n .fa-exclamation:before {\n     content: \"\\F12A\"\n }\n \n .fa-exclamation-circle:before {\n     content: \"\\F06A\"\n }\n \n .fa-exclamation-square:before {\n     content: \"\\F321\"\n }\n \n .fa-exclamation-triangle:before {\n     content: \"\\F071\"\n }\n \n .fa-expand:before {\n     content: \"\\F065\"\n }\n \n .fa-expand-alt:before {\n     content: \"\\F424\"\n }\n \n .fa-expand-arrows:before {\n     content: \"\\F31D\"\n }\n \n .fa-expand-arrows-alt:before {\n     content: \"\\F31E\"\n }\n \n .fa-expand-wide:before {\n     content: \"\\F320\"\n }\n \n .fa-expeditedssl:before {\n     content: \"\\F23E\"\n }\n \n .fa-external-link:before {\n     content: \"\\F08E\"\n }\n \n .fa-external-link-alt:before {\n     content: \"\\F35D\"\n }\n \n .fa-external-link-square:before {\n     content: \"\\F14C\"\n }\n \n .fa-external-link-square-alt:before {\n     content: \"\\F360\"\n }\n \n .fa-eye:before {\n     content: \"\\F06E\"\n }\n \n .fa-eye-dropper:before {\n     content: \"\\F1FB\"\n }\n \n .fa-eye-evil:before {\n     content: \"\\F6DB\"\n }\n \n .fa-eye-slash:before {\n     content: \"\\F070\"\n }\n \n .fa-facebook:before {\n     content: \"\\F09A\"\n }\n \n .fa-facebook-f:before {\n     content: \"\\F39E\"\n }\n \n .fa-facebook-messenger:before {\n     content: \"\\F39F\"\n }\n \n .fa-facebook-square:before {\n     content: \"\\F082\"\n }\n \n .fa-fantasy-flight-games:before {\n     content: \"\\F6DC\"\n }\n \n .fa-fast-backward:before {\n     content: \"\\F049\"\n }\n \n .fa-fast-forward:before {\n     content: \"\\F050\"\n }\n \n .fa-fax:before {\n     content: \"\\F1AC\"\n }\n \n .fa-feather:before {\n     content: \"\\F52D\"\n }\n \n .fa-feather-alt:before {\n     content: \"\\F56B\"\n }\n \n .fa-fedex:before {\n     content: \"\\F797\"\n }\n \n .fa-fedora:before {\n     content: \"\\F798\"\n }\n \n .fa-female:before {\n     content: \"\\F182\"\n }\n \n .fa-field-hockey:before {\n     content: \"\\F44C\"\n }\n \n .fa-fighter-jet:before {\n     content: \"\\F0FB\"\n }\n \n .fa-figma:before {\n     content: \"\\F799\"\n }\n \n .fa-file:before {\n     content: \"\\F15B\"\n }\n \n .fa-file-alt:before {\n     content: \"\\F15C\"\n }\n \n .fa-file-archive:before {\n     content: \"\\F1C6\"\n }\n \n .fa-file-audio:before {\n     content: \"\\F1C7\"\n }\n \n .fa-file-certificate:before {\n     content: \"\\F5F3\"\n }\n \n .fa-file-chart-line:before {\n     content: \"\\F659\"\n }\n \n .fa-file-chart-pie:before {\n     content: \"\\F65A\"\n }\n \n .fa-file-check:before {\n     content: \"\\F316\"\n }\n \n .fa-file-code:before {\n     content: \"\\F1C9\"\n }\n \n .fa-file-contract:before {\n     content: \"\\F56C\"\n }\n \n .fa-file-csv:before {\n     content: \"\\F6DD\"\n }\n \n .fa-file-download:before {\n     content: \"\\F56D\"\n }\n \n .fa-file-edit:before {\n     content: \"\\F31C\"\n }\n \n .fa-file-excel:before {\n     content: \"\\F1C3\"\n }\n \n .fa-file-exclamation:before {\n     content: \"\\F31A\"\n }\n \n .fa-file-export:before {\n     content: \"\\F56E\"\n }\n \n .fa-file-image:before {\n     content: \"\\F1C5\"\n }\n \n .fa-file-import:before {\n     content: \"\\F56F\"\n }\n \n .fa-file-invoice:before {\n     content: \"\\F570\"\n }\n \n .fa-file-invoice-dollar:before {\n     content: \"\\F571\"\n }\n \n .fa-file-medical:before {\n     content: \"\\F477\"\n }\n \n .fa-file-medical-alt:before {\n     content: \"\\F478\"\n }\n \n .fa-file-minus:before {\n     content: \"\\F318\"\n }\n \n .fa-file-pdf:before {\n     content: \"\\F1C1\"\n }\n \n .fa-file-plus:before {\n     content: \"\\F319\"\n }\n \n .fa-file-powerpoint:before {\n     content: \"\\F1C4\"\n }\n \n .fa-file-prescription:before {\n     content: \"\\F572\"\n }\n \n .fa-file-signature:before {\n     content: \"\\F573\"\n }\n \n .fa-file-spreadsheet:before {\n     content: \"\\F65B\"\n }\n \n .fa-file-times:before {\n     content: \"\\F317\"\n }\n \n .fa-file-upload:before {\n     content: \"\\F574\"\n }\n \n .fa-file-user:before {\n     content: \"\\F65C\"\n }\n \n .fa-file-video:before {\n     content: \"\\F1C8\"\n }\n \n .fa-file-word:before {\n     content: \"\\F1C2\"\n }\n \n .fa-files-medical:before {\n     content: \"\\F7FD\"\n }\n \n .fa-fill:before {\n     content: \"\\F575\"\n }\n \n .fa-fill-drip:before {\n     content: \"\\F576\"\n }\n \n .fa-film:before {\n     content: \"\\F008\"\n }\n \n .fa-film-alt:before {\n     content: \"\\F3A0\"\n }\n \n .fa-filter:before {\n     content: \"\\F0B0\"\n }\n \n .fa-fingerprint:before {\n     content: \"\\F577\"\n }\n \n .fa-fire:before {\n     content: \"\\F06D\"\n }\n \n .fa-fire-alt:before {\n     content: \"\\F7E4\"\n }\n \n .fa-fire-extinguisher:before {\n     content: \"\\F134\"\n }\n \n .fa-fire-smoke:before {\n     content: \"\\F74B\"\n }\n \n .fa-firefox:before {\n     content: \"\\F269\"\n }\n \n .fa-fireplace:before {\n     content: \"\\F79A\"\n }\n \n .fa-first-aid:before {\n     content: \"\\F479\"\n }\n \n .fa-first-order:before {\n     content: \"\\F2B0\"\n }\n \n .fa-first-order-alt:before {\n     content: \"\\F50A\"\n }\n \n .fa-firstdraft:before {\n     content: \"\\F3A1\"\n }\n \n .fa-fish:before {\n     content: \"\\F578\"\n }\n \n .fa-fish-cooked:before {\n     content: \"\\F7FE\"\n }\n \n .fa-fist-raised:before {\n     content: \"\\F6DE\"\n }\n \n .fa-flag:before {\n     content: \"\\F024\"\n }\n \n .fa-flag-alt:before {\n     content: \"\\F74C\"\n }\n \n .fa-flag-checkered:before {\n     content: \"\\F11E\"\n }\n \n .fa-flag-usa:before {\n     content: \"\\F74D\"\n }\n \n .fa-flame:before {\n     content: \"\\F6DF\"\n }\n \n .fa-flask:before {\n     content: \"\\F0C3\"\n }\n \n .fa-flask-poison:before {\n     content: \"\\F6E0\"\n }\n \n .fa-flask-potion:before {\n     content: \"\\F6E1\"\n }\n \n .fa-flickr:before {\n     content: \"\\F16E\"\n }\n \n .fa-flipboard:before {\n     content: \"\\F44D\"\n }\n \n .fa-flower:before {\n     content: \"\\F7FF\"\n }\n \n .fa-flower-daffodil:before {\n     content: \"\\F800\"\n }\n \n .fa-flower-tulip:before {\n     content: \"\\F801\"\n }\n \n .fa-flushed:before {\n     content: \"\\F579\"\n }\n \n .fa-fly:before {\n     content: \"\\F417\"\n }\n \n .fa-fog:before {\n     content: \"\\F74E\"\n }\n \n .fa-folder:before {\n     content: \"\\F07B\"\n }\n \n .fa-folder-minus:before {\n     content: \"\\F65D\"\n }\n \n .fa-folder-open:before {\n     content: \"\\F07C\"\n }\n \n .fa-folder-plus:before {\n     content: \"\\F65E\"\n }\n \n .fa-folder-times:before {\n     content: \"\\F65F\"\n }\n \n .fa-folder-tree:before {\n     content: \"\\F802\"\n }\n \n .fa-folders:before {\n     content: \"\\F660\"\n }\n \n .fa-font:before {\n     content: \"\\F031\"\n }\n \n .fa-font-awesome:before {\n     content: \"\\F2B4\"\n }\n \n .fa-font-awesome-alt:before {\n     content: \"\\F35C\"\n }\n \n .fa-font-awesome-flag:before {\n     content: \"\\F425\"\n }\n \n .fa-font-awesome-logo-full:before {\n     content: \"\\F4E6\"\n }\n \n .fa-fonticons:before {\n     content: \"\\F280\"\n }\n \n .fa-fonticons-fi:before {\n     content: \"\\F3A2\"\n }\n \n .fa-football-ball:before {\n     content: \"\\F44E\"\n }\n \n .fa-football-helmet:before {\n     content: \"\\F44F\"\n }\n \n .fa-forklift:before {\n     content: \"\\F47A\"\n }\n \n .fa-fort-awesome:before {\n     content: \"\\F286\"\n }\n \n .fa-fort-awesome-alt:before {\n     content: \"\\F3A3\"\n }\n \n .fa-forumbee:before {\n     content: \"\\F211\"\n }\n \n .fa-forward:before {\n     content: \"\\F04E\"\n }\n \n .fa-foursquare:before {\n     content: \"\\F180\"\n }\n \n .fa-fragile:before {\n     content: \"\\F4BB\"\n }\n \n .fa-free-code-camp:before {\n     content: \"\\F2C5\"\n }\n \n .fa-freebsd:before {\n     content: \"\\F3A4\"\n }\n \n .fa-french-fries:before {\n     content: \"\\F803\"\n }\n \n .fa-frog:before {\n     content: \"\\F52E\"\n }\n \n .fa-frosty-head:before {\n     content: \"\\F79B\"\n }\n \n .fa-frown:before {\n     content: \"\\F119\"\n }\n \n .fa-frown-open:before {\n     content: \"\\F57A\"\n }\n \n .fa-fulcrum:before {\n     content: \"\\F50B\"\n }\n \n .fa-function:before {\n     content: \"\\F661\"\n }\n \n .fa-funnel-dollar:before {\n     content: \"\\F662\"\n }\n \n .fa-futbol:before {\n     content: \"\\F1E3\"\n }\n \n .fa-galactic-republic:before {\n     content: \"\\F50C\"\n }\n \n .fa-galactic-senate:before {\n     content: \"\\F50D\"\n }\n \n .fa-gamepad:before {\n     content: \"\\F11B\"\n }\n \n .fa-gas-pump:before {\n     content: \"\\F52F\"\n }\n \n .fa-gas-pump-slash:before {\n     content: \"\\F5F4\"\n }\n \n .fa-gavel:before {\n     content: \"\\F0E3\"\n }\n \n .fa-gem:before {\n     content: \"\\F3A5\"\n }\n \n .fa-genderless:before {\n     content: \"\\F22D\"\n }\n \n .fa-get-pocket:before {\n     content: \"\\F265\"\n }\n \n .fa-gg:before {\n     content: \"\\F260\"\n }\n \n .fa-gg-circle:before {\n     content: \"\\F261\"\n }\n \n .fa-ghost:before {\n     content: \"\\F6E2\"\n }\n \n .fa-gift:before {\n     content: \"\\F06B\"\n }\n \n .fa-gift-card:before {\n     content: \"\\F663\"\n }\n \n .fa-gifts:before {\n     content: \"\\F79C\"\n }\n \n .fa-gingerbread-man:before {\n     content: \"\\F79D\"\n }\n \n .fa-git:before {\n     content: \"\\F1D3\"\n }\n \n .fa-git-alt:before {\n     content: \"\\F841\"\n }\n \n .fa-git-square:before {\n     content: \"\\F1D2\"\n }\n \n .fa-github:before {\n     content: \"\\F09B\"\n }\n \n .fa-github-alt:before {\n     content: \"\\F113\"\n }\n \n .fa-github-square:before {\n     content: \"\\F092\"\n }\n \n .fa-gitkraken:before {\n     content: \"\\F3A6\"\n }\n \n .fa-gitlab:before {\n     content: \"\\F296\"\n }\n \n .fa-gitter:before {\n     content: \"\\F426\"\n }\n \n .fa-glass:before {\n     content: \"\\F804\"\n }\n \n .fa-glass-champagne:before {\n     content: \"\\F79E\"\n }\n \n .fa-glass-cheers:before {\n     content: \"\\F79F\"\n }\n \n .fa-glass-martini:before {\n     content: \"\\F000\"\n }\n \n .fa-glass-martini-alt:before {\n     content: \"\\F57B\"\n }\n \n .fa-glass-whiskey:before {\n     content: \"\\F7A0\"\n }\n \n .fa-glass-whiskey-rocks:before {\n     content: \"\\F7A1\"\n }\n \n .fa-glasses:before {\n     content: \"\\F530\"\n }\n \n .fa-glasses-alt:before {\n     content: \"\\F5F5\"\n }\n \n .fa-glide:before {\n     content: \"\\F2A5\"\n }\n \n .fa-glide-g:before {\n     content: \"\\F2A6\"\n }\n \n .fa-globe:before {\n     content: \"\\F0AC\"\n }\n \n .fa-globe-africa:before {\n     content: \"\\F57C\"\n }\n \n .fa-globe-americas:before {\n     content: \"\\F57D\"\n }\n \n .fa-globe-asia:before {\n     content: \"\\F57E\"\n }\n \n .fa-globe-europe:before {\n     content: \"\\F7A2\"\n }\n \n .fa-globe-snow:before {\n     content: \"\\F7A3\"\n }\n \n .fa-globe-stand:before {\n     content: \"\\F5F6\"\n }\n \n .fa-gofore:before {\n     content: \"\\F3A7\"\n }\n \n .fa-golf-ball:before {\n     content: \"\\F450\"\n }\n \n .fa-golf-club:before {\n     content: \"\\F451\"\n }\n \n .fa-goodreads:before {\n     content: \"\\F3A8\"\n }\n \n .fa-goodreads-g:before {\n     content: \"\\F3A9\"\n }\n \n .fa-google:before {\n     content: \"\\F1A0\"\n }\n \n .fa-google-drive:before {\n     content: \"\\F3AA\"\n }\n \n .fa-google-play:before {\n     content: \"\\F3AB\"\n }\n \n .fa-google-plus:before {\n     content: \"\\F2B3\"\n }\n \n .fa-google-plus-g:before {\n     content: \"\\F0D5\"\n }\n \n .fa-google-plus-square:before {\n     content: \"\\F0D4\"\n }\n \n .fa-google-wallet:before {\n     content: \"\\F1EE\"\n }\n \n .fa-gopuram:before {\n     content: \"\\F664\"\n }\n \n .fa-graduation-cap:before {\n     content: \"\\F19D\"\n }\n \n .fa-gratipay:before {\n     content: \"\\F184\"\n }\n \n .fa-grav:before {\n     content: \"\\F2D6\"\n }\n \n .fa-greater-than:before {\n     content: \"\\F531\"\n }\n \n .fa-greater-than-equal:before {\n     content: \"\\F532\"\n }\n \n .fa-grimace:before {\n     content: \"\\F57F\"\n }\n \n .fa-grin:before {\n     content: \"\\F580\"\n }\n \n .fa-grin-alt:before {\n     content: \"\\F581\"\n }\n \n .fa-grin-beam:before {\n     content: \"\\F582\"\n }\n \n .fa-grin-beam-sweat:before {\n     content: \"\\F583\"\n }\n \n .fa-grin-hearts:before {\n     content: \"\\F584\"\n }\n \n .fa-grin-squint:before {\n     content: \"\\F585\"\n }\n \n .fa-grin-squint-tears:before {\n     content: \"\\F586\"\n }\n \n .fa-grin-stars:before {\n     content: \"\\F587\"\n }\n \n .fa-grin-tears:before {\n     content: \"\\F588\"\n }\n \n .fa-grin-tongue:before {\n     content: \"\\F589\"\n }\n \n .fa-grin-tongue-squint:before {\n     content: \"\\F58A\"\n }\n \n .fa-grin-tongue-wink:before {\n     content: \"\\F58B\"\n }\n \n .fa-grin-wink:before {\n     content: \"\\F58C\"\n }\n \n .fa-grip-horizontal:before {\n     content: \"\\F58D\"\n }\n \n .fa-grip-lines:before {\n     content: \"\\F7A4\"\n }\n \n .fa-grip-lines-vertical:before {\n     content: \"\\F7A5\"\n }\n \n .fa-grip-vertical:before {\n     content: \"\\F58E\"\n }\n \n .fa-gripfire:before {\n     content: \"\\F3AC\"\n }\n \n .fa-grunt:before {\n     content: \"\\F3AD\"\n }\n \n .fa-guitar:before {\n     content: \"\\F7A6\"\n }\n \n .fa-gulp:before {\n     content: \"\\F3AE\"\n }\n \n .fa-h-square:before {\n     content: \"\\F0FD\"\n }\n \n .fa-h1:before {\n     content: \"\\F313\"\n }\n \n .fa-h2:before {\n     content: \"\\F314\"\n }\n \n .fa-h3:before {\n     content: \"\\F315\"\n }\n \n .fa-hacker-news:before {\n     content: \"\\F1D4\"\n }\n \n .fa-hacker-news-square:before {\n     content: \"\\F3AF\"\n }\n \n .fa-hackerrank:before {\n     content: \"\\F5F7\"\n }\n \n .fa-hamburger:before {\n     content: \"\\F805\"\n }\n \n .fa-hammer:before {\n     content: \"\\F6E3\"\n }\n \n .fa-hammer-war:before {\n     content: \"\\F6E4\"\n }\n \n .fa-hamsa:before {\n     content: \"\\F665\"\n }\n \n .fa-hand-heart:before {\n     content: \"\\F4BC\"\n }\n \n .fa-hand-holding:before {\n     content: \"\\F4BD\"\n }\n \n .fa-hand-holding-box:before {\n     content: \"\\F47B\"\n }\n \n .fa-hand-holding-heart:before {\n     content: \"\\F4BE\"\n }\n \n .fa-hand-holding-magic:before {\n     content: \"\\F6E5\"\n }\n \n .fa-hand-holding-seedling:before {\n     content: \"\\F4BF\"\n }\n \n .fa-hand-holding-usd:before {\n     content: \"\\F4C0\"\n }\n \n .fa-hand-holding-water:before {\n     content: \"\\F4C1\"\n }\n \n .fa-hand-lizard:before {\n     content: \"\\F258\"\n }\n \n .fa-hand-middle-finger:before {\n     content: \"\\F806\"\n }\n \n .fa-hand-paper:before {\n     content: \"\\F256\"\n }\n \n .fa-hand-peace:before {\n     content: \"\\F25B\"\n }\n \n .fa-hand-point-down:before {\n     content: \"\\F0A7\"\n }\n \n .fa-hand-point-left:before {\n     content: \"\\F0A5\"\n }\n \n .fa-hand-point-right:before {\n     content: \"\\F0A4\"\n }\n \n .fa-hand-point-up:before {\n     content: \"\\F0A6\"\n }\n \n .fa-hand-pointer:before {\n     content: \"\\F25A\"\n }\n \n .fa-hand-receiving:before {\n     content: \"\\F47C\"\n }\n \n .fa-hand-rock:before {\n     content: \"\\F255\"\n }\n \n .fa-hand-scissors:before {\n     content: \"\\F257\"\n }\n \n .fa-hand-spock:before {\n     content: \"\\F259\"\n }\n \n .fa-hands:before {\n     content: \"\\F4C2\"\n }\n \n .fa-hands-heart:before {\n     content: \"\\F4C3\"\n }\n \n .fa-hands-helping:before {\n     content: \"\\F4C4\"\n }\n \n .fa-hands-usd:before {\n     content: \"\\F4C5\"\n }\n \n .fa-handshake:before {\n     content: \"\\F2B5\"\n }\n \n .fa-handshake-alt:before {\n     content: \"\\F4C6\"\n }\n \n .fa-hanukiah:before {\n     content: \"\\F6E6\"\n }\n \n .fa-hard-hat:before {\n     content: \"\\F807\"\n }\n \n .fa-hashtag:before {\n     content: \"\\F292\"\n }\n \n .fa-hat-santa:before {\n     content: \"\\F7A7\"\n }\n \n .fa-hat-winter:before {\n     content: \"\\F7A8\"\n }\n \n .fa-hat-witch:before {\n     content: \"\\F6E7\"\n }\n \n .fa-hat-wizard:before {\n     content: \"\\F6E8\"\n }\n \n .fa-haykal:before {\n     content: \"\\F666\"\n }\n \n .fa-hdd:before {\n     content: \"\\F0A0\"\n }\n \n .fa-head-side:before {\n     content: \"\\F6E9\"\n }\n \n .fa-head-side-brain:before {\n     content: \"\\F808\"\n }\n \n .fa-head-side-medical:before {\n     content: \"\\F809\"\n }\n \n .fa-head-vr:before {\n     content: \"\\F6EA\"\n }\n \n .fa-heading:before {\n     content: \"\\F1DC\"\n }\n \n .fa-headphones:before {\n     content: \"\\F025\"\n }\n \n .fa-headphones-alt:before {\n     content: \"\\F58F\"\n }\n \n .fa-headset:before {\n     content: \"\\F590\"\n }\n \n .fa-heart:before {\n     content: \"\\F004\"\n }\n \n .fa-heart-broken:before {\n     content: \"\\F7A9\"\n }\n \n .fa-heart-circle:before {\n     content: \"\\F4C7\"\n }\n \n .fa-heart-rate:before {\n     content: \"\\F5F8\"\n }\n \n .fa-heart-square:before {\n     content: \"\\F4C8\"\n }\n \n .fa-heartbeat:before {\n     content: \"\\F21E\"\n }\n \n .fa-helicopter:before {\n     content: \"\\F533\"\n }\n \n .fa-helmet-battle:before {\n     content: \"\\F6EB\"\n }\n \n .fa-hexagon:before {\n     content: \"\\F312\"\n }\n \n .fa-highlighter:before {\n     content: \"\\F591\"\n }\n \n .fa-hiking:before {\n     content: \"\\F6EC\"\n }\n \n .fa-hippo:before {\n     content: \"\\F6ED\"\n }\n \n .fa-hips:before {\n     content: \"\\F452\"\n }\n \n .fa-hire-a-helper:before {\n     content: \"\\F3B0\"\n }\n \n .fa-history:before {\n     content: \"\\F1DA\"\n }\n \n .fa-hockey-mask:before {\n     content: \"\\F6EE\"\n }\n \n .fa-hockey-puck:before {\n     content: \"\\F453\"\n }\n \n .fa-hockey-sticks:before {\n     content: \"\\F454\"\n }\n \n .fa-holly-berry:before {\n     content: \"\\F7AA\"\n }\n \n .fa-home:before {\n     content: \"\\F015\"\n }\n \n .fa-home-alt:before {\n     content: \"\\F80A\"\n }\n \n .fa-home-heart:before {\n     content: \"\\F4C9\"\n }\n \n .fa-home-lg:before {\n     content: \"\\F80B\"\n }\n \n .fa-home-lg-alt:before {\n     content: \"\\F80C\"\n }\n \n .fa-hood-cloak:before {\n     content: \"\\F6EF\"\n }\n \n .fa-hooli:before {\n     content: \"\\F427\"\n }\n \n .fa-hornbill:before {\n     content: \"\\F592\"\n }\n \n .fa-horse:before {\n     content: \"\\F6F0\"\n }\n \n .fa-horse-head:before {\n     content: \"\\F7AB\"\n }\n \n .fa-hospital:before {\n     content: \"\\F0F8\"\n }\n \n .fa-hospital-alt:before {\n     content: \"\\F47D\"\n }\n \n .fa-hospital-symbol:before {\n     content: \"\\F47E\"\n }\n \n .fa-hospital-user:before {\n     content: \"\\F80D\"\n }\n \n .fa-hospitals:before {\n     content: \"\\F80E\"\n }\n \n .fa-hot-tub:before {\n     content: \"\\F593\"\n }\n \n .fa-hotdog:before {\n     content: \"\\F80F\"\n }\n \n .fa-hotel:before {\n     content: \"\\F594\"\n }\n \n .fa-hotjar:before {\n     content: \"\\F3B1\"\n }\n \n .fa-hourglass:before {\n     content: \"\\F254\"\n }\n \n .fa-hourglass-end:before {\n     content: \"\\F253\"\n }\n \n .fa-hourglass-half:before {\n     content: \"\\F252\"\n }\n \n .fa-hourglass-start:before {\n     content: \"\\F251\"\n }\n \n .fa-house-damage:before {\n     content: \"\\F6F1\"\n }\n \n .fa-house-flood:before {\n     content: \"\\F74F\"\n }\n \n .fa-houzz:before {\n     content: \"\\F27C\"\n }\n \n .fa-hryvnia:before {\n     content: \"\\F6F2\"\n }\n \n .fa-html5:before {\n     content: \"\\F13B\"\n }\n \n .fa-hubspot:before {\n     content: \"\\F3B2\"\n }\n \n .fa-humidity:before {\n     content: \"\\F750\"\n }\n \n .fa-hurricane:before {\n     content: \"\\F751\"\n }\n \n .fa-i-cursor:before {\n     content: \"\\F246\"\n }\n \n .fa-ice-cream:before {\n     content: \"\\F810\"\n }\n \n .fa-ice-skate:before {\n     content: \"\\F7AC\"\n }\n \n .fa-icicles:before {\n     content: \"\\F7AD\"\n }\n \n .fa-id-badge:before {\n     content: \"\\F2C1\"\n }\n \n .fa-id-card:before {\n     content: \"\\F2C2\"\n }\n \n .fa-id-card-alt:before {\n     content: \"\\F47F\"\n }\n \n .fa-igloo:before {\n     content: \"\\F7AE\"\n }\n \n .fa-image:before {\n     content: \"\\F03E\"\n }\n \n .fa-images:before {\n     content: \"\\F302\"\n }\n \n .fa-imdb:before {\n     content: \"\\F2D8\"\n }\n \n .fa-inbox:before {\n     content: \"\\F01C\"\n }\n \n .fa-inbox-in:before {\n     content: \"\\F310\"\n }\n \n .fa-inbox-out:before {\n     content: \"\\F311\"\n }\n \n .fa-indent:before {\n     content: \"\\F03C\"\n }\n \n .fa-industry:before {\n     content: \"\\F275\"\n }\n \n .fa-industry-alt:before {\n     content: \"\\F3B3\"\n }\n \n .fa-infinity:before {\n     content: \"\\F534\"\n }\n \n .fa-info:before {\n     content: \"\\F129\"\n }\n \n .fa-info-circle:before {\n     content: \"\\F05A\"\n }\n \n .fa-info-square:before {\n     content: \"\\F30F\"\n }\n \n .fa-inhaler:before {\n     content: \"\\F5F9\"\n }\n \n .fa-instagram:before {\n     content: \"\\F16D\"\n }\n \n .fa-integral:before {\n     content: \"\\F667\"\n }\n \n .fa-intercom:before {\n     content: \"\\F7AF\"\n }\n \n .fa-internet-explorer:before {\n     content: \"\\F26B\"\n }\n \n .fa-intersection:before {\n     content: \"\\F668\"\n }\n \n .fa-inventory:before {\n     content: \"\\F480\"\n }\n \n .fa-invision:before {\n     content: \"\\F7B0\"\n }\n \n .fa-ioxhost:before {\n     content: \"\\F208\"\n }\n \n .fa-island-tropical:before {\n     content: \"\\F811\"\n }\n \n .fa-italic:before {\n     content: \"\\F033\"\n }\n \n .fa-itch-io:before {\n     content: \"\\F83A\"\n }\n \n .fa-itunes:before {\n     content: \"\\F3B4\"\n }\n \n .fa-itunes-note:before {\n     content: \"\\F3B5\"\n }\n \n .fa-jack-o-lantern:before {\n     content: \"\\F30E\"\n }\n \n .fa-java:before {\n     content: \"\\F4E4\"\n }\n \n .fa-jedi:before {\n     content: \"\\F669\"\n }\n \n .fa-jedi-order:before {\n     content: \"\\F50E\"\n }\n \n .fa-jenkins:before {\n     content: \"\\F3B6\"\n }\n \n .fa-jira:before {\n     content: \"\\F7B1\"\n }\n \n .fa-joget:before {\n     content: \"\\F3B7\"\n }\n \n .fa-joint:before {\n     content: \"\\F595\"\n }\n \n .fa-joomla:before {\n     content: \"\\F1AA\"\n }\n \n .fa-journal-whills:before {\n     content: \"\\F66A\"\n }\n \n .fa-js:before {\n     content: \"\\F3B8\"\n }\n \n .fa-js-square:before {\n     content: \"\\F3B9\"\n }\n \n .fa-jsfiddle:before {\n     content: \"\\F1CC\"\n }\n \n .fa-kaaba:before {\n     content: \"\\F66B\"\n }\n \n .fa-kaggle:before {\n     content: \"\\F5FA\"\n }\n \n .fa-key:before {\n     content: \"\\F084\"\n }\n \n .fa-key-skeleton:before {\n     content: \"\\F6F3\"\n }\n \n .fa-keybase:before {\n     content: \"\\F4F5\"\n }\n \n .fa-keyboard:before {\n     content: \"\\F11C\"\n }\n \n .fa-keycdn:before {\n     content: \"\\F3BA\"\n }\n \n .fa-keynote:before {\n     content: \"\\F66C\"\n }\n \n .fa-khanda:before {\n     content: \"\\F66D\"\n }\n \n .fa-kickstarter:before {\n     content: \"\\F3BB\"\n }\n \n .fa-kickstarter-k:before {\n     content: \"\\F3BC\"\n }\n \n .fa-kidneys:before {\n     content: \"\\F5FB\"\n }\n \n .fa-kiss:before {\n     content: \"\\F596\"\n }\n \n .fa-kiss-beam:before {\n     content: \"\\F597\"\n }\n \n .fa-kiss-wink-heart:before {\n     content: \"\\F598\"\n }\n \n .fa-kite:before {\n     content: \"\\F6F4\"\n }\n \n .fa-kiwi-bird:before {\n     content: \"\\F535\"\n }\n \n .fa-knife-kitchen:before {\n     content: \"\\F6F5\"\n }\n \n .fa-korvue:before {\n     content: \"\\F42F\"\n }\n \n .fa-lambda:before {\n     content: \"\\F66E\"\n }\n \n .fa-lamp:before {\n     content: \"\\F4CA\"\n }\n \n .fa-landmark:before {\n     content: \"\\F66F\"\n }\n \n .fa-landmark-alt:before {\n     content: \"\\F752\"\n }\n \n .fa-language:before {\n     content: \"\\F1AB\"\n }\n \n .fa-laptop:before {\n     content: \"\\F109\"\n }\n \n .fa-laptop-code:before {\n     content: \"\\F5FC\"\n }\n \n .fa-laptop-medical:before {\n     content: \"\\F812\"\n }\n \n .fa-laravel:before {\n     content: \"\\F3BD\"\n }\n \n .fa-lastfm:before {\n     content: \"\\F202\"\n }\n \n .fa-lastfm-square:before {\n     content: \"\\F203\"\n }\n \n .fa-laugh:before {\n     content: \"\\F599\"\n }\n \n .fa-laugh-beam:before {\n     content: \"\\F59A\"\n }\n \n .fa-laugh-squint:before {\n     content: \"\\F59B\"\n }\n \n .fa-laugh-wink:before {\n     content: \"\\F59C\"\n }\n \n .fa-layer-group:before {\n     content: \"\\F5FD\"\n }\n \n .fa-layer-minus:before {\n     content: \"\\F5FE\"\n }\n \n .fa-layer-plus:before {\n     content: \"\\F5FF\"\n }\n \n .fa-leaf:before {\n     content: \"\\F06C\"\n }\n \n .fa-leaf-heart:before {\n     content: \"\\F4CB\"\n }\n \n .fa-leaf-maple:before {\n     content: \"\\F6F6\"\n }\n \n .fa-leaf-oak:before {\n     content: \"\\F6F7\"\n }\n \n .fa-leanpub:before {\n     content: \"\\F212\"\n }\n \n .fa-lemon:before {\n     content: \"\\F094\"\n }\n \n .fa-less:before {\n     content: \"\\F41D\"\n }\n \n .fa-less-than:before {\n     content: \"\\F536\"\n }\n \n .fa-less-than-equal:before {\n     content: \"\\F537\"\n }\n \n .fa-level-down:before {\n     content: \"\\F149\"\n }\n \n .fa-level-down-alt:before {\n     content: \"\\F3BE\"\n }\n \n .fa-level-up:before {\n     content: \"\\F148\"\n }\n \n .fa-level-up-alt:before {\n     content: \"\\F3BF\"\n }\n \n .fa-life-ring:before {\n     content: \"\\F1CD\"\n }\n \n .fa-lightbulb:before {\n     content: \"\\F0EB\"\n }\n \n .fa-lightbulb-dollar:before {\n     content: \"\\F670\"\n }\n \n .fa-lightbulb-exclamation:before {\n     content: \"\\F671\"\n }\n \n .fa-lightbulb-on:before {\n     content: \"\\F672\"\n }\n \n .fa-lightbulb-slash:before {\n     content: \"\\F673\"\n }\n \n .fa-lights-holiday:before {\n     content: \"\\F7B2\"\n }\n \n .fa-line:before {\n     content: \"\\F3C0\"\n }\n \n .fa-link:before {\n     content: \"\\F0C1\"\n }\n \n .fa-linkedin:before {\n     content: \"\\F08C\"\n }\n \n .fa-linkedin-in:before {\n     content: \"\\F0E1\"\n }\n \n .fa-linode:before {\n     content: \"\\F2B8\"\n }\n \n .fa-linux:before {\n     content: \"\\F17C\"\n }\n \n .fa-lips:before {\n     content: \"\\F600\"\n }\n \n .fa-lira-sign:before {\n     content: \"\\F195\"\n }\n \n .fa-list:before {\n     content: \"\\F03A\"\n }\n \n .fa-list-alt:before {\n     content: \"\\F022\"\n }\n \n .fa-list-ol:before {\n     content: \"\\F0CB\"\n }\n \n .fa-list-ul:before {\n     content: \"\\F0CA\"\n }\n \n .fa-location:before {\n     content: \"\\F601\"\n }\n \n .fa-location-arrow:before {\n     content: \"\\F124\"\n }\n \n .fa-location-circle:before {\n     content: \"\\F602\"\n }\n \n .fa-location-slash:before {\n     content: \"\\F603\"\n }\n \n .fa-lock:before {\n     content: \"\\F023\"\n }\n \n .fa-lock-alt:before {\n     content: \"\\F30D\"\n }\n \n .fa-lock-open:before {\n     content: \"\\F3C1\"\n }\n \n .fa-lock-open-alt:before {\n     content: \"\\F3C2\"\n }\n \n .fa-long-arrow-alt-down:before {\n     content: \"\\F309\"\n }\n \n .fa-long-arrow-alt-left:before {\n     content: \"\\F30A\"\n }\n \n .fa-long-arrow-alt-right:before {\n     content: \"\\F30B\"\n }\n \n .fa-long-arrow-alt-up:before {\n     content: \"\\F30C\"\n }\n \n .fa-long-arrow-down:before {\n     content: \"\\F175\"\n }\n \n .fa-long-arrow-left:before {\n     content: \"\\F177\"\n }\n \n .fa-long-arrow-right:before {\n     content: \"\\F178\"\n }\n \n .fa-long-arrow-up:before {\n     content: \"\\F176\"\n }\n \n .fa-loveseat:before {\n     content: \"\\F4CC\"\n }\n \n .fa-low-vision:before {\n     content: \"\\F2A8\"\n }\n \n .fa-luchador:before {\n     content: \"\\F455\"\n }\n \n .fa-luggage-cart:before {\n     content: \"\\F59D\"\n }\n \n .fa-lungs:before {\n     content: \"\\F604\"\n }\n \n .fa-lyft:before {\n     content: \"\\F3C3\"\n }\n \n .fa-mace:before {\n     content: \"\\F6F8\"\n }\n \n .fa-magento:before {\n     content: \"\\F3C4\"\n }\n \n .fa-magic:before {\n     content: \"\\F0D0\"\n }\n \n .fa-magnet:before {\n     content: \"\\F076\"\n }\n \n .fa-mail-bulk:before {\n     content: \"\\F674\"\n }\n \n .fa-mailbox:before {\n     content: \"\\F813\"\n }\n \n .fa-mailchimp:before {\n     content: \"\\F59E\"\n }\n \n .fa-male:before {\n     content: \"\\F183\"\n }\n \n .fa-mandalorian:before {\n     content: \"\\F50F\"\n }\n \n .fa-mandolin:before {\n     content: \"\\F6F9\"\n }\n \n .fa-map:before {\n     content: \"\\F279\"\n }\n \n .fa-map-marked:before {\n     content: \"\\F59F\"\n }\n \n .fa-map-marked-alt:before {\n     content: \"\\F5A0\"\n }\n \n .fa-map-marker:before {\n     content: \"\\F041\"\n }\n \n .fa-map-marker-alt:before {\n     content: \"\\F3C5\"\n }\n \n .fa-map-marker-alt-slash:before {\n     content: \"\\F605\"\n }\n \n .fa-map-marker-check:before {\n     content: \"\\F606\"\n }\n \n .fa-map-marker-edit:before {\n     content: \"\\F607\"\n }\n \n .fa-map-marker-exclamation:before {\n     content: \"\\F608\"\n }\n \n .fa-map-marker-minus:before {\n     content: \"\\F609\"\n }\n \n .fa-map-marker-plus:before {\n     content: \"\\F60A\"\n }\n \n .fa-map-marker-question:before {\n     content: \"\\F60B\"\n }\n \n .fa-map-marker-slash:before {\n     content: \"\\F60C\"\n }\n \n .fa-map-marker-smile:before {\n     content: \"\\F60D\"\n }\n \n .fa-map-marker-times:before {\n     content: \"\\F60E\"\n }\n \n .fa-map-pin:before {\n     content: \"\\F276\"\n }\n \n .fa-map-signs:before {\n     content: \"\\F277\"\n }\n \n .fa-markdown:before {\n     content: \"\\F60F\"\n }\n \n .fa-marker:before {\n     content: \"\\F5A1\"\n }\n \n .fa-mars:before {\n     content: \"\\F222\"\n }\n \n .fa-mars-double:before {\n     content: \"\\F227\"\n }\n \n .fa-mars-stroke:before {\n     content: \"\\F229\"\n }\n \n .fa-mars-stroke-h:before {\n     content: \"\\F22B\"\n }\n \n .fa-mars-stroke-v:before {\n     content: \"\\F22A\"\n }\n \n .fa-mask:before {\n     content: \"\\F6FA\"\n }\n \n .fa-mastodon:before {\n     content: \"\\F4F6\"\n }\n \n .fa-maxcdn:before {\n     content: \"\\F136\"\n }\n \n .fa-meat:before {\n     content: \"\\F814\"\n }\n \n .fa-medal:before {\n     content: \"\\F5A2\"\n }\n \n .fa-medapps:before {\n     content: \"\\F3C6\"\n }\n \n .fa-medium:before {\n     content: \"\\F23A\"\n }\n \n .fa-medium-m:before {\n     content: \"\\F3C7\"\n }\n \n .fa-medkit:before {\n     content: \"\\F0FA\"\n }\n \n .fa-medrt:before {\n     content: \"\\F3C8\"\n }\n \n .fa-meetup:before {\n     content: \"\\F2E0\"\n }\n \n .fa-megaphone:before {\n     content: \"\\F675\"\n }\n \n .fa-megaport:before {\n     content: \"\\F5A3\"\n }\n \n .fa-meh:before {\n     content: \"\\F11A\"\n }\n \n .fa-meh-blank:before {\n     content: \"\\F5A4\"\n }\n \n .fa-meh-rolling-eyes:before {\n     content: \"\\F5A5\"\n }\n \n .fa-memory:before {\n     content: \"\\F538\"\n }\n \n .fa-mendeley:before {\n     content: \"\\F7B3\"\n }\n \n .fa-menorah:before {\n     content: \"\\F676\"\n }\n \n .fa-mercury:before {\n     content: \"\\F223\"\n }\n \n .fa-meteor:before {\n     content: \"\\F753\"\n }\n \n .fa-microchip:before {\n     content: \"\\F2DB\"\n }\n \n .fa-microphone:before {\n     content: \"\\F130\"\n }\n \n .fa-microphone-alt:before {\n     content: \"\\F3C9\"\n }\n \n .fa-microphone-alt-slash:before {\n     content: \"\\F539\"\n }\n \n .fa-microphone-slash:before {\n     content: \"\\F131\"\n }\n \n .fa-microscope:before {\n     content: \"\\F610\"\n }\n \n .fa-microsoft:before {\n     content: \"\\F3CA\"\n }\n \n .fa-mind-share:before {\n     content: \"\\F677\"\n }\n \n .fa-minus:before {\n     content: \"\\F068\"\n }\n \n .fa-minus-circle:before {\n     content: \"\\F056\"\n }\n \n .fa-minus-hexagon:before {\n     content: \"\\F307\"\n }\n \n .fa-minus-octagon:before {\n     content: \"\\F308\"\n }\n \n .fa-minus-square:before {\n     content: \"\\F146\"\n }\n \n .fa-mistletoe:before {\n     content: \"\\F7B4\"\n }\n \n .fa-mitten:before {\n     content: \"\\F7B5\"\n }\n \n .fa-mix:before {\n     content: \"\\F3CB\"\n }\n \n .fa-mixcloud:before {\n     content: \"\\F289\"\n }\n \n .fa-mizuni:before {\n     content: \"\\F3CC\"\n }\n \n .fa-mobile:before {\n     content: \"\\F10B\"\n }\n \n .fa-mobile-alt:before {\n     content: \"\\F3CD\"\n }\n \n .fa-mobile-android:before {\n     content: \"\\F3CE\"\n }\n \n .fa-mobile-android-alt:before {\n     content: \"\\F3CF\"\n }\n \n .fa-modx:before {\n     content: \"\\F285\"\n }\n \n .fa-monero:before {\n     content: \"\\F3D0\"\n }\n \n .fa-money-bill:before {\n     content: \"\\F0D6\"\n }\n \n .fa-money-bill-alt:before {\n     content: \"\\F3D1\"\n }\n \n .fa-money-bill-wave:before {\n     content: \"\\F53A\"\n }\n \n .fa-money-bill-wave-alt:before {\n     content: \"\\F53B\"\n }\n \n .fa-money-check:before {\n     content: \"\\F53C\"\n }\n \n .fa-money-check-alt:before {\n     content: \"\\F53D\"\n }\n \n .fa-monitor-heart-rate:before {\n     content: \"\\F611\"\n }\n \n .fa-monkey:before {\n     content: \"\\F6FB\"\n }\n \n .fa-monument:before {\n     content: \"\\F5A6\"\n }\n \n .fa-moon:before {\n     content: \"\\F186\"\n }\n \n .fa-moon-cloud:before {\n     content: \"\\F754\"\n }\n \n .fa-moon-stars:before {\n     content: \"\\F755\"\n }\n \n .fa-mortar-pestle:before {\n     content: \"\\F5A7\"\n }\n \n .fa-mosque:before {\n     content: \"\\F678\"\n }\n \n .fa-motorcycle:before {\n     content: \"\\F21C\"\n }\n \n .fa-mountain:before {\n     content: \"\\F6FC\"\n }\n \n .fa-mountains:before {\n     content: \"\\F6FD\"\n }\n \n .fa-mouse-pointer:before {\n     content: \"\\F245\"\n }\n \n .fa-mug-hot:before {\n     content: \"\\F7B6\"\n }\n \n .fa-mug-marshmallows:before {\n     content: \"\\F7B7\"\n }\n \n .fa-music:before {\n     content: \"\\F001\"\n }\n \n .fa-napster:before {\n     content: \"\\F3D2\"\n }\n \n .fa-narwhal:before {\n     content: \"\\F6FE\"\n }\n \n .fa-neos:before {\n     content: \"\\F612\"\n }\n \n .fa-network-wired:before {\n     content: \"\\F6FF\"\n }\n \n .fa-neuter:before {\n     content: \"\\F22C\"\n }\n \n .fa-newspaper:before {\n     content: \"\\F1EA\"\n }\n \n .fa-nimblr:before {\n     content: \"\\F5A8\"\n }\n \n .fa-nintendo-switch:before {\n     content: \"\\F418\"\n }\n \n .fa-node:before {\n     content: \"\\F419\"\n }\n \n .fa-node-js:before {\n     content: \"\\F3D3\"\n }\n \n .fa-not-equal:before {\n     content: \"\\F53E\"\n }\n \n .fa-notes-medical:before {\n     content: \"\\F481\"\n }\n \n .fa-npm:before {\n     content: \"\\F3D4\"\n }\n \n .fa-ns8:before {\n     content: \"\\F3D5\"\n }\n \n .fa-nutritionix:before {\n     content: \"\\F3D6\"\n }\n \n .fa-object-group:before {\n     content: \"\\F247\"\n }\n \n .fa-object-ungroup:before {\n     content: \"\\F248\"\n }\n \n .fa-octagon:before {\n     content: \"\\F306\"\n }\n \n .fa-odnoklassniki:before {\n     content: \"\\F263\"\n }\n \n .fa-odnoklassniki-square:before {\n     content: \"\\F264\"\n }\n \n .fa-oil-can:before {\n     content: \"\\F613\"\n }\n \n .fa-oil-temp:before {\n     content: \"\\F614\"\n }\n \n .fa-old-republic:before {\n     content: \"\\F510\"\n }\n \n .fa-om:before {\n     content: \"\\F679\"\n }\n \n .fa-omega:before {\n     content: \"\\F67A\"\n }\n \n .fa-opencart:before {\n     content: \"\\F23D\"\n }\n \n .fa-openid:before {\n     content: \"\\F19B\"\n }\n \n .fa-opera:before {\n     content: \"\\F26A\"\n }\n \n .fa-optin-monster:before {\n     content: \"\\F23C\"\n }\n \n .fa-ornament:before {\n     content: \"\\F7B8\"\n }\n \n .fa-osi:before {\n     content: \"\\F41A\"\n }\n \n .fa-otter:before {\n     content: \"\\F700\"\n }\n \n .fa-outdent:before {\n     content: \"\\F03B\"\n }\n \n .fa-page4:before {\n     content: \"\\F3D7\"\n }\n \n .fa-pagelines:before {\n     content: \"\\F18C\"\n }\n \n .fa-pager:before {\n     content: \"\\F815\"\n }\n \n .fa-paint-brush:before {\n     content: \"\\F1FC\"\n }\n \n .fa-paint-brush-alt:before {\n     content: \"\\F5A9\"\n }\n \n .fa-paint-roller:before {\n     content: \"\\F5AA\"\n }\n \n .fa-palette:before {\n     content: \"\\F53F\"\n }\n \n .fa-palfed:before {\n     content: \"\\F3D8\"\n }\n \n .fa-pallet:before {\n     content: \"\\F482\"\n }\n \n .fa-pallet-alt:before {\n     content: \"\\F483\"\n }\n \n .fa-paper-plane:before {\n     content: \"\\F1D8\"\n }\n \n .fa-paperclip:before {\n     content: \"\\F0C6\"\n }\n \n .fa-parachute-box:before {\n     content: \"\\F4CD\"\n }\n \n .fa-paragraph:before {\n     content: \"\\F1DD\"\n }\n \n .fa-parking:before {\n     content: \"\\F540\"\n }\n \n .fa-parking-circle:before {\n     content: \"\\F615\"\n }\n \n .fa-parking-circle-slash:before {\n     content: \"\\F616\"\n }\n \n .fa-parking-slash:before {\n     content: \"\\F617\"\n }\n \n .fa-passport:before {\n     content: \"\\F5AB\"\n }\n \n .fa-pastafarianism:before {\n     content: \"\\F67B\"\n }\n \n .fa-paste:before {\n     content: \"\\F0EA\"\n }\n \n .fa-patreon:before {\n     content: \"\\F3D9\"\n }\n \n .fa-pause:before {\n     content: \"\\F04C\"\n }\n \n .fa-pause-circle:before {\n     content: \"\\F28B\"\n }\n \n .fa-paw:before {\n     content: \"\\F1B0\"\n }\n \n .fa-paw-alt:before {\n     content: \"\\F701\"\n }\n \n .fa-paw-claws:before {\n     content: \"\\F702\"\n }\n \n .fa-paypal:before {\n     content: \"\\F1ED\"\n }\n \n .fa-peace:before {\n     content: \"\\F67C\"\n }\n \n .fa-pegasus:before {\n     content: \"\\F703\"\n }\n \n .fa-pen:before {\n     content: \"\\F304\"\n }\n \n .fa-pen-alt:before {\n     content: \"\\F305\"\n }\n \n .fa-pen-fancy:before {\n     content: \"\\F5AC\"\n }\n \n .fa-pen-nib:before {\n     content: \"\\F5AD\"\n }\n \n .fa-pen-square:before {\n     content: \"\\F14B\"\n }\n \n .fa-pencil:before {\n     content: \"\\F040\"\n }\n \n .fa-pencil-alt:before {\n     content: \"\\F303\"\n }\n \n .fa-pencil-paintbrush:before {\n     content: \"\\F618\"\n }\n \n .fa-pencil-ruler:before {\n     content: \"\\F5AE\"\n }\n \n .fa-pennant:before {\n     content: \"\\F456\"\n }\n \n .fa-penny-arcade:before {\n     content: \"\\F704\"\n }\n \n .fa-people-carry:before {\n     content: \"\\F4CE\"\n }\n \n .fa-pepper-hot:before {\n     content: \"\\F816\"\n }\n \n .fa-percent:before {\n     content: \"\\F295\"\n }\n \n .fa-percentage:before {\n     content: \"\\F541\"\n }\n \n .fa-periscope:before {\n     content: \"\\F3DA\"\n }\n \n .fa-person-booth:before {\n     content: \"\\F756\"\n }\n \n .fa-person-carry:before {\n     content: \"\\F4CF\"\n }\n \n .fa-person-dolly:before {\n     content: \"\\F4D0\"\n }\n \n .fa-person-dolly-empty:before {\n     content: \"\\F4D1\"\n }\n \n .fa-person-sign:before {\n     content: \"\\F757\"\n }\n \n .fa-phabricator:before {\n     content: \"\\F3DB\"\n }\n \n .fa-phoenix-framework:before {\n     content: \"\\F3DC\"\n }\n \n .fa-phoenix-squadron:before {\n     content: \"\\F511\"\n }\n \n .fa-phone:before {\n     content: \"\\F095\"\n }\n \n .fa-phone-office:before {\n     content: \"\\F67D\"\n }\n \n .fa-phone-plus:before {\n     content: \"\\F4D2\"\n }\n \n .fa-phone-slash:before {\n     content: \"\\F3DD\"\n }\n \n .fa-phone-square:before {\n     content: \"\\F098\"\n }\n \n .fa-phone-volume:before {\n     content: \"\\F2A0\"\n }\n \n .fa-php:before {\n     content: \"\\F457\"\n }\n \n .fa-pi:before {\n     content: \"\\F67E\"\n }\n \n .fa-pie:before {\n     content: \"\\F705\"\n }\n \n .fa-pied-piper:before {\n     content: \"\\F2AE\"\n }\n \n .fa-pied-piper-alt:before {\n     content: \"\\F1A8\"\n }\n \n .fa-pied-piper-hat:before {\n     content: \"\\F4E5\"\n }\n \n .fa-pied-piper-pp:before {\n     content: \"\\F1A7\"\n }\n \n .fa-pig:before {\n     content: \"\\F706\"\n }\n \n .fa-piggy-bank:before {\n     content: \"\\F4D3\"\n }\n \n .fa-pills:before {\n     content: \"\\F484\"\n }\n \n .fa-pinterest:before {\n     content: \"\\F0D2\"\n }\n \n .fa-pinterest-p:before {\n     content: \"\\F231\"\n }\n \n .fa-pinterest-square:before {\n     content: \"\\F0D3\"\n }\n \n .fa-pizza:before {\n     content: \"\\F817\"\n }\n \n .fa-pizza-slice:before {\n     content: \"\\F818\"\n }\n \n .fa-place-of-worship:before {\n     content: \"\\F67F\"\n }\n \n .fa-plane:before {\n     content: \"\\F072\"\n }\n \n .fa-plane-alt:before {\n     content: \"\\F3DE\"\n }\n \n .fa-plane-arrival:before {\n     content: \"\\F5AF\"\n }\n \n .fa-plane-departure:before {\n     content: \"\\F5B0\"\n }\n \n .fa-play:before {\n     content: \"\\F04B\"\n }\n \n .fa-play-circle:before {\n     content: \"\\F144\"\n }\n \n .fa-playstation:before {\n     content: \"\\F3DF\"\n }\n \n .fa-plug:before {\n     content: \"\\F1E6\"\n }\n \n .fa-plus:before {\n     content: \"\\F067\"\n }\n \n .fa-plus-circle:before {\n     content: \"\\F055\"\n }\n \n .fa-plus-hexagon:before {\n     content: \"\\F300\"\n }\n \n .fa-plus-octagon:before {\n     content: \"\\F301\"\n }\n \n .fa-plus-square:before {\n     content: \"\\F0FE\"\n }\n \n .fa-podcast:before {\n     content: \"\\F2CE\"\n }\n \n .fa-podium:before {\n     content: \"\\F680\"\n }\n \n .fa-podium-star:before {\n     content: \"\\F758\"\n }\n \n .fa-poll:before {\n     content: \"\\F681\"\n }\n \n .fa-poll-h:before {\n     content: \"\\F682\"\n }\n \n .fa-poll-people:before {\n     content: \"\\F759\"\n }\n \n .fa-poo:before {\n     content: \"\\F2FE\"\n }\n \n .fa-poo-storm:before {\n     content: \"\\F75A\"\n }\n \n .fa-poop:before {\n     content: \"\\F619\"\n }\n \n .fa-popcorn:before {\n     content: \"\\F819\"\n }\n \n .fa-portrait:before {\n     content: \"\\F3E0\"\n }\n \n .fa-pound-sign:before {\n     content: \"\\F154\"\n }\n \n .fa-power-off:before {\n     content: \"\\F011\"\n }\n \n .fa-pray:before {\n     content: \"\\F683\"\n }\n \n .fa-praying-hands:before {\n     content: \"\\F684\"\n }\n \n .fa-prescription:before {\n     content: \"\\F5B1\"\n }\n \n .fa-prescription-bottle:before {\n     content: \"\\F485\"\n }\n \n .fa-prescription-bottle-alt:before {\n     content: \"\\F486\"\n }\n \n .fa-presentation:before {\n     content: \"\\F685\"\n }\n \n .fa-print:before {\n     content: \"\\F02F\"\n }\n \n .fa-print-search:before {\n     content: \"\\F81A\"\n }\n \n .fa-print-slash:before {\n     content: \"\\F686\"\n }\n \n .fa-procedures:before {\n     content: \"\\F487\"\n }\n \n .fa-product-hunt:before {\n     content: \"\\F288\"\n }\n \n .fa-project-diagram:before {\n     content: \"\\F542\"\n }\n \n .fa-pumpkin:before {\n     content: \"\\F707\"\n }\n \n .fa-pushed:before {\n     content: \"\\F3E1\"\n }\n \n .fa-puzzle-piece:before {\n     content: \"\\F12E\"\n }\n \n .fa-python:before {\n     content: \"\\F3E2\"\n }\n \n .fa-qq:before {\n     content: \"\\F1D6\"\n }\n \n .fa-qrcode:before {\n     content: \"\\F029\"\n }\n \n .fa-question:before {\n     content: \"\\F128\"\n }\n \n .fa-question-circle:before {\n     content: \"\\F059\"\n }\n \n .fa-question-square:before {\n     content: \"\\F2FD\"\n }\n \n .fa-quidditch:before {\n     content: \"\\F458\"\n }\n \n .fa-quinscape:before {\n     content: \"\\F459\"\n }\n \n .fa-quora:before {\n     content: \"\\F2C4\"\n }\n \n .fa-quote-left:before {\n     content: \"\\F10D\"\n }\n \n .fa-quote-right:before {\n     content: \"\\F10E\"\n }\n \n .fa-quran:before {\n     content: \"\\F687\"\n }\n \n .fa-r-project:before {\n     content: \"\\F4F7\"\n }\n \n .fa-rabbit:before {\n     content: \"\\F708\"\n }\n \n .fa-rabbit-fast:before {\n     content: \"\\F709\"\n }\n \n .fa-racquet:before {\n     content: \"\\F45A\"\n }\n \n .fa-radiation:before {\n     content: \"\\F7B9\"\n }\n \n .fa-radiation-alt:before {\n     content: \"\\F7BA\"\n }\n \n .fa-rainbow:before {\n     content: \"\\F75B\"\n }\n \n .fa-raindrops:before {\n     content: \"\\F75C\"\n }\n \n .fa-ram:before {\n     content: \"\\F70A\"\n }\n \n .fa-ramp-loading:before {\n     content: \"\\F4D4\"\n }\n \n .fa-random:before {\n     content: \"\\F074\"\n }\n \n .fa-raspberry-pi:before {\n     content: \"\\F7BB\"\n }\n \n .fa-ravelry:before {\n     content: \"\\F2D9\"\n }\n \n .fa-react:before {\n     content: \"\\F41B\"\n }\n \n .fa-reacteurope:before {\n     content: \"\\F75D\"\n }\n \n .fa-readme:before {\n     content: \"\\F4D5\"\n }\n \n .fa-rebel:before {\n     content: \"\\F1D0\"\n }\n \n .fa-receipt:before {\n     content: \"\\F543\"\n }\n \n .fa-rectangle-landscape:before {\n     content: \"\\F2FA\"\n }\n \n .fa-rectangle-portrait:before {\n     content: \"\\F2FB\"\n }\n \n .fa-rectangle-wide:before {\n     content: \"\\F2FC\"\n }\n \n .fa-recycle:before {\n     content: \"\\F1B8\"\n }\n \n .fa-red-river:before {\n     content: \"\\F3E3\"\n }\n \n .fa-reddit:before {\n     content: \"\\F1A1\"\n }\n \n .fa-reddit-alien:before {\n     content: \"\\F281\"\n }\n \n .fa-reddit-square:before {\n     content: \"\\F1A2\"\n }\n \n .fa-redhat:before {\n     content: \"\\F7BC\"\n }\n \n .fa-redo:before {\n     content: \"\\F01E\"\n }\n \n .fa-redo-alt:before {\n     content: \"\\F2F9\"\n }\n \n .fa-registered:before {\n     content: \"\\F25D\"\n }\n \n .fa-renren:before {\n     content: \"\\F18B\"\n }\n \n .fa-repeat:before {\n     content: \"\\F363\"\n }\n \n .fa-repeat-1:before {\n     content: \"\\F365\"\n }\n \n .fa-repeat-1-alt:before {\n     content: \"\\F366\"\n }\n \n .fa-repeat-alt:before {\n     content: \"\\F364\"\n }\n \n .fa-reply:before {\n     content: \"\\F3E5\"\n }\n \n .fa-reply-all:before {\n     content: \"\\F122\"\n }\n \n .fa-replyd:before {\n     content: \"\\F3E6\"\n }\n \n .fa-republican:before {\n     content: \"\\F75E\"\n }\n \n .fa-researchgate:before {\n     content: \"\\F4F8\"\n }\n \n .fa-resolving:before {\n     content: \"\\F3E7\"\n }\n \n .fa-restroom:before {\n     content: \"\\F7BD\"\n }\n \n .fa-retweet:before {\n     content: \"\\F079\"\n }\n \n .fa-retweet-alt:before {\n     content: \"\\F361\"\n }\n \n .fa-rev:before {\n     content: \"\\F5B2\"\n }\n \n .fa-ribbon:before {\n     content: \"\\F4D6\"\n }\n \n .fa-ring:before {\n     content: \"\\F70B\"\n }\n \n .fa-rings-wedding:before {\n     content: \"\\F81B\"\n }\n \n .fa-road:before {\n     content: \"\\F018\"\n }\n \n .fa-robot:before {\n     content: \"\\F544\"\n }\n \n .fa-rocket:before {\n     content: \"\\F135\"\n }\n \n .fa-rocketchat:before {\n     content: \"\\F3E8\"\n }\n \n .fa-rockrms:before {\n     content: \"\\F3E9\"\n }\n \n .fa-route:before {\n     content: \"\\F4D7\"\n }\n \n .fa-route-highway:before {\n     content: \"\\F61A\"\n }\n \n .fa-route-interstate:before {\n     content: \"\\F61B\"\n }\n \n .fa-rss:before {\n     content: \"\\F09E\"\n }\n \n .fa-rss-square:before {\n     content: \"\\F143\"\n }\n \n .fa-ruble-sign:before {\n     content: \"\\F158\"\n }\n \n .fa-ruler:before {\n     content: \"\\F545\"\n }\n \n .fa-ruler-combined:before {\n     content: \"\\F546\"\n }\n \n .fa-ruler-horizontal:before {\n     content: \"\\F547\"\n }\n \n .fa-ruler-triangle:before {\n     content: \"\\F61C\"\n }\n \n .fa-ruler-vertical:before {\n     content: \"\\F548\"\n }\n \n .fa-running:before {\n     content: \"\\F70C\"\n }\n \n .fa-rupee-sign:before {\n     content: \"\\F156\"\n }\n \n .fa-rv:before {\n     content: \"\\F7BE\"\n }\n \n .fa-sack:before {\n     content: \"\\F81C\"\n }\n \n .fa-sack-dollar:before {\n     content: \"\\F81D\"\n }\n \n .fa-sad-cry:before {\n     content: \"\\F5B3\"\n }\n \n .fa-sad-tear:before {\n     content: \"\\F5B4\"\n }\n \n .fa-safari:before {\n     content: \"\\F267\"\n }\n \n .fa-salad:before {\n     content: \"\\F81E\"\n }\n \n .fa-salesforce:before {\n     content: \"\\F83B\"\n }\n \n .fa-sandwich:before {\n     content: \"\\F81F\"\n }\n \n .fa-sass:before {\n     content: \"\\F41E\"\n }\n \n .fa-satellite:before {\n     content: \"\\F7BF\"\n }\n \n .fa-satellite-dish:before {\n     content: \"\\F7C0\"\n }\n \n .fa-sausage:before {\n     content: \"\\F820\"\n }\n \n .fa-save:before {\n     content: \"\\F0C7\"\n }\n \n .fa-scalpel:before {\n     content: \"\\F61D\"\n }\n \n .fa-scalpel-path:before {\n     content: \"\\F61E\"\n }\n \n .fa-scanner:before {\n     content: \"\\F488\"\n }\n \n .fa-scanner-keyboard:before {\n     content: \"\\F489\"\n }\n \n .fa-scanner-touchscreen:before {\n     content: \"\\F48A\"\n }\n \n .fa-scarecrow:before {\n     content: \"\\F70D\"\n }\n \n .fa-scarf:before {\n     content: \"\\F7C1\"\n }\n \n .fa-schlix:before {\n     content: \"\\F3EA\"\n }\n \n .fa-school:before {\n     content: \"\\F549\"\n }\n \n .fa-screwdriver:before {\n     content: \"\\F54A\"\n }\n \n .fa-scribd:before {\n     content: \"\\F28A\"\n }\n \n .fa-scroll:before {\n     content: \"\\F70E\"\n }\n \n .fa-scroll-old:before {\n     content: \"\\F70F\"\n }\n \n .fa-scrubber:before {\n     content: \"\\F2F8\"\n }\n \n .fa-scythe:before {\n     content: \"\\F710\"\n }\n \n .fa-sd-card:before {\n     content: \"\\F7C2\"\n }\n \n .fa-search:before {\n     content: \"\\F002\"\n }\n \n .fa-search-dollar:before {\n     content: \"\\F688\"\n }\n \n .fa-search-location:before {\n     content: \"\\F689\"\n }\n \n .fa-search-minus:before {\n     content: \"\\F010\"\n }\n \n .fa-search-plus:before {\n     content: \"\\F00E\"\n }\n \n .fa-searchengin:before {\n     content: \"\\F3EB\"\n }\n \n .fa-seedling:before {\n     content: \"\\F4D8\"\n }\n \n .fa-sellcast:before {\n     content: \"\\F2DA\"\n }\n \n .fa-sellsy:before {\n     content: \"\\F213\"\n }\n \n .fa-server:before {\n     content: \"\\F233\"\n }\n \n .fa-servicestack:before {\n     content: \"\\F3EC\"\n }\n \n .fa-shapes:before {\n     content: \"\\F61F\"\n }\n \n .fa-share:before {\n     content: \"\\F064\"\n }\n \n .fa-share-all:before {\n     content: \"\\F367\"\n }\n \n .fa-share-alt:before {\n     content: \"\\F1E0\"\n }\n \n .fa-share-alt-square:before {\n     content: \"\\F1E1\"\n }\n \n .fa-share-square:before {\n     content: \"\\F14D\"\n }\n \n .fa-sheep:before {\n     content: \"\\F711\"\n }\n \n .fa-shekel-sign:before {\n     content: \"\\F20B\"\n }\n \n .fa-shield:before {\n     content: \"\\F132\"\n }\n \n .fa-shield-alt:before {\n     content: \"\\F3ED\"\n }\n \n .fa-shield-check:before {\n     content: \"\\F2F7\"\n }\n \n .fa-shield-cross:before {\n     content: \"\\F712\"\n }\n \n .fa-ship:before {\n     content: \"\\F21A\"\n }\n \n .fa-shipping-fast:before {\n     content: \"\\F48B\"\n }\n \n .fa-shipping-timed:before {\n     content: \"\\F48C\"\n }\n \n .fa-shirtsinbulk:before {\n     content: \"\\F214\"\n }\n \n .fa-shish-kebab:before {\n     content: \"\\F821\"\n }\n \n .fa-shoe-prints:before {\n     content: \"\\F54B\"\n }\n \n .fa-shopping-bag:before {\n     content: \"\\F290\"\n }\n \n .fa-shopping-basket:before {\n     content: \"\\F291\"\n }\n \n .fa-shopping-cart:before {\n     content: \"\\F07A\"\n }\n \n .fa-shopware:before {\n     content: \"\\F5B5\"\n }\n \n .fa-shovel:before {\n     content: \"\\F713\"\n }\n \n .fa-shovel-snow:before {\n     content: \"\\F7C3\"\n }\n \n .fa-shower:before {\n     content: \"\\F2CC\"\n }\n \n .fa-shredder:before {\n     content: \"\\F68A\"\n }\n \n .fa-shuttle-van:before {\n     content: \"\\F5B6\"\n }\n \n .fa-shuttlecock:before {\n     content: \"\\F45B\"\n }\n \n .fa-sickle:before {\n     content: \"\\F822\"\n }\n \n .fa-sigma:before {\n     content: \"\\F68B\"\n }\n \n .fa-sign:before {\n     content: \"\\F4D9\"\n }\n \n .fa-sign-in:before {\n     content: \"\\F090\"\n }\n \n .fa-sign-in-alt:before {\n     content: \"\\F2F6\"\n }\n \n .fa-sign-language:before {\n     content: \"\\F2A7\"\n }\n \n .fa-sign-out:before {\n     content: \"\\F08B\"\n }\n \n .fa-sign-out-alt:before {\n     content: \"\\F2F5\"\n }\n \n .fa-signal:before {\n     content: \"\\F012\"\n }\n \n .fa-signal-1:before {\n     content: \"\\F68C\"\n }\n \n .fa-signal-2:before {\n     content: \"\\F68D\"\n }\n \n .fa-signal-3:before {\n     content: \"\\F68E\"\n }\n \n .fa-signal-4:before {\n     content: \"\\F68F\"\n }\n \n .fa-signal-alt:before {\n     content: \"\\F690\"\n }\n \n .fa-signal-alt-1:before {\n     content: \"\\F691\"\n }\n \n .fa-signal-alt-2:before {\n     content: \"\\F692\"\n }\n \n .fa-signal-alt-3:before {\n     content: \"\\F693\"\n }\n \n .fa-signal-alt-slash:before {\n     content: \"\\F694\"\n }\n \n .fa-signal-slash:before {\n     content: \"\\F695\"\n }\n \n .fa-signature:before {\n     content: \"\\F5B7\"\n }\n \n .fa-sim-card:before {\n     content: \"\\F7C4\"\n }\n \n .fa-simplybuilt:before {\n     content: \"\\F215\"\n }\n \n .fa-sistrix:before {\n     content: \"\\F3EE\"\n }\n \n .fa-sitemap:before {\n     content: \"\\F0E8\"\n }\n \n .fa-sith:before {\n     content: \"\\F512\"\n }\n \n .fa-skating:before {\n     content: \"\\F7C5\"\n }\n \n .fa-skeleton:before {\n     content: \"\\F620\"\n }\n \n .fa-sketch:before {\n     content: \"\\F7C6\"\n }\n \n .fa-ski-jump:before {\n     content: \"\\F7C7\"\n }\n \n .fa-ski-lift:before {\n     content: \"\\F7C8\"\n }\n \n .fa-skiing:before {\n     content: \"\\F7C9\"\n }\n \n .fa-skiing-nordic:before {\n     content: \"\\F7CA\"\n }\n \n .fa-skull:before {\n     content: \"\\F54C\"\n }\n \n .fa-skull-crossbones:before {\n     content: \"\\F714\"\n }\n \n .fa-skyatlas:before {\n     content: \"\\F216\"\n }\n \n .fa-skype:before {\n     content: \"\\F17E\"\n }\n \n .fa-slack:before {\n     content: \"\\F198\"\n }\n \n .fa-slack-hash:before {\n     content: \"\\F3EF\"\n }\n \n .fa-slash:before {\n     content: \"\\F715\"\n }\n \n .fa-sledding:before {\n     content: \"\\F7CB\"\n }\n \n .fa-sleigh:before {\n     content: \"\\F7CC\"\n }\n \n .fa-sliders-h:before {\n     content: \"\\F1DE\"\n }\n \n .fa-sliders-h-square:before {\n     content: \"\\F3F0\"\n }\n \n .fa-sliders-v:before {\n     content: \"\\F3F1\"\n }\n \n .fa-sliders-v-square:before {\n     content: \"\\F3F2\"\n }\n \n .fa-slideshare:before {\n     content: \"\\F1E7\"\n }\n \n .fa-smile:before {\n     content: \"\\F118\"\n }\n \n .fa-smile-beam:before {\n     content: \"\\F5B8\"\n }\n \n .fa-smile-plus:before {\n     content: \"\\F5B9\"\n }\n \n .fa-smile-wink:before {\n     content: \"\\F4DA\"\n }\n \n .fa-smog:before {\n     content: \"\\F75F\"\n }\n \n .fa-smoke:before {\n     content: \"\\F760\"\n }\n \n .fa-smoking:before {\n     content: \"\\F48D\"\n }\n \n .fa-smoking-ban:before {\n     content: \"\\F54D\"\n }\n \n .fa-sms:before {\n     content: \"\\F7CD\"\n }\n \n .fa-snake:before {\n     content: \"\\F716\"\n }\n \n .fa-snapchat:before {\n     content: \"\\F2AB\"\n }\n \n .fa-snapchat-ghost:before {\n     content: \"\\F2AC\"\n }\n \n .fa-snapchat-square:before {\n     content: \"\\F2AD\"\n }\n \n .fa-snow-blowing:before {\n     content: \"\\F761\"\n }\n \n .fa-snowboarding:before {\n     content: \"\\F7CE\"\n }\n \n .fa-snowflake:before {\n     content: \"\\F2DC\"\n }\n \n .fa-snowflakes:before {\n     content: \"\\F7CF\"\n }\n \n .fa-snowman:before {\n     content: \"\\F7D0\"\n }\n \n .fa-snowmobile:before {\n     content: \"\\F7D1\"\n }\n \n .fa-snowplow:before {\n     content: \"\\F7D2\"\n }\n \n .fa-socks:before {\n     content: \"\\F696\"\n }\n \n .fa-solar-panel:before {\n     content: \"\\F5BA\"\n }\n \n .fa-sort:before {\n     content: \"\\F0DC\"\n }\n \n .fa-sort-alpha-down:before {\n     content: \"\\F15D\"\n }\n \n .fa-sort-alpha-up:before {\n     content: \"\\F15E\"\n }\n \n .fa-sort-amount-down:before {\n     content: \"\\F160\"\n }\n \n .fa-sort-amount-up:before {\n     content: \"\\F161\"\n }\n \n .fa-sort-down:before {\n     content: \"\\F0DD\"\n }\n \n .fa-sort-numeric-down:before {\n     content: \"\\F162\"\n }\n \n .fa-sort-numeric-up:before {\n     content: \"\\F163\"\n }\n \n .fa-sort-up:before {\n     content: \"\\F0DE\"\n }\n \n .fa-soundcloud:before {\n     content: \"\\F1BE\"\n }\n \n .fa-soup:before {\n     content: \"\\F823\"\n }\n \n .fa-sourcetree:before {\n     content: \"\\F7D3\"\n }\n \n .fa-spa:before {\n     content: \"\\F5BB\"\n }\n \n .fa-space-shuttle:before {\n     content: \"\\F197\"\n }\n \n .fa-spade:before {\n     content: \"\\F2F4\"\n }\n \n .fa-speakap:before {\n     content: \"\\F3F3\"\n }\n \n .fa-speaker-deck:before {\n     content: \"\\F83C\"\n }\n \n .fa-spider:before {\n     content: \"\\F717\"\n }\n \n .fa-spider-black-widow:before {\n     content: \"\\F718\"\n }\n \n .fa-spider-web:before {\n     content: \"\\F719\"\n }\n \n .fa-spinner:before {\n     content: \"\\F110\"\n }\n \n .fa-spinner-third:before {\n     content: \"\\F3F4\"\n }\n \n .fa-splotch:before {\n     content: \"\\F5BC\"\n }\n \n .fa-spotify:before {\n     content: \"\\F1BC\"\n }\n \n .fa-spray-can:before {\n     content: \"\\F5BD\"\n }\n \n .fa-square:before {\n     content: \"\\F0C8\"\n }\n \n .fa-square-full:before {\n     content: \"\\F45C\"\n }\n \n .fa-square-root:before {\n     content: \"\\F697\"\n }\n \n .fa-square-root-alt:before {\n     content: \"\\F698\"\n }\n \n .fa-squarespace:before {\n     content: \"\\F5BE\"\n }\n \n .fa-squirrel:before {\n     content: \"\\F71A\"\n }\n \n .fa-stack-exchange:before {\n     content: \"\\F18D\"\n }\n \n .fa-stack-overflow:before {\n     content: \"\\F16C\"\n }\n \n .fa-stackpath:before {\n     content: \"\\F842\"\n }\n \n .fa-staff:before {\n     content: \"\\F71B\"\n }\n \n .fa-stamp:before {\n     content: \"\\F5BF\"\n }\n \n .fa-star:before {\n     content: \"\\F005\"\n }\n \n .fa-star-and-crescent:before {\n     content: \"\\F699\"\n }\n \n .fa-star-christmas:before {\n     content: \"\\F7D4\"\n }\n \n .fa-star-exclamation:before {\n     content: \"\\F2F3\"\n }\n \n .fa-star-half:before {\n     content: \"\\F089\"\n }\n \n .fa-star-half-alt:before {\n     content: \"\\F5C0\"\n }\n \n .fa-star-of-david:before {\n     content: \"\\F69A\"\n }\n \n .fa-star-of-life:before {\n     content: \"\\F621\"\n }\n \n .fa-stars:before {\n     content: \"\\F762\"\n }\n \n .fa-staylinked:before {\n     content: \"\\F3F5\"\n }\n \n .fa-steak:before {\n     content: \"\\F824\"\n }\n \n .fa-steam:before {\n     content: \"\\F1B6\"\n }\n \n .fa-steam-square:before {\n     content: \"\\F1B7\"\n }\n \n .fa-steam-symbol:before {\n     content: \"\\F3F6\"\n }\n \n .fa-steering-wheel:before {\n     content: \"\\F622\"\n }\n \n .fa-step-backward:before {\n     content: \"\\F048\"\n }\n \n .fa-step-forward:before {\n     content: \"\\F051\"\n }\n \n .fa-stethoscope:before {\n     content: \"\\F0F1\"\n }\n \n .fa-sticker-mule:before {\n     content: \"\\F3F7\"\n }\n \n .fa-sticky-note:before {\n     content: \"\\F249\"\n }\n \n .fa-stocking:before {\n     content: \"\\F7D5\"\n }\n \n .fa-stomach:before {\n     content: \"\\F623\"\n }\n \n .fa-stop:before {\n     content: \"\\F04D\"\n }\n \n .fa-stop-circle:before {\n     content: \"\\F28D\"\n }\n \n .fa-stopwatch:before {\n     content: \"\\F2F2\"\n }\n \n .fa-store:before {\n     content: \"\\F54E\"\n }\n \n .fa-store-alt:before {\n     content: \"\\F54F\"\n }\n \n .fa-strava:before {\n     content: \"\\F428\"\n }\n \n .fa-stream:before {\n     content: \"\\F550\"\n }\n \n .fa-street-view:before {\n     content: \"\\F21D\"\n }\n \n .fa-stretcher:before {\n     content: \"\\F825\"\n }\n \n .fa-strikethrough:before {\n     content: \"\\F0CC\"\n }\n \n .fa-stripe:before {\n     content: \"\\F429\"\n }\n \n .fa-stripe-s:before {\n     content: \"\\F42A\"\n }\n \n .fa-stroopwafel:before {\n     content: \"\\F551\"\n }\n \n .fa-studiovinari:before {\n     content: \"\\F3F8\"\n }\n \n .fa-stumbleupon:before {\n     content: \"\\F1A4\"\n }\n \n .fa-stumbleupon-circle:before {\n     content: \"\\F1A3\"\n }\n \n .fa-subscript:before {\n     content: \"\\F12C\"\n }\n \n .fa-subway:before {\n     content: \"\\F239\"\n }\n \n .fa-suitcase:before {\n     content: \"\\F0F2\"\n }\n \n .fa-suitcase-rolling:before {\n     content: \"\\F5C1\"\n }\n \n .fa-sun:before {\n     content: \"\\F185\"\n }\n \n .fa-sun-cloud:before {\n     content: \"\\F763\"\n }\n \n .fa-sun-dust:before {\n     content: \"\\F764\"\n }\n \n .fa-sun-haze:before {\n     content: \"\\F765\"\n }\n \n .fa-sunrise:before {\n     content: \"\\F766\"\n }\n \n .fa-sunset:before {\n     content: \"\\F767\"\n }\n \n .fa-superpowers:before {\n     content: \"\\F2DD\"\n }\n \n .fa-superscript:before {\n     content: \"\\F12B\"\n }\n \n .fa-supple:before {\n     content: \"\\F3F9\"\n }\n \n .fa-surprise:before {\n     content: \"\\F5C2\"\n }\n \n .fa-suse:before {\n     content: \"\\F7D6\"\n }\n \n .fa-swatchbook:before {\n     content: \"\\F5C3\"\n }\n \n .fa-swimmer:before {\n     content: \"\\F5C4\"\n }\n \n .fa-swimming-pool:before {\n     content: \"\\F5C5\"\n }\n \n .fa-sword:before {\n     content: \"\\F71C\"\n }\n \n .fa-swords:before {\n     content: \"\\F71D\"\n }\n \n .fa-symfony:before {\n     content: \"\\F83D\"\n }\n \n .fa-synagogue:before {\n     content: \"\\F69B\"\n }\n \n .fa-sync:before {\n     content: \"\\F021\"\n }\n \n .fa-sync-alt:before {\n     content: \"\\F2F1\"\n }\n \n .fa-syringe:before {\n     content: \"\\F48E\"\n }\n \n .fa-table:before {\n     content: \"\\F0CE\"\n }\n \n .fa-table-tennis:before {\n     content: \"\\F45D\"\n }\n \n .fa-tablet:before {\n     content: \"\\F10A\"\n }\n \n .fa-tablet-alt:before {\n     content: \"\\F3FA\"\n }\n \n .fa-tablet-android:before {\n     content: \"\\F3FB\"\n }\n \n .fa-tablet-android-alt:before {\n     content: \"\\F3FC\"\n }\n \n .fa-tablet-rugged:before {\n     content: \"\\F48F\"\n }\n \n .fa-tablets:before {\n     content: \"\\F490\"\n }\n \n .fa-tachometer:before {\n     content: \"\\F0E4\"\n }\n \n .fa-tachometer-alt:before {\n     content: \"\\F3FD\"\n }\n \n .fa-tachometer-alt-average:before {\n     content: \"\\F624\"\n }\n \n .fa-tachometer-alt-fast:before {\n     content: \"\\F625\"\n }\n \n .fa-tachometer-alt-fastest:before {\n     content: \"\\F626\"\n }\n \n .fa-tachometer-alt-slow:before {\n     content: \"\\F627\"\n }\n \n .fa-tachometer-alt-slowest:before {\n     content: \"\\F628\"\n }\n \n .fa-tachometer-average:before {\n     content: \"\\F629\"\n }\n \n .fa-tachometer-fast:before {\n     content: \"\\F62A\"\n }\n \n .fa-tachometer-fastest:before {\n     content: \"\\F62B\"\n }\n \n .fa-tachometer-slow:before {\n     content: \"\\F62C\"\n }\n \n .fa-tachometer-slowest:before {\n     content: \"\\F62D\"\n }\n \n .fa-taco:before {\n     content: \"\\F826\"\n }\n \n .fa-tag:before {\n     content: \"\\F02B\"\n }\n \n .fa-tags:before {\n     content: \"\\F02C\"\n }\n \n .fa-tally:before {\n     content: \"\\F69C\"\n }\n \n .fa-tanakh:before {\n     content: \"\\F827\"\n }\n \n .fa-tape:before {\n     content: \"\\F4DB\"\n }\n \n .fa-tasks:before {\n     content: \"\\F0AE\"\n }\n \n .fa-tasks-alt:before {\n     content: \"\\F828\"\n }\n \n .fa-taxi:before {\n     content: \"\\F1BA\"\n }\n \n .fa-teamspeak:before {\n     content: \"\\F4F9\"\n }\n \n .fa-teeth:before {\n     content: \"\\F62E\"\n }\n \n .fa-teeth-open:before {\n     content: \"\\F62F\"\n }\n \n .fa-telegram:before {\n     content: \"\\F2C6\"\n }\n \n .fa-telegram-plane:before {\n     content: \"\\F3FE\"\n }\n \n .fa-temperature-frigid:before {\n     content: \"\\F768\"\n }\n \n .fa-temperature-high:before {\n     content: \"\\F769\"\n }\n \n .fa-temperature-hot:before {\n     content: \"\\F76A\"\n }\n \n .fa-temperature-low:before {\n     content: \"\\F76B\"\n }\n \n .fa-tencent-weibo:before {\n     content: \"\\F1D5\"\n }\n \n .fa-tenge:before {\n     content: \"\\F7D7\"\n }\n \n .fa-tennis-ball:before {\n     content: \"\\F45E\"\n }\n \n .fa-terminal:before {\n     content: \"\\F120\"\n }\n \n .fa-text-height:before {\n     content: \"\\F034\"\n }\n \n .fa-text-width:before {\n     content: \"\\F035\"\n }\n \n .fa-th:before {\n     content: \"\\F00A\"\n }\n \n .fa-th-large:before {\n     content: \"\\F009\"\n }\n \n .fa-th-list:before {\n     content: \"\\F00B\"\n }\n \n .fa-the-red-yeti:before {\n     content: \"\\F69D\"\n }\n \n .fa-theater-masks:before {\n     content: \"\\F630\"\n }\n \n .fa-themeco:before {\n     content: \"\\F5C6\"\n }\n \n .fa-themeisle:before {\n     content: \"\\F2B2\"\n }\n \n .fa-thermometer:before {\n     content: \"\\F491\"\n }\n \n .fa-thermometer-empty:before {\n     content: \"\\F2CB\"\n }\n \n .fa-thermometer-full:before {\n     content: \"\\F2C7\"\n }\n \n .fa-thermometer-half:before {\n     content: \"\\F2C9\"\n }\n \n .fa-thermometer-quarter:before {\n     content: \"\\F2CA\"\n }\n \n .fa-thermometer-three-quarters:before {\n     content: \"\\F2C8\"\n }\n \n .fa-theta:before {\n     content: \"\\F69E\"\n }\n \n .fa-think-peaks:before {\n     content: \"\\F731\"\n }\n \n .fa-thumbs-down:before {\n     content: \"\\F165\"\n }\n \n .fa-thumbs-up:before {\n     content: \"\\F164\"\n }\n \n .fa-thumbtack:before {\n     content: \"\\F08D\"\n }\n \n .fa-thunderstorm:before {\n     content: \"\\F76C\"\n }\n \n .fa-thunderstorm-moon:before {\n     content: \"\\F76D\"\n }\n \n .fa-thunderstorm-sun:before {\n     content: \"\\F76E\"\n }\n \n .fa-ticket:before {\n     content: \"\\F145\"\n }\n \n .fa-ticket-alt:before {\n     content: \"\\F3FF\"\n }\n \n .fa-tilde:before {\n     content: \"\\F69F\"\n }\n \n .fa-times:before {\n     content: \"\\F00D\"\n }\n \n .fa-times-circle:before {\n     content: \"\\F057\"\n }\n \n .fa-times-hexagon:before {\n     content: \"\\F2EE\"\n }\n \n .fa-times-octagon:before {\n     content: \"\\F2F0\"\n }\n \n .fa-times-square:before {\n     content: \"\\F2D3\"\n }\n \n .fa-tint:before {\n     content: \"\\F043\"\n }\n \n .fa-tint-slash:before {\n     content: \"\\F5C7\"\n }\n \n .fa-tire:before {\n     content: \"\\F631\"\n }\n \n .fa-tire-flat:before {\n     content: \"\\F632\"\n }\n \n .fa-tire-pressure-warning:before {\n     content: \"\\F633\"\n }\n \n .fa-tire-rugged:before {\n     content: \"\\F634\"\n }\n \n .fa-tired:before {\n     content: \"\\F5C8\"\n }\n \n .fa-toggle-off:before {\n     content: \"\\F204\"\n }\n \n .fa-toggle-on:before {\n     content: \"\\F205\"\n }\n \n .fa-toilet:before {\n     content: \"\\F7D8\"\n }\n \n .fa-toilet-paper:before {\n     content: \"\\F71E\"\n }\n \n .fa-toilet-paper-alt:before {\n     content: \"\\F71F\"\n }\n \n .fa-tombstone:before {\n     content: \"\\F720\"\n }\n \n .fa-tombstone-alt:before {\n     content: \"\\F721\"\n }\n \n .fa-toolbox:before {\n     content: \"\\F552\"\n }\n \n .fa-tools:before {\n     content: \"\\F7D9\"\n }\n \n .fa-tooth:before {\n     content: \"\\F5C9\"\n }\n \n .fa-toothbrush:before {\n     content: \"\\F635\"\n }\n \n .fa-torah:before {\n     content: \"\\F6A0\"\n }\n \n .fa-torii-gate:before {\n     content: \"\\F6A1\"\n }\n \n .fa-tornado:before {\n     content: \"\\F76F\"\n }\n \n .fa-tractor:before {\n     content: \"\\F722\"\n }\n \n .fa-trade-federation:before {\n     content: \"\\F513\"\n }\n \n .fa-trademark:before {\n     content: \"\\F25C\"\n }\n \n .fa-traffic-cone:before {\n     content: \"\\F636\"\n }\n \n .fa-traffic-light:before {\n     content: \"\\F637\"\n }\n \n .fa-traffic-light-go:before {\n     content: \"\\F638\"\n }\n \n .fa-traffic-light-slow:before {\n     content: \"\\F639\"\n }\n \n .fa-traffic-light-stop:before {\n     content: \"\\F63A\"\n }\n \n .fa-train:before {\n     content: \"\\F238\"\n }\n \n .fa-tram:before {\n     content: \"\\F7DA\"\n }\n \n .fa-transgender:before {\n     content: \"\\F224\"\n }\n \n .fa-transgender-alt:before {\n     content: \"\\F225\"\n }\n \n .fa-trash:before {\n     content: \"\\F1F8\"\n }\n \n .fa-trash-alt:before {\n     content: \"\\F2ED\"\n }\n \n .fa-trash-restore:before {\n     content: \"\\F829\"\n }\n \n .fa-trash-restore-alt:before {\n     content: \"\\F82A\"\n }\n \n .fa-treasure-chest:before {\n     content: \"\\F723\"\n }\n \n .fa-tree:before {\n     content: \"\\F1BB\"\n }\n \n .fa-tree-alt:before {\n     content: \"\\F400\"\n }\n \n .fa-tree-christmas:before {\n     content: \"\\F7DB\"\n }\n \n .fa-tree-decorated:before {\n     content: \"\\F7DC\"\n }\n \n .fa-tree-large:before {\n     content: \"\\F7DD\"\n }\n \n .fa-tree-palm:before {\n     content: \"\\F82B\"\n }\n \n .fa-trees:before {\n     content: \"\\F724\"\n }\n \n .fa-trello:before {\n     content: \"\\F181\"\n }\n \n .fa-triangle:before {\n     content: \"\\F2EC\"\n }\n \n .fa-tripadvisor:before {\n     content: \"\\F262\"\n }\n \n .fa-trophy:before {\n     content: \"\\F091\"\n }\n \n .fa-trophy-alt:before {\n     content: \"\\F2EB\"\n }\n \n .fa-truck:before {\n     content: \"\\F0D1\"\n }\n \n .fa-truck-container:before {\n     content: \"\\F4DC\"\n }\n \n .fa-truck-couch:before {\n     content: \"\\F4DD\"\n }\n \n .fa-truck-loading:before {\n     content: \"\\F4DE\"\n }\n \n .fa-truck-monster:before {\n     content: \"\\F63B\"\n }\n \n .fa-truck-moving:before {\n     content: \"\\F4DF\"\n }\n \n .fa-truck-pickup:before {\n     content: \"\\F63C\"\n }\n \n .fa-truck-plow:before {\n     content: \"\\F7DE\"\n }\n \n .fa-truck-ramp:before {\n     content: \"\\F4E0\"\n }\n \n .fa-tshirt:before {\n     content: \"\\F553\"\n }\n \n .fa-tty:before {\n     content: \"\\F1E4\"\n }\n \n .fa-tumblr:before {\n     content: \"\\F173\"\n }\n \n .fa-tumblr-square:before {\n     content: \"\\F174\"\n }\n \n .fa-turkey:before {\n     content: \"\\F725\"\n }\n \n .fa-turtle:before {\n     content: \"\\F726\"\n }\n \n .fa-tv:before {\n     content: \"\\F26C\"\n }\n \n .fa-tv-retro:before {\n     content: \"\\F401\"\n }\n \n .fa-twitch:before {\n     content: \"\\F1E8\"\n }\n \n .fa-twitter:before {\n     content: \"\\F099\"\n }\n \n .fa-twitter-square:before {\n     content: \"\\F081\"\n }\n \n .fa-typo3:before {\n     content: \"\\F42B\"\n }\n \n .fa-uber:before {\n     content: \"\\F402\"\n }\n \n .fa-ubuntu:before {\n     content: \"\\F7DF\"\n }\n \n .fa-uikit:before {\n     content: \"\\F403\"\n }\n \n .fa-umbrella:before {\n     content: \"\\F0E9\"\n }\n \n .fa-umbrella-beach:before {\n     content: \"\\F5CA\"\n }\n \n .fa-underline:before {\n     content: \"\\F0CD\"\n }\n \n .fa-undo:before {\n     content: \"\\F0E2\"\n }\n \n .fa-undo-alt:before {\n     content: \"\\F2EA\"\n }\n \n .fa-unicorn:before {\n     content: \"\\F727\"\n }\n \n .fa-union:before {\n     content: \"\\F6A2\"\n }\n \n .fa-uniregistry:before {\n     content: \"\\F404\"\n }\n \n .fa-universal-access:before {\n     content: \"\\F29A\"\n }\n \n .fa-university:before {\n     content: \"\\F19C\"\n }\n \n .fa-unlink:before {\n     content: \"\\F127\"\n }\n \n .fa-unlock:before {\n     content: \"\\F09C\"\n }\n \n .fa-unlock-alt:before {\n     content: \"\\F13E\"\n }\n \n .fa-untappd:before {\n     content: \"\\F405\"\n }\n \n .fa-upload:before {\n     content: \"\\F093\"\n }\n \n .fa-ups:before {\n     content: \"\\F7E0\"\n }\n \n .fa-usb:before {\n     content: \"\\F287\"\n }\n \n .fa-usd-circle:before {\n     content: \"\\F2E8\"\n }\n \n .fa-usd-square:before {\n     content: \"\\F2E9\"\n }\n \n .fa-user:before {\n     content: \"\\F007\"\n }\n \n .fa-user-alt:before {\n     content: \"\\F406\"\n }\n \n .fa-user-alt-slash:before {\n     content: \"\\F4FA\"\n }\n \n .fa-user-astronaut:before {\n     content: \"\\F4FB\"\n }\n \n .fa-user-chart:before {\n     content: \"\\F6A3\"\n }\n \n .fa-user-check:before {\n     content: \"\\F4FC\"\n }\n \n .fa-user-circle:before {\n     content: \"\\F2BD\"\n }\n \n .fa-user-clock:before {\n     content: \"\\F4FD\"\n }\n \n .fa-user-cog:before {\n     content: \"\\F4FE\"\n }\n \n .fa-user-crown:before {\n     content: \"\\F6A4\"\n }\n \n .fa-user-edit:before {\n     content: \"\\F4FF\"\n }\n \n .fa-user-friends:before {\n     content: \"\\F500\"\n }\n \n .fa-user-graduate:before {\n     content: \"\\F501\"\n }\n \n .fa-user-hard-hat:before {\n     content: \"\\F82C\"\n }\n \n .fa-user-headset:before {\n     content: \"\\F82D\"\n }\n \n .fa-user-injured:before {\n     content: \"\\F728\"\n }\n \n .fa-user-lock:before {\n     content: \"\\F502\"\n }\n \n .fa-user-md:before {\n     content: \"\\F0F0\"\n }\n \n .fa-user-md-chat:before {\n     content: \"\\F82E\"\n }\n \n .fa-user-minus:before {\n     content: \"\\F503\"\n }\n \n .fa-user-ninja:before {\n     content: \"\\F504\"\n }\n \n .fa-user-nurse:before {\n     content: \"\\F82F\"\n }\n \n .fa-user-plus:before {\n     content: \"\\F234\"\n }\n \n .fa-user-secret:before {\n     content: \"\\F21B\"\n }\n \n .fa-user-shield:before {\n     content: \"\\F505\"\n }\n \n .fa-user-slash:before {\n     content: \"\\F506\"\n }\n \n .fa-user-tag:before {\n     content: \"\\F507\"\n }\n \n .fa-user-tie:before {\n     content: \"\\F508\"\n }\n \n .fa-user-times:before {\n     content: \"\\F235\"\n }\n \n .fa-users:before {\n     content: \"\\F0C0\"\n }\n \n .fa-users-class:before {\n     content: \"\\F63D\"\n }\n \n .fa-users-cog:before {\n     content: \"\\F509\"\n }\n \n .fa-users-crown:before {\n     content: \"\\F6A5\"\n }\n \n .fa-users-medical:before {\n     content: \"\\F830\"\n }\n \n .fa-usps:before {\n     content: \"\\F7E1\"\n }\n \n .fa-ussunnah:before {\n     content: \"\\F407\"\n }\n \n .fa-utensil-fork:before {\n     content: \"\\F2E3\"\n }\n \n .fa-utensil-knife:before {\n     content: \"\\F2E4\"\n }\n \n .fa-utensil-spoon:before {\n     content: \"\\F2E5\"\n }\n \n .fa-utensils:before {\n     content: \"\\F2E7\"\n }\n \n .fa-utensils-alt:before {\n     content: \"\\F2E6\"\n }\n \n .fa-vaadin:before {\n     content: \"\\F408\"\n }\n \n .fa-value-absolute:before {\n     content: \"\\F6A6\"\n }\n \n .fa-vector-square:before {\n     content: \"\\F5CB\"\n }\n \n .fa-venus:before {\n     content: \"\\F221\"\n }\n \n .fa-venus-double:before {\n     content: \"\\F226\"\n }\n \n .fa-venus-mars:before {\n     content: \"\\F228\"\n }\n \n .fa-viacoin:before {\n     content: \"\\F237\"\n }\n \n .fa-viadeo:before {\n     content: \"\\F2A9\"\n }\n \n .fa-viadeo-square:before {\n     content: \"\\F2AA\"\n }\n \n .fa-vial:before {\n     content: \"\\F492\"\n }\n \n .fa-vials:before {\n     content: \"\\F493\"\n }\n \n .fa-viber:before {\n     content: \"\\F409\"\n }\n \n .fa-video:before {\n     content: \"\\F03D\"\n }\n \n .fa-video-plus:before {\n     content: \"\\F4E1\"\n }\n \n .fa-video-slash:before {\n     content: \"\\F4E2\"\n }\n \n .fa-vihara:before {\n     content: \"\\F6A7\"\n }\n \n .fa-vimeo:before {\n     content: \"\\F40A\"\n }\n \n .fa-vimeo-square:before {\n     content: \"\\F194\"\n }\n \n .fa-vimeo-v:before {\n     content: \"\\F27D\"\n }\n \n .fa-vine:before {\n     content: \"\\F1CA\"\n }\n \n .fa-vk:before {\n     content: \"\\F189\"\n }\n \n .fa-vnv:before {\n     content: \"\\F40B\"\n }\n \n .fa-volcano:before {\n     content: \"\\F770\"\n }\n \n .fa-volleyball-ball:before {\n     content: \"\\F45F\"\n }\n \n .fa-volume:before {\n     content: \"\\F6A8\"\n }\n \n .fa-volume-down:before {\n     content: \"\\F027\"\n }\n \n .fa-volume-mute:before {\n     content: \"\\F6A9\"\n }\n \n .fa-volume-off:before {\n     content: \"\\F026\"\n }\n \n .fa-volume-slash:before {\n     content: \"\\F2E2\"\n }\n \n .fa-volume-up:before {\n     content: \"\\F028\"\n }\n \n .fa-vote-nay:before {\n     content: \"\\F771\"\n }\n \n .fa-vote-yea:before {\n     content: \"\\F772\"\n }\n \n .fa-vr-cardboard:before {\n     content: \"\\F729\"\n }\n \n .fa-vuejs:before {\n     content: \"\\F41F\"\n }\n \n .fa-walker:before {\n     content: \"\\F831\"\n }\n \n .fa-walking:before {\n     content: \"\\F554\"\n }\n \n .fa-wallet:before {\n     content: \"\\F555\"\n }\n \n .fa-wand:before {\n     content: \"\\F72A\"\n }\n \n .fa-wand-magic:before {\n     content: \"\\F72B\"\n }\n \n .fa-warehouse:before {\n     content: \"\\F494\"\n }\n \n .fa-warehouse-alt:before {\n     content: \"\\F495\"\n }\n \n .fa-watch:before {\n     content: \"\\F2E1\"\n }\n \n .fa-watch-fitness:before {\n     content: \"\\F63E\"\n }\n \n .fa-water:before {\n     content: \"\\F773\"\n }\n \n .fa-water-lower:before {\n     content: \"\\F774\"\n }\n \n .fa-water-rise:before {\n     content: \"\\F775\"\n }\n \n .fa-wave-square:before {\n     content: \"\\F83E\"\n }\n \n .fa-waze:before {\n     content: \"\\F83F\"\n }\n \n .fa-webcam:before {\n     content: \"\\F832\"\n }\n \n .fa-webcam-slash:before {\n     content: \"\\F833\"\n }\n \n .fa-weebly:before {\n     content: \"\\F5CC\"\n }\n \n .fa-weibo:before {\n     content: \"\\F18A\"\n }\n \n .fa-weight:before {\n     content: \"\\F496\"\n }\n \n .fa-weight-hanging:before {\n     content: \"\\F5CD\"\n }\n \n .fa-weixin:before {\n     content: \"\\F1D7\"\n }\n \n .fa-whale:before {\n     content: \"\\F72C\"\n }\n \n .fa-whatsapp:before {\n     content: \"\\F232\"\n }\n \n .fa-whatsapp-square:before {\n     content: \"\\F40C\"\n }\n \n .fa-wheat:before {\n     content: \"\\F72D\"\n }\n \n .fa-wheelchair:before {\n     content: \"\\F193\"\n }\n \n .fa-whistle:before {\n     content: \"\\F460\"\n }\n \n .fa-whmcs:before {\n     content: \"\\F40D\"\n }\n \n .fa-wifi:before {\n     content: \"\\F1EB\"\n }\n \n .fa-wifi-1:before {\n     content: \"\\F6AA\"\n }\n \n .fa-wifi-2:before {\n     content: \"\\F6AB\"\n }\n \n .fa-wifi-slash:before {\n     content: \"\\F6AC\"\n }\n \n .fa-wikipedia-w:before {\n     content: \"\\F266\"\n }\n \n .fa-wind:before {\n     content: \"\\F72E\"\n }\n \n .fa-wind-warning:before {\n     content: \"\\F776\"\n }\n \n .fa-window:before {\n     content: \"\\F40E\"\n }\n \n .fa-window-alt:before {\n     content: \"\\F40F\"\n }\n \n .fa-window-close:before {\n     content: \"\\F410\"\n }\n \n .fa-window-maximize:before {\n     content: \"\\F2D0\"\n }\n \n .fa-window-minimize:before {\n     content: \"\\F2D1\"\n }\n \n .fa-window-restore:before {\n     content: \"\\F2D2\"\n }\n \n .fa-windows:before {\n     content: \"\\F17A\"\n }\n \n .fa-windsock:before {\n     content: \"\\F777\"\n }\n \n .fa-wine-bottle:before {\n     content: \"\\F72F\"\n }\n \n .fa-wine-glass:before {\n     content: \"\\F4E3\"\n }\n \n .fa-wine-glass-alt:before {\n     content: \"\\F5CE\"\n }\n \n .fa-wix:before {\n     content: \"\\F5CF\"\n }\n \n .fa-wizards-of-the-coast:before {\n     content: \"\\F730\"\n }\n \n .fa-wolf-pack-battalion:before {\n     content: \"\\F514\"\n }\n \n .fa-won-sign:before {\n     content: \"\\F159\"\n }\n \n .fa-wordpress:before {\n     content: \"\\F19A\"\n }\n \n .fa-wordpress-simple:before {\n     content: \"\\F411\"\n }\n \n .fa-wpbeginner:before {\n     content: \"\\F297\"\n }\n \n .fa-wpexplorer:before {\n     content: \"\\F2DE\"\n }\n \n .fa-wpforms:before {\n     content: \"\\F298\"\n }\n \n .fa-wpressr:before {\n     content: \"\\F3E4\"\n }\n \n .fa-wreath:before {\n     content: \"\\F7E2\"\n }\n \n .fa-wrench:before {\n     content: \"\\F0AD\"\n }\n \n .fa-x-ray:before {\n     content: \"\\F497\"\n }\n \n .fa-xbox:before {\n     content: \"\\F412\"\n }\n \n .fa-xing:before {\n     content: \"\\F168\"\n }\n \n .fa-xing-square:before {\n     content: \"\\F169\"\n }\n \n .fa-y-combinator:before {\n     content: \"\\F23B\"\n }\n \n .fa-yahoo:before {\n     content: \"\\F19E\"\n }\n \n .fa-yammer:before {\n     content: \"\\F840\"\n }\n \n .fa-yandex:before {\n     content: \"\\F413\"\n }\n \n .fa-yandex-international:before {\n     content: \"\\F414\"\n }\n \n .fa-yarn:before {\n     content: \"\\F7E3\"\n }\n \n .fa-yelp:before {\n     content: \"\\F1E9\"\n }\n \n .fa-yen-sign:before {\n     content: \"\\F157\"\n }\n \n .fa-yin-yang:before {\n     content: \"\\F6AD\"\n }\n \n .fa-yoast:before {\n     content: \"\\F2B1\"\n }\n \n .fa-youtube:before {\n     content: \"\\F167\"\n }\n \n .fa-youtube-square:before {\n     content: \"\\F431\"\n }\n \n .fa-zhihu:before {\n     content: \"\\F63F\"\n }\n \n .sr-only {\n     border: 0;\n     clip: rect(0, 0, 0, 0);\n     height: 1px;\n     margin: -1px;\n     overflow: hidden;\n     padding: 0;\n     position: absolute;\n     width: 1px\n }\n \n .sr-only-focusable:active,\n .sr-only-focusable:focus {\n     clip: auto;\n     height: auto;\n     margin: 0;\n     overflow: visible;\n     position: static;\n     width: auto\n }\n \n @font-face {\n     font-family: \"Font Awesome 5 Brands\";\n     font-style: normal;\n     font-weight: normal;\n     font-display: auto;\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.eot */ "./resources/js/font-awesome/webfonts/fa-brands-400.eot")) + ");\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.eot */ "./resources/js/font-awesome/webfonts/fa-brands-400.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.woff2 */ "./resources/js/font-awesome/webfonts/fa-brands-400.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.woff */ "./resources/js/font-awesome/webfonts/fa-brands-400.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.ttf */ "./resources/js/font-awesome/webfonts/fa-brands-400.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.svg */ "./resources/js/font-awesome/webfonts/fa-brands-400.svg")) + "#fontawesome) format(\"svg\")\n }\n \n .fab {\n     font-family: \"Font Awesome 5 Brands\"\n }\n \n @font-face {\n     font-family: \"Font Awesome 5 Pro\";\n     font-style: normal;\n     font-weight: 300;\n     font-display: auto;\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-light-300.eot */ "./resources/js/font-awesome/webfonts/fa-light-300.eot")) + ");\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-light-300.eot */ "./resources/js/font-awesome/webfonts/fa-light-300.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-light-300.woff2 */ "./resources/js/font-awesome/webfonts/fa-light-300.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-light-300.woff */ "./resources/js/font-awesome/webfonts/fa-light-300.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-light-300.ttf */ "./resources/js/font-awesome/webfonts/fa-light-300.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-light-300.svg */ "./resources/js/font-awesome/webfonts/fa-light-300.svg")) + "#fontawesome) format(\"svg\")\n }\n \n .fal {\n     font-weight: 300\n }\n \n @font-face {\n     font-family: \"Font Awesome 5 Pro\";\n     font-style: normal;\n     font-weight: 400;\n     font-display: auto;\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.eot */ "./resources/js/font-awesome/webfonts/fa-regular-400.eot")) + ");\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.eot */ "./resources/js/font-awesome/webfonts/fa-regular-400.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.woff2 */ "./resources/js/font-awesome/webfonts/fa-regular-400.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.woff */ "./resources/js/font-awesome/webfonts/fa-regular-400.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.ttf */ "./resources/js/font-awesome/webfonts/fa-regular-400.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.svg */ "./resources/js/font-awesome/webfonts/fa-regular-400.svg")) + "#fontawesome) format(\"svg\")\n }\n \n .fal,\n .far {\n     font-family: \"Font Awesome 5 Pro\"\n }\n \n .far {\n     font-weight: 400\n }\n \n @font-face {\n     font-family: \"Font Awesome 5 Pro\";\n     font-style: normal;\n     font-weight: 900;\n     font-display: auto;\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.eot */ "./resources/js/font-awesome/webfonts/fa-solid-900.eot")) + ");\n     src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.eot */ "./resources/js/font-awesome/webfonts/fa-solid-900.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.woff2 */ "./resources/js/font-awesome/webfonts/fa-solid-900.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.woff */ "./resources/js/font-awesome/webfonts/fa-solid-900.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.ttf */ "./resources/js/font-awesome/webfonts/fa-solid-900.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.svg */ "./resources/js/font-awesome/webfonts/fa-solid-900.svg")) + "#fontawesome) format(\"svg\")\n }\n \n .fa,\n .fas {\n     font-family: \"Font Awesome 5 Pro\";\n     font-weight: 900\n }", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/url/escape.js":
+/*!***************************************************!*\
+  !*** ./node_modules/css-loader/lib/url/escape.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
 
 
 /***/ }),
@@ -36911,6 +37321,515 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/timers-browserify/main.js":
 /*!************************************************!*\
   !*** ./node_modules/timers-browserify/main.js ***!
@@ -37005,14 +37924,276 @@ var render = function() {
     "div",
     { staticClass: "app" },
     [
-      _c("h1", [_vm._v("App Component Being Rendered Here")]),
+      _c("div", { staticClass: "head-wrapper" }, [
+        _c(
+          "nav",
+          { staticClass: "navbar navbar-expand-lg" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "navbar-brand", attrs: { to: "/" } },
+              [
+                _c("img", {
+                  attrs: {
+                    src: __webpack_require__(/*! @/images/svg/HoodChampions Logo.svg */ "./resources/js/images/svg/HoodChampions Logo.svg"),
+                    alt: "logo"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse navbar-collapse",
+                attrs: { id: "collapsibleNavId" }
+              },
+              [
+                _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/Login" } },
+                        [_vm._v("Login")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/" } },
+                        [_vm._v("Explore")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/about" } },
+                        [_vm._v("Start Activity")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _vm._m(6)
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c("router-view")
+      _c("router-view"),
+      _vm._v(" "),
+      _vm._m(7)
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler d-lg-none",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#collapsibleNavId",
+          "aria-controls": "collapsibleNavId",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("i", { staticClass: "fal fa-bars" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Home "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("About")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Hood")
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "sub-drop" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "team.html" } }, [_vm._v("TEAMS")])
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ang mo kio")])]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Other Hoods")])]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Hood Services")])
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Lelong!")])]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Lost and found!")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Group")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "friends.html" } }, [
+        _vm._v("Kakis")
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "sub-drop" }, [
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("MY KAKIS")])]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("KAKIS REQUESTS")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item profile-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("div", { staticClass: "profile-circle" }, [
+          _c("img", {
+            attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "profile" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "foot-wrapper" }, [
+      _c("section", { staticClass: "powered-bar" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "bar" }, [
+                _c("p", [_vm._v("Powered by")]),
+                _vm._v(" "),
+                _c("img", {
+                  attrs: { src: __webpack_require__(/*! @/images/skm.png */ "./resources/js/images/skm.png"), alt: "img" }
+                })
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("footer", { staticClass: "footer" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "frow" }, [
+            _c("p", [
+              _vm._v("© 2019 Singapore Kindness Movement. "),
+              _c("br"),
+              _vm._v(" All rights reserved")
+            ]),
+            _vm._v(" "),
+            _c("ul", [
+              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("About")])]),
+              _vm._v(" "),
+              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("FAQ")])]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Terms of Use")])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Privacy Policy")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "social" }, [
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fab fa-facebook" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fab fa-youtube" })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -51778,6 +52959,1037 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/vuex/dist/vuex.esm.js":
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/*! exports provided: default, Store, install, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/**
+ * vuex v3.1.1
+ * (c) 2019 Evan You
+ * @license MIT
+ */
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+    ? global
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (true) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (true) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (true) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (true) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if (true) {
+    assert(false, "use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+     true &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if (true) {
+      console.warn("[vuex] error in before action subscribers: ");
+      console.error(e);
+    }
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return result.then(function (res) {
+    try {
+      this$1._actionSubscribers
+        .filter(function (sub) { return sub.after; })
+        .forEach(function (sub) { return sub.after(action, this$1.state); });
+    } catch (e) {
+      if (true) {
+        console.warn("[vuex] error in after action subscribers: ");
+        console.error(e);
+      }
+    }
+    return res
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (true) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure enviroment.
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (true) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (true) {
+      assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (true) {
+    assert(typeof type === 'string', ("expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if (true) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept anthor params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if ( true && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if ( true && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.1.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
+
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -51920,22 +54132,29 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
+/* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/css/select.css */ "./resources/js/css/select.css");
+/* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_select_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_master_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/css/master.css */ "./resources/js/css/master.css");
+/* harmony import */ var _css_master_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_master_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/font-awesome/css/all.css */ "./resources/js/font-awesome/css/all.css");
+/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: '#app'
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
+  store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
+  el: '#app',
+  router: _routes__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 /***/ }),
@@ -51998,6 +54217,404 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/css/fonts/bold.ttf":
+/*!*****************************************!*\
+  !*** ./resources/js/css/fonts/bold.ttf ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/bold.ttf?8c2f67f41e21bde05843e36dcf8695a3";
+
+/***/ }),
+
+/***/ "./resources/js/css/fonts/ibmplex.ttf":
+/*!********************************************!*\
+  !*** ./resources/js/css/fonts/ibmplex.ttf ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/ibmplex.ttf?0b5a85206a5a77556a7f29ccdb148f2d";
+
+/***/ }),
+
+/***/ "./resources/js/css/fonts/light.ttf":
+/*!******************************************!*\
+  !*** ./resources/js/css/fonts/light.ttf ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/light.ttf?9b169eeb4ff552fe1422be6bfb62984a";
+
+/***/ }),
+
+/***/ "./resources/js/css/fonts/medium.ttf":
+/*!*******************************************!*\
+  !*** ./resources/js/css/fonts/medium.ttf ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/medium.ttf?ba26ab872b2b1a32397bd60ef14dd254";
+
+/***/ }),
+
+/***/ "./resources/js/css/fonts/semibold.ttf":
+/*!*********************************************!*\
+  !*** ./resources/js/css/fonts/semibold.ttf ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/semibold.ttf?04dc4a923cb39d37d79a36b06932d663";
+
+/***/ }),
+
+/***/ "./resources/js/css/master.css":
+/*!*************************************!*\
+  !*** ./resources/js/css/master.css ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!./master.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/master.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/css/select.css":
+/*!*************************************!*\
+  !*** ./resources/js/css/select.css ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!./select.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/select.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/css/all.css":
+/*!***********************************************!*\
+  !*** ./resources/js/font-awesome/css/all.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/postcss-loader/src??ref--6-2!./all.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/font-awesome/css/all.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-brands-400.eot":
+/*!**************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-brands-400.eot ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-brands-400.eot?99fb42ae2d1caeeef928b88e424b02ab";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-brands-400.svg":
+/*!**************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-brands-400.svg ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-brands-400.svg?b1c71dc4022e5dd80f01fa23658cc003";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-brands-400.ttf":
+/*!**************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-brands-400.ttf ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-brands-400.ttf?cd7b4e46cd06a6dcaf787a454c71fc02";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-brands-400.woff":
+/*!***************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-brands-400.woff ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-brands-400.woff?6065203719447e8246b86d2d849821b4";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-brands-400.woff2":
+/*!****************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-brands-400.woff2 ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-brands-400.woff2?81e35852f1c74faa7c66b4762a109d8c";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-light-300.eot":
+/*!*************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-light-300.eot ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-light-300.eot?2ef6d99e18876b039be154afdedabf01";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-light-300.svg":
+/*!*************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-light-300.svg ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-light-300.svg?e935c1861b8602b2dc6c669c42cf83ac";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-light-300.ttf":
+/*!*************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-light-300.ttf ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-light-300.ttf?03e67a20f133f8e37095cc9f988e51a4";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-light-300.woff":
+/*!**************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-light-300.woff ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-light-300.woff?0145959f8f52958cf24da0eb15b7cd38";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-light-300.woff2":
+/*!***************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-light-300.woff2 ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-light-300.woff2?dea6e2053ba43b37f5d29daf544a0973";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-regular-400.eot":
+/*!***************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-regular-400.eot ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-regular-400.eot?759ed07eb34028d659e7e52934affebb";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-regular-400.svg":
+/*!***************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-regular-400.svg ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-regular-400.svg?5b1536b4f63d819f8fa413917073926f";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-regular-400.ttf":
+/*!***************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-regular-400.ttf ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-regular-400.ttf?12c6ff700b23c72480819b939a40198c";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-regular-400.woff":
+/*!****************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-regular-400.woff ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-regular-400.woff?6e684aa45636f8af27fa3d6db3bcd246";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-regular-400.woff2":
+/*!*****************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-regular-400.woff2 ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-regular-400.woff2?5f838fc8f38524d4b71adedfaddb2ede";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-solid-900.eot":
+/*!*************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-solid-900.eot ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-solid-900.eot?d92b387165a85a5861108075d1595357";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-solid-900.svg":
+/*!*************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-solid-900.svg ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-solid-900.svg?9760d404c933f832702cd784072b5925";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-solid-900.ttf":
+/*!*************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-solid-900.ttf ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-solid-900.ttf?006cf3b7c239a0b2845c25e7665b4fbb";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-solid-900.woff":
+/*!**************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-solid-900.woff ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-solid-900.woff?5cea46da0b5bdbea3a0503ec0f55a06e";
+
+/***/ }),
+
+/***/ "./resources/js/font-awesome/webfonts/fa-solid-900.woff2":
+/*!***************************************************************!*\
+  !*** ./resources/js/font-awesome/webfonts/fa-solid-900.woff2 ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/fa-solid-900.woff2?ca3a3491ce9b0c4028f7bb97510dfc0b";
+
+/***/ }),
+
+/***/ "./resources/js/images/person.jpg":
+/*!****************************************!*\
+  !*** ./resources/js/images/person.jpg ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/person.jpg?898180b522692c3b9215aea970bef20a";
+
+/***/ }),
+
+/***/ "./resources/js/images/skm.png":
+/*!*************************************!*\
+  !*** ./resources/js/images/skm.png ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/skm.png?25f8c329e90508e8b0559ee3690256d3";
+
+/***/ }),
+
+/***/ "./resources/js/images/svg/HoodChampions Logo.svg":
+/*!********************************************************!*\
+  !*** ./resources/js/images/svg/HoodChampions Logo.svg ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/HoodChampions Logo.svg?13e6adb9c6117229aea3aeb400e4c578";
+
+/***/ }),
+
 /***/ "./resources/js/routes/index.js":
 /*!**************************************!*\
   !*** ./resources/js/routes/index.js ***!
@@ -52012,11 +54629,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 
 
+
+var Home = function Home() {
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! @/views/BL/home.vue */ "./resources/js/views/BL/home.vue"));
+};
+
+var About = function About() {
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/BL/About.vue */ "./resources/js/views/BL/About.vue"));
+};
+
+var Login = function Login() {
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! @/views/Login.vue */ "./resources/js/views/Login.vue"));
+};
+
+var Register = function Register() {
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
+};
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var routes = [{
+  path: '/',
+  name: 'Home',
+  component: Home
+}, {
+  path: '/about',
+  name: 'About',
+  component: About
+}, {
+  path: '/Login',
+  name: 'Login',
+  component: Login
+}, {
+  path: '/Register',
+  name: 'Register',
+  component: Register
+}];
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
-  rotues: [// 
-  ]
+  routes: routes
+});
+/* harmony default export */ __webpack_exports__["default"] = (router);
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  state: {// 
+  },
+  getters: {// 
+  },
+  mutations: {// 
+  },
+  actions: {// 
+  }
 }));
 
 /***/ }),

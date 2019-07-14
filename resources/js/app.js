@@ -1,17 +1,18 @@
 
 require('./bootstrap');
 
+import '@/css/select.css';
+import '@/css/master.css';
+import '@/font-awesome/css/all.css';
+
 import Vue from 'vue';
 import router from './routes'
+import store from './store'
 
-Vue.component('app', require('./App.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.component('app', require('@/App.vue').default);
 
 const app = new Vue({
+	store: store,
     el: '#app',
+    router: router
 });

@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::role(Role::all())->get();
+        $users = User::role(Role::all())->where('is_admin', 1)->get();
         return view('admin.UserManagement.user.index', compact('users'));
     }
 
@@ -49,6 +49,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->password = Hash::make($request->password);
+        $user->is_admin = 1;
         $user->save();
 
         foreach($request->roles as $role) {

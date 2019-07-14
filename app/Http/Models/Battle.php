@@ -32,4 +32,13 @@ class Battle extends Model
     {
     	return $this->belongsTo(Hood::class);
     }
+
+    /**
+     * [standings description]
+     * @return [type] [description]
+     */
+    public function standings()
+    {
+        return $this->hasMany(Standing::class);
+    }
 }
