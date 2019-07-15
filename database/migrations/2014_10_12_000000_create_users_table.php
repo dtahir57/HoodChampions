@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('residential_neighbourhood')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('gender')->nullable();
             $table->string('password')->nullable();
             $table->boolean('is_admin')->default(0);
             $table->rememberToken();

@@ -6,7 +6,7 @@
 	      <div class="row justify-content-center">
 	        <div class="col-md-6">
 	          <div class="form-group">
-	            <input type="email" class="form-control" placeholder="Email" id="reg_mail">
+	            <input type="email" class="form-control" placeholder="Email" v-model="email">
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
@@ -17,7 +17,7 @@
 	            </div>
 	          </div>
 	          <div class="form-group">
-	            <input type="text" class="form-control" placeholder="Full Name" id="full_name">
+	            <input type="text" class="form-control" placeholder="Full Name" v-model="full_name">
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
@@ -28,7 +28,7 @@
 	            </div>
 	          </div>
 	          <div class="form-group">
-	            <input type="text" class="form-control" placeholder="Username" id="user_name">
+	            <input type="text" class="form-control" placeholder="Username" v-model="username">
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
@@ -49,7 +49,7 @@
 	        </div>
 	        <div class="col-md-6">
 	          <div class="form-group">
-	            <input type="text" class="form-control" id="reg_phone" placeholder="Phone Number">
+	            <input type="text" class="form-control" placeholder="Phone Number" v-model="phone_number">
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
@@ -75,10 +75,10 @@
 	        
 	        <div class="col-lg-5 col-md-7 col-sm-9 col-12 mt-4">
 	          <div class="form-check terms-check">
-	            <input id="termz" type="checkbox" class="form-check-input" svalue="checkedValue">
-	            <label for="termz" class="form-check-label">I have read and agreed to <a href="#"> Terms and Use </a></label>
+	            <input id="termz" type="checkbox" class="form-check-input" svalue="checkedValue" v-model="agreed">
+	            <label for="termz" class="form-check-label">I have read and agreed to <router-link to="/terms-and-use"> Terms and Use </router-link></label>
 	          </div>  
-	          <button class="btn btn-default block-btn" data-toggle="modal" data-target="#code-sent">Sign Up</button>
+	          <button class="btn btn-default block-btn" data-toggle="modal" data-target="#code-sent" :disabled="!agreed">Sign Up</button>
 	          <p>Already have an account? <router-link to="/Login">Login</router-link></p>
 	        </div>
 	      </div>
@@ -97,7 +97,7 @@
 	        </div>
 	        <div class="modal-body">
 	          <h1 class="common-h">Verify Your phone</h1>
-	          <p>We'll text your verification code to <strong>9213812333</strong> <br> Standard fees may apply.</p>
+	          <p>We'll text your verification code to <strong>{{ phone_number }}</strong> <br> Standard fees may apply.</p>
 	          <button class="btn btn-default block-btn my-4">Confirm</button>
 	        </div>
 	      </div>
@@ -129,7 +129,8 @@ export default {
 			genders: [
 				{ value: 1, text: 'Male' },
 				{ value: 2, text: 'Female' }
-			]
+			],
+			agreed: false
 		}
 	},
 	created () {

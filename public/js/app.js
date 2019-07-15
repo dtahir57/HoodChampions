@@ -37952,9 +37952,31 @@ var render = function() {
               },
               [
                 _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                  _vm._m(1),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/" } },
+                        [_vm._v("Home")]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/about" } },
+                        [_vm._v("About")]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "li",
@@ -37975,7 +37997,7 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { staticClass: "nav-link", attrs: { to: "/" } },
+                        { staticClass: "nav-link", attrs: { to: "/explore" } },
                         [_vm._v("Explore")]
                       )
                     ],
@@ -37988,20 +38010,117 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { staticClass: "nav-link", attrs: { to: "/about" } },
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/start-activity" }
+                        },
                         [_vm._v("Start Activity")]
                       )
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                      _vm._v("Hood")
+                    ]),
+                    _vm._v(" "),
+                    _c("ul", { staticClass: "sub-drop" }, [
+                      _c(
+                        "li",
+                        [
+                          _c("router-link", { attrs: { to: "/teams" } }, [
+                            _vm._v("TEAMS")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        [
+                          _c("router-link", { attrs: { to: "/lelong" } }, [
+                            _vm._v("Lelong!")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/lost-and-found" } },
+                            [_vm._v("Lost and found!")]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ]),
                   _vm._v(" "),
                   _vm._m(4),
                   _vm._v(" "),
-                  _vm._m(5),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/kakis" } },
+                        [_vm._v("Kakis")]
+                      ),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "sub-drop" }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/kaki-request" } },
+                              [_vm._v("KAKIS REQUESTS")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _c(
+                    "li",
+                    { staticClass: "nav-item profile-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/kaki-profile" }
+                        },
+                        [
+                          _c("div", { staticClass: "profile-circle" }, [
+                            _c("img", {
+                              attrs: {
+                                src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"),
+                                alt: "profile"
+                              }
+                            })
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 ])
               ]
             )
@@ -38012,7 +38131,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(7)
+      _vm._m(6)
     ],
     1
   )
@@ -38042,51 +38161,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Home "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-      ])
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ang mo kio")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Other Hoods")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("About")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Hood")
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "sub-drop" }, [
-        _c("li", [
-          _c("a", { attrs: { href: "team.html" } }, [_vm._v("TEAMS")])
-        ]),
-        _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ang mo kio")])]),
-        _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Other Hoods")])]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Hood Services")])
-        ]),
-        _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Lelong!")])]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Lost and found!")])
-        ])
-      ])
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Hood Services")])
     ])
   },
   function() {
@@ -38103,33 +38193,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "friends.html" } }, [
-        _vm._v("Kakis")
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "sub-drop" }, [
-        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("MY KAKIS")])]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("KAKIS REQUESTS")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item profile-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _c("div", { staticClass: "profile-circle" }, [
-          _c("img", {
-            attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "profile" }
-          })
-        ])
-      ])
-    ])
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("MY KAKIS")])])
   },
   function() {
     var _vm = this
@@ -54643,7 +54707,43 @@ var Login = function Login() {
 };
 
 var Register = function Register() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(5), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
+};
+
+var Terms = function Terms() {
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! @/views/Terms.vue */ "./resources/js/views/Terms.vue"));
+};
+
+var Teams = function Teams() {
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
+};
+
+var Activity = function Activity() {
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
+};
+
+var Explore = function Explore() {
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
+};
+
+var LostAndFound = function LostAndFound() {
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
+};
+
+var Lelong = function Lelong() {
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
+};
+
+var Kakis = function Kakis() {
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
+};
+
+var KakiRequest = function KakiRequest() {
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/views/AL/KakiRequest.vue */ "./resources/js/views/AL/KakiRequest.vue"));
+};
+
+var KakiProfile = function KakiProfile() {
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
 };
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -54663,6 +54763,42 @@ var routes = [{
   path: '/Register',
   name: 'Register',
   component: Register
+}, {
+  path: '/terms-and-use',
+  name: 'Terms',
+  component: Terms
+}, {
+  path: '/teams',
+  name: 'Teams',
+  component: Teams
+}, {
+  path: '/start-activity',
+  name: 'Activity',
+  component: Activity
+}, {
+  path: '/explore',
+  name: 'Explore',
+  component: Explore
+}, {
+  path: '/lost-and-found',
+  name: 'LostAndFound',
+  component: LostAndFound
+}, {
+  path: '/lelong',
+  name: 'Lelong',
+  component: Lelong
+}, {
+  path: '/kakis',
+  name: 'Kakis',
+  component: Kakis
+}, {
+  path: '/kaki-request',
+  name: 'KakiRequest',
+  component: KakiRequest
+}, {
+  path: '/kaki-profile',
+  name: 'KakiProfile',
+  component: KakiProfile
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

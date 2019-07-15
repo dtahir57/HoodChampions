@@ -13,25 +13,25 @@
 		    <div class="collapse navbar-collapse" id="collapsibleNavId">
 		      <ul class="navbar-nav ml-auto">
 		      	<li class="nav-item">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		      		<router-link class="nav-link" to="/">Home</router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+		          <router-link class="nav-link" to="/about">About</router-link>
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/Login">Login</router-link>
               </li>
 		        <li class="nav-item">
-		          <router-link class="nav-link" to="/">Explore</router-link>
+		          <router-link class="nav-link" to="/explore">Explore</router-link>
 		        </li>
 		        <li class="nav-item">
-		          <router-link class="nav-link" to="/about">Start Activity</router-link>
+	                <router-link class="nav-link" to="/start-activity">Start Activity</router-link>
 		        </li>
 		        <li class="nav-item">
 		          <a class="nav-link" href="#">Hood</a>
 		          <ul class="sub-drop">
 		            <li>
-		              <a href="team.html">TEAMS</a>
+		              <router-link to="/teams">TEAMS</router-link>
 		            </li>
 		            <li>
 		              <a href="#">Ang mo kio</a>
@@ -43,10 +43,10 @@
 		              <a href="#">Hood Services</a>
 		            </li>
 		            <li>
-		              <a href="#">Lelong!</a>
+		              <router-link to="/lelong">Lelong!</router-link>
 		            </li>
 		            <li>
-		              <a href="#">Lost and found!</a>
+		              <router-link to="/lost-and-found">Lost and found!</router-link>
 		            </li>
 		          </ul>
 		        </li>
@@ -54,22 +54,22 @@
 		          <a class="nav-link" href="#">Group</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="friends.html">Kakis</a>
+		          <router-link class="nav-link" to="/kakis">Kakis</router-link>
 		          <ul class="sub-drop">
 		            <li>
 		              <a href="#">MY KAKIS</a>
 		            </li>
 		            <li>
-		              <a href="#">KAKIS REQUESTS</a>
+		              <router-link to="/kaki-request">KAKIS REQUESTS</router-link>
 		            </li>
 		          </ul>
 		        </li>
 		        <li class="nav-item profile-item">
-		          <a class="nav-link" href="#">
+		          <router-link class="nav-link" to="/kaki-profile">
 		            <div class="profile-circle">
 		              <img src="@/images/person.jpg" alt="profile">
 		            </div>
-		          </a>
+		          </router-link>
 		        </li>
 		      </ul>
 		    </div>
