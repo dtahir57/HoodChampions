@@ -1,0 +1,20 @@
+<svg id="Group_427" data-name="Group 427" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108.802" height="78.72" viewBox="0 0 108.802 78.72">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Rectangle_892" data-name="Rectangle 892" d="M0,0H100.539A8.264,8.264,0,0,1,108.8,8.264V66.575a0,0,0,0,1,0,0H8.264A8.264,8.264,0,0,1,0,58.311V0A0,0,0,0,1,0,0Z" fill="none"/>
+    </clipPath>
+  </defs>
+  <path id="Rectangle_888" data-name="Rectangle 888" d="M0,0H15.714a4.971,4.971,0,0,1,4.971,4.971v5.551a0,0,0,0,1,0,0H4.971A4.971,4.971,0,0,1,0,5.551V0A0,0,0,0,1,0,0Z" transform="translate(6.229)" fill="#f3e8dc"/>
+  <path id="Rectangle_889" data-name="Rectangle 889" d="M0,0H28.214a2.812,2.812,0,0,1,2.812,2.812v3.14a0,0,0,0,1,0,0H2.812A2.812,2.812,0,0,1,0,3.14V0A0,0,0,0,1,0,0Z" transform="translate(62.649 3.588)" fill="#a30f17"/>
+  <path id="Rectangle_890" data-name="Rectangle 890" d="M0,0H100.636A8.166,8.166,0,0,1,108.8,8.166V66.575a0,0,0,0,1,0,0H8.166A8.166,8.166,0,0,1,0,58.408V0A0,0,0,0,1,0,0Z" transform="translate(0 8.864)" fill="#d2111c"/>
+  <g id="Group_430" data-name="Group 430" transform="translate(0 8.864)">
+    <g id="Group_429" data-name="Group 429" clip-path="url(#clip-path)">
+      <rect id="Rectangle_891" data-name="Rectangle 891" width="108.802" height="44.082" transform="translate(0 15.36)" fill="#5c0c0c"/>
+    </g>
+  </g>
+  <ellipse id="Ellipse_26" data-name="Ellipse 26" cx="31.671" cy="31.671" rx="31.671" ry="31.671" transform="translate(35.064 15.379)" fill="#f3e8dc"/>
+  <ellipse id="Ellipse_27" data-name="Ellipse 27" cx="22.327" cy="22.327" rx="22.327" ry="22.327" transform="translate(42.624 67.438) rotate(-85.22)" fill="#161615"/>
+  <ellipse id="Ellipse_28" data-name="Ellipse 28" cx="6.348" cy="6.348" rx="6.348" ry="6.348" transform="translate(59.72 45.678) rotate(-85.22)" fill="#fff"/>
+  <ellipse id="Ellipse_29" data-name="Ellipse 29" cx="2.821" cy="2.821" rx="2.821" ry="2.821" transform="matrix(0.252, -0.968, 0.968, 0.252, 74.956, 51.888)" fill="#fff"/>
+  <ellipse id="Ellipse_30" data-name="Ellipse 30" cx="4.317" cy="4.317" rx="4.317" ry="4.317" transform="matrix(0.252, -0.968, 0.968, 0.252, 7.487, 62.301)" fill="#f3e8dc"/>
+</svg>

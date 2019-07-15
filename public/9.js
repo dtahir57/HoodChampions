@@ -113,7 +113,9 @@ var staticRenderFns = [
             _c("div", { staticClass: "row align-items-center" }, [
               _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
                 _c("div", { staticClass: "text" }, [
-                  _c("h1", { staticClass: "common-h" }, [_vm._v("Leong")]),
+                  _c("h1", { staticClass: "common-h" }, [
+                    _vm._v("Lost and Founds")
+                  ]),
                   _vm._v(" "),
                   _c("p", [
                     _vm._v(
@@ -122,7 +124,7 @@ var staticRenderFns = [
                   ]),
                   _vm._v(" "),
                   _c("button", { staticClass: "btn btn-default block-btn" }, [
-                    _vm._v("Create Team")
+                    _vm._v("Create Lost And Found")
                   ])
                 ])
               ]),
@@ -136,7 +138,7 @@ var staticRenderFns = [
                 [
                   _c("img", {
                     attrs: {
-                      src: "images/svg/Lost and Found.svg",
+                      src: __webpack_require__(/*! @/images/svg/Lost and Found.svg */ "./resources/js/images/svg/Lost and Found.svg"),
                       width: "100%",
                       alt: "img"
                     }
@@ -216,6 +218,17 @@ var staticRenderFns = [
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "./resources/js/images/svg/Lost and Found.svg":
+/*!****************************************************!*\
+  !*** ./resources/js/images/svg/Lost and Found.svg ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Lost and Found.svg?cc4436dc581d6b801b42e3cfdb473a6b";
 
 /***/ }),
 

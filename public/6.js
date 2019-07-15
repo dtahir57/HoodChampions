@@ -170,7 +170,7 @@ var staticRenderFns = [
                 [
                   _c("img", {
                     attrs: {
-                      src: "images/svg/Teams.svg",
+                      src: __webpack_require__(/*! @/images/svg/Teams.svg */ "./resources/js/images/svg/Teams.svg"),
                       width: "100%",
                       alt: "img"
                     }
@@ -192,7 +192,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/dance.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/dance.jpg */ "./resources/js/images/dance.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -212,7 +212,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/swim.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/swim.jpg */ "./resources/js/images/swim.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -232,7 +232,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/abstract.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/abstract.jpg */ "./resources/js/images/abstract.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -262,7 +262,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/piano.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/piano.jpg */ "./resources/js/images/piano.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -277,7 +277,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/paint.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/paint.jpg */ "./resources/js/images/paint.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -292,7 +292,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/cycle.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/cycle.jpg */ "./resources/js/images/cycle.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -307,7 +307,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: "images/cloud.jpg", alt: "img" }
+                    attrs: { src: __webpack_require__(/*! @/images/cloud.jpg */ "./resources/js/images/cloud.jpg"), alt: "img" }
                   })
                 ]),
                 _vm._v(" "),
@@ -325,6 +325,94 @@ var staticRenderFns = [
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "./resources/js/images/abstract.jpg":
+/*!******************************************!*\
+  !*** ./resources/js/images/abstract.jpg ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/abstract.jpg?b69abb71724f8d01c341356b3e857910";
+
+/***/ }),
+
+/***/ "./resources/js/images/cloud.jpg":
+/*!***************************************!*\
+  !*** ./resources/js/images/cloud.jpg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/cloud.jpg?1bc1bf32671b1795000b1355979e1f84";
+
+/***/ }),
+
+/***/ "./resources/js/images/cycle.jpg":
+/*!***************************************!*\
+  !*** ./resources/js/images/cycle.jpg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/cycle.jpg?cea9a114d7758ebfd72ef5fe25f7c306";
+
+/***/ }),
+
+/***/ "./resources/js/images/dance.jpg":
+/*!***************************************!*\
+  !*** ./resources/js/images/dance.jpg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/dance.jpg?4f978ffb08eba27932e4c71caff9dbb2";
+
+/***/ }),
+
+/***/ "./resources/js/images/paint.jpg":
+/*!***************************************!*\
+  !*** ./resources/js/images/paint.jpg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/paint.jpg?08a5268f5c20ca8294d5f510c60679c6";
+
+/***/ }),
+
+/***/ "./resources/js/images/piano.jpg":
+/*!***************************************!*\
+  !*** ./resources/js/images/piano.jpg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/piano.jpg?36610a12a326f23df510478fbc8eba10";
+
+/***/ }),
+
+/***/ "./resources/js/images/svg/Teams.svg":
+/*!*******************************************!*\
+  !*** ./resources/js/images/svg/Teams.svg ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Teams.svg?ec16c7dbf13cbbc46a27e684fbc66137";
+
+/***/ }),
+
+/***/ "./resources/js/images/swim.jpg":
+/*!**************************************!*\
+  !*** ./resources/js/images/swim.jpg ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/swim.jpg?7aaae9b6d3b8d5ae64fb591e0bbc4aa7";
 
 /***/ }),
 

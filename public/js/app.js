@@ -38066,7 +38066,21 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(4),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: "/interest-groups" }
+                        },
+                        [_vm._v("Group")]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "li",
@@ -38079,7 +38093,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("ul", { staticClass: "sub-drop" }, [
-                        _vm._m(5),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c(
                           "li",
@@ -38131,7 +38145,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(6)
+      _vm._m(5)
     ],
     1
   )
@@ -38177,16 +38191,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Hood Services")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Group")
-      ])
     ])
   },
   function() {
@@ -54746,6 +54750,14 @@ var KakiProfile = function KakiProfile() {
   return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
 };
 
+var Group = function Group() {
+  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
+};
+
+var SingleGroup = function SingleGroup() {
+  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! @/views/AL/group/Group.vue */ "./resources/js/views/AL/group/Group.vue"));
+};
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
   path: '/',
@@ -54799,6 +54811,14 @@ var routes = [{
   path: '/kaki-profile',
   name: 'KakiProfile',
   component: KakiProfile
+}, {
+  path: '/interest-groups',
+  name: 'Group',
+  component: Group
+}, {
+  path: '/interest-group',
+  name: 'SingleGroup',
+  component: SingleGroup
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

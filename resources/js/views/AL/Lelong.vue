@@ -8,11 +8,11 @@
 	            <div class="text">
 	              <h1 class="common-h">Leong</h1>
 	              <p>Dummy Text here, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!</p>
-	              <button class="btn btn-default block-btn">Create Team</button>
+	              <button class="btn btn-default block-btn">Create Lelong</button>
 	            </div>
 	          </div>
 	          <div class="col-md-5 offset-md-1 col-lg-5 offset-lg-2 col-xl-4 offset-xl-3">
-	            <img src="images/svg/Lelong.svg" width="100%" alt="img">
+	            <img src="@/images/svg/Lelong.svg" width="100%" alt="img">
 	          </div>
 	        </div>
 	      </div>

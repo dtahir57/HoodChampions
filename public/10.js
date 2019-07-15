@@ -121,7 +121,7 @@ var staticRenderFns = [
                   ]),
                   _vm._v(" "),
                   _c("button", { staticClass: "btn btn-default block-btn" }, [
-                    _vm._v("Create Team")
+                    _vm._v("Create Lelong")
                   ])
                 ])
               ]),
@@ -135,7 +135,7 @@ var staticRenderFns = [
                 [
                   _c("img", {
                     attrs: {
-                      src: "images/svg/Lelong.svg",
+                      src: __webpack_require__(/*! @/images/svg/Lelong.svg */ "./resources/js/images/svg/Lelong.svg"),
                       width: "100%",
                       alt: "img"
                     }
@@ -215,6 +215,17 @@ var staticRenderFns = [
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "./resources/js/images/svg/Lelong.svg":
+/*!********************************************!*\
+  !*** ./resources/js/images/svg/Lelong.svg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Lelong.svg?152a618b744009e60790b31308652648";
 
 /***/ }),
 

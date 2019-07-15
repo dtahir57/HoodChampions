@@ -22,7 +22,7 @@
 	          <div class="battle-box">
 	            <a href="#">
 	              <div class="img-holder">
-	                <img src="images/dance.jpg" class="img-fluid" alt="img">
+	                <img src="@/images/dance.jpg" class="img-fluid" alt="img">
 	              </div>
 	              <div class="text">
 	                <span>13 Dec 2019 </span>
@@ -36,7 +36,7 @@
 	          <div class="battle-box">
 	            <a href="#">
 	              <div class="img-holder">
-	                <img src="images/swim.jpg" class="img-fluid" alt="img">
+	                <img src="@/images/swim.jpg" class="img-fluid" alt="img">
 	              </div>
 	              <div class="text">
 	                <span>13 Dec 2019 </span>
@@ -50,7 +50,7 @@
 	          <div class="battle-box">
 	            <a href="#">
 	              <div class="img-holder">
-	                <img src="images/abstract.jpg" class="img-fluid" alt="img">
+	                <img src="@/images/abstract.jpg" class="img-fluid" alt="img">
 	              </div>
 	              <div class="text">
 	                <span>13 Dec 2019 </span>
@@ -75,14 +75,14 @@
 	      <div class="head-title-icon">
 	        <div class="common-h">Featured interest groups</div>
 	        <div class="icon">
-	          <img src="images/svg/Interest Group.svg" alt="img">
+	          <img src="@/images/svg/Interest Group.svg" alt="img">
 	        </div>
 	      </div>
 	      <div class="row">
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/dance.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Dancing</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -92,7 +92,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/swim.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/swim.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Swiming</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -102,7 +102,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/abstract.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/abstract.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Painting</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -117,14 +117,14 @@
 	      <div class="head-title-icon">
 	        <div class="common-h">Featured Battles</div>
 	        <div class="icon">
-	          <img src="images/svg/Battles.svg" alt="img">
+	          <img src="@/images/svg/Battles.svg" alt="img">
 	        </div>
 	      </div>
 	      <div class="row">
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/dance.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Dancing</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -134,7 +134,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/swim.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/swim.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Swiming</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -144,7 +144,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/abstract.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/abstract.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Painting</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>

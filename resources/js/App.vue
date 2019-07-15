@@ -51,7 +51,7 @@
 		          </ul>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="#">Group</a>
+		          <router-link class="nav-link" to="/interest-groups">Group</router-link>
 		        </li>
 		        <li class="nav-item">
 		          <router-link class="nav-link" to="/kakis">Kakis</router-link>

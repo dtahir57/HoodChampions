@@ -15,6 +15,8 @@ const Lelong = () => import('@/views/AL/Lelong.vue');
 const Kakis = () => import('@/views/AL/Kaki.vue');
 const KakiRequest = () => import('@/views/AL/KakiRequest.vue');
 const KakiProfile = () => import('@/views/AL/KakiProfile.vue');
+const Group = () => import('@/views/AL/Group.vue');
+const SingleGroup = () => import('@/views/AL/group/Group.vue');
 
 Vue.use(VueRouter);
 
@@ -83,6 +85,16 @@ const routes = [
 		path: '/kaki-profile',
 		name: 'KakiProfile',
 		component: KakiProfile
+	},
+	{
+		path: '/interest-groups',
+		name: 'Group',
+		component: Group
+	},
+	{
+		path: '/interest-group',
+		name: 'SingleGroup',
+		component: SingleGroup
 	}
 ];
 

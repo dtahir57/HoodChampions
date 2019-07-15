@@ -12,7 +12,7 @@
 	            </div>
 	          </div>
 	          <div class="col-md-5 offset-md-2 col-lg-4 offset-lg-3">
-	            <img src="images/svg/Teams.svg" width="100%" alt="img">
+	            <img src="@/images/svg/Teams.svg" width="100%" alt="img">
 	          </div>
 	        </div>
 	      </div>
@@ -25,7 +25,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/dance.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Dancing</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -35,7 +35,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/swim.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/swim.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Swiming</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -45,7 +45,7 @@
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/abstract.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/abstract.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Painting</a>
 	            <p><i class="fal fa-user-circle"></i> 15</p>
@@ -62,7 +62,7 @@
 	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/piano.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/piano.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Dancing</a>
 	            <p>The Best team you will ever join</p>
@@ -71,7 +71,7 @@
 	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/paint.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/paint.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Swiming</a>
 	            <p>The Best team you will ever join</p>
@@ -80,7 +80,7 @@
 	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/cycle.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/cycle.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Painting</a>
 	            <p>The Best team you will ever join</p>
@@ -89,7 +89,7 @@
 	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="images/cloud.jpg" class="img-fluid" alt="img">
+	              <img src="@/images/cloud.jpg" class="img-fluid" alt="img">
 	            </div>
 	            <a href="#">Painting</a>
 	            <p>The Best team you will ever join</p>
