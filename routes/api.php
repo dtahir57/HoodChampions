@@ -14,14 +14,17 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/register', 'API\RegisterController@register');
-Route::get('/hoods', 'API\HoodController@hoods');
-Route::get('/teams', 'API\TeamController@index');
-Route::get('/activities', 'API\ActivityController@index');
-Route::get('/interest_groups', 'API\GroupController@index');
-Route::get('/services', 'API\ServiceController@index');
-Route::get('/lost_and_founds', 'API\LostAndFoundController@index');
-Route::get('/battles', 'API\BattleController@index');
+Route::post('/login', 'API\RegisterController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:api'], function() {
+	Route::get('/user/{id}', 'API\RegisterController@getUser');
+	Route::get('/resend/{id}', 'API\ResendController@resend');
+	Route::post('/verify/otp', 'API\RegisterController@verify');
+	Route::get('/hoods', 'API\HoodController@hoods');
+	Route::get('/teams', 'API\TeamController@index');
+	Route::get('/activities', 'API\ActivityController@index');
+	Route::get('/interest_groups', 'API\GroupController@index');
+	Route::get('/services', 'API\ServiceController@index');
+	Route::get('/lost_and_founds', 'API\LostAndFoundController@index');
+	Route::get('/battles', 'API\BattleController@index');
 });

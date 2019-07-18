@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Hood;
 use App\Http\Models\Team;
 use App\Http\Resources\TeamResource;
+use App\User;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -14,10 +16,18 @@ class TeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teams = Team::all();
-        return TeamResource::collection($teams);
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        $hood = Hood::find($user->hood_id);
+        $user_teams = $user->teams;
+        $hood_name = $user->hood->planning_area_name;
+        return response()->json([
+            'user_teams' => TeamResource::collection($user_teams),
+            'teams' => TeamResource::collection($hood->teams),
+            'hood_name' => $hood_name
+        ]);
     }
 
     /**

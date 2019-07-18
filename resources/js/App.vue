@@ -11,7 +11,7 @@
 		        <i class="fal fa-bars"></i>
 		    </button>
 		    <div class="collapse navbar-collapse" id="collapsibleNavId">
-		      <ul class="navbar-nav ml-auto">
+		      <ul class="navbar-nav ml-auto" v-if="!apiToken">
 		      	<li class="nav-item">
 		      		<router-link class="nav-link" to="/">Home</router-link>
               </li>
@@ -21,6 +21,8 @@
               <li class="nav-item">
                 <router-link class="nav-link" to="/Login">Login</router-link>
               </li>
+          		</ul>
+          		<ul class="navbar-nav ml-auto" v-if="apiToken">
 		        <li class="nav-item">
 		          <router-link class="nav-link" to="/explore">Explore</router-link>
 		        </li>
@@ -125,17 +127,27 @@
 	</div>
 </template>
 <script>
-
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
 	components: {
 		// 
 	},
 	data () {
 		return {
-			// 
+			api_token: null
 		}
+	},
+	computed: {
+		...mapGetters([
+				'apiToken'
+			])
+	},
+	created () {
+		this.api_token = localStorage.getItem('user_api_token');
+		this.$store.dispatch('setApiToken', this.api_token)
 	}
 }
 </script>
-<style>
+<style lang="scss">
 </style>

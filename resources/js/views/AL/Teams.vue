@@ -8,7 +8,7 @@
 	            <div class="text">
 	              <h1 class="common-h">Teams</h1>
 	              <p>Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!</p>
-	              <button class="btn btn-default block-btn">Create Team</button>
+	              <router-link type="button" class="btn btn-default block-btn" to="/team/create">Create Team</router-link>
 	            </div>
 	          </div>
 	          <div class="col-md-5 offset-md-2 col-lg-4 offset-lg-3">
@@ -22,34 +22,14 @@
 	    <div class="container">
 	      <h1 class="common-h">My Teams</h1>
 	      <div class="row">
-	        <div class="col-lg-4 col-6 col-xs-12">
+	        <div class="col-lg-4 col-6 col-xs-12" v-for="(team, index) in getUserTeams">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="@/images/dance.jpg" class="img-fluid" alt="img">
+	              <img :src="team.image" class="img-fluid" alt="img">
 	            </div>
-	            <a href="#">Dancing</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>The Best team you will ever join</p>
-	          </div>
-	        </div>
-	        <div class="col-lg-4 col-6 col-xs-12">
-	          <div class="team-box">
-	            <div class="img-holder">
-	              <img src="@/images/swim.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Swiming</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>The Best team you will ever join</p>
-	          </div>
-	        </div>
-	        <div class="col-lg-4 col-6 col-xs-12">
-	          <div class="team-box">
-	            <div class="img-holder">
-	              <img src="@/images/abstract.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Painting</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>The Best team you will ever join</p>
+	            <a href="#">{{ team.title }}</a>
+	            <p><i class="fal fa-user-circle"></i> {{ team.users }}</p>
+	            <p>{{ team.about_us }}</p>
 	          </div>
 	        </div>
 	      </div>
@@ -57,42 +37,15 @@
 	  </section>
 	  <section class="all-teams">
 	    <div class="container">
-	      <h1 class="common-h">All Teams in Ang Mo Kio</h1>
+	      <h1 class="common-h">All Teams in {{ hood_name }}</h1>
 	      <div class="row">
-	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
+	        <div class="col-lg-3 col-md-4 col-6 col-xs-12" v-for="(team, index) in getHoodTeams">
 	          <div class="team-box">
 	            <div class="img-holder">
-	              <img src="@/images/piano.jpg" class="img-fluid" alt="img">
+	              <img :src="team.image" class="img-fluid" alt="img">
 	            </div>
-	            <a href="#">Dancing</a>
-	            <p>The Best team you will ever join</p>
-	          </div>
-	        </div>
-	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-	          <div class="team-box">
-	            <div class="img-holder">
-	              <img src="@/images/paint.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Swiming</a>
-	            <p>The Best team you will ever join</p>
-	          </div>
-	        </div>
-	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-	          <div class="team-box">
-	            <div class="img-holder">
-	              <img src="@/images/cycle.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Painting</a>
-	            <p>The Best team you will ever join</p>
-	          </div>
-	        </div>
-	        <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-	          <div class="team-box">
-	            <div class="img-holder">
-	              <img src="@/images/cloud.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Painting</a>
-	            <p>The Best team you will ever join</p>
+	            <a href="#">{{ team.title }}</a>
+	            <p>{{ team.about_us }}</p>
 	          </div>
 	        </div>
 	      </div>
@@ -101,12 +54,32 @@
 	</div>
 </template>
 <script>
+import { config } from '@/config/config'
+import { mapGetters } from 'vuex'
+
 export default {
 	name: 'Teams',
 	data () {
 		return {
-			// 
+			user_teams: [],
+			hood_name: '',
+			teams: []
 		}
+	},
+	computed: {
+		...mapGetters(['getUserTeams', 'getHoodTeams'])
+	},
+	created () {
+		let uri = '/api/teams'
+		axios.get(uri, config).then(response => {
+			this.user_teams = response.data.user_teams
+			this.$store.dispatch('setUserTeams', this.user_teams);
+			this.hood_name = response.data.hood_name
+			this.teams = response.data.teams
+			this.$store.dispatch('setHoodTeams', this.teams)
+		}).catch(error => {
+			console.log(error.data)
+		})
 	}
 }
 </script>

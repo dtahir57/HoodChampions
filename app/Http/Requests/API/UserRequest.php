@@ -33,21 +33,26 @@ class UserRequest extends FormRequest
             case 'POST':
                 {
                     return [
-                        'name' => 'required|max:255',
                         'email' => 'required|max:255|unique:users',
-                        'phone_number' => 'required|max:255',
-                        'password' => 'required|min:6|max:255|confirmed',
-                        'roles' => 'required'
+                        'name' => 'required|max:255',
+                        'username' => 'required|max:255|unique:users',
+                        'hood_id' => 'required',
+                        'phone_number' => 'required|max:255|unique:users',
+                        'gender' => 'required|boolean',
+                        'date_of_birth' => 'required'
                     ];
                 }
             case 'PUT':
             case 'PATCH':
                 {
                     return [
-                        'name' => 'required|max:255',
                         'email' => 'required|max:255',
+                        'name' => 'required|max:255',
+                        'username' => 'required|max:255',
+                        'hood_id' => 'required',
                         'phone_number' => 'required|max:255',
-                        'roles' => 'required'
+                        'gender' => 'required|boolean',
+                        'date_of_birth' => 'required'
                     ];
                 }
             default:

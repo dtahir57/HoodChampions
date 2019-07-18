@@ -10,7 +10,8 @@
                   <p>or</p>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="phone-num" v-model="phoneNumber" placeholder="Phone Number">
+                  <input type="text" class="form-control" name="Phone Number" v-validate="'required|numeric'" v-model="phoneNumber" placeholder="Phone Number">
+                  <span class="text-danger">{{ errors.first('Phone Number') }}</span>
                   <div class="mark">
                     <i class="far fa-times"></i>
                     <i class="far fa-check"></i>
@@ -19,10 +20,9 @@
                     <p class="requirement">
                       Please use a Mobile Device capable of receiving SMSes (Short Messeging Services) for registeration.
                     </p>
-                    <p class="valid">Your phone is valid.</p>
                   </div>
                 </div>
-                <button class="btn btn-default block-btn" :disabled="!phoneNumber" data-toggle="modal" data-target="#code-sent">Login</button>
+                <button class="btn btn-default block-btn" @click="validate" :disabled="!phoneNumber" data-toggle="modal" data-target="#code-sent">Login</button>
                 <p>Do not have an account? <router-link to="/Register">Sign Up</router-link></p>
     
               </div>
@@ -30,7 +30,7 @@
           </div>
         </section>          
         <!-- Modal -->
-        <div class="modal fade login-modal" id="code-sent" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal fade login-modal" id="code-sent" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true" v-if="showModal">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="modal-body">
                   <h1 class="common-h">Verify Your phone</h1>
-                  <p>We'll text your verification code to <strong>9213812333</strong> <br> Standard fees may apply.</p>
+                  <p>We'll text your verification code to <strong>{{ phoneNumber }}</strong> <br> Standard fees may apply.</p>
                   <button class="btn btn-default block-btn my-4">Confirm</button>
                 </div>
               </div>
@@ -53,8 +53,21 @@ export default {
 	name: 'Login',
 	data () {
 		return {
-			phoneNumber: ''
+			phoneNumber: '',
+      showModal: false
 		}
-	}
+	},
+  methods: {
+    validate () {
+      this.$validator.validateAll()
+    }
+  },
+  updated () {
+      if (this.errors.items.length > 0) {
+          this.showModal = false
+      } else {
+        this.showModal = true
+      }
+  }
 }
 </script>

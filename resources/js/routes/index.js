@@ -1,13 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import log from '@/middleware/log'
+import auth from '@/middleware/auth'
+
 const Home = () => import('@/views/BL/home.vue');
 const About = () => import('@/views/BL/About.vue');
 const Login = () => import('@/views/Login.vue');
 const Register = () => import('@/views/Register.vue');
 const Terms = () => import('@/views/Terms.vue');
+const VerifyOTP = () => import('@/views/OTP.vue');
 
+// Team Components Starts
 const Teams = () => import('@/views/AL/Teams.vue');
+const TeamCreate = () => import('@/views/AL/team/Create.vue');
+// Team Components Ends here
 const Activity = () => import('@/views/AL/Activity.vue');
 const Explore = () => import('@/views/AL/Explore.vue');
 const LostAndFound = () => import('@/views/AL/LostAndFound.vue');
@@ -39,7 +46,7 @@ const routes = [
 	{
 		path: '/Register',
 		name: 'Register',
-		component: Register
+		component: Register,
 	},
 	{
 		path: '/terms-and-use',
@@ -49,52 +56,112 @@ const routes = [
 	{
 		path: '/teams',
 		name: 'Teams',
-		component: Teams
+		component: Teams,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/start-activity',
 		name: 'Activity',
-		component: Activity
+		component: Activity,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/explore',
 		name: 'Explore',
-		component: Explore
+		component: Explore,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/lost-and-found',
 		name: 'LostAndFound',
-		component: LostAndFound
+		component: LostAndFound,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/lelong',
 		name: 'Lelong',
-		component: Lelong
+		component: Lelong,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/kakis',
 		name: 'Kakis',
-		component: Kakis
+		component: Kakis,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/kaki-request',
 		name: 'KakiRequest',
-		component: KakiRequest
+		component: KakiRequest,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/kaki-profile',
 		name: 'KakiProfile',
-		component: KakiProfile
+		component: KakiProfile,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/interest-groups',
 		name: 'Group',
-		component: Group
+		component: Group,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
 	},
 	{
 		path: '/interest-group',
 		name: 'SingleGroup',
-		component: SingleGroup
+		component: SingleGroup,
+		meta: {
+			middleware: [
+				auth
+			]
+		}
+	},
+	{
+		path: '/team/create',
+		name: 'CreateTeam',
+		component: TeamCreate
+	},
+	{
+		path: '/verify/:id',
+		name: 'OTP',
+		component: VerifyOTP
 	}
 ];
 

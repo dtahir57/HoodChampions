@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class TeamResource extends JsonResource
 {
@@ -24,7 +25,13 @@ class TeamResource extends JsonResource
             'email' => $this->email,
             'contact_no' => $this->contact_no,
             'meetup_place' => $this->meetup_place,
-            'image' => $this->image
+            'image' => Storage::url($this->image),
+            'users' => count($this->users)
         ];
+    }
+
+    public function with($request)
+    {
+        // 
     }
 }

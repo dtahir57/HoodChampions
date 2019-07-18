@@ -15,7 +15,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => '/admin'], function() {
+Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function() {
+    /**
+     * Admin Users Controller
+     */
+    Route::get('/admin/{id}', 'UserManagement\UserController@show')->name('user.show');
+    Route::get('/settings', 'Admin\SettingController@index')->name('setting.index');
+    Route::post('/env', 'Admin\SettingController@store')->name('setting.store');
+    /**
+     * End of admin user controller
+     */
     /**
      * Starting Routes For Permissions
      */

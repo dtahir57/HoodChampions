@@ -6,70 +6,68 @@
 	      <div class="row justify-content-center">
 	        <div class="col-md-6">
 	          <div class="form-group">
-	            <input type="email" class="form-control" placeholder="Email" v-model="email">
+	            <input type="email" class="form-control" v-validate="'required|email'" name="email" placeholder="Email" v-model="email">
+	            <span class="text-danger">{{ errors.first('email') }}</span>
+	            <span class="text-danger" v-if="formErrors.email">{{ formErrors.email[0] }}</span>
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
-	            </div>
-	            <div class="v-text">
-	              <p class="invalid">Please fill in a valid email address.</p>
-	              <p class="valid">Looks Good.</p>
 	            </div>
 	          </div>
 	          <div class="form-group">
-	            <input type="text" class="form-control" placeholder="Full Name" v-model="full_name">
+	            <input type="text" class="form-control" name="full_name" v-validate="'required'" placeholder="Full Name" v-model="full_name">
+	            <span class="text-danger">{{ errors.first('full_name') }}</span>
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
-	            </div>
-	            <div class="v-text">
-	              <p class="invalid">Please fill in your full name</p>
-	              <p class="valid">Looks Good.</p>
 	            </div>
 	          </div>
 	          <div class="form-group">
-	            <input type="text" class="form-control" placeholder="Username" v-model="username">
+	            <input type="text" class="form-control" name="username" v-validate="'required'" placeholder="Username" v-model="username">
+	            <span class="text-danger">{{ errors.first('username') }}</span>
+	            <span class="text-danger" v-if="formErrors.username">{{ formErrors.username[0] }}</span>
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
-	            </div>
-	            <div class="v-text">
-	              <p class="invalid">Please fill in a valid and unique username, no spaces, no capital letters and cannot start with a number</p>
-	              <p class="valid">Looks Good.</p>
 	            </div>
 	          </div>
 	          <div class="form-group">
 	            <model-list-select :list="hoods"
 	                                 v-model="hood"
+	                                 v-validate="'required'"
 	                                 option-value="id"
+	                                 name="hood"
 	                                 option-text="planning_area_name"
 	                                 placeholder="Residential Neighbourhood">
 	              </model-list-select>
+	              <span class="text-danger">{{ errors.first('hood') }}</span>
 	          </div>
 	        </div>
 	        <div class="col-md-6">
 	          <div class="form-group">
-	            <input type="text" class="form-control" placeholder="Phone Number" v-model="phone_number">
+	            <input type="text" class="form-control" name="phone_number" v-validate="'required|numeric'" placeholder="Phone Number" v-model="phone_number">
+	            <span class="text-danger">{{ errors.first('phone_number') }}</span>
+	            <span class="text-danger" v-if="formErrors.phone_number">{{ formErrors.phone_number[0] }}</span>
 	            <div class="mark">
 	              <i class="far fa-times"></i>
 	              <i class="far fa-check"></i>
-	            </div>
-	            <div class="v-text">
-	              <p class="invalid">Your phone number is invalid.</p>
-	              <p class="valid">Looks Good.</p>
 	            </div>
 	          </div>
 	          <div class="form-group">
 	            <model-list-select :list="genders"
 	                                 v-model="gender"
+	                                 v-validate="'required'"
+	                                 name="gender"
 	                                 option-value="value"
 	                                 option-text="text"
 	                                 placeholder="Select Gender">
 	              </model-list-select>
+	              <span class="text-danger">{{ errors.first('gender') }}</span>
 	          </div>
 	          <div class="form-group mt-5">
 	            <label for="dob">Date of Birth</label>
-	            <datepicker v-model="dob"></datepicker>
+	            <datepicker v-model="dob" name="dob" v-validate="'required'"></datepicker>
+	            <span class="text-danger">{{ errors.first('dob') }}</span>
 	          </div>
 	        </div>
 	        
@@ -78,8 +76,7 @@
 	            <input id="termz" type="checkbox" class="form-check-input" svalue="checkedValue" v-model="agreed">
 	            <label for="termz" class="form-check-label">I have read and agreed to <router-link to="/terms-and-use"> Terms and Use </router-link></label>
 	          </div>  
-	          <button class="btn btn-default block-btn" data-toggle="modal" data-target="#code-sent" :disabled="!agreed">Sign Up</button>
-	          <p>Already have an account? <router-link to="/Login">Login</router-link></p>
+	          <button class="btn btn-default block-btn" data-toggle="modal" data-target="#code-sent" :disabled="!agreed" @click="validate()">Sign Up</button>
 	        </div>
 	      </div>
 	    </div>
@@ -87,7 +84,7 @@
 	
 	
 	  <!-- Modal -->
-	  <div class="modal fade login-modal" id="code-sent" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+	  <div class="modal fade login-modal" id="code-sent" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true" v-if="showModal">
 	    <div class="modal-dialog" role="document">
 	      <div class="modal-content">
 	        <div class="modal-header">
@@ -98,7 +95,7 @@
 	        <div class="modal-body">
 	          <h1 class="common-h">Verify Your phone</h1>
 	          <p>We'll text your verification code to <strong>{{ phone_number }}</strong> <br> Standard fees may apply.</p>
-	          <button class="btn btn-default block-btn my-4">Confirm</button>
+	          <button class="btn btn-default block-btn my-4" @click="confirm()">Confirm</button>
 	        </div>
 	      </div>
 	    </div>
@@ -120,17 +117,44 @@ export default {
 			email: '',
 			phone_number: '',
 			full_name: '',
-			gender: '',
+			gender: null,
 			username: '',
 			dob: '',
-			residential_neighbourhood: '',
 			hoods: [],
-			hood: '',
+			hood: null,
 			genders: [
 				{ value: 1, text: 'Male' },
-				{ value: 2, text: 'Female' }
+				{ value: 0, text: 'Female' }
 			],
-			agreed: false
+			formErrors: [],
+			agreed: false,
+			showModal: false
+		}
+	},
+	methods: {
+		validate () {
+			this.$validator.validateAll()
+		},
+		confirm () {
+			let uri = '/api/register';
+			axios.post(uri, {
+				email: this.email,
+				name: this.full_name,
+				username: this.username,
+				hood_id: this.hood,
+				phone_number: this.phone_number,
+				gender: this.gender,
+				date_of_birth: this.dob
+			}).then(response => {
+				console.log(response.data.user)
+				this.$router.push({ name: 'OTP', params: {id: response.data.user.id} })
+			}).catch(error => {
+				this.formErrors = error.response.data.error
+				var modal = document.getElementById("code-sent")
+
+				modal.hide;
+				console.log(error.response)
+			})
 		}
 	},
 	created () {
@@ -140,6 +164,13 @@ export default {
 		}).catch(error => {
 			console.log(error)
 		})
+	},
+	updated () {
+		  if (this.errors.items.length > 0) {
+			    this.showModal = false
+			} else {
+				this.showModal = true
+			}
 	}
 }
 </script>

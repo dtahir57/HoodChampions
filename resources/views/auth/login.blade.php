@@ -41,34 +41,33 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern material-vertical-layout material-layout 1-column  bg-cyan bg-lighten-2 fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+<body class="vertical-layout vertical-menu-modern material-vertical-layout material-layout 1-column fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
 
     <!-- BEGIN: Header-->
-    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-dark navbar-shadow">
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light navbar-shadow">
         <div class="navbar-wrapper">
             <div class="navbar-header">
                 <ul class="nav navbar-nav flex-row">
-                    <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                    <li class="nav-item"><a class="navbar-brand" href="index.html"><img class="brand-logo" alt="modern admin logo" src="{{ asset('app-assets/images/logo/logo.png') }}">
-                            <h3 class="brand-text">Modern Admin</h3>
-                        </a></li>
+                    <li class="nav-item mobile-menu d-md-none mr-auto">
+                        <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
+                            <i class="ft-menu font-large-1"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img class="" alt="modern admin logo" src="{{ asset('assets/graphics/HoodChampions Logo.svg') }}">
+                            <!-- <h3 class="brand-text">Modern Admin</h3> -->
+                        </a>
+                    </li>
                     <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a></li>
                 </ul>
-            </div>
-            <div class="navbar-container">
-                <div class="collapse navbar-collapse justify-content-end" id="navbar-mobile">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item"><a class="nav-link mr-2 nav-link-label" href="index.html"><i class="ficon ft-arrow-left"></i></a></li>
-                        <li class="dropdown nav-item"><a class="nav-link mr-2 nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-settings"></i></a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </nav>
     <!-- END: Header-->
 
     <!-- BEGIN: Content-->
-    <div class="app-content content">
+    <div class="app-content content mt-5">
         <div class="content-header row">
         </div>
         <div class="content-wrapper">
@@ -79,9 +78,9 @@
                             <div class="card border-grey border-lighten-3 m-0">
                                 <div class="card-header border-0">
                                     <div class="card-title text-center">
-                                        <img src="{{ asset('app-assets/images/logo/logo-dark.png') }}" alt="branding logo">
+                                        <img src="{{ asset('assets/graphics/HoodChampions Logo.svg') }}" alt="branding logo">
                                     </div>
-                                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Login with Modern</span></h6>
+                                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Login To HoodChampions Admin Dashboard</span></h6>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -124,10 +123,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="card-footer border-0">
-                                    <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>New to Modern ?</span></p>
-                                    <a href="register-advanced.html" class="btn btn-info btn-block btn-lg mt-3"><i class="ft-user"></i> Register</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +137,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer fixed-bottom footer-dark navbar-border navbar-shadow">
-        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2019 <a class="text-bold-800 grey darken-2" href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">PIXINVENT</a></span><span class="float-md-right d-none d-lg-block">Hand-crafted & Made with <i class="ft-heart pink"></i><span id="scroll-top"></span></span></p>
+        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2019 <a class="text-bold-800 grey darken-2" href="{{ url('/') }}" target="_blank">HoodChampions</a></p>
     </footer>
     <!-- END: Footer-->
 
