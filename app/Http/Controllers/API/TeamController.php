@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Hood;
 use App\Http\Models\Team;
 use App\Http\Resources\TeamResource;
+use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $team = new Team;
     }
 
     /**
@@ -59,7 +60,11 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
+        $team = Team::find($id);
+        return response()->json([
+            'team' => new TeamResource($team),
+            'users' => UserResource::collection($team->users)
+        ]);
     }
 
     /**

@@ -8,9 +8,12 @@
                 <div class="mb-4 mt-5">
                   <p>Enter the code to verify <strong>{{ user.phone_number }}</strong></p>
                   <p>The OTP will expire 13:15, 2019 April 28 <a href="#" @click="resend()">Resend Code</a></p>
+                  <li class="alert alert-success" v-if="code_resent">{{ code_resent }}</li>
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" name="OTP" v-validate="'required|numeric'" v-model="otp" id="otp" placeholder="Verification Code">
+               	  <span class="text-danger" v-if="otp_expired">{{ otp_expired }}</span>
+               	  <span class="text-danger" v-if="code_mismatch">{{ code_mismatch }}</span>
                 </div>
                 <!-- <button class="btn btn-default block-btn" data-toggle="modal" data-target="#verified">Submit</button> -->
                 <button class="btn btn-default block-btn" @click="verify()">Submit</button>
@@ -46,12 +49,16 @@ export default {
 	data () {
 		return {
 			user: {},
-			otp: null
+			otp: null,
+			otp_expired: '',
+			code_resent: '',
+			code_mismatch: ''
 		}
 	},
 	methods: {
 		resend () {
-			axios.get('/api/resend/'+this.user.id).then(response => {
+			axios.get('/api/resend/code/'+this.user.id).then(response => {
+				this.code_resent = response.data.message
 				console.log(response.data)
 			}).catch(error => {
 				console.log(error.data)
@@ -63,14 +70,18 @@ export default {
 				id: this.user.id,
 				otp: this.otp
 			}).then(response => {
-				if (response.data.code !== 401) {
-					localStorage.setItem('user_api_token', response.data.user.token)
+				if (response.data.code == 200) {
+					console.log(response.data)
+					localStorage.setItem('user_api_token', response.data.success.token)
 					this.$store.dispatch('setApiToken', response.data.success.token);
 					this.$router.push("/")
+				} else if(response.data.code == 400) {
+					console.log(response.data.message)
+					this.code_mismatch = response.data.message
 				} else {
-					console.log('Error')
+					this.otp_expired = response.data.message
+					console.log(response.data.message);
 				}
-				console.log(response);
 			}).catch(error => {
 				console.log(error.response)
 			})
@@ -81,7 +92,7 @@ export default {
 		axios.get(uri).then(response => {
 			this.user = response.data.user
 			console.log(response.data.otp)
-			console.log(response.data)
+			console.log(response.data.user)
 		}).catch(error => {
 			console.log(error.data)
 		})

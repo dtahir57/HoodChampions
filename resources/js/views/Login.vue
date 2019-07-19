@@ -5,6 +5,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-5 col-md-8 col-sm-9 col-12 text-center">
                 <h1 class="common-h">login</h1>
+                <li class="alert alert-danger" v-if="server_error">{{ server_error }}</li>
                 <button class="btn btn-fb block-btn"><i class="fab fa-facebook"></i> Countinue with Facebook</button>
                 <div class="or">
                   <p>or</p>
@@ -12,6 +13,7 @@
                 <div class="form-group">
                   <input type="text" class="form-control" name="Phone Number" v-validate="'required|numeric'" v-model="phoneNumber" placeholder="Phone Number">
                   <span class="text-danger">{{ errors.first('Phone Number') }}</span>
+                  <span class="text-danger" v-if="invalid_phone">{{ invalid_phone }}</span>
                   <div class="mark">
                     <i class="far fa-times"></i>
                     <i class="far fa-check"></i>
@@ -41,7 +43,7 @@
                 <div class="modal-body">
                   <h1 class="common-h">Verify Your phone</h1>
                   <p>We'll text your verification code to <strong>{{ phoneNumber }}</strong> <br> Standard fees may apply.</p>
-                  <button class="btn btn-default block-btn my-4">Confirm</button>
+                  <button class="btn btn-default block-btn my-4" @click="login">Confirm</button>
                 </div>
               </div>
             </div>
@@ -54,12 +56,31 @@ export default {
 	data () {
 		return {
 			phoneNumber: '',
-      showModal: false
+      showModal: false,
+      invalid_phone: '',
+      server_error: ''
 		}
 	},
   methods: {
     validate () {
       this.$validator.validateAll()
+    },
+    login () {
+      let uri = '/api/login'
+      axios.post(uri, {
+        phone_number: this.phoneNumber
+      }).then(response => {
+        console.log(response.data)
+        if (response.data.code == 200) {
+          this.$router.push({ name: 'OTP', params: {id: response.data.user.id} })
+        } else if (response.data.code == 400) {
+          this.invalid_phone = response.data.message
+        } else {
+          this.server_error = response.data.error
+        }
+      }).catch(error => {
+        console.log(error.response.data)
+      })
     }
   },
   updated () {

@@ -11,8 +11,8 @@ class ResendController extends Controller
 {
     public function resend($id)
     {
-        $username = 'danishtahir57';
-        $password = 'Password@123';
+        $username = env('BULKSMS_USERNAME');
+        $password = env('BULKSMS_PASSWORD');
         $user = User::find($id);
         $otp = $this->cacheTheOtp($user->id);
     	$message = array('to' => $user->phone_number, 'body' => 'Your HoodChampions code is '.$otp.'. This code will expire in 3 minutes.');
@@ -24,7 +24,8 @@ class ResendController extends Controller
     	  return response()->json([
     	    'result' => "Response " . $result['server_response'],
     	    'user' => $user,
-    	    'code' => 200
+    	    'code' => 200,
+          'message' => 'Code Sent Again'
     	]);
     	  // Use json_decode($result['server_response']) to work with the response further
     	}
@@ -57,7 +58,7 @@ class ResendController extends Controller
     public function cacheTheOtp($userId)
     {
         $otp = rand(100000, 999999);
-        Cache::put('otp_'.$userId, $otp);
+        Cache::put(['otp_'.$userId => $otp], now()->addMinutes(5));
         return $otp;
     }
 }

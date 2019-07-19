@@ -27,7 +27,7 @@
 	            <div class="img-holder">
 	              <img :src="team.image" class="img-fluid" alt="img">
 	            </div>
-	            <a href="#">{{ team.title }}</a>
+	            <router-link :to="{ name: 'Team', params: {id: team.id} }">{{ team.title }}</router-link>
 	            <p><i class="fal fa-user-circle"></i> {{ team.users }}</p>
 	            <p>{{ team.about_us }}</p>
 	          </div>
@@ -44,7 +44,7 @@
 	            <div class="img-holder">
 	              <img :src="team.image" class="img-fluid" alt="img">
 	            </div>
-	            <a href="#">{{ team.title }}</a>
+	            <router-link :to="{ name: 'Team', params: {id: team.id} }">{{ team.title }}</router-link>
 	            <p>{{ team.about_us }}</p>
 	          </div>
 	        </div>

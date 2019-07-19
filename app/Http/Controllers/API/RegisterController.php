@@ -26,8 +26,8 @@ class RegisterController extends Controller
             return response()->json(['error'=>$validator->errors()], 401);            
         } else {
     		$input = $request->all();
-            $username = 'danishtahir57';
-            $password = 'Password@123';
+            $username = env('BULKSMS_USERNAME');
+            $password = env('BULKSMS_PASSWORD');
             // create the user
             $user = User::create($input);
             // Cache the otp 
@@ -53,10 +53,10 @@ class RegisterController extends Controller
     public function getUser($id)
     {
         $user = User::find($id);
-        $otp = Cache::get('otp_'.$user->id);
+        // $otp = Cache::get('otp_'.$user->id);
         return response()->json([
-            'user' => $user,
-            'otp' => $otp
+            'user' => $user
+            // 'otp' => $otp
         ]);
     }
 
@@ -86,13 +86,35 @@ class RegisterController extends Controller
 
     public function login(Request $request)
     {
-      // 
+        $user = User::where('phone_number', $request->phone_number)->first();
+        if ($user) {
+              $username = env('BULKSMS_USERNAME');
+              $password = env('BULKSMS_PASSWORD');
+              $otp = $this->cacheTheOtp($user->id);
+              $message = array('to' => $user->phone_number, 'body' => 'Your HoodChampions code is '.$otp.'. This code will expire in 3 minutes.');
+              $result = $this->send_message( json_encode($message), 'https://api.bulksms.com/v1/messages', $username, $password );
+
+            if ($result['http_status'] != 201) {
+              return response()->json(['error' => "Error sending: " . ($result['error'] ? $result['error'] : "HTTP status ".$result['http_status']."; Response was " .$result['server_response'])]);
+            } else {
+              return response()->json([
+                'result' => "Response " . $result['server_response'],
+                'user' => $user,
+                'code' => 200,
+            ]);
+              // Use json_decode($result['server_response']) to work with the response further
+            }
+        }
+        return response()->json([
+            'code' => 400,
+            'message' => 'User Not Found! Please type correct Phone Number'
+        ]);
     }
 
     public function cacheTheOtp($userId)
     {
         $otp = rand(100000, 999999);
-        Cache::put('otp_'.$userId, $otp);
+        Cache::put(['otp_'.$userId => $otp], now()->addMinutes(5));
         return $otp;
     }
 
@@ -106,9 +128,16 @@ class RegisterController extends Controller
             $user->update();
             Cache::forget('otp_'.$request->id);
             return response()->json([
+                'code' => 200,
                 'success' => $success
             ]);
-        } else {
+        } else if(Cache::get('otp_'.$user->id) !== $request->otp) {
+          return response()->json([
+            'code' => 400,
+            'message' => 'Code Mismatch! Please try again'
+          ]);
+        }
+        else {
             return response()->json([
                 'code' => 401,
                 'message' => 'Code has been expired! Please resend the code'

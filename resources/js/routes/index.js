@@ -14,6 +14,7 @@ const VerifyOTP = () => import('@/views/OTP.vue');
 // Team Components Starts
 const Teams = () => import('@/views/AL/Teams.vue');
 const TeamCreate = () => import('@/views/AL/team/Create.vue');
+const SingleTeam = () => import('@/views/AL/team/Team.vue');
 // Team Components Ends here
 const Activity = () => import('@/views/AL/Activity.vue');
 const Explore = () => import('@/views/AL/Explore.vue');
@@ -58,9 +59,7 @@ const routes = [
 		name: 'Teams',
 		component: Teams,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -68,9 +67,7 @@ const routes = [
 		name: 'Activity',
 		component: Activity,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -78,9 +75,7 @@ const routes = [
 		name: 'Explore',
 		component: Explore,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -88,9 +83,7 @@ const routes = [
 		name: 'LostAndFound',
 		component: LostAndFound,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -98,9 +91,7 @@ const routes = [
 		name: 'Lelong',
 		component: Lelong,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -108,9 +99,7 @@ const routes = [
 		name: 'Kakis',
 		component: Kakis,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -118,9 +107,7 @@ const routes = [
 		name: 'KakiRequest',
 		component: KakiRequest,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -128,9 +115,7 @@ const routes = [
 		name: 'KakiProfile',
 		component: KakiProfile,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -138,9 +123,7 @@ const routes = [
 		name: 'Group',
 		component: Group,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
@@ -148,15 +131,24 @@ const routes = [
 		name: 'SingleGroup',
 		component: SingleGroup,
 		meta: {
-			middleware: [
-				auth
-			]
+			requiresAuth: true
 		}
 	},
 	{
 		path: '/team/create',
 		name: 'CreateTeam',
-		component: TeamCreate
+		component: TeamCreate,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/team/:id',
+		name: 'Team',
+		component: SingleTeam,
+		meta: {
+			requiresAuth: true
+		}
 	},
 	{
 		path: '/verify/:id',
@@ -169,6 +161,18 @@ let router = new VueRouter({
 	mode: 'history', 
 	routes: routes
 });
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (localStorage.getItem('user_api_token')) {
+      next()
+      return
+    }
+    next('/Login') 
+  } else {
+    next()
+  }
+})
 
 export default router;
 

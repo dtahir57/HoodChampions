@@ -149,5 +149,13 @@ export default {
 	}
 }
 </script>
-<style lang="scss">
+<style>
+.app {
+	display:flex;
+	flex-direction:column;
+	min-height:100vh;
+}
+.app .main-wrapper{
+	flex-grow:1;
+}
 </style>

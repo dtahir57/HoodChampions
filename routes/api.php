@@ -15,13 +15,21 @@ use Illuminate\Http\Request;
 
 Route::post('/register', 'API\RegisterController@register');
 Route::post('/login', 'API\RegisterController@login');
+Route::get('/user/{id}', 'API\RegisterController@getUser');
+Route::get('/hoods', 'API\HoodController@hoods');
+Route::post('/verify/otp', 'API\RegisterController@verify');
+Route::get('/resend/code/{id}', 'API\ResendController@resend');
 
 Route::group(['middleware' => 'auth:api'], function() {
-	Route::get('/user/{id}', 'API\RegisterController@getUser');
-	Route::get('/resend/{id}', 'API\ResendController@resend');
-	Route::post('/verify/otp', 'API\RegisterController@verify');
-	Route::get('/hoods', 'API\HoodController@hoods');
+	/**
+	 * Starting Routes for TeamController
+	 */
 	Route::get('/teams', 'API\TeamController@index');
+	Route::get('/team/{id}', 'API\TeamController@show');
+	Route::post('/team', 'API\TeamController@store');
+	/**
+	 * Ending Routes For TeamController
+	 */
 	Route::get('/activities', 'API\ActivityController@index');
 	Route::get('/interest_groups', 'API\GroupController@index');
 	Route::get('/services', 'API\ServiceController@index');
