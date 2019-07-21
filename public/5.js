@@ -296,26 +296,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/config/config.js":
-/*!***************************************!*\
-  !*** ./resources/js/config/config.js ***!
-  \***************************************/
-/*! exports provided: config */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
-var config = {
-  headers: {
-    "Accept": "application/json",
-    "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
-
-  }
-};
-
-/***/ }),
-
 /***/ "./resources/js/images/svg/Teams.svg":
 /*!*******************************************!*\
   !*** ./resources/js/images/svg/Teams.svg ***!

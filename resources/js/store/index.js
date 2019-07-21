@@ -8,7 +8,8 @@ export default new Vuex.Store({
 	state: {
 		api_token: null,
 		UserTeams: [],
-		hoodTeams: []
+		hoodTeams: [],
+		user: {}
 	}, 
 	getters: {
 		apiToken: state => {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
 		},
 		getHoodTeams: state => {
 			return state.hoodTeams
+		},
+		getAuthenticatedUser: state => {
+			return state.user
 		}
 	}, 
 	mutations: {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
 		},
 		setHoodTeams: (state, payload) => {
 			state.hoodTeams = payload;
+		},
+		setCurrentUser: (state, payload) => {
+			state.user = payload
 		}
 	}, 
 	actions: {
@@ -41,6 +48,9 @@ export default new Vuex.Store({
 		},
 		setHoodTeams: (context, payload) => {
 			context.commit('setHoodTeams', payload)
+		},
+		setCurrentUser: (context, payload) => {
+			context.commit('setCurrentUser', payload)
 		}
 	}
 });

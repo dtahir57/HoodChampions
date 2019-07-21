@@ -136,6 +136,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
+import { config } from '@/config/config'
+
 export default {
 	components: {
 		// 
@@ -153,6 +155,15 @@ export default {
 	created () {
 		this.api_token = localStorage.getItem('user_api_token');
 		this.$store.dispatch('setApiToken', this.api_token)
+		if (this.api_token) {
+			let uri = '/api/user/auth';
+			axios.post(uri, {}, config).then(response => {
+				this.$store.dispatch('setCurrentUser', response.data.user)
+				console.log(response.data)
+			}).catch(error => {
+				console.log(error.response)
+			})
+		}
 	}
 }
 </script>

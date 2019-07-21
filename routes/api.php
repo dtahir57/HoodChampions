@@ -30,6 +30,13 @@ Route::group(['middleware' => 'auth:api'], function() {
 	/**
 	 * Ending Routes For TeamController
 	 */
+	/**
+	 * Starting Routes For UserController
+	 */
+	Route::post('/user/auth', 'API\UserController@index');
+	/**
+	 * Ending Routes For UserController
+	 */
 	Route::get('/activities', 'API\ActivityController@index');
 	Route::get('/interest_groups', 'API\GroupController@index');
 	Route::get('/services', 'API\ServiceController@index');

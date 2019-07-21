@@ -1813,6 +1813,7 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/config/config */ "./resources/js/config/config.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } else { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1954,6 +1955,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {// 
   },
@@ -1964,8 +1966,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['apiToken'])),
   created: function created() {
+    var _this = this;
+
     this.api_token = localStorage.getItem('user_api_token');
     this.$store.dispatch('setApiToken', this.api_token);
+
+    if (this.api_token) {
+      var uri = '/api/user/auth';
+      axios.post(uri, {}, _config_config__WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
+        _this.$store.dispatch('setCurrentUser', response.data.user);
+
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
   }
 });
 
@@ -65497,6 +65512,26 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/config/config.js":
+/*!***************************************!*\
+  !*** ./resources/js/config/config.js ***!
+  \***************************************/
+/*! exports provided: config */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "config", function() { return config; });
+var config = {
+  headers: {
+    "Accept": "application/json",
+    "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
+
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/css/select.css":
 /*!*************************************!*\
   !*** ./resources/js/css/select.css ***!
@@ -66103,7 +66138,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     api_token: null,
     UserTeams: [],
-    hoodTeams: []
+    hoodTeams: [],
+    user: {}
   },
   getters: {
     apiToken: function apiToken(state) {
@@ -66114,6 +66150,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     getHoodTeams: function getHoodTeams(state) {
       return state.hoodTeams;
+    },
+    getAuthenticatedUser: function getAuthenticatedUser(state) {
+      return state.user;
     }
   },
   mutations: {
@@ -66125,6 +66164,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setHoodTeams: function setHoodTeams(state, payload) {
       state.hoodTeams = payload;
+    },
+    setCurrentUser: function setCurrentUser(state, payload) {
+      state.user = payload;
     }
   },
   actions: {
@@ -66136,6 +66178,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setHoodTeams: function setHoodTeams(context, payload) {
       context.commit('setHoodTeams', payload);
+    },
+    setCurrentUser: function setCurrentUser(context, payload) {
+      context.commit('setCurrentUser', payload);
     }
   }
 }));
