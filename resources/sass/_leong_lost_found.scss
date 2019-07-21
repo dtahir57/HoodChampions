@@ -1,0 +1,52 @@
+.leong
+{
+  .leong-banner
+  {
+    background: $background;
+    padding: 60px 0px;
+    .text
+    {
+      p
+      {
+        color:$silver;
+        margin-bottom: 30px;
+      }
+      @media (max-width:991px) {
+        margin-bottom: 30px;
+      }
+    }
+    img
+    {
+      max-width: 150px;
+
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+.lost-found
+{
+  .lf-banner
+  {
+    background: $background;
+    padding: 60px 0px;
+    .text
+    {
+      p
+      {
+        color:$silver;
+        margin-bottom: 30px;
+      }
+      @media (max-width:991px) {
+        margin-bottom: 30px;
+      }
+    }
+    img
+    {
+      max-width: 120px;
+
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}

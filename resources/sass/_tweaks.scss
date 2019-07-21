@@ -1,0 +1,97 @@
+.ui.dropdown:not(.button) > .default.text[data-v-3a0c7bea], .ui.default.dropdown:not(.button) > .text[data-v-3a0c7bea]
+{
+    padding-left: 5px;
+    color:#6c757d !important;
+    font-family: medium;
+}
+.ui.search.selection.dropdown > input.search[data-v-3a0c7bea]{
+    padding: 0.375rem 5px;
+    height: 50px !important;
+}
+.ui.selection.dropdown[data-v-3a0c7bea]
+{
+    background: #fff3e6 !important;
+    border: 1px solid #fff3e6 !important;
+    height: 50px !important;
+    font-family: medium;
+    border-radius: 0px;
+}
+.ui.selection.dropdown[data-v-3a0c7bea]:hover
+{
+    border: 1px solid #fff3e6 !important;
+}
+.ui.fluid.dropdown[data-v-3a0c7bea]
+{
+    display:flex !important;
+    align-items:center !important;
+    position: relative !important;
+}
+.ui.search.dropdown > .text[data-v-3a0c7bea]
+{
+    padding-left: 5px !important;
+}
+
+.ui.fluid.dropdown > .dropdown.icon[data-v-3a0c7bea] 
+{
+    width: auto !important;
+    height: auto !important;
+    line-height: 0 !important;
+    transform: translateY(0%) !important;
+    top: 50% !important;
+    margin:-5px 0px 0px 0px !important;
+    padding:0px !important;
+    right:0px !important;
+}
+.ui.fluid.dropdown > .dropdown.icon[data-v-3a0c7bea]::before {
+    content: "\f107";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 400;
+    position: absolute;
+    z-index: 100;
+    top: 7px;
+    color: #a30f17;
+    font-size: 24px;
+    right: 10px;
+}
+
+.ui.selection.dropdown .menu > .item[data-v-3a0c7bea]
+{
+    color:#000 !important;
+    background:$skin !important;
+    height: 50px !important;
+}
+.ui.selection.dropdown .menu > .item.current[data-v-3a0c7bea]
+{
+    background: $red !important;
+    color: #fff !important;
+}
+
+.ui.selection.active.dropdown:hover .menu[data-v-3a0c7bea]
+{
+    border:none;
+}
+.ui.selection.active.dropdown .menu[data-v-3a0c7bea]
+{
+    border:none;
+    border-radius: 0px;
+}
+.ui.search.selection.dropdown > input.search[data-v-3a0c7bea]
+{
+    padding: 5px !important;
+}
+.ui.selection.dropdown[data-v-3a0c7bea],
+.ui.fluid.dropdown[data-v-3a0c7bea]
+{
+    border-radius: 0px !important;
+}
+
+.vdp-datepicker input
+{
+    background: #fff3e6 !important;
+    border: 1px solid #fff3e6 !important;
+    height: 50px !important;
+    font-family: medium;
+    border-radius: 0px;
+    width:100%;
+    padding: 10px;
+}

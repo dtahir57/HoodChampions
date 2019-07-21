@@ -526,7 +526,7 @@ module.exports = "/images/cycle.jpg?cea9a114d7758ebfd72ef5fe25f7c306";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Homepage - Music.svg?b541e238c469508fb880da7c37f98695";
+module.exports = "/images/Homepage - Music.svg?64350e3f7a97bd4fc46f020aae085c10";
 
 /***/ }),
 
@@ -537,7 +537,7 @@ module.exports = "/images/Homepage - Music.svg?b541e238c469508fb880da7c37f98695"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Homepage - Painting.svg?cce3f7f112b13a4057583930339720a0";
+module.exports = "/images/Homepage - Painting.svg?ced0c6a2e24b7761b87e68f47bce8674";
 
 /***/ }),
 
@@ -548,7 +548,7 @@ module.exports = "/images/Homepage - Painting.svg?cce3f7f112b13a4057583930339720
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Homepage - Photography.svg?d69cb68e829cd58ecd5b3ab694b4ae19";
+module.exports = "/images/Homepage - Photography.svg?3a18f41fb229f042f21c7a9d0659c97e";
 
 /***/ }),
 
@@ -559,7 +559,7 @@ module.exports = "/images/Homepage - Photography.svg?d69cb68e829cd58ecd5b3ab694b
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Homepage- Cooking.svg?8c38db6e59ff6c24163e5dc6c8c51f93";
+module.exports = "/images/Homepage- Cooking.svg?7752a98b194ab7410fb90cbab8fe0563";
 
 /***/ }),
 
@@ -570,7 +570,7 @@ module.exports = "/images/Homepage- Cooking.svg?8c38db6e59ff6c24163e5dc6c8c51f93
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Homepage- Sports .svg?59e69dc4e532e6aefda634d7a8f35943";
+module.exports = "/images/Homepage- Sports .svg?bf424bada12e47e8fef6c8eecd16c002";
 
 /***/ }),
 
@@ -581,7 +581,7 @@ module.exports = "/images/Homepage- Sports .svg?59e69dc4e532e6aefda634d7a8f35943
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/National Hood Rankings.svg?f932bf55432cbabc83593f66f664cfc6";
+module.exports = "/images/National Hood Rankings.svg?79322f957e37e46d6707484a21cd5cfe";
 
 /***/ }),
 

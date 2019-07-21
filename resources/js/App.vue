@@ -72,6 +72,14 @@
 		              <img src="@/images/person.jpg" alt="profile">
 		            </div>
 		          </router-link>
+				  <ul class="sub-drop">
+		            <li>
+		              <a href="#"><i class="far fa-user"></i> Profile</a>
+		            </li>
+		            <li>
+		              <router-link to="/kaki-request"><i class="far fa-sign-out"></i> Logout</router-link>
+		            </li>
+		          </ul>
 		        </li>
 		      </ul>
 		    </div>

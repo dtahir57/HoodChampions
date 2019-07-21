@@ -528,7 +528,7 @@ module.exports = "/images/dance.jpg?4f978ffb08eba27932e4c71caff9dbb2";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Battles.svg?153335fd25a57ff96ef0042dbc050dd5";
+module.exports = "/images/Battles.svg?49eefb62289a50a8df276476636e6fdd";
 
 /***/ }),
 
@@ -539,7 +539,7 @@ module.exports = "/images/Battles.svg?153335fd25a57ff96ef0042dbc050dd5";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Interest Group.svg?cb9d7d6cb2186057e470e5269875fdfe";
+module.exports = "/images/Interest Group.svg?ec4991d5e56e24e09fe4d58b35fa5502";
 
 /***/ }),
 

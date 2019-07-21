@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    font-family: "plex", sans-serif;
+  }
+  *::selection
+  {
+    background-color:#b95d5d;
+    color:#fff;
+  }
+
+  ul {
+    margin: 0px;
+    padding: 0px;
+    li {
+      list-style-type: none;
+      display: inline-block;
+    }
+  }
+  a {
+    text-decoration: none !important;
+    color:#333;
+    &:hover
+    {
+      color:$red;
+    }
+  }
+  html {
+    overflow-x: hidden !important;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #fff;
+    margin: 0px;
+    position: relative;
+    padding: 0px;
+    width: 100%;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 12px;
+    background-color: transparent;
+    position: absolute;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color:#aaa;
+    border-radius: 0spx;
+  }
+  body::-webkit-scrollbar-track {
+    background-color: $light;
+  }
+  
+ 
+  .fluid {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+  // Margin Y axis Remover from row
+  .mx-none{
+    margin: 0px -15px 0px -15px;
+  }
+  .mx-7p{
+    margin: 0px -7px 0px -7px;
+  }
+  .hidden {
+    display: none;
+  }
+  *:focus {
+    outline-color: transparent !important;
+  }
+  
+  .btn:focus,
+  .form-control:focus {
+    box-shadow:none !important;
+  }
+  .form-control
+  {
+    border-radius: 0px;
+  }
+  .btn-outline
+  {
+    background:transparent;
+    color:$maroon;
+    border:1px solid $maroon;
+    border-radius: 0px;
+    font-size: 17px;
+    padding: 10px 30px;
+    transition: .1s linear;
+    font-family: medium;
+    @media (max-width:1199px) {
+      font-size:16px;
+      padding: 9px 28px;
+    }
+    @media (max-width:991px) {
+      font-size:15px;
+      padding: 8px 26px;
+    }
+    @media (max-width:767px) {
+      font-size:14px;
+      padding: 7px 24px;
+    }
+    &:hover
+    {
+      color:$red;
+      border:1px solid $red;
+    }
+    &:active
+    {
+      transform: scale(.97);
+    }
+  }
+  .btn-default
+  {
+    color: #fff;
+    background-color:$maroon;
+    border:1px solid $maroon;
+    border-radius: 0px;
+    font-size: 16px;
+    padding: 10px 30px;
+    transition: .1s linear;
+    font-family: medium;
+    @media (max-width:1199px) {
+      font-size:16px;
+      padding: 9px 28px;
+    }
+    @media (max-width:991px) {
+      font-size:15px;
+      padding: 8px 26px;
+    }
+    @media (max-width:767px) {
+      font-size:14px;
+      padding: 7px 24px;
+    }
+    &:hover
+    {
+      background: $red;
+      color:#fff;
+      border:1px solid $red;
+    }
+    &:active
+    {
+      transform: scale(.97);
+    }
+  }
+  .link
+  {
+    color:$red;
+    text-decoration: none;
+    &:hover
+    {
+      color:$red;
+    }
+  }
+  
+  @media (max-width:420px){
+    .col-xs-12
+    {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+  }
+ 
+  .common-h
+  {
+    font-size: 18px;
+    text-transform: uppercase;
+    color:$maroon;
+    margin: 0px 0px 30px;
+    font-family: medium;
+    kerning: 100;
+  }
+
+  input.form-control
+  {
+    border:none;
+    border-bottom:2px solid $maroon;
+    height:50px;  
+    font-family: medium;
+    &:focus
+    {
+      border-color:$red;
+      background: #fff3e6;
+    }
+  }
+  label
+  {
+    text-transform: uppercase;
+    font-family: semibold;
+    color:$silver;
+    font-size: 14px;
+    @media (max-width:991px) {
+      font-size: 13px;
+    }
+    @media (max-width:767px) {
+      font-size: 12px;
+    }
+  }
+  textarea.form-control
+  {
+    border:none !important;
+    background: $background;
+    height: 200px;
+    padding: 10px 15px;
+    font-family: medium;
+    &:focus
+    {
+      background: #fff3e6;
+    }
+  }
+  
+.group-btns
+{
+    display: flex;
+    .btn
+    {
+      width: 50%;
+      flex-grow: 1;
+    }
+}
+
+.main
+{
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  flex-direction: column;
+  .main-wrapper
+  {
+    flex-grow: 1;
+  }
+}
