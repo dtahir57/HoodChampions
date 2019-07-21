@@ -2,7 +2,7 @@
 require('./bootstrap');
 
 import '@/css/select.css';
-import '@/css/master.css';
+// import '@/css/master.css';
 import '@/font-awesome/css/all.css';
 
 import Vue from 'vue';

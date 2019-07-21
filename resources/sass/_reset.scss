@@ -45,7 +45,7 @@
   
   body::-webkit-scrollbar-thumb {
     background-color:#aaa;
-    border-radius: 0spx;
+    border-radius: 5px;
   }
   body::-webkit-scrollbar-track {
     background-color: $light;
@@ -163,7 +163,7 @@
  
   .common-h
   {
-    font-size: 18px;
+    font-size: 1rem;
     text-transform: uppercase;
     color:$maroon;
     margin: 0px 0px 30px;

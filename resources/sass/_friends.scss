@@ -2,6 +2,18 @@
 {
     background: $background;
     padding: 50px 0px;
+    .common-h
+    {
+        i
+        {
+            margin-left: 40px;
+        }
+        @media (max-width:991px) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+    }
     .no-friends
     {
         padding: 30px 0px;
@@ -43,8 +55,14 @@
         {
             margin-left: 40px;
         }
+        @media (max-width:991px) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
     }
 }
+
 .person-box
 {
     padding: 0px 15px;
@@ -146,15 +164,15 @@
     {
         height: 100%;
         text-align: center;
-        padding: 50px 50px;
+        padding: 50px 50px 10px;
         background: $background;
         @media  (max-width:1199px)
         {
-            padding: 50px 30px;
+            padding: 50px 10px;
         }
         @media  (max-width:767px)
         {
-            padding: 40px 30px 30px;
+            padding: 40px 30px 10px;
         }
         .img-holder
         {
@@ -222,7 +240,7 @@
     {
         margin-top: 40px;
         border-top: 1px solid #ddd;
-        padding: 40px 15px;
+        padding: 40px 15px 10px;
         text-align: left;
         ul
         {
@@ -303,6 +321,10 @@
                 p
                 {
                     margin: 0px 0px 50px;
+                }
+                .btn
+                {
+                    width:100%;
                 }
                 .btn-default
                 {

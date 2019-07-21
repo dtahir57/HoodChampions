@@ -236,10 +236,10 @@ var render = function() {
   return _c("div", { staticClass: "main-wrapper" }, [
     _c("section", { staticClass: "friends" }, [
       _c("div", { staticClass: "container" }, [
-        _c("h1", { staticClass: "common-h" }, [_vm._v("My Kakis")]),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c(
               "div",
               { staticClass: "person-box" },
@@ -258,8 +258,6 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
           _vm._m(2),
@@ -272,12 +270,14 @@ var render = function() {
           _vm._v(" "),
           _vm._m(6),
           _vm._v(" "),
-          _vm._m(7)
+          _vm._m(7),
+          _vm._v(" "),
+          _vm._m(8)
         ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(8)
+    _vm._m(9)
   ])
 }
 var staticRenderFns = [
@@ -285,7 +285,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("h1", { staticClass: "common-h" }, [
+      _vm._v("My Kakis "),
+      _c("i", { staticClass: "fas fa-chevron-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -301,7 +310,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -317,7 +326,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -333,7 +342,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -349,7 +358,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -365,7 +374,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -381,7 +390,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -397,7 +406,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+    return _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
       _c("div", { staticClass: "person-box" }, [
         _c("a", { attrs: { href: "#" } }, [
           _c("div", { staticClass: "img-holder" }, [
@@ -421,7 +430,7 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -433,7 +442,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -445,7 +454,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -457,7 +466,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -469,7 +478,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -481,7 +490,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -493,7 +502,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -505,7 +514,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [
@@ -517,7 +526,7 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-xl-2 col-lg-3 col-md-4 col-6" }, [
+          _c("div", { staticClass: "col-xl-2 col-lg-3 col-4" }, [
             _c("div", { staticClass: "person-box" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _c("div", { staticClass: "img-holder" }, [

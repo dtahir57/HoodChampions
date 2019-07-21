@@ -12,15 +12,29 @@
         margin-bottom: 30px;
       }
       @media (max-width:991px) {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
+      }
+      @media (max-width:767px) {
+        display: flex;
+        align-items: flex-start;
+      }
+      .inner-img
+      {
+        width: 100px;
+        margin-left:20px;
+        @media (min-width:768px) {
+          display: none;
+        }
       }
     }
-    img
+    .outer-img
     {
-      max-width: 400px;
-
+      max-width: 400px; 
       display: block;
       margin: 0 auto;
+      @media (max-width:767px) {
+        display: none !important;
+      }
     }
   }
 }

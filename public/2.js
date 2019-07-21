@@ -167,6 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Explore',
   data: function data() {
@@ -229,7 +230,7 @@ var staticRenderFns = [
       _c("section", { staticClass: "upcoming-battles" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "common-h" }, [
-            _vm._v("Upcomming hood battles")
+            _vm._v("Upcoming hood battles")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [

@@ -233,6 +233,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Group',
   data: function data() {
@@ -270,21 +273,32 @@ var staticRenderFns = [
         _c("div", { staticClass: "interest-banner" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row align-items-center" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c("h1", { staticClass: "common-h" }, [
+                  _vm._v("Interest Groups")
+                ])
+              ]),
+              _vm._v(" "),
               _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
                 _c("div", { staticClass: "text" }, [
-                  _c("h1", { staticClass: "common-h" }, [
-                    _vm._v("Interest Groups")
-                  ]),
-                  _vm._v(" "),
                   _c("p", [
                     _vm._v(
                       "Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
                     )
                   ]),
                   _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-default block-btn" }, [
-                    _vm._v("Create Interest Group")
-                  ])
+                  _c("img", {
+                    staticClass: "inner-img",
+                    attrs: {
+                      src: __webpack_require__(/*! @/images/svg/Interest Group.svg */ "./resources/js/images/svg/Interest Group.svg"),
+                      width: "100%",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-default block-btn" }, [
+                  _vm._v("Create Interest Group")
                 ])
               ]),
               _vm._v(" "),
@@ -296,6 +310,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("img", {
+                    staticClass: "outer-img",
                     attrs: {
                       src: __webpack_require__(/*! @/images/svg/Interest Group.svg */ "./resources/js/images/svg/Interest Group.svg"),
                       width: "100%",

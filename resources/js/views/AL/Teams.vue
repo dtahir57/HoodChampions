@@ -4,15 +4,18 @@
 	    <div class="create-team-banner">
 	      <div class="container">
 	        <div class="row align-items-center">
+			<div class="col-12">
+	              <h1 class="common-h">Teams</h1>
+				</div>
 	          <div class="col-md-5 col-lg-4">
 	            <div class="text">
-	              <h1 class="common-h">Teams</h1>
 	              <p>Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!</p>
-	              <router-link type="button" class="btn btn-default block-btn" to="/team/create">Create Team</router-link>
+					<img class="inner-img" src="@/images/svg/Teams.svg" alt="img">
 	            </div>
+				  <router-link class="btn btn-default block-btn" to="/team/create">Create Team</router-link>
 	          </div>
 	          <div class="col-md-5 offset-md-2 col-lg-4 offset-lg-3">
-	            <img src="@/images/svg/Teams.svg" width="100%" alt="img">
+	            <img class="outer-img" src="@/images/svg/Teams.svg" width="100%" alt="img">
 	          </div>
 	        </div>
 	      </div>

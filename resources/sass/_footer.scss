@@ -7,18 +7,21 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        @media (max-width:991px) {
-          justify-content:space-between;
-        }
         p
         {
           color:#fff;
-            margin: 0px 20px 0px 0px;
-            font-size: 18px;
+          margin: 0px 20px 0px 0px;
+          font-size: 18px;
+          @media (max-width:991px) {
+            font-size: 14px;
+          }
         }
         img
         {
-            height: 70px;
+          height: 70px;
+          @media (max-width:991px) {
+            height:45px;
+          }
         }
     }
 }
@@ -33,8 +36,6 @@
         align-items: center;
         @media (max-width:991px) {
           flex-wrap:wrap;
-          text-align: center;
-          flex-direction: column;
         }
         p
         {
@@ -44,40 +45,55 @@
           @media (max-width:991px) {
             width: 100%;
             flex-grow: 1;
-            margin-bottom: 10px;
+            margin-top: 10px;
+            order:3;
+            font-size:13px;
             br
             {
               display: none;
             }
           }
         }
-          ul
+        @media (max-width:991px) {
+          .flinks
           {
-            li
+            order:1;
+          }
+        }
+        ul
+        {
+          li
+          {
+            a
             {
-                a
-                {
-                    color:#999;
-                    padding: 5px 10px;
-                    &:hover
-                    {
-                        color:$red;
-                    }
-                }
+              color:#999;
+              padding: 5px 10px;
+              @media (max-width:991px) {
+                padding: 5px 15px 5px 0px;
+                font-size: 13px;
+              }
+              &:hover
+              {
+                color:$red;
+              }
             }
+          }
         }
         .social
         {
           margin-left: 20px;
           @media (max-width:991px) {
             margin-left: 0px;
-            margin-top: 10px;
+            order:2;
           }
           li
           {
             a
             {
               font-size: 24px;
+              @media (max-width:991px) {
+                font-size: 18px;
+              }
             }
           }
         }

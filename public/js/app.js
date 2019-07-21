@@ -1952,7 +1952,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6413,26 +6412,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 }));
 //# sourceMappingURL=bootstrap.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/master.css":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/css/master.css ***!
-  \*********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "@font-face {\r\n  font-family: plex;\r\n  src: url(" + escape(__webpack_require__(/*! ./fonts/ibmplex.ttf */ "./resources/js/css/fonts/ibmplex.ttf")) + "); }\r\n\r\n@font-face {\r\n  font-family: light;\r\n  src: url(" + escape(__webpack_require__(/*! ./fonts/light.ttf */ "./resources/js/css/fonts/light.ttf")) + "); }\r\n\r\n@font-face {\r\n  font-family: medium;\r\n  src: url(" + escape(__webpack_require__(/*! ./fonts/medium.ttf */ "./resources/js/css/fonts/medium.ttf")) + "); }\r\n\r\n@font-face {\r\n  font-family: semibold;\r\n  src: url(" + escape(__webpack_require__(/*! ./fonts/semibold.ttf */ "./resources/js/css/fonts/semibold.ttf")) + "); }\r\n\r\n@font-face {\r\n  font-family: bold;\r\n  src: url(" + escape(__webpack_require__(/*! ./fonts/bold.ttf */ "./resources/js/css/fonts/bold.ttf")) + "); }\r\n\r\n* {\r\n  box-sizing: border-box;\r\n  font-family: \"plex\", sans-serif; }\r\n\r\n*::-moz-selection {\r\n  background-color: #b95d5d;\r\n  color: #fff; }\r\n\r\n*::selection {\r\n  background-color: #b95d5d;\r\n  color: #fff; }\r\n\r\nul {\r\n  margin: 0px;\r\n  padding: 0px; }\r\n  ul li {\r\n    list-style-type: none;\r\n    display: inline-block; }\r\n\r\na {\r\n  text-decoration: none !important;\r\n  color: #333; }\r\n  a:hover {\r\n    color: #dd2927; }\r\n\r\nhtml {\r\n  overflow-x: hidden !important;\r\n  scroll-behavior: smooth; }\r\n\r\nbody {\r\n  background-color: #fff;\r\n  margin: 0px;\r\n  position: relative;\r\n  padding: 0px;\r\n  width: 100%; }\r\n\r\nbody::-webkit-scrollbar {\r\n  width: 12px;\r\n  background-color: transparent;\r\n  position: absolute; }\r\n\r\nbody::-webkit-scrollbar-thumb {\r\n  background-color: #a30f17;\r\n  border-radius: 6px; }\r\n\r\nbody::-webkit-scrollbar-track {\r\n  background-color: #e2e2e2; }\r\n\r\n.fluid {\r\n  padding-left: 7px !important;\r\n  padding-right: 7px !important; }\r\n\r\n.mx-none {\r\n  margin: 0px -15px 0px -15px; }\r\n\r\n.mx-7p {\r\n  margin: 0px -7px 0px -7px; }\r\n\r\n.hidden {\r\n  display: none; }\r\n\r\n*:focus {\r\n  outline-color: transparent !important; }\r\n\r\n.btn:focus,\r\n.form-control:focus {\r\n  box-shadow: none !important; }\r\n\r\n.form-control {\r\n  border-radius: 0px; }\r\n\r\n.btn-outline {\r\n  background: transparent;\r\n  color: #a30f17;\r\n  border: 1px solid #a30f17;\r\n  border-radius: 0px;\r\n  font-size: 17px;\r\n  padding: 10px 30px;\r\n  -webkit-transition: .1s linear;\r\n  transition: .1s linear;\r\n  font-family: medium; }\r\n  @media (max-width: 1199px) {\r\n    .btn-outline {\r\n      font-size: 16px;\r\n      padding: 9px 28px; } }\r\n  @media (max-width: 991px) {\r\n    .btn-outline {\r\n      font-size: 15px;\r\n      padding: 8px 26px; } }\r\n  @media (max-width: 767px) {\r\n    .btn-outline {\r\n      font-size: 14px;\r\n      padding: 7px 24px; } }\r\n  .btn-outline:hover {\r\n    color: #dd2927;\r\n    border: 1px solid #dd2927; }\r\n  .btn-outline:active {\r\n    -webkit-transform: scale(0.97);\r\n    transform: scale(0.97); }\r\n\r\n.btn-default {\r\n  color: #fff;\r\n  background-color: #a30f17;\r\n  border: 1px solid #a30f17;\r\n  border-radius: 0px;\r\n  font-size: 16px;\r\n  padding: 10px 30px;\r\n  -webkit-transition: .1s linear;\r\n  transition: .1s linear;\r\n  font-family: medium; }\r\n  @media (max-width: 1199px) {\r\n    .btn-default {\r\n      font-size: 16px;\r\n      padding: 9px 28px; } }\r\n  @media (max-width: 991px) {\r\n    .btn-default {\r\n      font-size: 15px;\r\n      padding: 8px 26px; } }\r\n  @media (max-width: 767px) {\r\n    .btn-default {\r\n      font-size: 14px;\r\n      padding: 7px 24px; } }\r\n  .btn-default:hover {\r\n    background: #dd2927;\r\n    color: #fff;\r\n    border: 1px solid #dd2927; }\r\n  .btn-default:active {\r\n    -webkit-transform: scale(0.97);\r\n    transform: scale(0.97); }\r\n\r\n.link {\r\n  color: #dd2927;\r\n  text-decoration: none; }\r\n  .link:hover {\r\n    color: #dd2927; }\r\n\r\n@media (max-width: 420px) {\r\n  .col-xs-12 {\r\n    -webkit-box-flex: 0 !important;\r\n    flex: 0 0 100% !important;\r\n    max-width: 100% !important; } }\r\n\r\n.common-h {\r\n  font-size: 18px;\r\n  text-transform: uppercase;\r\n  color: #dd2927;\r\n  margin: 0px 0px 30px;\r\n  font-family: medium; }\r\n\r\ninput.form-control {\r\n  border: none;\r\n  border-bottom: 2px solid #a30f17;\r\n  height: 50px;\r\n  font-family: medium; }\r\n  input.form-control:focus {\r\n    border-color: #dd2927;\r\n    background: #fff3e6; }\r\n\r\nlabel {\r\n  text-transform: uppercase;\r\n  font-family: semibold;\r\n  color: #9a9a9a;\r\n  font-size: 14px; }\r\n  @media (max-width: 991px) {\r\n    label {\r\n      font-size: 13px; } }\r\n  @media (max-width: 767px) {\r\n    label {\r\n      font-size: 12px; } }\r\n\r\ntextarea.form-control {\r\n  border: none !important;\r\n  background: #fffbf8;\r\n  height: 200px;\r\n  padding: 10px 15px;\r\n  font-family: medium; }\r\n  textarea.form-control:focus {\r\n    background: #fff3e6; }\r\n\r\n.group-btns {\r\n  display: -webkit-box;\r\n  display: flex; }\r\n  .group-btns .btn {\r\n    width: 50%;\r\n    -webkit-box-flex: 1;\r\n    flex-grow: 1; }\r\n\r\n.main {\r\n  min-height: 100vh;\r\n  display: -webkit-box;\r\n  display: flex;\r\n  width: 100%;\r\n  margin: 0px;\r\n  padding: 0px;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n  flex-direction: column; }\r\n  .main .main-wrapper {\r\n    -webkit-box-flex: 1;\r\n    flex-grow: 1; }\r\n\r\n.navbar {\r\n  border: none;\r\n  border-radius: 0px;\r\n  padding: 0px 15px;\r\n  background: #fff; }\r\n  .navbar .navbar-brand {\r\n    padding: 0px 0px 6px; }\r\n    @media (max-width: 767px) {\r\n      .navbar .navbar-brand {\r\n        padding: 5px 0px 10px; } }\r\n    .navbar .navbar-brand img {\r\n      height: 30px; }\r\n      @media (max-width: 1199px) {\r\n        .navbar .navbar-brand img {\r\n          height: 25px; } }\r\n  .navbar .navbar-toggler {\r\n    font-size: 25px;\r\n    padding: 5px 5px 0px 5px; }\r\n    .navbar .navbar-toggler:hover {\r\n      color: #dd2927; }\r\n  .navbar .navbar-nav {\r\n    margin-right: 50px; }\r\n    @media (max-width: 991px) {\r\n      .navbar .navbar-nav {\r\n        margin-right: 0px; } }\r\n    .navbar .navbar-nav .nav-item {\r\n      display: -webkit-box;\r\n      display: flex;\r\n      -webkit-box-align: center;\r\n      align-items: center;\r\n      position: relative; }\r\n      .navbar .navbar-nav .nav-item .nav-link {\r\n        font-size: 18px;\r\n        padding: 20px 30px;\r\n        font-family: medium;\r\n        color: #9a9a9a; }\r\n        @media (max-width: 1199px) {\r\n          .navbar .navbar-nav .nav-item .nav-link {\r\n            font-size: 16px;\r\n            padding: 15px 20px; } }\r\n        @media (max-width: 991px) {\r\n          .navbar .navbar-nav .nav-item .nav-link {\r\n            font-size: 15px;\r\n            padding: 15px 12px;\r\n            font-family: plex; } }\r\n        .navbar .navbar-nav .nav-item .nav-link:hover {\r\n          color: #dd2927; }\r\n      .navbar .navbar-nav .nav-item > ul.sub-drop {\r\n        position: absolute;\r\n        top: 100%;\r\n        left: 50%;\r\n        -webkit-transform: translateX(-50%);\r\n        transform: translateX(-50%);\r\n        background: #fff3e6;\r\n        display: none;\r\n        z-index: 200; }\r\n        .navbar .navbar-nav .nav-item > ul.sub-drop li {\r\n          display: block; }\r\n          .navbar .navbar-nav .nav-item > ul.sub-drop li a {\r\n            text-align: center;\r\n            display: inline-block;\r\n            text-transform: uppercase;\r\n            color: #dd2927;\r\n            width: 100%;\r\n            white-space: nowrap;\r\n            padding: 15px 18px; }\r\n            .navbar .navbar-nav .nav-item > ul.sub-drop li a:hover {\r\n              background: #dd2927;\r\n              color: #fff; }\r\n      .navbar .navbar-nav .nav-item:hover a {\r\n        color: #dd2927; }\r\n      .navbar .navbar-nav .nav-item:hover .sub-drop, .navbar .navbar-nav .nav-item .sub-drop:hover {\r\n        display: block; }\r\n    .navbar .navbar-nav .profile-item .nav-link {\r\n      padding: 5px 15px; }\r\n    .navbar .navbar-nav .profile-item .profile-circle {\r\n      border-radius: 100%;\r\n      width: 45px;\r\n      height: 45px; }\r\n      .navbar .navbar-nav .profile-item .profile-circle img {\r\n        border-radius: 100%;\r\n        width: 100%; }\r\n\r\n.powered-bar {\r\n  background: #000;\r\n  padding: 20px 0px; }\r\n  .powered-bar .bar {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n    align-items: center;\r\n    -webkit-box-pack: start;\r\n    justify-content: flex-start; }\r\n    @media (max-width: 991px) {\r\n      .powered-bar .bar {\r\n        -webkit-box-pack: justify;\r\n        justify-content: space-between; } }\r\n    .powered-bar .bar p {\r\n      color: #fff;\r\n      margin: 0px 20px 0px 0px;\r\n      font-size: 18px; }\r\n    .powered-bar .bar img {\r\n      height: 70px; }\r\n\r\n.footer {\r\n  padding: 20px 0px;\r\n  background: #2f2f2f;\r\n  color: #999; }\r\n  .footer .frow {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n    align-items: center; }\r\n    @media (max-width: 991px) {\r\n      .footer .frow {\r\n        flex-wrap: wrap;\r\n        text-align: center;\r\n        -webkit-box-orient: vertical;\r\n        -webkit-box-direction: normal;\r\n        flex-direction: column; } }\r\n    .footer .frow p {\r\n      margin-right: auto;\r\n      margin-bottom: 0px;\r\n      font-size: 16px; }\r\n      @media (max-width: 991px) {\r\n        .footer .frow p {\r\n          width: 100%;\r\n          -webkit-box-flex: 1;\r\n          flex-grow: 1;\r\n          margin-bottom: 10px; }\r\n          .footer .frow p br {\r\n            display: none; } }\r\n    .footer .frow ul li a {\r\n      color: #999;\r\n      padding: 5px 10px; }\r\n      .footer .frow ul li a:hover {\r\n        color: #dd2927; }\r\n    .footer .frow .social {\r\n      margin-left: 20px; }\r\n      @media (max-width: 991px) {\r\n        .footer .frow .social {\r\n          margin-left: 0px;\r\n          margin-top: 10px; } }\r\n      .footer .frow .social li a {\r\n        font-size: 24px; }\r\n\r\n.newsstream {\r\n  padding: 40px 0px;\r\n  background: #fffbf8;\r\n  position: relative; }\r\n\r\n.single-feed img {\r\n  width: 100%; }\r\n\r\n.single-feed .stream-text {\r\n  height: 100%; }\r\n  .single-feed .stream-text .text {\r\n    max-height: 130px;\r\n    overflow: hidden; }\r\n  @media (max-width: 767px) {\r\n    .single-feed .stream-text {\r\n      display: -webkit-box;\r\n      display: flex;\r\n      padding: 15px 0px;\r\n      -webkit-box-align: start;\r\n      align-items: flex-start;\r\n      -webkit-box-pack: justify;\r\n      justify-content: space-between; }\r\n      .single-feed .stream-text .text {\r\n        -webkit-box-flex: 1;\r\n        flex-grow: 1; } }\r\n  .single-feed .stream-text h2 {\r\n    margin: 0px;\r\n    font-size: 18px;\r\n    color: #dd2927;\r\n    text-transform: uppercase; }\r\n  .single-feed .stream-text h3 {\r\n    font-size: 17px;\r\n    line-height: 16px;\r\n    color: #000;\r\n    font-family: semibold;\r\n    margin: 10px 0px; }\r\n    .single-feed .stream-text h3 a {\r\n      font-family: semibold; }\r\n      .single-feed .stream-text h3 a:hover {\r\n        color: #dd2927; }\r\n  .single-feed .stream-text p {\r\n    font-size: 18px;\r\n    color: #707070; }\r\n  .single-feed .stream-text .icon {\r\n    position: absolute;\r\n    bottom: 0px;\r\n    right: 0px;\r\n    width: 50%; }\r\n    @media (max-width: 767px) {\r\n      .single-feed .stream-text .icon {\r\n        position: relative;\r\n        max-width: 120px; } }\r\n\r\n.ad-box {\r\n  padding: 50px 0px; }\r\n  .ad-box .box {\r\n    width: 380px;\r\n    height: 280px;\r\n    background: #888;\r\n    text-align: center;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n    align-items: center;\r\n    -webkit-box-pack: center;\r\n    justify-content: center;\r\n    margin: 0 auto; }\r\n    .ad-box .box h1 {\r\n      color: #fff;\r\n      font-size: calc(1.2vw + 1.2em); }\r\n\r\n.battles {\r\n  background: #fff;\r\n  padding: 30px 0px; }\r\n  .battles .battle-box {\r\n    margin-bottom: 30px;\r\n    -webkit-transition: .1s ease;\r\n    transition: .1s ease; }\r\n    .battles .battle-box:hover {\r\n      box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3); }\r\n    .battles .battle-box a {\r\n      display: inline-block;\r\n      width: 100%; }\r\n    .battles .battle-box .img-holder {\r\n      position: relative;\r\n      padding-top: 60%; }\r\n      .battles .battle-box .img-holder img {\r\n        position: absolute;\r\n        top: 0px;\r\n        left: 0px;\r\n        width: 100%;\r\n        height: 100%;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        -o-object-position: center;\r\n        object-position: center; }\r\n    .battles .battle-box .content {\r\n      background: #fffbf8;\r\n      text-align: center;\r\n      padding: 20px; }\r\n      .battles .battle-box .content img {\r\n        height: 70px; }\r\n      .battles .battle-box .content h4 {\r\n        font-size: 18px;\r\n        margin: 5px 0px 0px;\r\n        color: #a30f17;\r\n        font-family: bold;\r\n        text-transform: uppercase; }\r\n      .battles .battle-box .content h5 {\r\n        color: #dd2927;\r\n        font-size: 16px;\r\n        margin: 10px 0px;\r\n        text-transform: uppercase; }\r\n      .battles .battle-box .content h6 {\r\n        font-family: semibold;\r\n        font-size: 18px;\r\n        color: #000; }\r\n      .battles .battle-box .content p {\r\n        font-size: 15px;\r\n        margin: 0px;\r\n        height: 70px;\r\n        overflow: hidden; }\r\n\r\n.display {\r\n  padding: 30px 0px;\r\n  background: #fffbf8; }\r\n  .display img {\r\n    display: block;\r\n    width: 80%;\r\n    margin: 0 auto; }\r\n    @media (max-width: 991px) {\r\n      .display img {\r\n        width: 90%; } }\r\n    @media (max-width: 576px) {\r\n      .display img {\r\n        width: 100%; } }\r\n  .display .table {\r\n    margin: 20px 0px; }\r\n    .display .table thead {\r\n      background: #a30f17; }\r\n      .display .table thead th {\r\n        color: #fff;\r\n        text-align: center;\r\n        font-weight: 500;\r\n        font-family: bold; }\r\n    .display .table tbody td {\r\n      text-align: center;\r\n      border: none;\r\n      font-size: 18px;\r\n      font-family: medium;\r\n      color: #707070;\r\n      padding: 20px 10px; }\r\n      @media (max-width: 991px) {\r\n        .display .table tbody td {\r\n          font-size: 16px; } }\r\n      @media (max-width: 767px) {\r\n        .display .table tbody td {\r\n          font-size: 15px; } }\r\n      @media (max-width: 576px) {\r\n        .display .table tbody td {\r\n          font-size: 14px; } }\r\n    .display .table tbody tr:first-child td {\r\n      color: #dd2927; }\r\n\r\n.hood-ranking .content {\r\n  padding: 40px 0px; }\r\n  .hood-ranking .content p {\r\n    color: #707070; }\r\n    @media (max-width: 991px) {\r\n      .hood-ranking .content p {\r\n        font-size: 14px; } }\r\n    @media (max-width: 576px) {\r\n      .hood-ranking .content p {\r\n        font-size: 13px; } }\r\n\r\n.hood-ranking .table td {\r\n  border: none;\r\n  color: #707070;\r\n  padding: 15px; }\r\n  .hood-ranking .table td ~ td {\r\n    text-align: center; }\r\n\r\n.hood-ranking .table .lead {\r\n  background: #fff3e6;\r\n  margin-bottom: 30px; }\r\n  .hood-ranking .table .lead td {\r\n    padding: 15px;\r\n    font-size: 17px;\r\n    color: #a30f17;\r\n    font-family: bold; }\r\n    @media (max-width: 991px) {\r\n      .hood-ranking .table .lead td {\r\n        font-size: 16px; } }\r\n    @media (max-width: 767px) {\r\n      .hood-ranking .table .lead td {\r\n        font-size: 15px; } }\r\n    @media (max-width: 576px) {\r\n      .hood-ranking .table .lead td {\r\n        font-size: 14px; } }\r\n\r\n.hood-ranking .table .lag td {\r\n  padding: 15px 15px 50px; }\r\n  @media (max-width: 991px) {\r\n    .hood-ranking .table .lag td {\r\n      font-size: 15px; } }\r\n  @media (max-width: 767px) {\r\n    .hood-ranking .table .lag td {\r\n      font-size: 14px; } }\r\n  @media (max-width: 576px) {\r\n    .hood-ranking .table .lag td {\r\n      font-size: 13px; } }\r\n\r\n.hood-ranking .table .total {\r\n  background: #a30f17;\r\n  margin-bottom: 30px; }\r\n  .hood-ranking .table .total td {\r\n    padding: 15px;\r\n    font-size: 17px;\r\n    color: #fff;\r\n    font-family: bold; }\r\n    @media (max-width: 991px) {\r\n      .hood-ranking .table .total td {\r\n        font-size: 16px; } }\r\n    @media (max-width: 767px) {\r\n      .hood-ranking .table .total td {\r\n        font-size: 15px; } }\r\n    @media (max-width: 576px) {\r\n      .hood-ranking .table .total td {\r\n        font-size: 14px; } }\r\n\r\n.about {\r\n  background: #fffbf8;\r\n  padding: 40px 0px 30px; }\r\n  .about .content {\r\n    margin-bottom: 30px; }\r\n    .about .content .common-h {\r\n      margin-bottom: 20px; }\r\n    .about .content p {\r\n      margin: 0px 0px 15px; }\r\n\r\n.contact-box {\r\n  padding: 40px 0px; }\r\n  .contact-box .container {\r\n    position: relative; }\r\n  .contact-box .form-group {\r\n    margin-bottom: 40px; }\r\n  .contact-box .corner-icon {\r\n    position: absolute;\r\n    right: 0px;\r\n    top: -40px;\r\n    z-index: 10;\r\n    -webkit-transform: translateY(-50%);\r\n    transform: translateY(-50%);\r\n    width: 7vw; }\r\n    @media (max-width: 1199px) {\r\n      .contact-box .corner-icon {\r\n        width: 8vw; } }\r\n    @media (max-width: 991px) {\r\n      .contact-box .corner-icon {\r\n        width: 9vw; } }\r\n    @media (max-width: 767px) {\r\n      .contact-box .corner-icon {\r\n        width: 60px;\r\n        right: 15px; } }\r\n\r\n.friends {\r\n  background: #fffbf8;\r\n  padding: 50px 0px; }\r\n  .friends .no-friends {\r\n    padding: 30px 0px;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n    align-items: center;\r\n    -webkit-box-pack: center;\r\n    justify-content: center;\r\n    text-align: center;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    flex-direction: column; }\r\n    .friends .no-friends img {\r\n      width: 40%; }\r\n      @media (max-width: 991px) {\r\n        .friends .no-friends img {\r\n          width: 50%; } }\r\n      @media (max-width: 576px) {\r\n        .friends .no-friends img {\r\n          width: 60%; } }\r\n    .friends .no-friends p {\r\n      margin: 0px;\r\n      color: #707070;\r\n      font-family: medium; }\r\n      .friends .no-friends p strong {\r\n        color: #dd2927;\r\n        font-family: medium; }\r\n\r\n.nearby {\r\n  padding: 50px 0px;\r\n  background: #fff; }\r\n  .nearby .common-h i {\r\n    margin-left: 40px; }\r\n\r\n.person-box {\r\n  padding: 0px 15px;\r\n  text-align: center;\r\n  margin-bottom: 25px; }\r\n  .person-box a {\r\n    display: inline-block;\r\n    width: 100%; }\r\n  .person-box .img-holder {\r\n    border-radius: 100%;\r\n    padding-top: 100%;\r\n    position: relative; }\r\n    .person-box .img-holder img {\r\n      border-radius: 100%;\r\n      position: absolute;\r\n      top: 0px;\r\n      left: 0px;\r\n      height: 100%;\r\n      width: 100%;\r\n      -o-object-fit: cover;\r\n      object-fit: cover;\r\n      -o-object-position: center;\r\n      object-position: center; }\r\n  .person-box h4 {\r\n    font-family: medium;\r\n    font-size: 16px;\r\n    margin: 10px 0px; }\r\n\r\n.friend-requests {\r\n  padding: 50px 0px; }\r\n  .friend-requests .request {\r\n    margin-bottom: 40px;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: end;\r\n    align-items: flex-end; }\r\n    @media (max-width: 991px) {\r\n      .friend-requests .request {\r\n        -webkit-box-orient: vertical;\r\n        -webkit-box-direction: normal;\r\n        flex-direction: column;\r\n        -webkit-box-pack: justify;\r\n        justify-content: space-between;\r\n        text-align: center; } }\r\n    .friend-requests .request .img-holder {\r\n      border-radius: 100%;\r\n      width: 20%;\r\n      margin-right: 20px; }\r\n      @media (max-width: 991px) {\r\n        .friend-requests .request .img-holder {\r\n          width: 120px;\r\n          margin: 0 auto; } }\r\n      @media (max-width: 767px) {\r\n        .friend-requests .request .img-holder {\r\n          width: 100px;\r\n          margin: 0 auto; } }\r\n      .friend-requests .request .img-holder img {\r\n        width: 100%;\r\n        border-radius: 100%; }\r\n    .friend-requests .request .name-action {\r\n      width: 60%; }\r\n      @media (max-width: 991px) {\r\n        .friend-requests .request .name-action {\r\n          width: 100%; } }\r\n      .friend-requests .request .name-action a {\r\n        font-size: 17px;\r\n        font-family: medium;\r\n        color: #9a9a9a;\r\n        padding: 10px 0px;\r\n        display: inline-block;\r\n        margin-bottom: 5px; }\r\n        .friend-requests .request .name-action a:hover {\r\n          color: #dd2927; }\r\n      .friend-requests .request .name-action .group-btns {\r\n        max-width: 350px;\r\n        margin: 0 auto; }\r\n\r\n.friend-profile .profile-details {\r\n  height: 100%;\r\n  text-align: center;\r\n  padding: 50px 50px;\r\n  background: #fffbf8; }\r\n  @media (max-width: 1199px) {\r\n    .friend-profile .profile-details {\r\n      padding: 50px 30px; } }\r\n  @media (max-width: 767px) {\r\n    .friend-profile .profile-details {\r\n      padding: 40px 30px 30px; } }\r\n  .friend-profile .profile-details .img-holder {\r\n    border-radius: 100%;\r\n    width: 120px;\r\n    margin: 0 auto 20px; }\r\n    .friend-profile .profile-details .img-holder img {\r\n      width: 100%;\r\n      border-radius: 100%; }\r\n  .friend-profile .profile-details h6 {\r\n    margin: 0px 0px 5px;\r\n    font-family: medium;\r\n    color: #9a9a9a;\r\n    font-size: 18px; }\r\n  .friend-profile .profile-details p {\r\n    margin: 0px;\r\n    color: #9a9a9a;\r\n    font-display: 16px;\r\n    font-family: medium; }\r\n  .friend-profile .profile-details ul {\r\n    margin: 15px 0px 30px; }\r\n    .friend-profile .profile-details ul li {\r\n      padding: 0px 16px;\r\n      font-size: 16px;\r\n      font-family: medium;\r\n      color: #9a9a9a;\r\n      position: relative; }\r\n      .friend-profile .profile-details ul li::after {\r\n        position: absolute;\r\n        content: \"\";\r\n        height: 15px;\r\n        width: 1px;\r\n        background: #ddd;\r\n        top: 50%;\r\n        -webkit-transform: translateY(-50%);\r\n        transform: translateY(-50%);\r\n        right: -1px; }\r\n      .friend-profile .profile-details ul li:last-child::after {\r\n        display: none; }\r\n  .friend-profile .profile-details .btn-outline {\r\n    width: 90%;\r\n    max-width: 330px;\r\n    margin: 0 auto;\r\n    display: block; }\r\n\r\n.friend-profile .hood-services {\r\n  margin-top: 40px;\r\n  border-top: 1px solid #ddd;\r\n  padding: 40px 15px;\r\n  text-align: left; }\r\n  .friend-profile .hood-services ul li {\r\n    padding: 0px; }\r\n    .friend-profile .hood-services ul li h5 {\r\n      font-size: 18px;\r\n      font-family: medium;\r\n      color: #000;\r\n      margin: 0px 0px 3px; }\r\n    .friend-profile .hood-services ul li p {\r\n      margin: 0px 0px 4px;\r\n      color: #9a9a9a;\r\n      font-size: 17px;\r\n      font-family: medium; }\r\n\r\n.friend-profile .about-profile {\r\n  padding: 50px 50px 50px 80px; }\r\n  @media (max-width: 1199px) {\r\n    .friend-profile .about-profile {\r\n      padding: 50px 30px; } }\r\n  @media (max-width: 767px) {\r\n    .friend-profile .about-profile {\r\n      padding: 40px 20px; } }\r\n  .friend-profile .about-profile .block {\r\n    margin-bottom: 100px; }\r\n    .friend-profile .about-profile .block ~ .block:last-child {\r\n      margin-bottom: 50px; }\r\n    .friend-profile .about-profile .block .group {\r\n      margin-bottom: 20px; }\r\n      .friend-profile .about-profile .block .group .img-holder {\r\n        position: relative;\r\n        padding-top: 60%;\r\n        margin-bottom: 5px; }\r\n        .friend-profile .about-profile .block .group .img-holder img {\r\n          -o-object-fit: cover;\r\n          object-fit: cover;\r\n          -o-object-position: center;\r\n          object-position: center;\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          left: 0px;\r\n          top: 0px; }\r\n      .friend-profile .about-profile .block .group a {\r\n        color: #111;\r\n        font-family: semibold;\r\n        font-size: 18px; }\r\n        .friend-profile .about-profile .block .group a:hover {\r\n          color: #dd2927; }\r\n      .friend-profile .about-profile .block .group p {\r\n        color: #9a9a9a;\r\n        margin: 0px; }\r\n    .friend-profile .about-profile .block .not-any p {\r\n      margin: 0px 0px 50px; }\r\n    .friend-profile .about-profile .block .not-any .btn-default {\r\n      min-width: 300px; }\r\n      @media (max-width: 991px) {\r\n        .friend-profile .about-profile .block .not-any .btn-default {\r\n          min-width: 270px; } }\r\n      @media (max-width: 767px) {\r\n        .friend-profile .about-profile .block .not-any .btn-default {\r\n          min-width: 250px; } }\r\n\r\n.not-found-error {\r\n  padding: 80px 0px;\r\n  text-align: center; }\r\n  .not-found-error p {\r\n    font-family: semibold;\r\n    font-size: 18px;\r\n    color: #9a9a9a;\r\n    margin: 20px 0px; }\r\n\r\n.login {\r\n  padding: 60px 0px 80px;\r\n  text-align: center; }\r\n  .login .common-h {\r\n    margin-bottom: 60px; }\r\n  .login p {\r\n    font-family: medium;\r\n    color: #9a9a9a;\r\n    margin: 10px 0px; }\r\n  .login a {\r\n    font-size: 16px;\r\n    font-family: semibold;\r\n    color: #a30f17; }\r\n    .login a:hover {\r\n      color: #dd2927; }\r\n  .login input.form-control {\r\n    position: relative;\r\n    background: #fff3e6;\r\n    border: 1px solid #fff3e6; }\r\n  .login .btn-fb {\r\n    background: #3366c3;\r\n    color: #fff;\r\n    width: 100%;\r\n    border-radius: 0px;\r\n    display: block;\r\n    padding: 10px 20px; }\r\n    .login .btn-fb i {\r\n      margin-right: 15px; }\r\n  .login .or {\r\n    padding: 20px 0px; }\r\n    .login .or p {\r\n      margin: 0px;\r\n      font-family: medium;\r\n      color: #9a9a9a; }\r\n  .login .v-text {\r\n    font-size: 14px;\r\n    margin: 10px 0px;\r\n    height: 45px;\r\n    overflow: hidden; }\r\n    .login .v-text p {\r\n      text-align: left;\r\n      margin: 0px;\r\n      color: #9a9a9a;\r\n      font-family: medium; }\r\n    .login .v-text .valid {\r\n      display: none;\r\n      color: #00af57; }\r\n    .login .v-text .invalid {\r\n      display: none;\r\n      color: #be2e2e; }\r\n  .login .form-control.correct {\r\n    border: 1px solid #00af57; }\r\n    .login .form-control.correct ~ .v-text .requirement {\r\n      display: none; }\r\n    .login .form-control.correct ~ .v-text .valid {\r\n      display: block; }\r\n    .login .form-control.correct ~ .mark {\r\n      display: block; }\r\n      .login .form-control.correct ~ .mark .fa-times {\r\n        display: none; }\r\n  .login .form-control.incorrect {\r\n    border: 1px solid #be2e2e; }\r\n    .login .form-control.incorrect ~ .v-text .requirement, .login .form-control.incorrect ~ .v-text .invalid {\r\n      display: block;\r\n      color: #be2e2e; }\r\n    .login .form-control.incorrect ~ .v-text .valid {\r\n      display: none; }\r\n    .login .form-control.incorrect ~ .mark {\r\n      display: block; }\r\n      .login .form-control.incorrect ~ .mark .fa-check {\r\n        display: none; }\r\n  .login .form-group {\r\n    position: relative;\r\n    min-height: 100px;\r\n    text-align: left; }\r\n    .login .form-group .mark {\r\n      position: absolute;\r\n      display: inline-block;\r\n      right: 15px;\r\n      top: 10px;\r\n      z-index: 10;\r\n      display: none; }\r\n      .login .form-group .mark .fa-times {\r\n        color: #be2e2e; }\r\n      .login .form-group .mark .fa-check {\r\n        color: #00af57; }\r\n\r\n.block-btn {\r\n  width: 100%; }\r\n\r\n.modal-open {\r\n  padding-right: 0px !important; }\r\n\r\n.modal-open section {\r\n  padding-right: 0px !important;\r\n  -webkit-filter: blur(3px);\r\n  filter: blur(3px); }\r\n\r\n.modal .modal-header {\r\n  border: none; }\r\n  .modal .modal-header .close {\r\n    color: #a30f17;\r\n    opacity: 1; }\r\n    .modal .modal-header .close:hover {\r\n      color: #dd2927;\r\n      opacity: 1; }\r\n\r\n.modal .modal-body .btn-default {\r\n  min-height: 50px; }\r\n\r\n.login-modal {\r\n  text-align: center; }\r\n  .login-modal .modal-body p {\r\n    color: #9a9a9a; }\r\n\r\n.modal-backdrop.show {\r\n  opacity: .9; }\r\n\r\n.modal-dialog {\r\n  top: 40%;\r\n  margin-top: 0px !important;\r\n  -webkit-transform: translateY(-50%) !important;\r\n  transform: translateY(-50%) !important; }\r\n\r\n.select2 {\r\n  text-align: left; }\r\n\r\n.select2-results__options li {\r\n  display: block !important;\r\n  padding: 15px 10px; }\r\n\r\n.select2-search {\r\n  display: none; }\r\n\r\n.select2-container--default .select2-selection--single {\r\n  background: #fff3e6;\r\n  border: 1px solid #fff3e6;\r\n  height: 50px; }\r\n\r\n.select2-container--default .select2-selection--single .select2-selection__rendered {\r\n  line-height: 46px;\r\n  color: #333;\r\n  font-family: medium; }\r\n\r\n.select2-selection__arrow b {\r\n  border: none !important; }\r\n\r\n.select2-selection__arrow::after {\r\n  content: \"\\F107\";\r\n  font-family: \"Font Awesome 5 Pro\";\r\n  font-weight: 400;\r\n  position: absolute;\r\n  z-index: 100;\r\n  top: 7px;\r\n  color: #a30f17;\r\n  font-size: 24px;\r\n  right: 10px; }\r\n\r\n.select2-container--default .select2-results__option--highlighted[aria-selected] {\r\n  background: #dd2927;\r\n  color: #fff; }\r\n\r\n.select2-dropdown {\r\n  background-color: #fff3e6;\r\n  border: 1px solid #fff3e6; }\r\n\r\n.datepicker--day-name {\r\n  font-size: 14px;\r\n  font-family: medium;\r\n  color: #dd2927; }\r\n\r\n.datepicker--cell.datepicker--cell-day.-selected- {\r\n  background: #dd2927;\r\n  color: #fff; }\r\n\r\n.terms-check {\r\n  display: -webkit-box;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  align-items: center;\r\n  -webkit-box-pack: center !important;\r\n  justify-content: center !important;\r\n  margin-bottom: 15px; }\r\n  .terms-check input {\r\n    display: none; }\r\n  .terms-check label {\r\n    position: relative;\r\n    text-transform: none !important; }\r\n    .terms-check label::-moz-selection {\r\n      background: white;\r\n      color: #9a9a9a; }\r\n    .terms-check label::selection {\r\n      background: white;\r\n      color: #9a9a9a; }\r\n    .terms-check label::before {\r\n      content: \" \";\r\n      height: 20px;\r\n      width: 20px;\r\n      border: 2px solid #a30f17;\r\n      position: absolute;\r\n      left: -30px;\r\n      z-index: 10;\r\n      top: 3px;\r\n      border-radius: 100%; }\r\n    .terms-check label::after {\r\n      content: \"\\F00C\";\r\n      font-family: \"Font Awesome 5 Pro\";\r\n      font-weight: 400;\r\n      font-size: 14px;\r\n      position: absolute;\r\n      left: -27.5px;\r\n      z-index: 10;\r\n      top: 3px;\r\n      color: #a30f17;\r\n      display: none; }\r\n  .terms-check input[type=checkbox]:checked ~ label::after {\r\n    display: block; }\r\n\r\n.form-check {\r\n  display: -webkit-box;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  align-items: center;\r\n  -webkit-box-pack: start;\r\n  justify-content: flex-start;\r\n  margin: 10px 0px 20px;\r\n  padding-left: 0px; }\r\n  .form-check input {\r\n    display: none; }\r\n  .form-check label {\r\n    position: relative;\r\n    text-transform: none !important;\r\n    padding-left: 30px;\r\n    font-size: 16px !important; }\r\n    .form-check label a {\r\n      padding-left: 4px; }\r\n    .form-check label::-moz-selection {\r\n      background: white;\r\n      color: #9a9a9a; }\r\n    .form-check label::selection {\r\n      background: white;\r\n      color: #9a9a9a; }\r\n    .form-check label::before {\r\n      content: \" \";\r\n      height: 20px;\r\n      width: 20px;\r\n      border: 2px solid #a30f17;\r\n      position: absolute;\r\n      left: 0px;\r\n      z-index: 10;\r\n      top: 3px;\r\n      border-radius: 100%; }\r\n    .form-check label::after {\r\n      content: \"\\F00C\";\r\n      font-family: \"Font Awesome 5 Pro\";\r\n      font-weight: 400;\r\n      font-size: 14px;\r\n      position: absolute;\r\n      left: 3px;\r\n      z-index: 10;\r\n      top: 3px;\r\n      color: #a30f17;\r\n      display: none; }\r\n  .form-check input[type=checkbox]:checked ~ label::after {\r\n    display: block; }\r\n\r\n.news-stream {\r\n  padding: 60px 0px;\r\n  background: #fffbf8;\r\n  position: relative; }\r\n  .news-stream .single-feed {\r\n    margin-bottom: 100px; }\r\n    .news-stream .single-feed:last-child {\r\n      margin-bottom: 0px; }\r\n    @media (max-width: 767px) {\r\n      .news-stream .single-feed {\r\n        margin-bottom: 60px; } }\r\n    @media (max-width: 576px) {\r\n      .news-stream .single-feed {\r\n        margin-bottom: 50px; } }\r\n\r\n.teams .create-team-banner {\r\n  background: #fffbf8;\r\n  padding: 60px 0px; }\r\n  .teams .create-team-banner .text p {\r\n    color: #9a9a9a;\r\n    margin-bottom: 30px; }\r\n  @media (max-width: 991px) {\r\n    .teams .create-team-banner .text {\r\n      margin-bottom: 30px; } }\r\n  .teams .create-team-banner img {\r\n    max-width: 400px;\r\n    display: block;\r\n    margin: 0 auto; }\r\n\r\n.my-teams {\r\n  padding: 50px 0px; }\r\n\r\n.team-box {\r\n  margin-bottom: 20px; }\r\n  .team-box .img-holder {\r\n    position: relative;\r\n    padding-top: 60%;\r\n    margin-bottom: 5px; }\r\n    .team-box .img-holder img {\r\n      -o-object-fit: cover;\r\n      object-fit: cover;\r\n      -o-object-position: center;\r\n      object-position: center;\r\n      width: 100%;\r\n      height: 100%;\r\n      position: absolute;\r\n      left: 0px;\r\n      top: 0px; }\r\n  .team-box a {\r\n    color: #111;\r\n    font-family: semibold;\r\n    font-size: 18px; }\r\n    .team-box a:hover {\r\n      color: #dd2927; }\r\n  .team-box p {\r\n    color: #9a9a9a;\r\n    margin: 0px; }\r\n\r\n.all-teams {\r\n  padding: 50px 0px;\r\n  background: #fffbf8; }\r\n\r\n.join-team {\r\n  padding: 40px 0px 60px; }\r\n  .join-team .img-holder {\r\n    position: relative;\r\n    padding-top: 60%; }\r\n    .join-team .img-holder img {\r\n      width: 100%;\r\n      position: absolute;\r\n      -o-object-fit: cover;\r\n      object-fit: cover;\r\n      -o-object-position: center;\r\n      object-position: center;\r\n      left: 0px;\r\n      top: 0px;\r\n      height: 100%; }\r\n  .join-team .team-info {\r\n    height: 100%;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    flex-direction: column; }\r\n    @media (max-width: 767px) {\r\n      .join-team .team-info {\r\n        margin-top: 10px; } }\r\n    .join-team .team-info .text {\r\n      -webkit-box-flex: 1;\r\n      flex-grow: 1;\r\n      overflow: hidden; }\r\n    .join-team .team-info h3 {\r\n      font-size: 17px;\r\n      line-height: 16px;\r\n      color: #000;\r\n      font-family: semibold;\r\n      margin: 10px 0px; }\r\n    .join-team .team-info span {\r\n      color: #707070;\r\n      display: block;\r\n      padding: 0px 0px 5px 0px; }\r\n    .join-team .team-info p {\r\n      font-size: 16px;\r\n      color: #000; }\r\n\r\n.info-msg {\r\n  background: #fff3e6;\r\n  width: 100%;\r\n  padding: 15px 20px;\r\n  margin: 10px 0px 20px;\r\n  text-align: left !important;\r\n  display: inline-block; }\r\n  .info-msg p {\r\n    margin: 0px;\r\n    color: #707070; }\r\n\r\n.team-posts {\r\n  padding: 60px 0px 80px;\r\n  background: #fffbf8;\r\n  border-top: 2px solid #eee;\r\n  border-bottom: 2px solid #eee; }\r\n  @media (max-width: 767px) {\r\n    .team-posts {\r\n      padding: 40px 0px 60px; } }\r\n  .team-posts .publisher {\r\n    text-align: center; }\r\n    .team-posts .publisher .img-holder {\r\n      height: 100px;\r\n      width: 100px;\r\n      position: relative;\r\n      display: block;\r\n      margin: 0 auto 20px; }\r\n      .team-posts .publisher .img-holder img {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        width: 100%;\r\n        height: 100%;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        border-radius: 100%; }\r\n  @media (max-width: 767px) {\r\n    .team-posts .posts {\r\n      margin-top: 20px; } }\r\n\r\n.team-details {\r\n  padding: 60px 0px; }\r\n  .team-details .common-h {\r\n    text-align: center; }\r\n  .team-details .about-team ul li {\r\n    display: block;\r\n    margin-bottom: 20px; }\r\n    .team-details .about-team ul li:last-child {\r\n      margin-bottom: 0px; }\r\n    .team-details .about-team ul li p {\r\n      margin: 0px;\r\n      color: #000; }\r\n    .team-details .about-team ul li span {\r\n      color: #9a9a9a; }\r\n  .team-details .members .single-member {\r\n    margin-bottom: 30px; }\r\n    .team-details .members .single-member a {\r\n      display: -webkit-box;\r\n      display: flex;\r\n      -webkit-box-align: center;\r\n      align-items: center; }\r\n    .team-details .members .single-member .img-holder {\r\n      height: 50px;\r\n      width: 50px;\r\n      position: relative;\r\n      display: block;\r\n      margin-right: 15px; }\r\n      .team-details .members .single-member .img-holder img {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        width: 100%;\r\n        height: 100%;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        border-radius: 100%; }\r\n    .team-details .members .single-member .name-place {\r\n      -webkit-box-flex: 1;\r\n      flex-grow: 1; }\r\n      .team-details .members .single-member .name-place h4 {\r\n        font-family: medium;\r\n        font-size: 16px;\r\n        margin: 0px;\r\n        color: #9a9a9a; }\r\n        .team-details .members .single-member .name-place h4:hover {\r\n          color: #dd2927; }\r\n      .team-details .members .single-member .name-place p {\r\n        font-size: 14px;\r\n        color: #9a9a9a;\r\n        margin: 2px 0px 0px; }\r\n\r\n.create-battle-banner {\r\n  background: #fffbf8;\r\n  padding: 60px 0px; }\r\n  .create-battle-banner .text p {\r\n    color: #9a9a9a;\r\n    margin-bottom: 30px; }\r\n  @media (max-width: 991px) {\r\n    .create-battle-banner .text {\r\n      margin-bottom: 30px; } }\r\n  .create-battle-banner img {\r\n    max-width: 180px;\r\n    display: block;\r\n    margin: 0 auto; }\r\n\r\n.create-battle {\r\n  padding: 40px 0px 60px; }\r\n  .create-battle .img-holder {\r\n    position: relative;\r\n    padding-top: 60%; }\r\n    .create-battle .img-holder img {\r\n      width: 100%;\r\n      position: absolute;\r\n      -o-object-fit: cover;\r\n      object-fit: cover;\r\n      -o-object-position: center;\r\n      object-position: center;\r\n      left: 0px;\r\n      top: 0px;\r\n      height: 100%; }\r\n  .create-battle .team-info {\r\n    height: 100%;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    flex-direction: column; }\r\n    @media (max-width: 767px) {\r\n      .create-battle .team-info {\r\n        margin-top: 10px; } }\r\n    .create-battle .team-info .text {\r\n      -webkit-box-flex: 1;\r\n      flex-grow: 1;\r\n      overflow: hidden; }\r\n    .create-battle .team-info h3 {\r\n      font-size: 17px;\r\n      line-height: 16px;\r\n      color: #000;\r\n      font-family: semibold;\r\n      margin: 10px 0px;\r\n      display: -webkit-box;\r\n      display: flex;\r\n      -webkit-box-pack: justify;\r\n      justify-content: space-between;\r\n      -webkit-box-align: center;\r\n      align-items: center; }\r\n      .create-battle .team-info h3 a {\r\n        color: #a30f17; }\r\n        .create-battle .team-info h3 a:hover {\r\n          color: #dd2927; }\r\n    .create-battle .team-info span {\r\n      color: #707070;\r\n      display: block;\r\n      padding: 0px 0px 5px 0px; }\r\n    .create-battle .team-info p {\r\n      font-size: 16px;\r\n      color: #000; }\r\n\r\n.team-battles {\r\n  padding: 60px 0px 80px;\r\n  background: #fffbf8;\r\n  border-top: 2px solid #eee;\r\n  border-bottom: 2px solid #eee; }\r\n  @media (max-width: 767px) {\r\n    .team-battles {\r\n      padding: 40px 0px 60px; } }\r\n  .team-battles .row > div {\r\n    position: relative; }\r\n  .team-battles .publisher {\r\n    text-align: center;\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    top: 15px; }\r\n    .team-battles .publisher .img-holder {\r\n      height: 100px;\r\n      width: 100px;\r\n      position: relative;\r\n      display: block;\r\n      margin: 0 auto 20px; }\r\n      .team-battles .publisher .img-holder img {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        width: 100%;\r\n        height: 100%;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        border-radius: 100%; }\r\n  .team-battles .battles {\r\n    background: #fffbf8; }\r\n    @media (max-width: 767px) {\r\n      .team-battles .battles {\r\n        margin-top: 20px; } }\r\n    .team-battles .battles > ul > li {\r\n      display: inline-block;\r\n      padding: 15px 0px;\r\n      border-bottom: 1px solid #ddd;\r\n      width: 100% !important; }\r\n      .team-battles .battles > ul > li .strip {\r\n        display: -webkit-box;\r\n        display: flex;\r\n        -webkit-box-align: center;\r\n        align-items: center;\r\n        -webkit-box-pack: justify;\r\n        justify-content: space-between;\r\n        background: #fff;\r\n        border: 1px solid #fff3e6;\r\n        padding: 6px 20px; }\r\n        .team-battles .battles > ul > li .strip .img-holder {\r\n          width: 40px;\r\n          border-radius: 100%;\r\n          height: 40px; }\r\n          .team-battles .battles > ul > li .strip .img-holder img {\r\n            border-radius: 100%;\r\n            width: 100%;\r\n            height: 100%;\r\n            -o-object-fit: cover;\r\n            object-fit: cover;\r\n            -o-object-position: center;\r\n            object-position: center; }\r\n        .team-battles .battles > ul > li .strip p {\r\n          color: #707070;\r\n          margin: 0px; }\r\n      .team-battles .battles > ul > li .bdate {\r\n        padding-top: 5px;\r\n        text-align: right; }\r\n        .team-battles .battles > ul > li .bdate span {\r\n          font-size: 12px;\r\n          color: #707070; }\r\n        .team-battles .battles > ul > li .bdate .remove-action {\r\n          display: inline-block;\r\n          margin: 0px 5px;\r\n          width: 0px;\r\n          height: 0px;\r\n          white-space: nowrap;\r\n          opacity: 0;\r\n          -webkit-transition: width .2s linear;\r\n          transition: width .2s linear; }\r\n          .team-battles .battles > ul > li .bdate .remove-action.show {\r\n            width: auto;\r\n            height: auto;\r\n            opacity: 1;\r\n            margin: 0px 10px; }\r\n          .team-battles .battles > ul > li .bdate .remove-action li a {\r\n            font-size: 13px;\r\n            padding: 0px 5px;\r\n            font-family: medium; }\r\n          .team-battles .battles > ul > li .bdate .remove-action li::after {\r\n            content: \"/\";\r\n            font-size: 11px;\r\n            color: #9a9a9a; }\r\n          .team-battles .battles > ul > li .bdate .remove-action li:last-child:after {\r\n            display: none; }\r\n        .team-battles .battles > ul > li .bdate .trash {\r\n          font-size: 13px;\r\n          color: #a30f17;\r\n          display: none; }\r\n          .team-battles .battles > ul > li .bdate .trash.stay {\r\n            display: inline-block !important; }\r\n          @media (max-width: 767px) {\r\n            .team-battles .battles > ul > li .bdate .trash {\r\n              display: inline-block !important; } }\r\n          .team-battles .battles > ul > li .bdate .trash:hover {\r\n            color: #dd2927; }\r\n      .team-battles .battles > ul > li:hover .trash {\r\n        display: inline-block; }\r\n\r\n.battle-details {\r\n  padding: 60px 0px; }\r\n  .battle-details .common-h {\r\n    text-align: center; }\r\n  .battle-details .about-team ul li {\r\n    display: block;\r\n    margin-bottom: 20px; }\r\n    .battle-details .about-team ul li:last-child {\r\n      margin-bottom: 0px; }\r\n    .battle-details .about-team ul li p {\r\n      margin: 0px;\r\n      color: #000; }\r\n    .battle-details .about-team ul li span {\r\n      color: #9a9a9a; }\r\n  .battle-details .members .single-member {\r\n    margin-bottom: 30px; }\r\n    .battle-details .members .single-member a {\r\n      display: -webkit-box;\r\n      display: flex;\r\n      -webkit-box-align: center;\r\n      align-items: center; }\r\n    .battle-details .members .single-member .img-holder {\r\n      height: 50px;\r\n      width: 50px;\r\n      position: relative;\r\n      display: block;\r\n      margin-right: 15px; }\r\n      .battle-details .members .single-member .img-holder img {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        width: 100%;\r\n        height: 100%;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        border-radius: 100%; }\r\n    .battle-details .members .single-member .name-place {\r\n      -webkit-box-flex: 1;\r\n      flex-grow: 1; }\r\n      .battle-details .members .single-member .name-place h4 {\r\n        font-family: medium;\r\n        font-size: 16px;\r\n        margin: 0px;\r\n        color: #9a9a9a; }\r\n        .battle-details .members .single-member .name-place h4:hover {\r\n          color: #dd2927; }\r\n      .battle-details .members .single-member .name-place p {\r\n        font-size: 14px;\r\n        color: #9a9a9a;\r\n        margin: 2px 0px 0px; }\r\n  .battle-details .f-row {\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: start;\r\n    align-items: flex-start;\r\n    -webkit-box-pack: justify;\r\n    justify-content: space-between; }\r\n    @media (max-width: 767px) {\r\n      .battle-details .f-row {\r\n        -webkit-box-orient: vertical;\r\n        -webkit-box-direction: normal;\r\n        flex-direction: column;\r\n        justify-content: space-around !important; }\r\n        .battle-details .f-row .column {\r\n          margin: 0 auto 40px; }\r\n        .battle-details .f-row .column:first-child,\r\n        .battle-details .f-row .column:last-child {\r\n          text-align: center; }\r\n        .battle-details .f-row .column:last-child {\r\n          margin: 0 auto 0px; } }\r\n    .battle-details .f-row .column {\r\n      min-width: 120px; }\r\n  .battle-details .results h5 {\r\n    display: inline-block;\r\n    width: 100%;\r\n    color: #9a9a9a;\r\n    text-transform: uppercase;\r\n    font-size: 14px;\r\n    margin: 0px 0px 10px; }\r\n  .battle-details .results table {\r\n    margin: 10px 0px; }\r\n    .battle-details .results table tr td {\r\n      padding: 5px 7px;\r\n      font-family: medium; }\r\n    .battle-details .results table .winner td {\r\n      color: #dd2927; }\r\n\r\n.edit-battle {\r\n  padding: 60px 0px;\r\n  background: #fffbf8; }\r\n  .edit-battle .common-h {\r\n    border-bottom: 2px solid #dd2927;\r\n    display: inline-block;\r\n    padding-bottom: 5px; }\r\n  .edit-battle h5 {\r\n    font-size: 14px;\r\n    color: #dd2927;\r\n    margin: 0px;\r\n    text-transform: uppercase;\r\n    margin: 20px 0px 30px; }\r\n  .edit-battle label {\r\n    font-size: 14px;\r\n    font-family: plex;\r\n    font-weight: 400;\r\n    color: #9a9a9a;\r\n    letter-spacing: 1px;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n    align-items: center;\r\n    -webkit-box-pack: justify;\r\n    justify-content: space-between; }\r\n    .edit-battle label span {\r\n      font-size: 14px;\r\n      font-family: plex;\r\n      font-weight: 400;\r\n      color: #9a9a9a;\r\n      letter-spacing: 1px; }\r\n  .edit-battle .form-group {\r\n    margin-bottom: 30px;\r\n    display: inline-block;\r\n    width: 100%; }\r\n    .edit-battle .form-group input.form-control {\r\n      background: #fffbf8; }\r\n      .edit-battle .form-group input.form-control:focus {\r\n        background: #fff3e6; }\r\n    .edit-battle .form-group textarea {\r\n      background: #fff3e6;\r\n      height: 160px; }\r\n    .edit-battle .form-group .img-box {\r\n      position: relative;\r\n      padding-top: 60%;\r\n      background: #f1f1f1;\r\n      border: none; }\r\n      .edit-battle .form-group .img-box .remove-img {\r\n        background: #a30f17;\r\n        padding: 0px 7px;\r\n        color: #fff;\r\n        font-size: 20px;\r\n        position: absolute;\r\n        top: 0px;\r\n        right: 0px;\r\n        z-index: 60; }\r\n      .edit-battle .form-group .img-box::after {\r\n        content: \"\\F03E\";\r\n        font-family: \"Font Awesome 5 Pro\";\r\n        font-weight: 400;\r\n        position: absolute;\r\n        z-index: 10;\r\n        font-size: 5vw;\r\n        top: 50%;\r\n        left: 50%;\r\n        -webkit-transform: translate(-50%, -50%);\r\n        transform: translate(-50%, -50%);\r\n        color: #9a9a9a; }\r\n      .edit-battle .form-group .img-box img {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        height: 100%;\r\n        width: 100%;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        z-index: 50;\r\n        opacity: 0; }\r\n        .edit-battle .form-group .img-box img.visible {\r\n          opacity: 1; }\r\n    .edit-battle .form-group .file-holder {\r\n      display: none; }\r\n    .edit-battle .form-group .img-uploader {\r\n      margin: 20px 0px 10px; }\r\n    .edit-battle .form-group p {\r\n      color: #9a9a9a; }\r\n\r\n.select2-results__options::-webkit-scrollbar {\r\n  width: 6px;\r\n  background-color: #707070;\r\n  position: absolute; }\r\n\r\n.select2-results__options::-webkit-scrollbar-thumb {\r\n  background-color: #fff;\r\n  border-radius: 6px;\r\n  border: 2px solid #707070; }\r\n\r\n.select2-results__options::-webkit-scrollbar-track {\r\n  background-color: #707070; }\r\n\r\n.select2-results__options {\r\n  max-height: 220px !important; }\r\n\r\n.search-bar {\r\n  background: #fff3e6;\r\n  display: inline-block;\r\n  width: 100%; }\r\n  .search-bar .input-group {\r\n    margin-bottom: 0px; }\r\n    .search-bar .input-group .input-group-prepend .input-group-text {\r\n      background-color: transparent;\r\n      border: none;\r\n      padding: 0px;\r\n      color: #9a9a9a;\r\n      font-size: 18px; }\r\n    .search-bar .input-group .form-control {\r\n      background: transparent;\r\n      border: none !important;\r\n      font-size: 18px;\r\n      color: #111;\r\n      font-family: medium;\r\n      height: 50px; }\r\n      .search-bar .input-group .form-control::-webkit-input-placeholder {\r\n        color: #9a9a9a; }\r\n      .search-bar .input-group .form-control:-ms-input-placeholder {\r\n        color: #9a9a9a; }\r\n      .search-bar .input-group .form-control::-ms-input-placeholder {\r\n        color: #9a9a9a; }\r\n      .search-bar .input-group .form-control::-moz-placeholder {\r\n        color: #9a9a9a; }\r\n      .search-bar .input-group .form-control::placeholder {\r\n        color: #9a9a9a; }\r\n\r\n.upcoming-battles {\r\n  padding: 50px 0px;\r\n  background: #fffbf8; }\r\n  .upcoming-battles .battle-box {\r\n    margin-bottom: 20px; }\r\n    .upcoming-battles .battle-box a {\r\n      display: inline-block;\r\n      width: 100%; }\r\n    .upcoming-battles .battle-box .img-holder {\r\n      position: relative;\r\n      padding-top: 60%;\r\n      margin-bottom: 5px; }\r\n      .upcoming-battles .battle-box .img-holder img {\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px; }\r\n    .upcoming-battles .battle-box .text span {\r\n      display: block;\r\n      color: #dd2927;\r\n      font-size: 16px;\r\n      text-transform: uppercase; }\r\n    .upcoming-battles .battle-box .text h4 {\r\n      margin: 5px 0px;\r\n      color: #111;\r\n      font-family: semibold;\r\n      font-size: 18px; }\r\n      .upcoming-battles .battle-box .text h4:hover {\r\n        color: #dd2927; }\r\n    .upcoming-battles .battle-box .text p {\r\n      color: #9a9a9a;\r\n      margin: 0px; }\r\n\r\n.ad-holder {\r\n  clear: both;\r\n  padding: 15px 0px; }\r\n  .ad-holder .ad {\r\n    background: #707070;\r\n    color: #fff;\r\n    max-width: 800px;\r\n    margin: 0 auto; }\r\n    .ad-holder .ad h1 {\r\n      font-size: calc(1vw + 2em);\r\n      text-align: center;\r\n      padding: 20px 0px; }\r\n\r\n.head-title-icon {\r\n  display: -webkit-box;\r\n  display: flex;\r\n  margin-bottom: 30px;\r\n  -webkit-box-align: end;\r\n  align-items: flex-end;\r\n  -webkit-box-pack: justify;\r\n  justify-content: space-between;\r\n  position: relative; }\r\n  .head-title-icon .common-h {\r\n    margin-bottom: 0px !important; }\r\n  .head-title-icon .icon {\r\n    position: absolute;\r\n    bottom: 0px;\r\n    right: 0px; }\r\n    .head-title-icon .icon img {\r\n      height: calc(2.5em + 3vw); }\r\n\r\n.featured {\r\n  padding: 60px 0px; }\r\n  .featured .group {\r\n    margin-bottom: 20px; }\r\n    .featured .group .img-holder {\r\n      position: relative;\r\n      padding-top: 60%;\r\n      margin-bottom: 5px; }\r\n      .featured .group .img-holder img {\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px; }\r\n    .featured .group a {\r\n      color: #111;\r\n      font-family: semibold;\r\n      font-size: 18px; }\r\n      .featured .group a:hover {\r\n        color: #dd2927; }\r\n    .featured .group p {\r\n      color: #9a9a9a;\r\n      margin: 0px; }\r\n\r\n.interest .interest-banner {\r\n  background: #fffbf8;\r\n  padding: 60px 0px; }\r\n  .interest .interest-banner .text p {\r\n    color: #9a9a9a;\r\n    margin-bottom: 30px; }\r\n  @media (max-width: 991px) {\r\n    .interest .interest-banner .text {\r\n      margin-bottom: 30px; } }\r\n  .interest .interest-banner img {\r\n    max-width: 100px;\r\n    display: block;\r\n    margin: 0 auto; }\r\n\r\n.categories {\r\n  padding: 50px 0px; }\r\n  .categories .categories-slider .item {\r\n    text-align: center; }\r\n    .categories .categories-slider .item .img-holder {\r\n      position: relative;\r\n      padding-top: 100%;\r\n      max-width: 120px;\r\n      display: block;\r\n      margin: 0 auto; }\r\n      @media (max-width: 1400px) {\r\n        .categories .categories-slider .item .img-holder {\r\n          max-width: 100px; } }\r\n      @media (max-width: 1199px) {\r\n        .categories .categories-slider .item .img-holder {\r\n          max-width: 90px; } }\r\n      @media (max-width: 767px) {\r\n        .categories .categories-slider .item .img-holder {\r\n          max-width: 80px; } }\r\n      @media (max-width: 576px) {\r\n        .categories .categories-slider .item .img-holder {\r\n          max-width: 60px; } }\r\n      .categories .categories-slider .item .img-holder img {\r\n        position: absolute;\r\n        left: 0px;\r\n        right: 0px;\r\n        top: 0px;\r\n        height: 100%;\r\n        width: 100%;\r\n        -o-object-fit: contain;\r\n        object-fit: contain;\r\n        -o-object-position: center;\r\n        object-position: center; }\r\n  .categories .categories-slider h5.ctg-title {\r\n    margin: 0px 0px 10px;\r\n    font-size: 16px;\r\n    text-align: center !important;\r\n    font-family: bold; }\r\n    @media (max-width: 1199px) {\r\n      .categories .categories-slider h5.ctg-title {\r\n        font-size: 15px; } }\r\n    @media (max-width: 991px) {\r\n      .categories .categories-slider h5.ctg-title {\r\n        font-size: 14px; } }\r\n    @media (max-width: 767px) {\r\n      .categories .categories-slider h5.ctg-title {\r\n        font-size: 13px; } }\r\n    @media (max-width: 576px) {\r\n      .categories .categories-slider h5.ctg-title {\r\n        font-size: 12px; } }\r\n\r\n.owl-carousel {\r\n  position: relative; }\r\n  .owl-carousel .owl-nav {\r\n    position: absolute;\r\n    top: 50%;\r\n    width: 100%;\r\n    -webkit-transform: translateY(-50%);\r\n    transform: translateY(-50%); }\r\n    .owl-carousel .owl-nav .owl-prev,\r\n    .owl-carousel .owl-nav .owl-next {\r\n      position: absolute;\r\n      padding: 2px 10px; }\r\n      .owl-carousel .owl-nav .owl-prev i,\r\n      .owl-carousel .owl-nav .owl-next i {\r\n        color: #a30f17;\r\n        font-size: calc(1.5vw + 1em); }\r\n      .owl-carousel .owl-nav .owl-prev:hover i,\r\n      .owl-carousel .owl-nav .owl-next:hover i {\r\n        color: #dd2927; }\r\n    .owl-carousel .owl-nav .owl-prev {\r\n      left: -1vw; }\r\n    .owl-carousel .owl-nav .owl-next {\r\n      right: -1vw; }\r\n\r\n.mi-groups {\r\n  background: #fffbf8; }\r\n\r\n.interest-group-none {\r\n  background: #fffbf8;\r\n  text-align: center;\r\n  padding: 50px 0px; }\r\n  .interest-group-none img {\r\n    margin-bottom: 20px; }\r\n  .interest-group-none p {\r\n    margin: 0px 0px;\r\n    font-family: medium;\r\n    color: #9a9a9a; }\r\n  .interest-group-none a {\r\n    font-family: semibold;\r\n    color: #dd2927;\r\n    font-size: 16px; }\r\n    .interest-group-none a:hover {\r\n      color: #a30f17; }\r\n\r\n.join-interest-group {\r\n  padding: 40px 0px 60px; }\r\n  .join-interest-group .img-holder {\r\n    position: relative;\r\n    padding-top: 60%; }\r\n    .join-interest-group .img-holder img {\r\n      width: 100%;\r\n      position: absolute;\r\n      -o-object-fit: cover;\r\n      object-fit: cover;\r\n      -o-object-position: center;\r\n      object-position: center;\r\n      left: 0px;\r\n      top: 0px;\r\n      height: 100%; }\r\n  .join-interest-group .ig-info {\r\n    height: 100%;\r\n    display: -webkit-box;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    flex-direction: column; }\r\n    @media (max-width: 767px) {\r\n      .join-interest-group .ig-info {\r\n        margin-top: 10px; } }\r\n    .join-interest-group .ig-info .text {\r\n      -webkit-box-flex: 1;\r\n      flex-grow: 1;\r\n      overflow: hidden; }\r\n    .join-interest-group .ig-info h3 {\r\n      font-size: 17px;\r\n      line-height: 16px;\r\n      color: #000;\r\n      font-family: semibold;\r\n      margin: 10px 0px;\r\n      display: -webkit-box;\r\n      display: flex;\r\n      -webkit-box-pack: justify;\r\n      justify-content: space-between;\r\n      -webkit-box-align: center;\r\n      align-items: center; }\r\n      .join-interest-group .ig-info h3 a {\r\n        color: #a30f17; }\r\n        .join-interest-group .ig-info h3 a:hover {\r\n          color: #dd2927; }\r\n    .join-interest-group .ig-info span {\r\n      color: #707070;\r\n      display: block;\r\n      padding: 0px 0px 5px 0px; }\r\n    .join-interest-group .ig-info p {\r\n      font-size: 16px;\r\n      color: #000; }\r\n\r\n.ig-activities {\r\n  padding: 60px 0px 80px;\r\n  background: #fffbf8;\r\n  border-top: 2px solid #eee;\r\n  border-bottom: 2px solid #eee; }\r\n  @media (max-width: 767px) {\r\n    .ig-activities {\r\n      padding: 40px 0px 60px; } }\r\n  .ig-activities .row > div {\r\n    position: relative; }\r\n  .ig-activities .publisher {\r\n    text-align: center;\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    top: 15px; }\r\n    .ig-activities .publisher .img-holder {\r\n      height: 100px;\r\n      width: 100px;\r\n      position: relative;\r\n      display: block;\r\n      margin: 0 auto 20px; }\r\n      .ig-activities .publisher .img-holder img {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        width: 100%;\r\n        height: 100%;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        border-radius: 100%; }\r\n  .ig-activities .activities {\r\n    background: #fffbf8; }\r\n    @media (max-width: 767px) {\r\n      .ig-activities .activities {\r\n        margin-top: 20px; } }\r\n    .ig-activities .activities > ul > li {\r\n      display: inline-block;\r\n      padding: 15px 0px;\r\n      border-bottom: 1px solid #ddd;\r\n      width: 100% !important; }\r\n      .ig-activities .activities > ul > li .strip {\r\n        display: -webkit-box;\r\n        display: flex;\r\n        -webkit-box-align: center;\r\n        align-items: center;\r\n        -webkit-box-pack: justify;\r\n        justify-content: space-between;\r\n        background: #fff;\r\n        border: 1px solid #fff3e6;\r\n        padding: 6px 20px; }\r\n        .ig-activities .activities > ul > li .strip .img-holder {\r\n          width: 40px;\r\n          border-radius: 100%;\r\n          height: 40px; }\r\n          .ig-activities .activities > ul > li .strip .img-holder img {\r\n            border-radius: 100%;\r\n            width: 100%;\r\n            height: 100%;\r\n            -o-object-fit: cover;\r\n            object-fit: cover;\r\n            -o-object-position: center;\r\n            object-position: center; }\r\n        .ig-activities .activities > ul > li .strip p {\r\n          color: #707070;\r\n          margin: 0px; }\r\n      .ig-activities .activities > ul > li .adate {\r\n        padding-top: 5px;\r\n        text-align: right; }\r\n        .ig-activities .activities > ul > li .adate span {\r\n          font-size: 12px;\r\n          color: #707070; }\r\n        .ig-activities .activities > ul > li .adate .remove-action {\r\n          display: inline-block;\r\n          margin: 0px 5px;\r\n          width: 0px;\r\n          height: 0px;\r\n          white-space: nowrap;\r\n          opacity: 0;\r\n          -webkit-transition: width .2s linear;\r\n          transition: width .2s linear; }\r\n          .ig-activities .activities > ul > li .adate .remove-action.show {\r\n            width: auto;\r\n            height: auto;\r\n            opacity: 1;\r\n            margin: 0px 10px; }\r\n          .ig-activities .activities > ul > li .adate .remove-action li a {\r\n            font-size: 13px;\r\n            padding: 0px 5px;\r\n            font-family: medium; }\r\n          .ig-activities .activities > ul > li .adate .remove-action li::after {\r\n            content: \"/\";\r\n            font-size: 11px;\r\n            color: #9a9a9a; }\r\n          .ig-activities .activities > ul > li .adate .remove-action li:last-child:after {\r\n            display: none; }\r\n        .ig-activities .activities > ul > li .adate .trash {\r\n          font-size: 13px;\r\n          color: #a30f17;\r\n          display: none; }\r\n          .ig-activities .activities > ul > li .adate .trash.stay {\r\n            display: inline-block !important; }\r\n          @media (max-width: 767px) {\r\n            .ig-activities .activities > ul > li .adate .trash {\r\n              display: inline-block !important; } }\r\n          .ig-activities .activities > ul > li .adate .trash:hover {\r\n            color: #dd2927; }\r\n      .ig-activities .activities > ul > li:hover .trash {\r\n        display: inline-block; }\r\n\r\n.other-hoods-ctg {\r\n  background: #fffbf8; }\r\n\r\n.other-upcomming-battles {\r\n  background: #fff; }\r\n\r\n.past-battles {\r\n  padding: 50px 0px;\r\n  background: #fffbf8; }\r\n  .past-battles .battle-box {\r\n    margin-bottom: 20px; }\r\n    .past-battles .battle-box a {\r\n      display: inline-block;\r\n      width: 100%; }\r\n    .past-battles .battle-box .img-holder {\r\n      position: relative;\r\n      padding-top: 60%;\r\n      margin-bottom: 5px; }\r\n      .past-battles .battle-box .img-holder img {\r\n        -o-object-fit: cover;\r\n        object-fit: cover;\r\n        -o-object-position: center;\r\n        object-position: center;\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px; }\r\n    .past-battles .battle-box .text h4 {\r\n      margin: 10px 0px 5px;\r\n      color: #111;\r\n      font-family: semibold;\r\n      font-size: 18px; }\r\n      .past-battles .battle-box .text h4:hover {\r\n        color: #dd2927; }\r\n    .past-battles .battle-box .text p {\r\n      color: #9a9a9a;\r\n      margin: 0px; }\r\n\r\n.btn-logout {\r\n  font-family: medium;\r\n  font-size: 17px; }\r\n\r\n#logout p {\r\n  margin: 0px; }\r\n  #logout p a {\r\n    color: #dd2927;\r\n    font-size: 17px; }\r\n\r\n.leong .leong-banner {\r\n  background: #fffbf8;\r\n  padding: 60px 0px; }\r\n  .leong .leong-banner .text p {\r\n    color: #9a9a9a;\r\n    margin-bottom: 30px; }\r\n  @media (max-width: 991px) {\r\n    .leong .leong-banner .text {\r\n      margin-bottom: 30px; } }\r\n  .leong .leong-banner img {\r\n    max-width: 150px;\r\n    display: block;\r\n    margin: 0 auto; }\r\n\r\n.lost-found .lf-banner {\r\n  background: #fffbf8;\r\n  padding: 60px 0px; }\r\n  .lost-found .lf-banner .text p {\r\n    color: #9a9a9a;\r\n    margin-bottom: 30px; }\r\n  @media (max-width: 991px) {\r\n    .lost-found .lf-banner .text {\r\n      margin-bottom: 30px; } }\r\n  .lost-found .lf-banner img {\r\n    max-width: 120px;\r\n    display: block;\r\n    margin: 0 auto; }\r\n", ""]);
-
-// exports
 
 
 /***/ }),
@@ -49127,239 +49106,210 @@ var render = function() {
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse navbar-collapse",
-                attrs: { id: "collapsibleNavId" }
-              },
-              [
-                !_vm.apiToken
-                  ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            { staticClass: "nav-link", attrs: { to: "/" } },
-                            [_vm._v("Home")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/about" }
-                            },
-                            [_vm._v("About")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/Login" }
-                            },
-                            [_vm._v("Login")]
-                          )
-                        ],
-                        1
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.apiToken
-                  ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/explore" }
-                            },
-                            [_vm._v("Explore")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/start-activity" }
-                            },
-                            [_vm._v("Start Activity")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "nav-item" }, [
+            _c("div", { staticClass: "navbar-holder ml-auto" }, [
+              !_vm.apiToken
+                ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
                         _c(
-                          "a",
-                          { staticClass: "nav-link", attrs: { href: "#" } },
-                          [_vm._v("Hood")]
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/" } },
+                          [_vm._v("Home")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/about" } },
+                          [_vm._v("About")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/Login" } },
+                          [_vm._v("Login")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.apiToken
+                ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/explore" }
+                          },
+                          [_vm._v("Explore")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/start-activity" }
+                          },
+                          [_vm._v("Start Activity")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "sub-drop" }, [
+                        _c(
+                          "li",
+                          [
+                            _c("router-link", { attrs: { to: "/teams" } }, [
+                              _vm._v("TEAMS")
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c("router-link", { attrs: { to: "/lelong" } }, [
+                              _vm._v("Lelong!")
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/lost-and-found" } },
+                              [_vm._v("Lost and found!")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/interest-groups" }
+                          },
+                          [_vm._v("Group")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "sub-drop" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/kaki-request" } },
+                              [_vm._v("KAKIS REQUESTS")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item profile-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/kaki-profile" }
+                          },
+                          [
+                            _c("div", { staticClass: "profile-circle" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"),
+                                  alt: "profile"
+                                }
+                              })
+                            ])
+                          ]
                         ),
                         _vm._v(" "),
                         _c("ul", { staticClass: "sub-drop" }, [
-                          _c(
-                            "li",
-                            [
-                              _c("router-link", { attrs: { to: "/teams" } }, [
-                                _vm._v("TEAMS")
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm._m(1),
-                          _vm._v(" "),
-                          _vm._m(2),
-                          _vm._v(" "),
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _c(
-                            "li",
-                            [
-                              _c("router-link", { attrs: { to: "/lelong" } }, [
-                                _vm._v("Lelong!")
-                              ])
-                            ],
-                            1
-                          ),
+                          _vm._m(7),
                           _vm._v(" "),
                           _c(
                             "li",
                             [
                               _c(
                                 "router-link",
-                                { attrs: { to: "/lost-and-found" } },
-                                [_vm._v("Lost and found!")]
+                                { attrs: { to: "/kaki-request" } },
+                                [
+                                  _c("i", { staticClass: "far fa-sign-out" }),
+                                  _vm._v(" Logout")
+                                ]
                               )
                             ],
                             1
                           )
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/interest-groups" }
-                            },
-                            [_vm._v("Group")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/kakis" }
-                            },
-                            [_vm._v("Kakis")]
-                          ),
-                          _vm._v(" "),
-                          _c("ul", { staticClass: "sub-drop" }, [
-                            _vm._m(4),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              [
-                                _c(
-                                  "router-link",
-                                  { attrs: { to: "/kaki-request" } },
-                                  [_vm._v("KAKIS REQUESTS")]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item profile-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/kaki-profile" }
-                            },
-                            [
-                              _c("div", { staticClass: "profile-circle" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"),
-                                    alt: "profile"
-                                  }
-                                })
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("ul", { staticClass: "sub-drop" }, [
-                            _vm._m(5),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              [
-                                _c(
-                                  "router-link",
-                                  { attrs: { to: "/kaki-request" } },
-                                  [
-                                    _c("i", { staticClass: "far fa-sign-out" }),
-                                    _vm._v(" Logout")
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ])
-                  : _vm._e()
-              ]
-            )
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e()
+            ])
           ],
           1
         )
@@ -49367,7 +49317,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(6)
+      _vm._m(8)
     ],
     1
   )
@@ -49379,18 +49329,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      {
-        staticClass: "navbar-toggler d-lg-none",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#collapsibleNavId",
-          "aria-controls": "collapsibleNavId",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
+      { staticClass: "navbar-toggler", attrs: { type: "button" } },
       [_c("i", { staticClass: "fal fa-bars" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
+      [_vm._v("Hood "), _c("i", { staticClass: "far fa-chevron-down" })]
     )
   },
   function() {
@@ -49414,6 +49364,16 @@ var staticRenderFns = [
     return _c("li", [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Hood Services")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
+      [_vm._v("Kakis "), _c("i", { staticClass: "far fa-chevron-down" })]
+    )
   },
   function() {
     var _vm = this
@@ -49462,7 +49422,7 @@ var staticRenderFns = [
               _vm._v(" All rights reserved")
             ]),
             _vm._v(" "),
-            _c("ul", [
+            _c("ul", { staticClass: "flinks" }, [
               _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("About")])]),
               _vm._v(" "),
               _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("FAQ")])]),
@@ -65453,30 +65413,28 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/css/select.css */ "./resources/js/css/select.css");
 /* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_select_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_master_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/css/master.css */ "./resources/js/css/master.css");
-/* harmony import */ var _css_master_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_master_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/font-awesome/css/all.css */ "./resources/js/font-awesome/css/all.css");
-/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/font-awesome/css/all.css */ "./resources/js/font-awesome/css/all.css");
+/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+ // import '@/css/master.css';
 
 
 
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vee_validate__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
-var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
-  store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vee_validate__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
+  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
   el: '#app',
-  router: _routes__WEBPACK_IMPORTED_MODULE_4__["default"]
+  router: _routes__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 
 /***/ }),
@@ -65536,91 +65494,6 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/bold.ttf":
-/*!*****************************************!*\
-  !*** ./resources/js/css/fonts/bold.ttf ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/bold.ttf?8c2f67f41e21bde05843e36dcf8695a3";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/ibmplex.ttf":
-/*!********************************************!*\
-  !*** ./resources/js/css/fonts/ibmplex.ttf ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/ibmplex.ttf?0b5a85206a5a77556a7f29ccdb148f2d";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/light.ttf":
-/*!******************************************!*\
-  !*** ./resources/js/css/fonts/light.ttf ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/light.ttf?9b169eeb4ff552fe1422be6bfb62984a";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/medium.ttf":
-/*!*******************************************!*\
-  !*** ./resources/js/css/fonts/medium.ttf ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/medium.ttf?ba26ab872b2b1a32397bd60ef14dd254";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/semibold.ttf":
-/*!*********************************************!*\
-  !*** ./resources/js/css/fonts/semibold.ttf ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/semibold.ttf?04dc4a923cb39d37d79a36b06932d663";
-
-/***/ }),
-
-/***/ "./resources/js/css/master.css":
-/*!*************************************!*\
-  !*** ./resources/js/css/master.css ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!./master.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/master.css");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
