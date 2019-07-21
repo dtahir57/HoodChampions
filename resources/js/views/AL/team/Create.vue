@@ -47,14 +47,12 @@
 	            <span class="text-danger">{{ errors.first('Meetup Place') }}</span>
 	          </div>
 	          <div class="form-group">
-<<<<<<< HEAD
 	            <div v-if="data.image">
-=======
-	            <div class="uimg-holder" v-if="data.image">
->>>>>>> origin/frontend
-	              <a href="javascript:void(0)" @click="removeImage" class="remove-img"><i class="far fa-times"></i></a>
-	              <img :src="data.image">
-	            </div>
+	            	<div class="uimg-holder" v-if="data.image">
+	              	<a href="javascript:void(0)" @click="removeImage" class="remove-img"><i class="far fa-times"></i></a>
+	              	<img :src="data.image">
+	            	</div>
+	        	</div>
 				<div class="img-clone" v-if="!data.image">
 				</div>
 	            <div class="upload-btn-wrapper">

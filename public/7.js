@@ -90,8 +90,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateTeam',
@@ -225,8 +223,476 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "main-wrapper" }, [
+    _c("section", { staticClass: "edit-battle" }, [
+      _c("div", { staticClass: "container" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-5 col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.title,
+                    expression: "data.title"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required|max:30",
+                    expression: "'required|max:30'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "ttl", name: "Title", type: "text" },
+                domProps: { value: _vm.data.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "title", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("Title")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "max-groups" } }, [
+                _vm._v("Max Number of Members")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.max_no_of_members,
+                    expression: "data.max_no_of_members"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required|numeric",
+                    expression: "'required|numeric'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", name: "Members" },
+                domProps: { value: _vm.data.max_no_of_members },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "max_no_of_members", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("Members")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.description,
+                    expression: "data.description"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required|max:100",
+                    expression: "'required|max:100'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "description", name: "Description", rows: "3" },
+                domProps: { value: _vm.data.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "description", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("Description")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.about_us,
+                    expression: "data.about_us"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required|max:30",
+                    expression: "'required|max:30'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "about", name: "About Us", type: "text" },
+                domProps: { value: _vm.data.about_us },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "about_us", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("About Us")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.email,
+                    expression: "data.email"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required|max:30",
+                    expression: "'required|max:30'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "mail", name: "Email", type: "email" },
+                domProps: { value: _vm.data.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "email", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("Email")))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-5 offset-lg-2 col-sm-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "cnumber" } }, [
+                _vm._v("Contact Number")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.contact_no,
+                    expression: "data.contact_no"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required",
+                    expression: "'required'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "cnumber", name: "Contact Number", type: "text" },
+                domProps: { value: _vm.data.contact_no },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "contact_no", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("Contact Number")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "mplace" } }, [
+                _vm._v("Meetup place")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.data.meetup_place,
+                    expression: "data.meetup_place"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required",
+                    expression: "'required'"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "mplace", name: "Meetup Place", type: "text" },
+                domProps: { value: _vm.data.meetup_place },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.data, "meetup_place", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("Meetup Place")))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _vm.data.image
+                ? _c("div", [
+                    _vm.data.image
+                      ? _c("div", { staticClass: "uimg-holder" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "remove-img",
+                              attrs: { href: "javascript:void(0)" },
+                              on: { click: _vm.removeImage }
+                            },
+                            [_c("i", { staticClass: "far fa-times" })]
+                          ),
+                          _vm._v(" "),
+                          _c("img", { attrs: { src: _vm.data.image } })
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.data.image
+                ? _c("div", { staticClass: "img-clone" })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "upload-btn-wrapper" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  ref: "photo",
+                  attrs: { type: "file", name: "Image" },
+                  on: { change: _vm.onImageChange }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.errors.first("Image")))
+                ]),
+                _vm._v(" "),
+                !_vm.data.image
+                  ? _c("button", { staticClass: "btn btn-default block-btn" }, [
+                      _vm._v("Add Photo")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.data.image
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline block-btn",
+                        attrs: { disabled: "" }
+                      },
+                      [_vm._v("Photo Added")]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "Only images (.jpg, .gif, .png) with the file size below 300kb is allowed"
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.agreed,
+                    expression: "agreed"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  id: "termz",
+                  type: "checkbox",
+                  svalue: "checkedValue"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.agreed)
+                    ? _vm._i(_vm.agreed, null) > -1
+                    : _vm.agreed
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.agreed,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.agreed = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.agreed = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.agreed = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(5)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "group-btns" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.agreed },
+                  on: { click: _vm.save }
+                },
+                [_vm._v("Save")]
+              ),
+              _vm._v(" "),
+              _c("button", { staticClass: "btn btn-outline" }, [
+                _vm._v("Cancel")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h1", { staticClass: "common-h" }, [_vm._v("CREATE YOUR TEAM")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "ttl" } }, [
+      _vm._v("Title "),
+      _c("span", [_vm._v("Max. 30")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "max-groups" } }, [
+      _vm._v("Description"),
+      _c("span", [_vm._v("Max. 100")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "about" } }, [
+      _vm._v("About Us "),
+      _c("span", [_vm._v("Max. 30")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "mail" } }, [
+      _vm._v("Email "),
+      _c("span", [_vm._v("Max. 30")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-check-label", attrs: { for: "termz" } },
+      [
+        _vm._v("I have read and agreed to "),
+        _c("a", { attrs: { href: "#" } }, [_vm._v(" Terms and Use ")])
+      ]
+    )
+  }
+]
+render._withStripped = true
 
 
 
