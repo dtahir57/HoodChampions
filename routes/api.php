@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	 */
 	Route::get('/teams', 'API\TeamController@index');
 	Route::get('/team/{id}', 'API\TeamController@show');
-	Route::post('/team', 'API\TeamController@store');
+	Route::post('/team/store', 'API\TeamController@store');
 	/**
 	 * Ending Routes For TeamController
 	 */

@@ -2,8 +2,9 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Concerns\withPivot;
 
 class Team extends Model
 {
@@ -21,7 +22,7 @@ class Team extends Model
      */
     public function users()
     {
-    	return $this->belongsToMany(User::class);
+    	return $this->belongsToMany(User::class)->withPivot('is_captain');
     }
     /**
      * [battles description]

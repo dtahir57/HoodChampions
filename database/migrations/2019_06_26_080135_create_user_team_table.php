@@ -27,6 +27,7 @@ class CreateUserTeamTable extends Migration
                     ->on('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->boolean('is_captain')->default(0);
             $table->timestamps();
         });
     }

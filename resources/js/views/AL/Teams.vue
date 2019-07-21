@@ -77,6 +77,7 @@ export default {
 			this.hood_name = response.data.hood_name
 			this.teams = response.data.teams
 			this.$store.dispatch('setHoodTeams', this.teams)
+			console.log(response)
 		}).catch(error => {
 			console.log(error.data)
 		})

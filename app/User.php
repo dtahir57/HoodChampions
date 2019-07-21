@@ -9,6 +9,7 @@ use App\Http\Models\LostAndFound;
 use App\Http\Models\Service;
 use App\Http\Models\Team;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\Concerns\withPivot;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -57,7 +58,7 @@ class User extends Authenticatable
 
     public function teams()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class)->withPivot('is_captain');
     }
 
     public function interest_groups()
