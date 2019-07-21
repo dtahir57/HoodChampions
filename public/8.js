@@ -74,12 +74,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
->>>>>>> origin/frontend
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LostAndFound',
   data: function data() {
@@ -117,14 +114,6 @@ var staticRenderFns = [
         _c("div", { staticClass: "lf-banner" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row align-items-center" }, [
-<<<<<<< HEAD
-              _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
-                _c("div", { staticClass: "text" }, [
-                  _c("h1", { staticClass: "common-h" }, [
-                    _vm._v("Lost and Founds")
-                  ]),
-                  _vm._v(" "),
-=======
               _c("div", { staticClass: "col-12" }, [
                 _c("h1", { staticClass: "common-h" }, [
                   _vm._v("Lost and Founds")
@@ -133,18 +122,12 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
                 _c("div", { staticClass: "text" }, [
->>>>>>> origin/frontend
                   _c("p", [
                     _vm._v(
                       "Dummy Text here, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
                     )
                   ]),
                   _vm._v(" "),
-<<<<<<< HEAD
-                  _c("button", { staticClass: "btn btn-default block-btn" }, [
-                    _vm._v("Create Lost And Found")
-                  ])
-=======
                   _c("img", {
                     staticClass: "inner-img",
                     attrs: {
@@ -157,7 +140,6 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("button", { staticClass: "btn btn-default block-btn" }, [
                   _vm._v("Create Lost And Found")
->>>>>>> origin/frontend
                 ])
               ]),
               _vm._v(" "),
@@ -169,10 +151,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("img", {
-<<<<<<< HEAD
-=======
                     staticClass: "outer-img",
->>>>>>> origin/frontend
                     attrs: {
                       src: __webpack_require__(/*! @/images/svg/Lost and Found.svg */ "./resources/js/images/svg/Lost and Found.svg"),
                       width: "100%",
@@ -197,7 +176,6 @@ var staticRenderFns = [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
               _c("div", { staticClass: "group" }, [
-<<<<<<< HEAD
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
@@ -215,8 +193,6 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
               _c("div", { staticClass: "group" }, [
-=======
->>>>>>> origin/frontend
                 _c("div", { staticClass: "img-holder" }, [
                   _c("img", {
                     staticClass: "img-fluid",
@@ -229,26 +205,6 @@ var staticRenderFns = [
                 _c("p", [
                   _vm._v("Lorem ipsum dolor sit dummy text using heres")
                 ])
-<<<<<<< HEAD
-=======
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
-              _c("div", { staticClass: "group" }, [
-                _c("div", { staticClass: "img-holder" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "images/dance.jpg", alt: "img" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Dancing")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v("Lorem ipsum dolor sit dummy text using heres")
-                ])
->>>>>>> origin/frontend
               ])
             ]),
             _vm._v(" "),
@@ -287,11 +243,7 @@ render._withStripped = true
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
 module.exports = "/images/Lost and Found.svg?cc4436dc581d6b801b42e3cfdb473a6b";
-=======
-module.exports = "/images/Lost and Found.svg?5ef0b4d8137f28c0a5f60f52c88dba47";
->>>>>>> origin/frontend
 
 /***/ }),
 

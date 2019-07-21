@@ -163,11 +163,7 @@ __webpack_require__.r(__webpack_exports__);
         gender: this.gender,
         date_of_birth: this.dob
       }).then(function (response) {
-<<<<<<< HEAD
-        console.log(response.data.user);
-=======
         console.log(response);
->>>>>>> origin/frontend
 
         _this.$router.push({
           name: 'OTP',
@@ -181,13 +177,10 @@ __webpack_require__.r(__webpack_exports__);
         modal.hide;
         console.log(error.response);
       });
-<<<<<<< HEAD
-=======
       var body = document.getElementsByTagName("body");
       var backdrop = document.getElementsByClassName("modal-backdrop fade show");
       body.remove("model-open");
       backdrop.remove("show");
->>>>>>> origin/frontend
     }
   },
   created: function created() {
@@ -223,11 +216,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-<<<<<<< HEAD
 exports.push([module.i, "\nselect2[data-v-3563ad7c] {\n}\n", ""]);
-=======
-exports.push([module.i, "\nselect2[data-v-3563ad7c] {\n}\r\n", ""]);
->>>>>>> origin/frontend
 
 // exports
 
@@ -536,11 +525,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-<<<<<<< HEAD
-              { staticClass: "form-group mt-5" },
-=======
               { staticClass: "form-group" },
->>>>>>> origin/frontend
               [
                 _c("label", { attrs: { for: "dob" } }, [
                   _vm._v("Date of Birth")

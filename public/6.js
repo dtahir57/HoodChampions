@@ -389,12 +389,8 @@ __webpack_require__.r(__webpack_exports__);
 var config = {
   headers: {
     "Accept": "application/json",
-<<<<<<< HEAD
     "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
 
-=======
-    "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
->>>>>>> origin/frontend
   }
 };
 
@@ -407,11 +403,7 @@ var config = {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
 module.exports = "/images/Teams.svg?ec16c7dbf13cbbc46a27e684fbc66137";
-=======
-module.exports = "/images/Teams.svg?1baee7fb6122153de847e0d3c50d064e";
->>>>>>> origin/frontend
 
 /***/ }),
 

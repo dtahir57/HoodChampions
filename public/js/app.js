@@ -65878,77 +65878,77 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! @/views/BL/home.vue */ "./resources/js/views/BL/home.vue"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! @/views/BL/home.vue */ "./resources/js/views/BL/home.vue"));
 };
 
 var About = function About() {
-  return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! @/views/BL/About.vue */ "./resources/js/views/BL/About.vue"));
+  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! @/views/BL/About.vue */ "./resources/js/views/BL/About.vue"));
 };
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! @/views/Login.vue */ "./resources/js/views/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! @/views/Login.vue */ "./resources/js/views/Login.vue"));
 };
 
 var Register = function Register() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
 };
 
 var Terms = function Terms() {
-  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! @/views/Terms.vue */ "./resources/js/views/Terms.vue"));
+  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! @/views/Terms.vue */ "./resources/js/views/Terms.vue"));
 };
 
 var VerifyOTP = function VerifyOTP() {
-  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! @/views/OTP.vue */ "./resources/js/views/OTP.vue"));
+  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! @/views/OTP.vue */ "./resources/js/views/OTP.vue"));
 }; // Team Components Starts
 
 
 var Teams = function Teams() {
-  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
 };
 
 var TeamCreate = function TeamCreate() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/team/Create.vue */ "./resources/js/views/AL/team/Create.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! @/views/AL/team/Create.vue */ "./resources/js/views/AL/team/Create.vue"));
 };
 
 var SingleTeam = function SingleTeam() {
-  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
 }; // Team Components Ends here
 
 
 var Activity = function Activity() {
-  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
 };
 
 var Explore = function Explore() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
 };
 
 var LostAndFound = function LostAndFound() {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
 };
 
 var Lelong = function Lelong() {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
 };
 
 var Kakis = function Kakis() {
-  return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
 };
 
 var KakiRequest = function KakiRequest() {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! @/views/AL/KakiRequest.vue */ "./resources/js/views/AL/KakiRequest.vue"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/views/AL/KakiRequest.vue */ "./resources/js/views/AL/KakiRequest.vue"));
 };
 
 var KakiProfile = function KakiProfile() {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
 };
 
 var Group = function Group() {
-  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
 };
 
 var SingleGroup = function SingleGroup() {
-  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! @/views/AL/group/Group.vue */ "./resources/js/views/AL/group/Group.vue"));
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! @/views/AL/group/Group.vue */ "./resources/js/views/AL/group/Group.vue"));
 };
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
