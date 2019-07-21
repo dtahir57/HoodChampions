@@ -1964,9 +1964,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       api_token: null
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['apiToken'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['apiToken', 'getAuthenticatedUser'])),
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      var uri = '/api/user/logout';
+      axios.post(uri, {}, _config_config__WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
+        _this.api_token = localStorage.removeItem('user_api_token');
+
+        _this.$store.dispatch('setApiToken', _this.api_token);
+
+        _this.$router.push({
+          name: 'Login'
+        });
+
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     this.api_token = localStorage.getItem('user_api_token');
     this.$store.dispatch('setApiToken', this.api_token);
@@ -1974,7 +1994,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     if (this.api_token) {
       var uri = '/api/user/auth';
       axios.post(uri, {}, _config_config__WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
-        _this.$store.dispatch('setCurrentUser', response.data.user);
+        _this2.$store.dispatch('setCurrentUser', response.data.user);
 
         console.log(response.data);
       })["catch"](function (error) {
@@ -49304,20 +49324,19 @@ var render = function() {
                         _c("ul", { staticClass: "sub-drop" }, [
                           _vm._m(7),
                           _vm._v(" "),
-                          _c(
-                            "li",
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/kaki-request" } },
-                                [
-                                  _c("i", { staticClass: "far fa-sign-out" }),
-                                  _vm._v(" Logout")
-                                ]
-                              )
-                            ],
-                            1
-                          )
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "javascript:void(0)" },
+                                on: { click: _vm.logout }
+                              },
+                              [
+                                _c("i", { staticClass: "far fa-sign-out" }),
+                                _vm._v(" Logout")
+                              ]
+                            )
+                          ])
                         ])
                       ],
                       1
@@ -49362,7 +49381,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ang mo kio")])])
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ang Mo Kio")])])
   },
   function() {
     var _vm = this

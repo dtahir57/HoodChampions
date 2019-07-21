@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	 * Starting Routes For UserController
 	 */
 	Route::post('/user/auth', 'API\UserController@index');
+	Route::post('/user/logout', 'API\RegisterController@logout');
 	/**
 	 * Ending Routes For UserController
 	 */

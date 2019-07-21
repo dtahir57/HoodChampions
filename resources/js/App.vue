@@ -35,7 +35,7 @@
 						<router-link to="/teams">TEAMS</router-link>
 						</li>
 						<li>
-						<a href="#">Ang mo kio</a>
+						<a href="#">Ang Mo Kio</a>
 						</li>
 						<li>
 						<a href="#">Other Hoods</a>
@@ -76,7 +76,7 @@
 						<a href="#"><i class="far fa-user"></i> Profile</a>
 						</li>
 						<li>
-						<router-link to="/kaki-request"><i class="far fa-sign-out"></i> Logout</router-link>
+						<a href="javascript:void(0)" @click="logout"><i class="far fa-sign-out"></i> Logout</a>
 						</li>
 					</ul>
 					</li>
@@ -149,8 +149,22 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-				'apiToken'
+				'apiToken',
+				'getAuthenticatedUser'
 			])
+	},
+	methods: {
+		logout () {
+			let uri = '/api/user/logout';
+			axios.post(uri, {}, config).then(response => {
+				this.api_token = localStorage.removeItem('user_api_token')
+				this.$store.dispatch('setApiToken', this.api_token)
+				this.$router.push({ name: 'Login' })
+				console.log(response.data)
+			}).catch(error => {
+				console.log(error.response)
+			})
+		}
 	},
 	created () {
 		this.api_token = localStorage.getItem('user_api_token');

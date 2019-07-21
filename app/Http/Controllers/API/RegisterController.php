@@ -7,6 +7,7 @@ use App\Http\Requests\API\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class RegisterController extends Controller
@@ -143,5 +144,18 @@ class RegisterController extends Controller
                 'message' => 'Code has been expired! Please resend the code'
             ]);
         }
+    }
+
+    public function logout(Request $request)
+    {
+      $token = $request->bearerToken();
+      $user = User::where('api_token', $token)->first();
+      DB::table('oauth_access_tokens')->where('user_id', $user->id)->delete();
+      $user->api_token = '';
+      $user->update();
+      return response()->json([
+        'code' => 200,
+        'message' => 'You have been logged out'
+      ]);
     }
 }
