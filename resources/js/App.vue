@@ -6,75 +6,82 @@
 		    <router-link class="navbar-brand" to="/">
 		      <img src="@/images/svg/HoodChampions Logo.svg" alt="logo">
 		    </router-link>
-		    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-		        aria-expanded="false" aria-label="Toggle navigation">
+		    <button class="navbar-toggler" type="button">
 		        <i class="fal fa-bars"></i>
 		    </button>
-		    <div class="collapse navbar-collapse" id="collapsibleNavId">
-		      <ul class="navbar-nav ml-auto" v-if="!apiToken">
-		      	<li class="nav-item">
-		      		<router-link class="nav-link" to="/">Home</router-link>
-              </li>
-              <li class="nav-item">
-		          <router-link class="nav-link" to="/about">About</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/Login">Login</router-link>
-              </li>
-          		</ul>
-          		<ul class="navbar-nav ml-auto" v-if="apiToken">
-		        <li class="nav-item">
-		          <router-link class="nav-link" to="/explore">Explore</router-link>
-		        </li>
-		        <li class="nav-item">
-	                <router-link class="nav-link" to="/start-activity">Start Activity</router-link>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Hood</a>
-		          <ul class="sub-drop">
-		            <li>
-		              <router-link to="/teams">TEAMS</router-link>
-		            </li>
-		            <li>
-		              <a href="#">Ang mo kio</a>
-		            </li>
-		            <li>
-		              <a href="#">Other Hoods</a>
-		            </li>
-		            <li>
-		              <a href="#">Hood Services</a>
-		            </li>
-		            <li>
-		              <router-link to="/lelong">Lelong!</router-link>
-		            </li>
-		            <li>
-		              <router-link to="/lost-and-found">Lost and found!</router-link>
-		            </li>
-		          </ul>
-		        </li>
-		        <li class="nav-item">
-		          <router-link class="nav-link" to="/interest-groups">Group</router-link>
-		        </li>
-		        <li class="nav-item">
-		          <router-link class="nav-link" to="/kakis">Kakis</router-link>
-		          <ul class="sub-drop">
-		            <li>
-		              <a href="#">MY KAKIS</a>
-		            </li>
-		            <li>
-		              <router-link to="/kaki-request">KAKIS REQUESTS</router-link>
-		            </li>
-		          </ul>
-		        </li>
-		        <li class="nav-item profile-item">
-		          <router-link class="nav-link" to="/kaki-profile">
-		            <div class="profile-circle">
-		              <img src="@/images/person.jpg" alt="profile">
-		            </div>
-		          </router-link>
-		        </li>
-		      </ul>
-		    </div>
+			<div class="navbar-holder ml-auto">
+				<ul class="navbar-nav ml-auto" v-if="!apiToken">
+				<li class="nav-item">
+					<router-link class="nav-link" to="/">Home</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link class="nav-link" to="/about">About</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link class="nav-link" to="/Login">Login</router-link>
+				</li>
+				</ul>
+				<ul class="navbar-nav ml-auto" v-if="apiToken">
+					<li class="nav-item">
+					<router-link class="nav-link" to="/explore">Explore</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link class="nav-link" to="/start-activity">Start Activity</router-link>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="javascript:void(0)">Hood <i class="far fa-chevron-down"></i></a>
+					<ul class="sub-drop">
+						<li>
+						<router-link to="/teams">TEAMS</router-link>
+						</li>
+						<li>
+						<a href="#">Ang mo kio</a>
+						</li>
+						<li>
+						<a href="#">Other Hoods</a>
+						</li>
+						<li>
+						<a href="#">Hood Services</a>
+						</li>
+						<li>
+						<router-link to="/lelong">Lelong!</router-link>
+						</li>
+						<li>
+						<router-link to="/lost-and-found">Lost and found!</router-link>
+						</li>
+					</ul>
+					</li>
+					<li class="nav-item">
+					<router-link class="nav-link" to="/interest-groups">Group</router-link>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="javascript:void(0)">Kakis <i class="far fa-chevron-down"></i></a>
+					<ul class="sub-drop">
+						<li>
+						<a href="#">MY KAKIS</a>
+						</li>
+						<li>
+						<router-link to="/kaki-request">KAKIS REQUESTS</router-link>
+						</li>
+					</ul>
+					</li>
+					<li class="nav-item profile-item">
+					<router-link class="nav-link" to="/kaki-profile">
+						<div class="profile-circle">
+						<img src="@/images/person.jpg" alt="profile">
+						</div>
+					</router-link>
+					<ul class="sub-drop">
+						<li>
+						<a href="#"><i class="far fa-user"></i> Profile</a>
+						</li>
+						<li>
+						<router-link to="/kaki-request"><i class="far fa-sign-out"></i> Logout</router-link>
+						</li>
+					</ul>
+					</li>
+				</ul>
+			</div>
 		  </nav>
 		</div>
 		<!-- Header Ends -->		
@@ -97,7 +104,7 @@
 	          <div class="container">
 	            <div class="frow">
 	              <p>&copy; 2019 Singapore Kindness Movement. <br> All rights reserved</p>
-	              <ul>
+	              <ul class="flinks">
 	                <li>
 	                  <a href="#">About</a>
 	                </li>

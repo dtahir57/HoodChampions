@@ -74,6 +74,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LostAndFound',
   data: function data() {
@@ -111,21 +114,32 @@ var staticRenderFns = [
         _c("div", { staticClass: "lf-banner" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row align-items-center" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c("h1", { staticClass: "common-h" }, [
+                  _vm._v("Lost and Founds")
+                ])
+              ]),
+              _vm._v(" "),
               _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
                 _c("div", { staticClass: "text" }, [
-                  _c("h1", { staticClass: "common-h" }, [
-                    _vm._v("Lost and Founds")
-                  ]),
-                  _vm._v(" "),
                   _c("p", [
                     _vm._v(
                       "Dummy Text here, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
                     )
                   ]),
                   _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-default block-btn" }, [
-                    _vm._v("Create Lost And Found")
-                  ])
+                  _c("img", {
+                    staticClass: "inner-img",
+                    attrs: {
+                      src: __webpack_require__(/*! @/images/svg/Lost and Found.svg */ "./resources/js/images/svg/Lost and Found.svg"),
+                      width: "100%",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-default block-btn" }, [
+                  _vm._v("Create Lost And Found")
                 ])
               ]),
               _vm._v(" "),
@@ -137,6 +151,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("img", {
+                    staticClass: "outer-img",
                     attrs: {
                       src: __webpack_require__(/*! @/images/svg/Lost and Found.svg */ "./resources/js/images/svg/Lost and Found.svg"),
                       width: "100%",

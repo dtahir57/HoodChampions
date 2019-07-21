@@ -1,0 +1,25 @@
+
+.news-stream
+{
+    padding: 60px 0px;
+    background: $background;
+    position: relative;
+    .single-feed
+    {
+        margin-bottom:100px;
+        &:last-child
+        {
+            margin-bottom:0px;
+        }
+        @media (max-width:767px) {
+            margin-bottom:60px;
+        }
+        @media (max-width:576px) {
+            margin-bottom:50px;
+        }
+    }
+}
+.single-feed .stream-text .icon
+{
+    max-width: 80px;
+}

@@ -1,3 +1,4 @@
+
 <template>
 	<div class="main-wrapper">
 	  <div class="search-bar">
@@ -16,7 +17,7 @@
 	  </div>
 	  <section class="upcoming-battles">
 	    <div class="container">
-	      <div class="common-h">Upcomming hood battles</div>
+	      <div class="common-h">Upcoming hood battles</div>
 	      <div class="row">
 	        <div class="col-lg-4 col-6 col-xs-12">
 	          <div class="battle-box">

@@ -1,0 +1,48 @@
+.about
+{
+    background: $background;
+    padding: 40px 0px 30px;
+    .content
+    {
+        margin-bottom: 30px;
+        .common-h
+        {
+            margin-bottom: 20px;
+        }
+        p
+        {
+            margin: 0px 0px 15px;
+        }
+    }
+}
+.contact-box
+{
+    .container
+    {
+        position: relative;
+    }
+    padding: 40px 0px;
+    .form-group
+    {
+        margin-bottom: 40px;
+    }
+    .corner-icon
+    {
+        position: absolute;
+        right: 0px;
+        top: -40px;
+        z-index: 10;
+        transform: translateY(-50%);
+        width: 7vw;
+        @media (max-width:1199px) {
+            width: 8vw;
+        }
+        @media (max-width:991px) {
+            width: 9vw;
+        }
+        @media (max-width:767px) {
+            width: 60px;
+            right: 15px;
+        }
+    }
+}

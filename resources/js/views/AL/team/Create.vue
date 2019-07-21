@@ -47,14 +47,21 @@
 	            <span class="text-danger">{{ errors.first('Meetup Place') }}</span>
 	          </div>
 	          <div class="form-group">
+<<<<<<< HEAD
 	            <div v-if="data.image">
+=======
+	            <div class="uimg-holder" v-if="data.image">
+>>>>>>> origin/frontend
 	              <a href="javascript:void(0)" @click="removeImage" class="remove-img"><i class="far fa-times"></i></a>
 	              <img :src="data.image">
 	            </div>
+				<div class="img-clone" v-if="!data.image">
+				</div>
 	            <div class="upload-btn-wrapper">
 	            	<input type="file" @change="onImageChange" ref="photo" name="Image" v-validate="'required'">
 	            	<span class="text-danger">{{ errors.first('Image') }}</span>
-	            	<button class="btn btn-default block-btn img-uploader">Add Photo</button>
+	            	<button class="btn btn-default block-btn" v-if="!data.image">Add Photo</button>
+					<button class="btn btn-outline block-btn" disabled v-if="data.image">Photo Added</button>
 	        	</div>
 	            <p>Only images (.jpg, .gif, .png) with the file size below 300kb is allowed</p>
 	      

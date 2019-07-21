@@ -233,6 +233,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Group',
   data: function data() {
@@ -270,21 +273,32 @@ var staticRenderFns = [
         _c("div", { staticClass: "interest-banner" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row align-items-center" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c("h1", { staticClass: "common-h" }, [
+                  _vm._v("Interest Groups")
+                ])
+              ]),
+              _vm._v(" "),
               _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
                 _c("div", { staticClass: "text" }, [
-                  _c("h1", { staticClass: "common-h" }, [
-                    _vm._v("Interest Groups")
-                  ]),
-                  _vm._v(" "),
                   _c("p", [
                     _vm._v(
                       "Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
                     )
                   ]),
                   _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-default block-btn" }, [
-                    _vm._v("Create Interest Group")
-                  ])
+                  _c("img", {
+                    staticClass: "inner-img",
+                    attrs: {
+                      src: __webpack_require__(/*! @/images/svg/Interest Group.svg */ "./resources/js/images/svg/Interest Group.svg"),
+                      width: "100%",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-default block-btn" }, [
+                  _vm._v("Create Interest Group")
                 ])
               ]),
               _vm._v(" "),
@@ -296,6 +310,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("img", {
+                    staticClass: "outer-img",
                     attrs: {
                       src: __webpack_require__(/*! @/images/svg/Interest Group.svg */ "./resources/js/images/svg/Interest Group.svg"),
                       width: "100%",
@@ -735,7 +750,7 @@ render._withStripped = true
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Categories - Gardening.svg?43c53745eda96a3ecda976132818c422";
+module.exports = "/images/Categories - Gardening.svg?3fa50dc3bb7bbe126ad943e8f91b0ab5";
 
 /***/ }),
 
@@ -746,7 +761,7 @@ module.exports = "/images/Categories - Gardening.svg?43c53745eda96a3ecda97613281
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Categories - Mahjong.svg?e4e605130a0ed622fac5808082b853fb";
+module.exports = "/images/Categories - Mahjong.svg?1753aa591d299f40076c43a34faf761a";
 
 /***/ }),
 
@@ -757,7 +772,7 @@ module.exports = "/images/Categories - Mahjong.svg?e4e605130a0ed622fac5808082b85
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Categories - Music.svg?f44533e0eeefdcd766c58c57ac0e0cc5";
+module.exports = "/images/Categories - Music.svg?1ea3ed4cba1dd4304e1e3543b5479783";
 
 /***/ }),
 
@@ -768,7 +783,7 @@ module.exports = "/images/Categories - Music.svg?f44533e0eeefdcd766c58c57ac0e0cc
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Categories - Painting.svg?ead61e9ed5dd155781900c965a6094a4";
+module.exports = "/images/Categories - Painting.svg?f6b07d58e3bd819fb61e359f6f1db744";
 
 /***/ }),
 
@@ -779,7 +794,7 @@ module.exports = "/images/Categories - Painting.svg?ead61e9ed5dd155781900c965a60
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Categories - Photography.svg?08c70a519494689c299f650793b3964e";
+module.exports = "/images/Categories - Photography.svg?952df7418cbfd09e11598cdec89c1d19";
 
 /***/ }),
 
@@ -790,7 +805,7 @@ module.exports = "/images/Categories - Photography.svg?08c70a519494689c299f65079
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Categories- Sports.svg?b0ec876bccfb939c15fd185a18f16777";
+module.exports = "/images/Categories- Sports.svg?55bb88a8766e300cda7a3ff9822c025e";
 
 /***/ }),
 
@@ -801,7 +816,7 @@ module.exports = "/images/Categories- Sports.svg?b0ec876bccfb939c15fd185a18f1677
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Homepage- Cooking.svg?8c38db6e59ff6c24163e5dc6c8c51f93";
+module.exports = "/images/Homepage- Cooking.svg?7752a98b194ab7410fb90cbab8fe0563";
 
 /***/ }),
 
@@ -812,7 +827,7 @@ module.exports = "/images/Homepage- Cooking.svg?8c38db6e59ff6c24163e5dc6c8c51f93
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Interest Group.svg?cb9d7d6cb2186057e470e5269875fdfe";
+module.exports = "/images/Interest Group.svg?ec4991d5e56e24e09fe4d58b35fa5502";
 
 /***/ }),
 

@@ -1,8 +1,43 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'varibles.scss';
+@import 'fonts.scss';
+@import 'reset.scss';
+
+
+@import 'header.scss';
+
+@import 'footer.scss';
+
+
+@import 'home.scss';
+
+@import 'about.scss';
+
+@import 'friends.scss';
+
+@import '404.scss';
+
+@import 'login_signup.scss';
+
+@import 'newsstream.scss';
+
+@import 'teams.scss';
+
+@import 'battle.scss';
+
+@import 'explore.scss';
+
+@import 'interest_groups.scss';
+
+@import 'other.scss';
+
+@import 'profile.scss';
+
+@import 'leong_lost_found.scss';
+
+@import 'tweaks.scss';

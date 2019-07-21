@@ -70,6 +70,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -125,33 +128,27 @@ var render = function() {
       _c("div", { staticClass: "create-team-banner" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row align-items-center" }, [
-            _c("div", { staticClass: "col-md-5 col-lg-4" }, [
-              _c(
-                "div",
-                { staticClass: "text" },
-                [
-                  _c("h1", { staticClass: "common-h" }, [_vm._v("Teams")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-default block-btn",
-                      attrs: { type: "button", to: "/team/create" }
-                    },
-                    [_vm._v("Create Team")]
-                  )
-                ],
-                1
-              )
-            ]),
+            _vm._m(0),
             _vm._v(" "),
-            _vm._m(0)
+            _c(
+              "div",
+              { staticClass: "col-md-5 col-lg-4" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-default block-btn",
+                    attrs: { to: "/team/create" }
+                  },
+                  [_vm._v("Create Team")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(2)
           ])
         ])
       ])
@@ -252,11 +249,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h1", { staticClass: "common-h" }, [_vm._v("Teams")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text" }, [
+      _c("p", [
+        _vm._v(
+          "Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
+        )
+      ]),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "inner-img",
+        attrs: { src: __webpack_require__(/*! @/images/svg/Teams.svg */ "./resources/js/images/svg/Teams.svg"), alt: "img" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "col-md-5 offset-md-2 col-lg-4 offset-lg-3" },
       [
         _c("img", {
+          staticClass: "outer-img",
           attrs: {
             src: __webpack_require__(/*! @/images/svg/Teams.svg */ "./resources/js/images/svg/Teams.svg"),
             width: "100%",

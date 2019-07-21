@@ -1,0 +1,90 @@
+.leong
+{
+  .leong-banner
+  {
+    background: $background;
+    padding: 60px 0px;
+    .commmon-h
+    {
+      margin-bottom: 15px !important;
+    }
+    .text
+    {
+      p
+      {
+        color:$silver;
+        margin-bottom: 30px;
+      }
+      @media (max-width:991px) {
+        margin-bottom: 10px;
+      }
+      @media (max-width:767px) {
+        display: flex;
+        align-items: flex-start;
+      }
+      .inner-img
+      {
+        width: 100px;
+        margin-left:20px;
+        @media (min-width:768px) {
+          display: none;
+        }
+      }
+    }
+    .outer-img
+    {
+      max-width: 160px; 
+      display: block;
+      margin: 0 auto;
+      transform: translateY(-40%);
+      @media (max-width:767px) {
+        display: none !important;
+      }
+    }
+  }
+}
+.lost-found
+{
+  .lf-banner
+  {
+    background: $background;
+    padding: 60px 0px;
+    .commmon-h
+    {
+      margin-bottom: 15px !important;
+    }
+    .text
+    {
+      p
+      {
+        color:$silver;
+        margin-bottom: 30px;
+      }
+      @media (max-width:991px) {
+        margin-bottom: 10px;
+      }
+      @media (max-width:767px) {
+        display: flex;
+        align-items: flex-start;
+      }
+      .inner-img
+      {
+        width: 80px;
+        margin-left:20px;
+        @media (min-width:768px) {
+          display: none;
+        }
+      }
+    }
+    .outer-img
+    {
+      max-width: 100px; 
+      display: block;
+      margin: 0 auto;
+      transform: translateY(-20%);     
+      @media (max-width:767px) {
+        display: none !important;
+      }
+    }
+  }
+}

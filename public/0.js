@@ -4819,6 +4819,7 @@ var script$2 = {
       return this.utils.getFullYear(this.disabledDates.to) >= this.utils.getFullYear(this.pageDate);
     },
 
+<<<<<<< HEAD
     /**
      * Increments the year
      */
@@ -4827,6 +4828,9 @@ var script$2 = {
         this.changeYear(1);
       }
     },
+=======
+module.exports = "/images/Homepage - Music.svg?64350e3f7a97bd4fc46f020aae085c10";
+>>>>>>> origin/frontend
 
     /**
      * Checks if the next year is disabled or not
@@ -4840,12 +4844,16 @@ var script$2 = {
       return this.utils.getFullYear(this.disabledDates.from) <= this.utils.getFullYear(this.pageDate);
     },
 
+<<<<<<< HEAD
     /**
      * Emits an event that shows the year calendar
      */
     showYearCalendar: function showYearCalendar() {
       this.$emit('showYearCalendar');
     },
+=======
+module.exports = "/images/Homepage - Painting.svg?ced0c6a2e24b7761b87e68f47bce8674";
+>>>>>>> origin/frontend
 
     /**
      * Whether the selected date is in this month
@@ -4864,9 +4872,13 @@ var script$2 = {
     isDisabledMonth: function isDisabledMonth(date) {
       var disabledDates = false;
 
+<<<<<<< HEAD
       if (typeof this.disabledDates === 'undefined') {
         return false;
       }
+=======
+module.exports = "/images/Homepage - Photography.svg?3a18f41fb229f042f21c7a9d0659c97e";
+>>>>>>> origin/frontend
 
       if (typeof this.disabledDates.to !== 'undefined' && this.disabledDates.to) {
         if (this.utils.getMonth(date) < this.utils.getMonth(this.disabledDates.to) && this.utils.getFullYear(date) <= this.utils.getFullYear(this.disabledDates.to) || this.utils.getFullYear(date) < this.utils.getFullYear(this.disabledDates.to)) {
@@ -4880,9 +4892,13 @@ var script$2 = {
         }
       }
 
+<<<<<<< HEAD
       if (typeof this.disabledDates.customPredictor === 'function' && this.disabledDates.customPredictor(date)) {
         disabledDates = true;
       }
+=======
+module.exports = "/images/Homepage- Cooking.svg?7752a98b194ab7410fb90cbab8fe0563";
+>>>>>>> origin/frontend
 
       return disabledDates;
     }
@@ -4890,8 +4906,12 @@ var script$2 = {
 
 };
 
+<<<<<<< HEAD
 /* script */
 const __vue_script__$2 = script$2;
+=======
+module.exports = "/images/Homepage- Sports .svg?bf424bada12e47e8fef6c8eecd16c002";
+>>>>>>> origin/frontend
 
 /* template */
 var __vue_render__$2 = function() {
@@ -4997,6 +5017,7 @@ __vue_render__$2._withStripped = true;
   /* style inject SSR */
   
 
+<<<<<<< HEAD
   
   var PickerMonth = normalizeComponent_1(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
@@ -5008,6 +5029,9 @@ __vue_render__$2._withStripped = true;
     undefined,
     undefined
   );
+=======
+module.exports = "/images/National Hood Rankings.svg?79322f957e37e46d6707484a21cd5cfe";
+>>>>>>> origin/frontend
 
 //
 var script$3 = {

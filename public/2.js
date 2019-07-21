@@ -94,6 +94,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> origin/frontend
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'KakiProfile',
   data: function data() {
@@ -136,6 +213,7 @@ var staticRenderFns = [
                   _c("img", { attrs: { src: "images/person.jpg", alt: "img" } })
                 ]),
                 _vm._v(" "),
+<<<<<<< HEAD
                 _c("h6", [_vm._v("Joel Wong")]),
                 _vm._v(" "),
                 _c("p", [
@@ -156,6 +234,38 @@ var staticRenderFns = [
                 _c("div", { staticClass: "hood-services" }, [
                   _c("h1", { staticClass: "common-h" }, [
                     _vm._v("Hood Services")
+=======
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "search",
+                    name: "search",
+                    placeholder: "Search Here"
+                  }
+                })
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "upcoming-battles" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "common-h" }, [
+            _vm._v("Upcoming hood battles")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
+              _c("div", { staticClass: "battle-box" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("div", { staticClass: "img-holder" }, [
+                    _c("img", {
+                      staticClass: "img-fluid",
+                      attrs: { src: __webpack_require__(/*! @/images/dance.jpg */ "./resources/js/images/dance.jpg"), alt: "img" }
+                    })
+>>>>>>> origin/frontend
                   ]),
                   _vm._v(" "),
                   _c("ul", [
@@ -272,10 +382,72 @@ render._withStripped = true
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/views/AL/KakiProfile.vue":
 /*!***********************************************!*\
   !*** ./resources/js/views/AL/KakiProfile.vue ***!
   \***********************************************/
+=======
+/***/ "./resources/js/images/abstract.jpg":
+/*!******************************************!*\
+  !*** ./resources/js/images/abstract.jpg ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/abstract.jpg?b69abb71724f8d01c341356b3e857910";
+
+/***/ }),
+
+/***/ "./resources/js/images/dance.jpg":
+/*!***************************************!*\
+  !*** ./resources/js/images/dance.jpg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/dance.jpg?4f978ffb08eba27932e4c71caff9dbb2";
+
+/***/ }),
+
+/***/ "./resources/js/images/svg/Battles.svg":
+/*!*********************************************!*\
+  !*** ./resources/js/images/svg/Battles.svg ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Battles.svg?49eefb62289a50a8df276476636e6fdd";
+
+/***/ }),
+
+/***/ "./resources/js/images/svg/Interest Group.svg":
+/*!****************************************************!*\
+  !*** ./resources/js/images/svg/Interest Group.svg ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Interest Group.svg?ec4991d5e56e24e09fe4d58b35fa5502";
+
+/***/ }),
+
+/***/ "./resources/js/images/swim.jpg":
+/*!**************************************!*\
+  !*** ./resources/js/images/swim.jpg ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/swim.jpg?7aaae9b6d3b8d5ae64fb591e0bbc4aa7";
+
+/***/ }),
+
+/***/ "./resources/js/views/AL/Explore.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/views/AL/Explore.vue ***!
+  \*******************************************/
+>>>>>>> origin/frontend
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

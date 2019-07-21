@@ -64,7 +64,7 @@
 	              </model-list-select>
 	              <span class="text-danger">{{ errors.first('gender') }}</span>
 	          </div>
-	          <div class="form-group mt-5">
+	          <div class="form-group">
 	            <label for="dob">Date of Birth</label>
 	            <datepicker v-model="dob" name="dob" v-validate="'required'"></datepicker>
 	            <span class="text-danger">{{ errors.first('dob') }}</span>
@@ -146,7 +146,7 @@ export default {
 				gender: this.gender,
 				date_of_birth: this.dob
 			}).then(response => {
-				console.log(response.data.user)
+				console.log(response)
 				this.$router.push({ name: 'OTP', params: {id: response.data.user.id} })
 			}).catch(error => {
 				this.formErrors = error.response.data.error
@@ -155,6 +155,10 @@ export default {
 				modal.hide;
 				console.log(error.response)
 			})
+			var body = document.getElementsByTagName("body")
+			var backdrop = document.getElementsByClassName("modal-backdrop fade show")
+			body.remove("model-open");
+			backdrop.remove("show");
 		}
 	},
 	created () {

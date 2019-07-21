@@ -32,7 +32,7 @@
 	              </button>
 	            </div>
 	            <div class="modal-body">
-	              <h1 class="common-h">Congratation</h1>
+	              <h1 class="common-h">Congratulation</h1>
 	              <p><strong>{{ user.phone_number }}</strong> <br> is Varified.</p>
 	              <button class="btn btn-default block-btn mt-4 mb-5">Go to your Profile</button>
 	            </div>

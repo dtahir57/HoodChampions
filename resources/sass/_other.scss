@@ -1,0 +1,56 @@
+.other-hoods-ctg
+{
+    background: $background;
+}
+.other-upcomming-battles
+{
+    background: #fff;
+}
+.past-battles
+{
+    padding: 50px 0px;
+    background: $background;
+    .battle-box
+    {
+        margin-bottom: 20px;
+        a
+        {
+            display: inline-block;
+            width: 100%;
+        }
+        .img-holder
+        {
+            position: relative;
+            padding-top:60%;
+            img
+            {
+                object-fit: cover;
+                object-position: center;
+                width:100%;
+                height: 100%;
+                position:absolute;
+                left: 0px;
+                top: 0px;
+            }
+            margin-bottom: 5px;
+        }
+        .text{
+            h4
+            {
+                margin: 10px 0px 5px;
+                color:#111;
+                font-family: semibold;
+                font-size: 18px;
+                &:hover
+                {
+                    color:$red;
+                }
+            }
+            p{
+    
+                color:$silver;
+                margin: 0px;
+            }
+        }
+    }
+}

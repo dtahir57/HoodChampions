@@ -163,7 +163,7 @@ __webpack_require__.r(__webpack_exports__);
         gender: this.gender,
         date_of_birth: this.dob
       }).then(function (response) {
-        console.log(response.data.user);
+        console.log(response);
 
         _this.$router.push({
           name: 'OTP',
@@ -177,6 +177,10 @@ __webpack_require__.r(__webpack_exports__);
         modal.hide;
         console.log(error.response);
       });
+      var body = document.getElementsByTagName("body");
+      var backdrop = document.getElementsByClassName("modal-backdrop fade show");
+      body.remove("model-open");
+      backdrop.remove("show");
     }
   },
   created: function created() {
@@ -521,7 +525,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "form-group mt-5" },
+              { staticClass: "form-group" },
               [
                 _c("label", { attrs: { for: "dob" } }, [
                   _vm._v("Date of Birth")

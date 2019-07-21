@@ -4,15 +4,18 @@
 	    <div class="interest-banner">
 	      <div class="container">
 	        <div class="row align-items-center">
+				<div class="col-12">
+					<h1 class="common-h">Interest Groups</h1>
+				</div>
 	          <div class="col-md-6 col-lg-5 col-xl-4">
 	            <div class="text">
-	              <h1 class="common-h">Interest Groups</h1>
 	              <p>Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!</p>
-	              <button class="btn btn-default block-btn">Create Interest Group</button>
-	            </div>
+	            	<img src="@/images/svg/Interest Group.svg" class="inner-img" width="100%" alt="img">
+				</div>
+				<button class="btn btn-default block-btn">Create Interest Group</button>
 	          </div>
 	          <div class="col-md-5 offset-md-1 col-lg-5 offset-lg-2 col-xl-4 offset-xl-3">
-	            <img src="@/images/svg/Interest Group.svg" width="100%" alt="img">
+	            <img src="@/images/svg/Interest Group.svg" class="outer-img" width="100%" alt="img">
 	          </div>
 	        </div>
 	      </div>

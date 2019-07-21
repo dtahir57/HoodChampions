@@ -1945,6 +1945,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6405,26 +6412,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 }));
 //# sourceMappingURL=bootstrap.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/master.css":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/css/master.css ***!
-  \*********************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "@font-face {\n  font-family: plex;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/ibmplex.ttf */ "./resources/js/css/fonts/ibmplex.ttf")) + "); }\n\n@font-face {\n  font-family: light;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/light.ttf */ "./resources/js/css/fonts/light.ttf")) + "); }\n\n@font-face {\n  font-family: medium;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/medium.ttf */ "./resources/js/css/fonts/medium.ttf")) + "); }\n\n@font-face {\n  font-family: semibold;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/semibold.ttf */ "./resources/js/css/fonts/semibold.ttf")) + "); }\n\n@font-face {\n  font-family: bold;\n  src: url(" + escape(__webpack_require__(/*! ./fonts/bold.ttf */ "./resources/js/css/fonts/bold.ttf")) + "); }\n\n* {\n  box-sizing: border-box;\n  font-family: \"plex\", sans-serif; }\n\n*::-moz-selection {\n  background-color: #b95d5d;\n  color: #fff; }\n\n*::selection {\n  background-color: #b95d5d;\n  color: #fff; }\n\nul {\n  margin: 0px;\n  padding: 0px; }\n  ul li {\n    list-style-type: none;\n    display: inline-block; }\n\na {\n  text-decoration: none !important;\n  color: #333; }\n  a:hover {\n    color: #dd2927; }\n\nhtml {\n  overflow-x: hidden !important;\n  scroll-behavior: smooth; }\n\nbody {\n  background-color: #fff;\n  margin: 0px;\n  position: relative;\n  padding: 0px;\n  width: 100%; }\n\nbody::-webkit-scrollbar {\n  width: 12px;\n  background-color: transparent;\n  position: absolute; }\n\nbody::-webkit-scrollbar-thumb {\n  background-color: #a30f17;\n  border-radius: 6px; }\n\nbody::-webkit-scrollbar-track {\n  background-color: #e2e2e2; }\n\n.fluid {\n  padding-left: 7px !important;\n  padding-right: 7px !important; }\n\n.mx-none {\n  margin: 0px -15px 0px -15px; }\n\n.mx-7p {\n  margin: 0px -7px 0px -7px; }\n\n.hidden {\n  display: none; }\n\n*:focus {\n  outline-color: transparent !important; }\n\n.btn:focus,\n.form-control:focus {\n  box-shadow: none !important; }\n\n.form-control {\n  border-radius: 0px; }\n\n.btn-outline {\n  background: transparent;\n  color: #a30f17;\n  border: 1px solid #a30f17;\n  border-radius: 0px;\n  font-size: 17px;\n  padding: 10px 30px;\n  -webkit-transition: .1s linear;\n  transition: .1s linear;\n  font-family: medium; }\n  @media (max-width: 1199px) {\n    .btn-outline {\n      font-size: 16px;\n      padding: 9px 28px; } }\n  @media (max-width: 991px) {\n    .btn-outline {\n      font-size: 15px;\n      padding: 8px 26px; } }\n  @media (max-width: 767px) {\n    .btn-outline {\n      font-size: 14px;\n      padding: 7px 24px; } }\n  .btn-outline:hover {\n    color: #dd2927;\n    border: 1px solid #dd2927; }\n  .btn-outline:active {\n    -webkit-transform: scale(0.97);\n    transform: scale(0.97); }\n\n.btn-default {\n  color: #fff;\n  background-color: #a30f17;\n  border: 1px solid #a30f17;\n  border-radius: 0px;\n  font-size: 16px;\n  padding: 10px 30px;\n  -webkit-transition: .1s linear;\n  transition: .1s linear;\n  font-family: medium; }\n  @media (max-width: 1199px) {\n    .btn-default {\n      font-size: 16px;\n      padding: 9px 28px; } }\n  @media (max-width: 991px) {\n    .btn-default {\n      font-size: 15px;\n      padding: 8px 26px; } }\n  @media (max-width: 767px) {\n    .btn-default {\n      font-size: 14px;\n      padding: 7px 24px; } }\n  .btn-default:hover {\n    background: #dd2927;\n    color: #fff;\n    border: 1px solid #dd2927; }\n  .btn-default:active {\n    -webkit-transform: scale(0.97);\n    transform: scale(0.97); }\n\n.link {\n  color: #dd2927;\n  text-decoration: none; }\n  .link:hover {\n    color: #dd2927; }\n\n@media (max-width: 420px) {\n  .col-xs-12 {\n    -webkit-box-flex: 0 !important;\n    flex: 0 0 100% !important;\n    max-width: 100% !important; } }\n\n.common-h {\n  font-size: 18px;\n  text-transform: uppercase;\n  color: #dd2927;\n  margin: 0px 0px 30px;\n  font-family: medium; }\n\ninput.form-control {\n  border: none;\n  border-bottom: 2px solid #a30f17;\n  height: 50px;\n  font-family: medium; }\n  input.form-control:focus {\n    border-color: #dd2927;\n    background: #fff3e6; }\n\nlabel {\n  text-transform: uppercase;\n  font-family: semibold;\n  color: #9a9a9a;\n  font-size: 14px; }\n  @media (max-width: 991px) {\n    label {\n      font-size: 13px; } }\n  @media (max-width: 767px) {\n    label {\n      font-size: 12px; } }\n\ntextarea.form-control {\n  border: none !important;\n  background: #fffbf8;\n  height: 200px;\n  padding: 10px 15px;\n  font-family: medium; }\n  textarea.form-control:focus {\n    background: #fff3e6; }\n\n.group-btns {\n  display: -webkit-box;\n  display: flex; }\n  .group-btns .btn {\n    width: 50%;\n    -webkit-box-flex: 1;\n    flex-grow: 1; }\n\n.main {\n  min-height: 100vh;\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n  margin: 0px;\n  padding: 0px;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  flex-direction: column; }\n  .main .main-wrapper {\n    -webkit-box-flex: 1;\n    flex-grow: 1; }\n\n.navbar {\n  border: none;\n  border-radius: 0px;\n  padding: 0px 15px;\n  background: #fff; }\n  .navbar .navbar-brand {\n    padding: 0px 0px 6px; }\n    @media (max-width: 767px) {\n      .navbar .navbar-brand {\n        padding: 5px 0px 10px; } }\n    .navbar .navbar-brand img {\n      height: 30px; }\n      @media (max-width: 1199px) {\n        .navbar .navbar-brand img {\n          height: 25px; } }\n  .navbar .navbar-toggler {\n    font-size: 25px;\n    padding: 5px 5px 0px 5px; }\n    .navbar .navbar-toggler:hover {\n      color: #dd2927; }\n  .navbar .navbar-nav {\n    margin-right: 50px; }\n    @media (max-width: 991px) {\n      .navbar .navbar-nav {\n        margin-right: 0px; } }\n    .navbar .navbar-nav .nav-item {\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-align: center;\n      align-items: center;\n      position: relative; }\n      .navbar .navbar-nav .nav-item .nav-link {\n        font-size: 18px;\n        padding: 20px 30px;\n        font-family: medium;\n        color: #9a9a9a; }\n        @media (max-width: 1199px) {\n          .navbar .navbar-nav .nav-item .nav-link {\n            font-size: 16px;\n            padding: 15px 20px; } }\n        @media (max-width: 991px) {\n          .navbar .navbar-nav .nav-item .nav-link {\n            font-size: 15px;\n            padding: 15px 12px;\n            font-family: plex; } }\n        .navbar .navbar-nav .nav-item .nav-link:hover {\n          color: #dd2927; }\n      .navbar .navbar-nav .nav-item > ul.sub-drop {\n        position: absolute;\n        top: 100%;\n        left: 50%;\n        -webkit-transform: translateX(-50%);\n        transform: translateX(-50%);\n        background: #fff3e6;\n        display: none;\n        z-index: 200; }\n        .navbar .navbar-nav .nav-item > ul.sub-drop li {\n          display: block; }\n          .navbar .navbar-nav .nav-item > ul.sub-drop li a {\n            text-align: center;\n            display: inline-block;\n            text-transform: uppercase;\n            color: #dd2927;\n            width: 100%;\n            white-space: nowrap;\n            padding: 15px 18px; }\n            .navbar .navbar-nav .nav-item > ul.sub-drop li a:hover {\n              background: #dd2927;\n              color: #fff; }\n      .navbar .navbar-nav .nav-item:hover a {\n        color: #dd2927; }\n      .navbar .navbar-nav .nav-item:hover .sub-drop, .navbar .navbar-nav .nav-item .sub-drop:hover {\n        display: block; }\n    .navbar .navbar-nav .profile-item .nav-link {\n      padding: 5px 15px; }\n    .navbar .navbar-nav .profile-item .profile-circle {\n      border-radius: 100%;\n      width: 45px;\n      height: 45px; }\n      .navbar .navbar-nav .profile-item .profile-circle img {\n        border-radius: 100%;\n        width: 100%; }\n\n.powered-bar {\n  background: #000;\n  padding: 20px 0px; }\n  .powered-bar .bar {\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: start;\n    justify-content: flex-start; }\n    @media (max-width: 991px) {\n      .powered-bar .bar {\n        -webkit-box-pack: justify;\n        justify-content: space-between; } }\n    .powered-bar .bar p {\n      color: #fff;\n      margin: 0px 20px 0px 0px;\n      font-size: 18px; }\n    .powered-bar .bar img {\n      height: 70px; }\n\n.footer {\n  padding: 20px 0px;\n  background: #2f2f2f;\n  color: #999; }\n  .footer .frow {\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center; }\n    @media (max-width: 991px) {\n      .footer .frow {\n        flex-wrap: wrap;\n        text-align: center;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n        flex-direction: column; } }\n    .footer .frow p {\n      margin-right: auto;\n      margin-bottom: 0px;\n      font-size: 16px; }\n      @media (max-width: 991px) {\n        .footer .frow p {\n          width: 100%;\n          -webkit-box-flex: 1;\n          flex-grow: 1;\n          margin-bottom: 10px; }\n          .footer .frow p br {\n            display: none; } }\n    .footer .frow ul li a {\n      color: #999;\n      padding: 5px 10px; }\n      .footer .frow ul li a:hover {\n        color: #dd2927; }\n    .footer .frow .social {\n      margin-left: 20px; }\n      @media (max-width: 991px) {\n        .footer .frow .social {\n          margin-left: 0px;\n          margin-top: 10px; } }\n      .footer .frow .social li a {\n        font-size: 24px; }\n\n.newsstream {\n  padding: 40px 0px;\n  background: #fffbf8;\n  position: relative; }\n\n.single-feed img {\n  width: 100%; }\n\n.single-feed .stream-text {\n  height: 100%; }\n  .single-feed .stream-text .text {\n    max-height: 130px;\n    overflow: hidden; }\n  @media (max-width: 767px) {\n    .single-feed .stream-text {\n      display: -webkit-box;\n      display: flex;\n      padding: 15px 0px;\n      -webkit-box-align: start;\n      align-items: flex-start;\n      -webkit-box-pack: justify;\n      justify-content: space-between; }\n      .single-feed .stream-text .text {\n        -webkit-box-flex: 1;\n        flex-grow: 1; } }\n  .single-feed .stream-text h2 {\n    margin: 0px;\n    font-size: 18px;\n    color: #dd2927;\n    text-transform: uppercase; }\n  .single-feed .stream-text h3 {\n    font-size: 17px;\n    line-height: 16px;\n    color: #000;\n    font-family: semibold;\n    margin: 10px 0px; }\n    .single-feed .stream-text h3 a {\n      font-family: semibold; }\n      .single-feed .stream-text h3 a:hover {\n        color: #dd2927; }\n  .single-feed .stream-text p {\n    font-size: 18px;\n    color: #707070; }\n  .single-feed .stream-text .icon {\n    position: absolute;\n    bottom: 0px;\n    right: 0px;\n    width: 50%; }\n    @media (max-width: 767px) {\n      .single-feed .stream-text .icon {\n        position: relative;\n        max-width: 120px; } }\n\n.ad-box {\n  padding: 50px 0px; }\n  .ad-box .box {\n    width: 380px;\n    height: 280px;\n    background: #888;\n    text-align: center;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: center;\n    justify-content: center;\n    margin: 0 auto; }\n    .ad-box .box h1 {\n      color: #fff;\n      font-size: calc(1.2vw + 1.2em); }\n\n.battles {\n  background: #fff;\n  padding: 30px 0px; }\n  .battles .battle-box {\n    margin-bottom: 30px;\n    -webkit-transition: .1s ease;\n    transition: .1s ease; }\n    .battles .battle-box:hover {\n      box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3); }\n    .battles .battle-box a {\n      display: inline-block;\n      width: 100%; }\n    .battles .battle-box .img-holder {\n      position: relative;\n      padding-top: 60%; }\n      .battles .battle-box .img-holder img {\n        position: absolute;\n        top: 0px;\n        left: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center; }\n    .battles .battle-box .content {\n      background: #fffbf8;\n      text-align: center;\n      padding: 20px; }\n      .battles .battle-box .content img {\n        height: 70px; }\n      .battles .battle-box .content h4 {\n        font-size: 18px;\n        margin: 5px 0px 0px;\n        color: #a30f17;\n        font-family: bold;\n        text-transform: uppercase; }\n      .battles .battle-box .content h5 {\n        color: #dd2927;\n        font-size: 16px;\n        margin: 10px 0px;\n        text-transform: uppercase; }\n      .battles .battle-box .content h6 {\n        font-family: semibold;\n        font-size: 18px;\n        color: #000; }\n      .battles .battle-box .content p {\n        font-size: 15px;\n        margin: 0px;\n        height: 70px;\n        overflow: hidden; }\n\n.display {\n  padding: 30px 0px;\n  background: #fffbf8; }\n  .display img {\n    display: block;\n    width: 80%;\n    margin: 0 auto; }\n    @media (max-width: 991px) {\n      .display img {\n        width: 90%; } }\n    @media (max-width: 576px) {\n      .display img {\n        width: 100%; } }\n  .display .table {\n    margin: 20px 0px; }\n    .display .table thead {\n      background: #a30f17; }\n      .display .table thead th {\n        color: #fff;\n        text-align: center;\n        font-weight: 500;\n        font-family: bold; }\n    .display .table tbody td {\n      text-align: center;\n      border: none;\n      font-size: 18px;\n      font-family: medium;\n      color: #707070;\n      padding: 20px 10px; }\n      @media (max-width: 991px) {\n        .display .table tbody td {\n          font-size: 16px; } }\n      @media (max-width: 767px) {\n        .display .table tbody td {\n          font-size: 15px; } }\n      @media (max-width: 576px) {\n        .display .table tbody td {\n          font-size: 14px; } }\n    .display .table tbody tr:first-child td {\n      color: #dd2927; }\n\n.hood-ranking .content {\n  padding: 40px 0px; }\n  .hood-ranking .content p {\n    color: #707070; }\n    @media (max-width: 991px) {\n      .hood-ranking .content p {\n        font-size: 14px; } }\n    @media (max-width: 576px) {\n      .hood-ranking .content p {\n        font-size: 13px; } }\n\n.hood-ranking .table td {\n  border: none;\n  color: #707070;\n  padding: 15px; }\n  .hood-ranking .table td ~ td {\n    text-align: center; }\n\n.hood-ranking .table .lead {\n  background: #fff3e6;\n  margin-bottom: 30px; }\n  .hood-ranking .table .lead td {\n    padding: 15px;\n    font-size: 17px;\n    color: #a30f17;\n    font-family: bold; }\n    @media (max-width: 991px) {\n      .hood-ranking .table .lead td {\n        font-size: 16px; } }\n    @media (max-width: 767px) {\n      .hood-ranking .table .lead td {\n        font-size: 15px; } }\n    @media (max-width: 576px) {\n      .hood-ranking .table .lead td {\n        font-size: 14px; } }\n\n.hood-ranking .table .lag td {\n  padding: 15px 15px 50px; }\n  @media (max-width: 991px) {\n    .hood-ranking .table .lag td {\n      font-size: 15px; } }\n  @media (max-width: 767px) {\n    .hood-ranking .table .lag td {\n      font-size: 14px; } }\n  @media (max-width: 576px) {\n    .hood-ranking .table .lag td {\n      font-size: 13px; } }\n\n.hood-ranking .table .total {\n  background: #a30f17;\n  margin-bottom: 30px; }\n  .hood-ranking .table .total td {\n    padding: 15px;\n    font-size: 17px;\n    color: #fff;\n    font-family: bold; }\n    @media (max-width: 991px) {\n      .hood-ranking .table .total td {\n        font-size: 16px; } }\n    @media (max-width: 767px) {\n      .hood-ranking .table .total td {\n        font-size: 15px; } }\n    @media (max-width: 576px) {\n      .hood-ranking .table .total td {\n        font-size: 14px; } }\n\n.about {\n  background: #fffbf8;\n  padding: 40px 0px 30px; }\n  .about .content {\n    margin-bottom: 30px; }\n    .about .content .common-h {\n      margin-bottom: 20px; }\n    .about .content p {\n      margin: 0px 0px 15px; }\n\n.contact-box {\n  padding: 40px 0px; }\n  .contact-box .container {\n    position: relative; }\n  .contact-box .form-group {\n    margin-bottom: 40px; }\n  .contact-box .corner-icon {\n    position: absolute;\n    right: 0px;\n    top: -40px;\n    z-index: 10;\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%);\n    width: 7vw; }\n    @media (max-width: 1199px) {\n      .contact-box .corner-icon {\n        width: 8vw; } }\n    @media (max-width: 991px) {\n      .contact-box .corner-icon {\n        width: 9vw; } }\n    @media (max-width: 767px) {\n      .contact-box .corner-icon {\n        width: 60px;\n        right: 15px; } }\n\n.friends {\n  background: #fffbf8;\n  padding: 50px 0px; }\n  .friends .no-friends {\n    padding: 30px 0px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: center;\n    justify-content: center;\n    text-align: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    .friends .no-friends img {\n      width: 40%; }\n      @media (max-width: 991px) {\n        .friends .no-friends img {\n          width: 50%; } }\n      @media (max-width: 576px) {\n        .friends .no-friends img {\n          width: 60%; } }\n    .friends .no-friends p {\n      margin: 0px;\n      color: #707070;\n      font-family: medium; }\n      .friends .no-friends p strong {\n        color: #dd2927;\n        font-family: medium; }\n\n.nearby {\n  padding: 50px 0px;\n  background: #fff; }\n  .nearby .common-h i {\n    margin-left: 40px; }\n\n.person-box {\n  padding: 0px 15px;\n  text-align: center;\n  margin-bottom: 25px; }\n  .person-box a {\n    display: inline-block;\n    width: 100%; }\n  .person-box .img-holder {\n    border-radius: 100%;\n    padding-top: 100%;\n    position: relative; }\n    .person-box .img-holder img {\n      border-radius: 100%;\n      position: absolute;\n      top: 0px;\n      left: 0px;\n      height: 100%;\n      width: 100%;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center; }\n  .person-box h4 {\n    font-family: medium;\n    font-size: 16px;\n    margin: 10px 0px; }\n\n.friend-requests {\n  padding: 50px 0px; }\n  .friend-requests .request {\n    margin-bottom: 40px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: end;\n    align-items: flex-end; }\n    @media (max-width: 991px) {\n      .friend-requests .request {\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n        flex-direction: column;\n        -webkit-box-pack: justify;\n        justify-content: space-between;\n        text-align: center; } }\n    .friend-requests .request .img-holder {\n      border-radius: 100%;\n      width: 20%;\n      margin-right: 20px; }\n      @media (max-width: 991px) {\n        .friend-requests .request .img-holder {\n          width: 120px;\n          margin: 0 auto; } }\n      @media (max-width: 767px) {\n        .friend-requests .request .img-holder {\n          width: 100px;\n          margin: 0 auto; } }\n      .friend-requests .request .img-holder img {\n        width: 100%;\n        border-radius: 100%; }\n    .friend-requests .request .name-action {\n      width: 60%; }\n      @media (max-width: 991px) {\n        .friend-requests .request .name-action {\n          width: 100%; } }\n      .friend-requests .request .name-action a {\n        font-size: 17px;\n        font-family: medium;\n        color: #9a9a9a;\n        padding: 10px 0px;\n        display: inline-block;\n        margin-bottom: 5px; }\n        .friend-requests .request .name-action a:hover {\n          color: #dd2927; }\n      .friend-requests .request .name-action .group-btns {\n        max-width: 350px;\n        margin: 0 auto; }\n\n.friend-profile .profile-details {\n  height: 100%;\n  text-align: center;\n  padding: 50px 50px;\n  background: #fffbf8; }\n  @media (max-width: 1199px) {\n    .friend-profile .profile-details {\n      padding: 50px 30px; } }\n  @media (max-width: 767px) {\n    .friend-profile .profile-details {\n      padding: 40px 30px 30px; } }\n  .friend-profile .profile-details .img-holder {\n    border-radius: 100%;\n    width: 120px;\n    margin: 0 auto 20px; }\n    .friend-profile .profile-details .img-holder img {\n      width: 100%;\n      border-radius: 100%; }\n  .friend-profile .profile-details h6 {\n    margin: 0px 0px 5px;\n    font-family: medium;\n    color: #9a9a9a;\n    font-size: 18px; }\n  .friend-profile .profile-details p {\n    margin: 0px;\n    color: #9a9a9a;\n    font-display: 16px;\n    font-family: medium; }\n  .friend-profile .profile-details ul {\n    margin: 15px 0px 30px; }\n    .friend-profile .profile-details ul li {\n      padding: 0px 16px;\n      font-size: 16px;\n      font-family: medium;\n      color: #9a9a9a;\n      position: relative; }\n      .friend-profile .profile-details ul li::after {\n        position: absolute;\n        content: \"\";\n        height: 15px;\n        width: 1px;\n        background: #ddd;\n        top: 50%;\n        -webkit-transform: translateY(-50%);\n        transform: translateY(-50%);\n        right: -1px; }\n      .friend-profile .profile-details ul li:last-child::after {\n        display: none; }\n  .friend-profile .profile-details .btn-outline {\n    width: 90%;\n    max-width: 330px;\n    margin: 0 auto;\n    display: block; }\n\n.friend-profile .hood-services {\n  margin-top: 40px;\n  border-top: 1px solid #ddd;\n  padding: 40px 15px;\n  text-align: left; }\n  .friend-profile .hood-services ul li {\n    padding: 0px; }\n    .friend-profile .hood-services ul li h5 {\n      font-size: 18px;\n      font-family: medium;\n      color: #000;\n      margin: 0px 0px 3px; }\n    .friend-profile .hood-services ul li p {\n      margin: 0px 0px 4px;\n      color: #9a9a9a;\n      font-size: 17px;\n      font-family: medium; }\n\n.friend-profile .about-profile {\n  padding: 50px 50px 50px 80px; }\n  @media (max-width: 1199px) {\n    .friend-profile .about-profile {\n      padding: 50px 30px; } }\n  @media (max-width: 767px) {\n    .friend-profile .about-profile {\n      padding: 40px 20px; } }\n  .friend-profile .about-profile .block {\n    margin-bottom: 100px; }\n    .friend-profile .about-profile .block ~ .block:last-child {\n      margin-bottom: 50px; }\n    .friend-profile .about-profile .block .group {\n      margin-bottom: 20px; }\n      .friend-profile .about-profile .block .group .img-holder {\n        position: relative;\n        padding-top: 60%;\n        margin-bottom: 5px; }\n        .friend-profile .about-profile .block .group .img-holder img {\n          -o-object-fit: cover;\n          object-fit: cover;\n          -o-object-position: center;\n          object-position: center;\n          width: 100%;\n          height: 100%;\n          position: absolute;\n          left: 0px;\n          top: 0px; }\n      .friend-profile .about-profile .block .group a {\n        color: #111;\n        font-family: semibold;\n        font-size: 18px; }\n        .friend-profile .about-profile .block .group a:hover {\n          color: #dd2927; }\n      .friend-profile .about-profile .block .group p {\n        color: #9a9a9a;\n        margin: 0px; }\n    .friend-profile .about-profile .block .not-any p {\n      margin: 0px 0px 50px; }\n    .friend-profile .about-profile .block .not-any .btn-default {\n      min-width: 300px; }\n      @media (max-width: 991px) {\n        .friend-profile .about-profile .block .not-any .btn-default {\n          min-width: 270px; } }\n      @media (max-width: 767px) {\n        .friend-profile .about-profile .block .not-any .btn-default {\n          min-width: 250px; } }\n\n.not-found-error {\n  padding: 80px 0px;\n  text-align: center; }\n  .not-found-error p {\n    font-family: semibold;\n    font-size: 18px;\n    color: #9a9a9a;\n    margin: 20px 0px; }\n\n.login {\n  padding: 60px 0px 80px;\n  text-align: center; }\n  .login .common-h {\n    margin-bottom: 60px; }\n  .login p {\n    font-family: medium;\n    color: #9a9a9a;\n    margin: 10px 0px; }\n  .login a {\n    font-size: 16px;\n    font-family: semibold;\n    color: #a30f17; }\n    .login a:hover {\n      color: #dd2927; }\n  .login input.form-control {\n    position: relative;\n    background: #fff3e6;\n    border: 1px solid #fff3e6; }\n  .login .btn-fb {\n    background: #3366c3;\n    color: #fff;\n    width: 100%;\n    border-radius: 0px;\n    display: block;\n    padding: 10px 20px; }\n    .login .btn-fb i {\n      margin-right: 15px; }\n  .login .or {\n    padding: 20px 0px; }\n    .login .or p {\n      margin: 0px;\n      font-family: medium;\n      color: #9a9a9a; }\n  .login .v-text {\n    font-size: 14px;\n    margin: 10px 0px;\n    height: 45px;\n    overflow: hidden; }\n    .login .v-text p {\n      text-align: left;\n      margin: 0px;\n      color: #9a9a9a;\n      font-family: medium; }\n    .login .v-text .valid {\n      display: none;\n      color: #00af57; }\n    .login .v-text .invalid {\n      display: none;\n      color: #be2e2e; }\n  .login .form-control.correct {\n    border: 1px solid #00af57; }\n    .login .form-control.correct ~ .v-text .requirement {\n      display: none; }\n    .login .form-control.correct ~ .v-text .valid {\n      display: block; }\n    .login .form-control.correct ~ .mark {\n      display: block; }\n      .login .form-control.correct ~ .mark .fa-times {\n        display: none; }\n  .login .form-control.incorrect {\n    border: 1px solid #be2e2e; }\n    .login .form-control.incorrect ~ .v-text .requirement, .login .form-control.incorrect ~ .v-text .invalid {\n      display: block;\n      color: #be2e2e; }\n    .login .form-control.incorrect ~ .v-text .valid {\n      display: none; }\n    .login .form-control.incorrect ~ .mark {\n      display: block; }\n      .login .form-control.incorrect ~ .mark .fa-check {\n        display: none; }\n  .login .form-group {\n    position: relative;\n    min-height: 100px;\n    text-align: left; }\n    .login .form-group .mark {\n      position: absolute;\n      display: inline-block;\n      right: 15px;\n      top: 10px;\n      z-index: 10;\n      display: none; }\n      .login .form-group .mark .fa-times {\n        color: #be2e2e; }\n      .login .form-group .mark .fa-check {\n        color: #00af57; }\n\n.block-btn {\n  width: 100%; }\n\n.modal-open {\n  padding-right: 0px !important; }\n\n.modal-open section {\n  padding-right: 0px !important;\n  -webkit-filter: blur(3px);\n  filter: blur(3px); }\n\n.modal .modal-header {\n  border: none; }\n  .modal .modal-header .close {\n    color: #a30f17;\n    opacity: 1; }\n    .modal .modal-header .close:hover {\n      color: #dd2927;\n      opacity: 1; }\n\n.modal .modal-body .btn-default {\n  min-height: 50px; }\n\n.login-modal {\n  text-align: center; }\n  .login-modal .modal-body p {\n    color: #9a9a9a; }\n\n.modal-backdrop.show {\n  opacity: .9; }\n\n.modal-dialog {\n  top: 40%;\n  margin-top: 0px !important;\n  -webkit-transform: translateY(-50%) !important;\n  transform: translateY(-50%) !important; }\n\n.select2 {\n  text-align: left; }\n\n.select2-results__options li {\n  display: block !important;\n  padding: 15px 10px; }\n\n.select2-search {\n  display: none; }\n\n.select2-container--default .select2-selection--single {\n  background: #fff3e6;\n  border: 1px solid #fff3e6;\n  height: 50px; }\n\n.select2-container--default .select2-selection--single .select2-selection__rendered {\n  line-height: 46px;\n  color: #333;\n  font-family: medium; }\n\n.select2-selection__arrow b {\n  border: none !important; }\n\n.select2-selection__arrow::after {\n  content: \"\\F107\";\n  font-family: \"Font Awesome 5 Pro\";\n  font-weight: 400;\n  position: absolute;\n  z-index: 100;\n  top: 7px;\n  color: #a30f17;\n  font-size: 24px;\n  right: 10px; }\n\n.select2-container--default .select2-results__option--highlighted[aria-selected] {\n  background: #dd2927;\n  color: #fff; }\n\n.select2-dropdown {\n  background-color: #fff3e6;\n  border: 1px solid #fff3e6; }\n\n.datepicker--day-name {\n  font-size: 14px;\n  font-family: medium;\n  color: #dd2927; }\n\n.datepicker--cell.datepicker--cell-day.-selected- {\n  background: #dd2927;\n  color: #fff; }\n\n.terms-check {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n  align-items: center;\n  -webkit-box-pack: center !important;\n  justify-content: center !important;\n  margin-bottom: 15px; }\n  .terms-check input {\n    display: none; }\n  .terms-check label {\n    position: relative;\n    text-transform: none !important; }\n    .terms-check label::-moz-selection {\n      background: white;\n      color: #9a9a9a; }\n    .terms-check label::selection {\n      background: white;\n      color: #9a9a9a; }\n    .terms-check label::before {\n      content: \" \";\n      height: 20px;\n      width: 20px;\n      border: 2px solid #a30f17;\n      position: absolute;\n      left: -30px;\n      z-index: 10;\n      top: 3px;\n      border-radius: 100%; }\n    .terms-check label::after {\n      content: \"\\F00C\";\n      font-family: \"Font Awesome 5 Pro\";\n      font-weight: 400;\n      font-size: 14px;\n      position: absolute;\n      left: -27.5px;\n      z-index: 10;\n      top: 3px;\n      color: #a30f17;\n      display: none; }\n  .terms-check input[type=checkbox]:checked ~ label::after {\n    display: block; }\n\n.form-check {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n  align-items: center;\n  -webkit-box-pack: start;\n  justify-content: flex-start;\n  margin: 10px 0px 20px;\n  padding-left: 0px; }\n  .form-check input {\n    display: none; }\n  .form-check label {\n    position: relative;\n    text-transform: none !important;\n    padding-left: 30px;\n    font-size: 16px !important; }\n    .form-check label a {\n      padding-left: 4px; }\n    .form-check label::-moz-selection {\n      background: white;\n      color: #9a9a9a; }\n    .form-check label::selection {\n      background: white;\n      color: #9a9a9a; }\n    .form-check label::before {\n      content: \" \";\n      height: 20px;\n      width: 20px;\n      border: 2px solid #a30f17;\n      position: absolute;\n      left: 0px;\n      z-index: 10;\n      top: 3px;\n      border-radius: 100%; }\n    .form-check label::after {\n      content: \"\\F00C\";\n      font-family: \"Font Awesome 5 Pro\";\n      font-weight: 400;\n      font-size: 14px;\n      position: absolute;\n      left: 3px;\n      z-index: 10;\n      top: 3px;\n      color: #a30f17;\n      display: none; }\n  .form-check input[type=checkbox]:checked ~ label::after {\n    display: block; }\n\n.news-stream {\n  padding: 60px 0px;\n  background: #fffbf8;\n  position: relative; }\n  .news-stream .single-feed {\n    margin-bottom: 100px; }\n    .news-stream .single-feed:last-child {\n      margin-bottom: 0px; }\n    @media (max-width: 767px) {\n      .news-stream .single-feed {\n        margin-bottom: 60px; } }\n    @media (max-width: 576px) {\n      .news-stream .single-feed {\n        margin-bottom: 50px; } }\n\n.teams .create-team-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .teams .create-team-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .teams .create-team-banner .text {\n      margin-bottom: 30px; } }\n  .teams .create-team-banner img {\n    max-width: 400px;\n    display: block;\n    margin: 0 auto; }\n\n.my-teams {\n  padding: 50px 0px; }\n\n.team-box {\n  margin-bottom: 20px; }\n  .team-box .img-holder {\n    position: relative;\n    padding-top: 60%;\n    margin-bottom: 5px; }\n    .team-box .img-holder img {\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      width: 100%;\n      height: 100%;\n      position: absolute;\n      left: 0px;\n      top: 0px; }\n  .team-box a {\n    color: #111;\n    font-family: semibold;\n    font-size: 18px; }\n    .team-box a:hover {\n      color: #dd2927; }\n  .team-box p {\n    color: #9a9a9a;\n    margin: 0px; }\n\n.all-teams {\n  padding: 50px 0px;\n  background: #fffbf8; }\n\n.join-team {\n  padding: 40px 0px 60px; }\n  .join-team .img-holder {\n    position: relative;\n    padding-top: 60%; }\n    .join-team .img-holder img {\n      width: 100%;\n      position: absolute;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      left: 0px;\n      top: 0px;\n      height: 100%; }\n  .join-team .team-info {\n    height: 100%;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    @media (max-width: 767px) {\n      .join-team .team-info {\n        margin-top: 10px; } }\n    .join-team .team-info .text {\n      -webkit-box-flex: 1;\n      flex-grow: 1;\n      overflow: hidden; }\n    .join-team .team-info h3 {\n      font-size: 17px;\n      line-height: 16px;\n      color: #000;\n      font-family: semibold;\n      margin: 10px 0px; }\n    .join-team .team-info span {\n      color: #707070;\n      display: block;\n      padding: 0px 0px 5px 0px; }\n    .join-team .team-info p {\n      font-size: 16px;\n      color: #000; }\n\n.info-msg {\n  background: #fff3e6;\n  width: 100%;\n  padding: 15px 20px;\n  margin: 10px 0px 20px;\n  text-align: left !important;\n  display: inline-block; }\n  .info-msg p {\n    margin: 0px;\n    color: #707070; }\n\n.team-posts {\n  padding: 60px 0px 80px;\n  background: #fffbf8;\n  border-top: 2px solid #eee;\n  border-bottom: 2px solid #eee; }\n  @media (max-width: 767px) {\n    .team-posts {\n      padding: 40px 0px 60px; } }\n  .team-posts .publisher {\n    text-align: center; }\n    .team-posts .publisher .img-holder {\n      height: 100px;\n      width: 100px;\n      position: relative;\n      display: block;\n      margin: 0 auto 20px; }\n      .team-posts .publisher .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n  @media (max-width: 767px) {\n    .team-posts .posts {\n      margin-top: 20px; } }\n\n.team-details {\n  padding: 60px 0px; }\n  .team-details .common-h {\n    text-align: center; }\n  .team-details .about-team ul li {\n    display: block;\n    margin-bottom: 20px; }\n    .team-details .about-team ul li:last-child {\n      margin-bottom: 0px; }\n    .team-details .about-team ul li p {\n      margin: 0px;\n      color: #000; }\n    .team-details .about-team ul li span {\n      color: #9a9a9a; }\n  .team-details .members .single-member {\n    margin-bottom: 30px; }\n    .team-details .members .single-member a {\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-align: center;\n      align-items: center; }\n    .team-details .members .single-member .img-holder {\n      height: 50px;\n      width: 50px;\n      position: relative;\n      display: block;\n      margin-right: 15px; }\n      .team-details .members .single-member .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n    .team-details .members .single-member .name-place {\n      -webkit-box-flex: 1;\n      flex-grow: 1; }\n      .team-details .members .single-member .name-place h4 {\n        font-family: medium;\n        font-size: 16px;\n        margin: 0px;\n        color: #9a9a9a; }\n        .team-details .members .single-member .name-place h4:hover {\n          color: #dd2927; }\n      .team-details .members .single-member .name-place p {\n        font-size: 14px;\n        color: #9a9a9a;\n        margin: 2px 0px 0px; }\n\n.create-battle-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .create-battle-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .create-battle-banner .text {\n      margin-bottom: 30px; } }\n  .create-battle-banner img {\n    max-width: 180px;\n    display: block;\n    margin: 0 auto; }\n\n.create-battle {\n  padding: 40px 0px 60px; }\n  .create-battle .img-holder {\n    position: relative;\n    padding-top: 60%; }\n    .create-battle .img-holder img {\n      width: 100%;\n      position: absolute;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      left: 0px;\n      top: 0px;\n      height: 100%; }\n  .create-battle .team-info {\n    height: 100%;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    @media (max-width: 767px) {\n      .create-battle .team-info {\n        margin-top: 10px; } }\n    .create-battle .team-info .text {\n      -webkit-box-flex: 1;\n      flex-grow: 1;\n      overflow: hidden; }\n    .create-battle .team-info h3 {\n      font-size: 17px;\n      line-height: 16px;\n      color: #000;\n      font-family: semibold;\n      margin: 10px 0px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-pack: justify;\n      justify-content: space-between;\n      -webkit-box-align: center;\n      align-items: center; }\n      .create-battle .team-info h3 a {\n        color: #a30f17; }\n        .create-battle .team-info h3 a:hover {\n          color: #dd2927; }\n    .create-battle .team-info span {\n      color: #707070;\n      display: block;\n      padding: 0px 0px 5px 0px; }\n    .create-battle .team-info p {\n      font-size: 16px;\n      color: #000; }\n\n.team-battles {\n  padding: 60px 0px 80px;\n  background: #fffbf8;\n  border-top: 2px solid #eee;\n  border-bottom: 2px solid #eee; }\n  @media (max-width: 767px) {\n    .team-battles {\n      padding: 40px 0px 60px; } }\n  .team-battles .row > div {\n    position: relative; }\n  .team-battles .publisher {\n    text-align: center;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 15px; }\n    .team-battles .publisher .img-holder {\n      height: 100px;\n      width: 100px;\n      position: relative;\n      display: block;\n      margin: 0 auto 20px; }\n      .team-battles .publisher .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n  .team-battles .battles {\n    background: #fffbf8; }\n    @media (max-width: 767px) {\n      .team-battles .battles {\n        margin-top: 20px; } }\n    .team-battles .battles > ul > li {\n      display: inline-block;\n      padding: 15px 0px;\n      border-bottom: 1px solid #ddd;\n      width: 100% !important; }\n      .team-battles .battles > ul > li .strip {\n        display: -webkit-box;\n        display: flex;\n        -webkit-box-align: center;\n        align-items: center;\n        -webkit-box-pack: justify;\n        justify-content: space-between;\n        background: #fff;\n        border: 1px solid #fff3e6;\n        padding: 6px 20px; }\n        .team-battles .battles > ul > li .strip .img-holder {\n          width: 40px;\n          border-radius: 100%;\n          height: 40px; }\n          .team-battles .battles > ul > li .strip .img-holder img {\n            border-radius: 100%;\n            width: 100%;\n            height: 100%;\n            -o-object-fit: cover;\n            object-fit: cover;\n            -o-object-position: center;\n            object-position: center; }\n        .team-battles .battles > ul > li .strip p {\n          color: #707070;\n          margin: 0px; }\n      .team-battles .battles > ul > li .bdate {\n        padding-top: 5px;\n        text-align: right; }\n        .team-battles .battles > ul > li .bdate span {\n          font-size: 12px;\n          color: #707070; }\n        .team-battles .battles > ul > li .bdate .remove-action {\n          display: inline-block;\n          margin: 0px 5px;\n          width: 0px;\n          height: 0px;\n          white-space: nowrap;\n          opacity: 0;\n          -webkit-transition: width .2s linear;\n          transition: width .2s linear; }\n          .team-battles .battles > ul > li .bdate .remove-action.show {\n            width: auto;\n            height: auto;\n            opacity: 1;\n            margin: 0px 10px; }\n          .team-battles .battles > ul > li .bdate .remove-action li a {\n            font-size: 13px;\n            padding: 0px 5px;\n            font-family: medium; }\n          .team-battles .battles > ul > li .bdate .remove-action li::after {\n            content: \"/\";\n            font-size: 11px;\n            color: #9a9a9a; }\n          .team-battles .battles > ul > li .bdate .remove-action li:last-child:after {\n            display: none; }\n        .team-battles .battles > ul > li .bdate .trash {\n          font-size: 13px;\n          color: #a30f17;\n          display: none; }\n          .team-battles .battles > ul > li .bdate .trash.stay {\n            display: inline-block !important; }\n          @media (max-width: 767px) {\n            .team-battles .battles > ul > li .bdate .trash {\n              display: inline-block !important; } }\n          .team-battles .battles > ul > li .bdate .trash:hover {\n            color: #dd2927; }\n      .team-battles .battles > ul > li:hover .trash {\n        display: inline-block; }\n\n.battle-details {\n  padding: 60px 0px; }\n  .battle-details .common-h {\n    text-align: center; }\n  .battle-details .about-team ul li {\n    display: block;\n    margin-bottom: 20px; }\n    .battle-details .about-team ul li:last-child {\n      margin-bottom: 0px; }\n    .battle-details .about-team ul li p {\n      margin: 0px;\n      color: #000; }\n    .battle-details .about-team ul li span {\n      color: #9a9a9a; }\n  .battle-details .members .single-member {\n    margin-bottom: 30px; }\n    .battle-details .members .single-member a {\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-align: center;\n      align-items: center; }\n    .battle-details .members .single-member .img-holder {\n      height: 50px;\n      width: 50px;\n      position: relative;\n      display: block;\n      margin-right: 15px; }\n      .battle-details .members .single-member .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n    .battle-details .members .single-member .name-place {\n      -webkit-box-flex: 1;\n      flex-grow: 1; }\n      .battle-details .members .single-member .name-place h4 {\n        font-family: medium;\n        font-size: 16px;\n        margin: 0px;\n        color: #9a9a9a; }\n        .battle-details .members .single-member .name-place h4:hover {\n          color: #dd2927; }\n      .battle-details .members .single-member .name-place p {\n        font-size: 14px;\n        color: #9a9a9a;\n        margin: 2px 0px 0px; }\n  .battle-details .f-row {\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: start;\n    align-items: flex-start;\n    -webkit-box-pack: justify;\n    justify-content: space-between; }\n    @media (max-width: 767px) {\n      .battle-details .f-row {\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n        flex-direction: column;\n        justify-content: space-around !important; }\n        .battle-details .f-row .column {\n          margin: 0 auto 40px; }\n        .battle-details .f-row .column:first-child,\n        .battle-details .f-row .column:last-child {\n          text-align: center; }\n        .battle-details .f-row .column:last-child {\n          margin: 0 auto 0px; } }\n    .battle-details .f-row .column {\n      min-width: 120px; }\n  .battle-details .results h5 {\n    display: inline-block;\n    width: 100%;\n    color: #9a9a9a;\n    text-transform: uppercase;\n    font-size: 14px;\n    margin: 0px 0px 10px; }\n  .battle-details .results table {\n    margin: 10px 0px; }\n    .battle-details .results table tr td {\n      padding: 5px 7px;\n      font-family: medium; }\n    .battle-details .results table .winner td {\n      color: #dd2927; }\n\n.edit-battle {\n  padding: 60px 0px;\n  background: #fffbf8; }\n  .edit-battle .common-h {\n    border-bottom: 2px solid #dd2927;\n    display: inline-block;\n    padding-bottom: 5px; }\n  .edit-battle h5 {\n    font-size: 14px;\n    color: #dd2927;\n    margin: 0px;\n    text-transform: uppercase;\n    margin: 20px 0px 30px; }\n  .edit-battle label {\n    font-size: 14px;\n    font-family: plex;\n    font-weight: 400;\n    color: #9a9a9a;\n    letter-spacing: 1px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-align: center;\n    align-items: center;\n    -webkit-box-pack: justify;\n    justify-content: space-between; }\n    .edit-battle label span {\n      font-size: 14px;\n      font-family: plex;\n      font-weight: 400;\n      color: #9a9a9a;\n      letter-spacing: 1px; }\n  .edit-battle .form-group {\n    margin-bottom: 30px;\n    display: inline-block;\n    width: 100%; }\n    .edit-battle .form-group input.form-control {\n      background: #fffbf8; }\n      .edit-battle .form-group input.form-control:focus {\n        background: #fff3e6; }\n    .edit-battle .form-group textarea {\n      background: #fff3e6;\n      height: 160px; }\n    .edit-battle .form-group .img-box {\n      position: relative;\n      padding-top: 60%;\n      background: #f1f1f1;\n      border: none; }\n      .edit-battle .form-group .img-box .remove-img {\n        background: #a30f17;\n        padding: 0px 7px;\n        color: #fff;\n        font-size: 20px;\n        position: absolute;\n        top: 0px;\n        right: 0px;\n        z-index: 60; }\n      .edit-battle .form-group .img-box::after {\n        content: \"\\F03E\";\n        font-family: \"Font Awesome 5 Pro\";\n        font-weight: 400;\n        position: absolute;\n        z-index: 10;\n        font-size: 5vw;\n        top: 50%;\n        left: 50%;\n        -webkit-transform: translate(-50%, -50%);\n        transform: translate(-50%, -50%);\n        color: #9a9a9a; }\n      .edit-battle .form-group .img-box img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        height: 100%;\n        width: 100%;\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        z-index: 50;\n        opacity: 0; }\n        .edit-battle .form-group .img-box img.visible {\n          opacity: 1; }\n    .edit-battle .form-group .file-holder {\n      display: none; }\n    .edit-battle .form-group .img-uploader {\n      margin: 20px 0px 10px; }\n    .edit-battle .form-group p {\n      color: #9a9a9a; }\n\n.select2-results__options::-webkit-scrollbar {\n  width: 6px;\n  background-color: #707070;\n  position: absolute; }\n\n.select2-results__options::-webkit-scrollbar-thumb {\n  background-color: #fff;\n  border-radius: 6px;\n  border: 2px solid #707070; }\n\n.select2-results__options::-webkit-scrollbar-track {\n  background-color: #707070; }\n\n.select2-results__options {\n  max-height: 220px !important; }\n\n.search-bar {\n  background: #fff3e6;\n  display: inline-block;\n  width: 100%; }\n  .search-bar .input-group {\n    margin-bottom: 0px; }\n    .search-bar .input-group .input-group-prepend .input-group-text {\n      background-color: transparent;\n      border: none;\n      padding: 0px;\n      color: #9a9a9a;\n      font-size: 18px; }\n    .search-bar .input-group .form-control {\n      background: transparent;\n      border: none !important;\n      font-size: 18px;\n      color: #111;\n      font-family: medium;\n      height: 50px; }\n      .search-bar .input-group .form-control::-webkit-input-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control:-ms-input-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control::-ms-input-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control::-moz-placeholder {\n        color: #9a9a9a; }\n      .search-bar .input-group .form-control::placeholder {\n        color: #9a9a9a; }\n\n.upcoming-battles {\n  padding: 50px 0px;\n  background: #fffbf8; }\n  .upcoming-battles .battle-box {\n    margin-bottom: 20px; }\n    .upcoming-battles .battle-box a {\n      display: inline-block;\n      width: 100%; }\n    .upcoming-battles .battle-box .img-holder {\n      position: relative;\n      padding-top: 60%;\n      margin-bottom: 5px; }\n      .upcoming-battles .battle-box .img-holder img {\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0px;\n        top: 0px; }\n    .upcoming-battles .battle-box .text span {\n      display: block;\n      color: #dd2927;\n      font-size: 16px;\n      text-transform: uppercase; }\n    .upcoming-battles .battle-box .text h4 {\n      margin: 5px 0px;\n      color: #111;\n      font-family: semibold;\n      font-size: 18px; }\n      .upcoming-battles .battle-box .text h4:hover {\n        color: #dd2927; }\n    .upcoming-battles .battle-box .text p {\n      color: #9a9a9a;\n      margin: 0px; }\n\n.ad-holder {\n  clear: both;\n  padding: 15px 0px; }\n  .ad-holder .ad {\n    background: #707070;\n    color: #fff;\n    max-width: 800px;\n    margin: 0 auto; }\n    .ad-holder .ad h1 {\n      font-size: calc(1vw + 2em);\n      text-align: center;\n      padding: 20px 0px; }\n\n.head-title-icon {\n  display: -webkit-box;\n  display: flex;\n  margin-bottom: 30px;\n  -webkit-box-align: end;\n  align-items: flex-end;\n  -webkit-box-pack: justify;\n  justify-content: space-between;\n  position: relative; }\n  .head-title-icon .common-h {\n    margin-bottom: 0px !important; }\n  .head-title-icon .icon {\n    position: absolute;\n    bottom: 0px;\n    right: 0px; }\n    .head-title-icon .icon img {\n      height: calc(2.5em + 3vw); }\n\n.featured {\n  padding: 60px 0px; }\n  .featured .group {\n    margin-bottom: 20px; }\n    .featured .group .img-holder {\n      position: relative;\n      padding-top: 60%;\n      margin-bottom: 5px; }\n      .featured .group .img-holder img {\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0px;\n        top: 0px; }\n    .featured .group a {\n      color: #111;\n      font-family: semibold;\n      font-size: 18px; }\n      .featured .group a:hover {\n        color: #dd2927; }\n    .featured .group p {\n      color: #9a9a9a;\n      margin: 0px; }\n\n.interest .interest-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .interest .interest-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .interest .interest-banner .text {\n      margin-bottom: 30px; } }\n  .interest .interest-banner img {\n    max-width: 100px;\n    display: block;\n    margin: 0 auto; }\n\n.categories {\n  padding: 50px 0px; }\n  .categories .categories-slider .item {\n    text-align: center; }\n    .categories .categories-slider .item .img-holder {\n      position: relative;\n      padding-top: 100%;\n      max-width: 120px;\n      display: block;\n      margin: 0 auto; }\n      @media (max-width: 1400px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 100px; } }\n      @media (max-width: 1199px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 90px; } }\n      @media (max-width: 767px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 80px; } }\n      @media (max-width: 576px) {\n        .categories .categories-slider .item .img-holder {\n          max-width: 60px; } }\n      .categories .categories-slider .item .img-holder img {\n        position: absolute;\n        left: 0px;\n        right: 0px;\n        top: 0px;\n        height: 100%;\n        width: 100%;\n        -o-object-fit: contain;\n        object-fit: contain;\n        -o-object-position: center;\n        object-position: center; }\n  .categories .categories-slider h5.ctg-title {\n    margin: 0px 0px 10px;\n    font-size: 16px;\n    text-align: center !important;\n    font-family: bold; }\n    @media (max-width: 1199px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 15px; } }\n    @media (max-width: 991px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 14px; } }\n    @media (max-width: 767px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 13px; } }\n    @media (max-width: 576px) {\n      .categories .categories-slider h5.ctg-title {\n        font-size: 12px; } }\n\n.owl-carousel {\n  position: relative; }\n  .owl-carousel .owl-nav {\n    position: absolute;\n    top: 50%;\n    width: 100%;\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%); }\n    .owl-carousel .owl-nav .owl-prev,\n    .owl-carousel .owl-nav .owl-next {\n      position: absolute;\n      padding: 2px 10px; }\n      .owl-carousel .owl-nav .owl-prev i,\n      .owl-carousel .owl-nav .owl-next i {\n        color: #a30f17;\n        font-size: calc(1.5vw + 1em); }\n      .owl-carousel .owl-nav .owl-prev:hover i,\n      .owl-carousel .owl-nav .owl-next:hover i {\n        color: #dd2927; }\n    .owl-carousel .owl-nav .owl-prev {\n      left: -1vw; }\n    .owl-carousel .owl-nav .owl-next {\n      right: -1vw; }\n\n.mi-groups {\n  background: #fffbf8; }\n\n.interest-group-none {\n  background: #fffbf8;\n  text-align: center;\n  padding: 50px 0px; }\n  .interest-group-none img {\n    margin-bottom: 20px; }\n  .interest-group-none p {\n    margin: 0px 0px;\n    font-family: medium;\n    color: #9a9a9a; }\n  .interest-group-none a {\n    font-family: semibold;\n    color: #dd2927;\n    font-size: 16px; }\n    .interest-group-none a:hover {\n      color: #a30f17; }\n\n.join-interest-group {\n  padding: 40px 0px 60px; }\n  .join-interest-group .img-holder {\n    position: relative;\n    padding-top: 60%; }\n    .join-interest-group .img-holder img {\n      width: 100%;\n      position: absolute;\n      -o-object-fit: cover;\n      object-fit: cover;\n      -o-object-position: center;\n      object-position: center;\n      left: 0px;\n      top: 0px;\n      height: 100%; }\n  .join-interest-group .ig-info {\n    height: 100%;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    flex-direction: column; }\n    @media (max-width: 767px) {\n      .join-interest-group .ig-info {\n        margin-top: 10px; } }\n    .join-interest-group .ig-info .text {\n      -webkit-box-flex: 1;\n      flex-grow: 1;\n      overflow: hidden; }\n    .join-interest-group .ig-info h3 {\n      font-size: 17px;\n      line-height: 16px;\n      color: #000;\n      font-family: semibold;\n      margin: 10px 0px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-pack: justify;\n      justify-content: space-between;\n      -webkit-box-align: center;\n      align-items: center; }\n      .join-interest-group .ig-info h3 a {\n        color: #a30f17; }\n        .join-interest-group .ig-info h3 a:hover {\n          color: #dd2927; }\n    .join-interest-group .ig-info span {\n      color: #707070;\n      display: block;\n      padding: 0px 0px 5px 0px; }\n    .join-interest-group .ig-info p {\n      font-size: 16px;\n      color: #000; }\n\n.ig-activities {\n  padding: 60px 0px 80px;\n  background: #fffbf8;\n  border-top: 2px solid #eee;\n  border-bottom: 2px solid #eee; }\n  @media (max-width: 767px) {\n    .ig-activities {\n      padding: 40px 0px 60px; } }\n  .ig-activities .row > div {\n    position: relative; }\n  .ig-activities .publisher {\n    text-align: center;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 15px; }\n    .ig-activities .publisher .img-holder {\n      height: 100px;\n      width: 100px;\n      position: relative;\n      display: block;\n      margin: 0 auto 20px; }\n      .ig-activities .publisher .img-holder img {\n        position: absolute;\n        left: 0px;\n        top: 0px;\n        width: 100%;\n        height: 100%;\n        -o-object-position: center;\n        object-position: center;\n        -o-object-fit: cover;\n        object-fit: cover;\n        border-radius: 100%; }\n  .ig-activities .activities {\n    background: #fffbf8; }\n    @media (max-width: 767px) {\n      .ig-activities .activities {\n        margin-top: 20px; } }\n    .ig-activities .activities > ul > li {\n      display: inline-block;\n      padding: 15px 0px;\n      border-bottom: 1px solid #ddd;\n      width: 100% !important; }\n      .ig-activities .activities > ul > li .strip {\n        display: -webkit-box;\n        display: flex;\n        -webkit-box-align: center;\n        align-items: center;\n        -webkit-box-pack: justify;\n        justify-content: space-between;\n        background: #fff;\n        border: 1px solid #fff3e6;\n        padding: 6px 20px; }\n        .ig-activities .activities > ul > li .strip .img-holder {\n          width: 40px;\n          border-radius: 100%;\n          height: 40px; }\n          .ig-activities .activities > ul > li .strip .img-holder img {\n            border-radius: 100%;\n            width: 100%;\n            height: 100%;\n            -o-object-fit: cover;\n            object-fit: cover;\n            -o-object-position: center;\n            object-position: center; }\n        .ig-activities .activities > ul > li .strip p {\n          color: #707070;\n          margin: 0px; }\n      .ig-activities .activities > ul > li .adate {\n        padding-top: 5px;\n        text-align: right; }\n        .ig-activities .activities > ul > li .adate span {\n          font-size: 12px;\n          color: #707070; }\n        .ig-activities .activities > ul > li .adate .remove-action {\n          display: inline-block;\n          margin: 0px 5px;\n          width: 0px;\n          height: 0px;\n          white-space: nowrap;\n          opacity: 0;\n          -webkit-transition: width .2s linear;\n          transition: width .2s linear; }\n          .ig-activities .activities > ul > li .adate .remove-action.show {\n            width: auto;\n            height: auto;\n            opacity: 1;\n            margin: 0px 10px; }\n          .ig-activities .activities > ul > li .adate .remove-action li a {\n            font-size: 13px;\n            padding: 0px 5px;\n            font-family: medium; }\n          .ig-activities .activities > ul > li .adate .remove-action li::after {\n            content: \"/\";\n            font-size: 11px;\n            color: #9a9a9a; }\n          .ig-activities .activities > ul > li .adate .remove-action li:last-child:after {\n            display: none; }\n        .ig-activities .activities > ul > li .adate .trash {\n          font-size: 13px;\n          color: #a30f17;\n          display: none; }\n          .ig-activities .activities > ul > li .adate .trash.stay {\n            display: inline-block !important; }\n          @media (max-width: 767px) {\n            .ig-activities .activities > ul > li .adate .trash {\n              display: inline-block !important; } }\n          .ig-activities .activities > ul > li .adate .trash:hover {\n            color: #dd2927; }\n      .ig-activities .activities > ul > li:hover .trash {\n        display: inline-block; }\n\n.other-hoods-ctg {\n  background: #fffbf8; }\n\n.other-upcomming-battles {\n  background: #fff; }\n\n.past-battles {\n  padding: 50px 0px;\n  background: #fffbf8; }\n  .past-battles .battle-box {\n    margin-bottom: 20px; }\n    .past-battles .battle-box a {\n      display: inline-block;\n      width: 100%; }\n    .past-battles .battle-box .img-holder {\n      position: relative;\n      padding-top: 60%;\n      margin-bottom: 5px; }\n      .past-battles .battle-box .img-holder img {\n        -o-object-fit: cover;\n        object-fit: cover;\n        -o-object-position: center;\n        object-position: center;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0px;\n        top: 0px; }\n    .past-battles .battle-box .text h4 {\n      margin: 10px 0px 5px;\n      color: #111;\n      font-family: semibold;\n      font-size: 18px; }\n      .past-battles .battle-box .text h4:hover {\n        color: #dd2927; }\n    .past-battles .battle-box .text p {\n      color: #9a9a9a;\n      margin: 0px; }\n\n.btn-logout {\n  font-family: medium;\n  font-size: 17px; }\n\n#logout p {\n  margin: 0px; }\n  #logout p a {\n    color: #dd2927;\n    font-size: 17px; }\n\n.leong .leong-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .leong .leong-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .leong .leong-banner .text {\n      margin-bottom: 30px; } }\n  .leong .leong-banner img {\n    max-width: 150px;\n    display: block;\n    margin: 0 auto; }\n\n.lost-found .lf-banner {\n  background: #fffbf8;\n  padding: 60px 0px; }\n  .lost-found .lf-banner .text p {\n    color: #9a9a9a;\n    margin-bottom: 30px; }\n  @media (max-width: 991px) {\n    .lost-found .lf-banner .text {\n      margin-bottom: 30px; } }\n  .lost-found .lf-banner img {\n    max-width: 120px;\n    display: block;\n    margin: 0 auto; }\n", ""]);
-
-// exports
 
 
 /***/ }),
@@ -49119,220 +49106,210 @@ var render = function() {
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse navbar-collapse",
-                attrs: { id: "collapsibleNavId" }
-              },
-              [
-                !_vm.apiToken
-                  ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            { staticClass: "nav-link", attrs: { to: "/" } },
-                            [_vm._v("Home")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/about" }
-                            },
-                            [_vm._v("About")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/Login" }
-                            },
-                            [_vm._v("Login")]
-                          )
-                        ],
-                        1
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.apiToken
-                  ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/explore" }
-                            },
-                            [_vm._v("Explore")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/start-activity" }
-                            },
-                            [_vm._v("Start Activity")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "nav-item" }, [
+            _c("div", { staticClass: "navbar-holder ml-auto" }, [
+              !_vm.apiToken
+                ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
                         _c(
-                          "a",
-                          { staticClass: "nav-link", attrs: { href: "#" } },
-                          [_vm._v("Hood")]
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/" } },
+                          [_vm._v("Home")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/about" } },
+                          [_vm._v("About")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/Login" } },
+                          [_vm._v("Login")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.apiToken
+                ? _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/explore" }
+                          },
+                          [_vm._v("Explore")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/start-activity" }
+                          },
+                          [_vm._v("Start Activity")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "sub-drop" }, [
+                        _c(
+                          "li",
+                          [
+                            _c("router-link", { attrs: { to: "/teams" } }, [
+                              _vm._v("TEAMS")
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c("router-link", { attrs: { to: "/lelong" } }, [
+                              _vm._v("Lelong!")
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/lost-and-found" } },
+                              [_vm._v("Lost and found!")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/interest-groups" }
+                          },
+                          [_vm._v("Group")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "sub-drop" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/kaki-request" } },
+                              [_vm._v("KAKIS REQUESTS")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item profile-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/kaki-profile" }
+                          },
+                          [
+                            _c("div", { staticClass: "profile-circle" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"),
+                                  alt: "profile"
+                                }
+                              })
+                            ])
+                          ]
                         ),
                         _vm._v(" "),
                         _c("ul", { staticClass: "sub-drop" }, [
-                          _c(
-                            "li",
-                            [
-                              _c("router-link", { attrs: { to: "/teams" } }, [
-                                _vm._v("TEAMS")
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm._m(1),
-                          _vm._v(" "),
-                          _vm._m(2),
-                          _vm._v(" "),
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _c(
-                            "li",
-                            [
-                              _c("router-link", { attrs: { to: "/lelong" } }, [
-                                _vm._v("Lelong!")
-                              ])
-                            ],
-                            1
-                          ),
+                          _vm._m(7),
                           _vm._v(" "),
                           _c(
                             "li",
                             [
                               _c(
                                 "router-link",
-                                { attrs: { to: "/lost-and-found" } },
-                                [_vm._v("Lost and found!")]
+                                { attrs: { to: "/kaki-request" } },
+                                [
+                                  _c("i", { staticClass: "far fa-sign-out" }),
+                                  _vm._v(" Logout")
+                                ]
                               )
                             ],
                             1
                           )
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/interest-groups" }
-                            },
-                            [_vm._v("Group")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/kakis" }
-                            },
-                            [_vm._v("Kakis")]
-                          ),
-                          _vm._v(" "),
-                          _c("ul", { staticClass: "sub-drop" }, [
-                            _vm._m(4),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              [
-                                _c(
-                                  "router-link",
-                                  { attrs: { to: "/kaki-request" } },
-                                  [_vm._v("KAKIS REQUESTS")]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        { staticClass: "nav-item profile-item" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "nav-link",
-                              attrs: { to: "/kaki-profile" }
-                            },
-                            [
-                              _c("div", { staticClass: "profile-circle" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"),
-                                    alt: "profile"
-                                  }
-                                })
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ])
-                  : _vm._e()
-              ]
-            )
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e()
+            ])
           ],
           1
         )
@@ -49340,7 +49317,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(8)
     ],
     1
   )
@@ -49352,18 +49329,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      {
-        staticClass: "navbar-toggler d-lg-none",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#collapsibleNavId",
-          "aria-controls": "collapsibleNavId",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
+      { staticClass: "navbar-toggler", attrs: { type: "button" } },
       [_c("i", { staticClass: "fal fa-bars" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
+      [_vm._v("Hood "), _c("i", { staticClass: "far fa-chevron-down" })]
     )
   },
   function() {
@@ -49392,7 +49369,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
+      [_vm._v("Kakis "), _c("i", { staticClass: "far fa-chevron-down" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("MY KAKIS")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "far fa-user" }),
+        _vm._v(" Profile")
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -49424,7 +49422,7 @@ var staticRenderFns = [
               _vm._v(" All rights reserved")
             ]),
             _vm._v(" "),
-            _c("ul", [
+            _c("ul", { staticClass: "flinks" }, [
               _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("About")])]),
               _vm._v(" "),
               _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("FAQ")])]),
@@ -65415,30 +65413,28 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/css/select.css */ "./resources/js/css/select.css");
 /* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_select_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_master_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/css/master.css */ "./resources/js/css/master.css");
-/* harmony import */ var _css_master_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_master_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/font-awesome/css/all.css */ "./resources/js/font-awesome/css/all.css");
-/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/font-awesome/css/all.css */ "./resources/js/font-awesome/css/all.css");
+/* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+ // import '@/css/master.css';
 
 
 
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vee_validate__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
-var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
-  store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vee_validate__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
+  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
   el: '#app',
-  router: _routes__WEBPACK_IMPORTED_MODULE_4__["default"]
+  router: _routes__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 
 /***/ }),
@@ -65498,91 +65494,6 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/bold.ttf":
-/*!*****************************************!*\
-  !*** ./resources/js/css/fonts/bold.ttf ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/bold.ttf?8c2f67f41e21bde05843e36dcf8695a3";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/ibmplex.ttf":
-/*!********************************************!*\
-  !*** ./resources/js/css/fonts/ibmplex.ttf ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/ibmplex.ttf?0b5a85206a5a77556a7f29ccdb148f2d";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/light.ttf":
-/*!******************************************!*\
-  !*** ./resources/js/css/fonts/light.ttf ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/light.ttf?9b169eeb4ff552fe1422be6bfb62984a";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/medium.ttf":
-/*!*******************************************!*\
-  !*** ./resources/js/css/fonts/medium.ttf ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/medium.ttf?ba26ab872b2b1a32397bd60ef14dd254";
-
-/***/ }),
-
-/***/ "./resources/js/css/fonts/semibold.ttf":
-/*!*********************************************!*\
-  !*** ./resources/js/css/fonts/semibold.ttf ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/semibold.ttf?04dc4a923cb39d37d79a36b06932d663";
-
-/***/ }),
-
-/***/ "./resources/js/css/master.css":
-/*!*************************************!*\
-  !*** ./resources/js/css/master.css ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/postcss-loader/src??ref--6-2!./master.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/css/master.css");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
