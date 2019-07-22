@@ -42,7 +42,7 @@
 	  </section>
 	  <section class="team-posts">
 	    <div class="container">
-	      <div class="row">
+	      <div class="row" v-if="is_joined">
 	        <div class="col-xl-3 col-md-4">
 	          <div class="publisher">
 	            <h1 class="common-h">Wall</h1>
@@ -67,6 +67,7 @@
 	          </div>
 	        </div>
 	      </div>
+	      <div class="info-msg">Join a Team to post on a wall</div>
 	    </div>
 	  </section>
 	  <section class="team-details">
