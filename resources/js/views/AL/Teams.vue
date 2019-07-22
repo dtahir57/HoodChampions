@@ -57,8 +57,8 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/config'
 import { mapGetters } from 'vuex'
+import { config } from '@/config/'
 
 export default {
 	name: 'Teams',
@@ -74,13 +74,19 @@ export default {
 	},
 	created () {
 		let uri = '/api/teams'
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			 	// "Content-Type": "multipart/form-data"
+			}
+		}).then(response => {
 			this.user_teams = response.data.user_teams
 			this.$store.dispatch('setUserTeams', this.user_teams);
 			this.hood_name = response.data.hood_name
 			this.teams = response.data.teams
 			this.$store.dispatch('setHoodTeams', this.teams)
-			console.log(response)
+			console.log(response.data)
 		}).catch(error => {
 			console.log(error.data)
 		})

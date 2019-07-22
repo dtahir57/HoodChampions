@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/config */ "./resources/js/config/config.js");
+/* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/ */ "./resources/js/config/index.js");
 //
 //
 //
@@ -144,8 +144,14 @@ __webpack_require__.r(__webpack_exports__);
           contact_no: this.data.contact_no,
           meetup_place: this.data.meetup_place,
           image: this.data.image
-        }, _config_config__WEBPACK_IMPORTED_MODULE_0__["config"]).then(function (response) {
-          console.log(response.data.data);
+        }, {
+          headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
+
+          }
+        }).then(function (response) {
+          console.log(response.data);
         })["catch"](function (error) {
           console.log(error.response);
         });

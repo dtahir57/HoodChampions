@@ -1813,7 +1813,7 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/config/config */ "./resources/js/config/config.js");
+/* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/config/ */ "./resources/js/config/index.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } else { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1970,10 +1970,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var uri = '/api/user/logout';
-      axios.post(uri, {}, _config_config__WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
-        _this.api_token = localStorage.removeItem('user_api_token');
+      axios.post(uri, {}, {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
+        }
+      }).then(function (response) {
+        localStorage.removeItem('user_api_token');
 
-        _this.$store.dispatch('setApiToken', _this.api_token);
+        _this.$store.dispatch('setApiToken', '');
 
         _this.$router.push({
           name: 'Login'
@@ -1993,7 +1998,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     if (this.api_token) {
       var uri = '/api/user/auth';
-      axios.post(uri, {}, _config_config__WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
+      axios.post(uri, {}, _config___WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
         _this2.$store.dispatch('setCurrentUser', response.data.user);
 
         console.log(response.data);
@@ -65531,10 +65536,10 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/config/config.js":
-/*!***************************************!*\
-  !*** ./resources/js/config/config.js ***!
-  \***************************************/
+/***/ "./resources/js/config/index.js":
+/*!**************************************!*\
+  !*** ./resources/js/config/index.js ***!
+  \**************************************/
 /*! exports provided: config */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -65544,8 +65549,7 @@ __webpack_require__.r(__webpack_exports__);
 var config = {
   headers: {
     "Accept": "application/json",
-    "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
-
+    "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
   }
 };
 
@@ -65957,7 +65961,7 @@ var VerifyOTP = function VerifyOTP() {
 
 
 var Teams = function Teams() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
 };
 
 var TeamCreate = function TeamCreate() {
@@ -65965,7 +65969,7 @@ var TeamCreate = function TeamCreate() {
 };
 
 var SingleTeam = function SingleTeam() {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
 }; // Team Components Ends here
 
 
@@ -65978,11 +65982,11 @@ var Explore = function Explore() {
 };
 
 var LostAndFound = function LostAndFound() {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
 };
 
 var Lelong = function Lelong() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
 };
 
 var Kakis = function Kakis() {

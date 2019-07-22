@@ -79,7 +79,7 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/config'
+import { config } from '@/config/'
 
 export default {
 	name: 'CreateTeam',
@@ -132,9 +132,15 @@ export default {
         			contact_no: this.data.contact_no,
         			meetup_place: this.data.meetup_place,
         			image: this.data.image
-        		}, config)
+        		}, {
+        			headers: {
+        				"Accept": "application/json",
+        			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+        			 	// "Content-Type": "multipart/form-data"
+        			}
+        		})
         		.then(response => {
-        			console.log(response.data.data)
+        			console.log(response.data)
         		}).catch(error => {
         			console.log(error.response)
         		})

@@ -1,14 +1,20 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Lelong.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AL/Lelong.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Teams.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AL/Teams.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/config/ */ "./resources/js/config/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } else { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -67,29 +73,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Lelong',
+  name: 'Teams',
   data: function data() {
-    return {};
+    return {
+      user_teams: [],
+      hood_name: '',
+      teams: []
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getUserTeams', 'getHoodTeams'])),
+  created: function created() {
+    var _this = this;
+
+    var uri = '/api/teams';
+    axios.get(uri, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
+
+      }
+    }).then(function (response) {
+      _this.user_teams = response.data.user_teams;
+
+      _this.$store.dispatch('setUserTeams', _this.user_teams);
+
+      _this.hood_name = response.data.hood_name;
+      _this.teams = response.data.teams;
+
+      _this.$store.dispatch('setHoodTeams', _this.teams);
+
+      console.log(response.data);
+    })["catch"](function (error) {
+      console.log(error.data);
+    });
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Lelong.vue?vue&type=template&id=bd1108ec&":
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AL/Lelong.vue?vue&type=template&id=bd1108ec& ***!
-  \*******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Teams.vue?vue&type=template&id=9e663c9e&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AL/Teams.vue?vue&type=template&id=9e663c9e& ***!
+  \******************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -101,130 +129,171 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "main-wrapper" }, [
+    _c("section", { staticClass: "teams" }, [
+      _c("div", { staticClass: "create-team-banner" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row align-items-center" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-5 col-lg-4" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-default block-btn",
+                    attrs: { to: "/team/create" }
+                  },
+                  [_vm._v("Create Team")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "my-teams" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "common-h" }, [_vm._v("My Teams")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.getUserTeams, function(team, index) {
+            return _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
+              _c(
+                "div",
+                { staticClass: "team-box" },
+                [
+                  _c("div", { staticClass: "img-holder" }, [
+                    _c("img", {
+                      staticClass: "img-fluid",
+                      attrs: { src: team.image, alt: "img" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      attrs: { to: { name: "Team", params: { id: team.id } } }
+                    },
+                    [_vm._v(_vm._s(team.title))]
+                  ),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("i", { staticClass: "fal fa-user-circle" }),
+                    _vm._v(" " + _vm._s(team.users))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(team.about_us))])
+                ],
+                1
+              )
+            ])
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "all-teams" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "common-h" }, [
+          _vm._v("All Teams in " + _vm._s(_vm.hood_name))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.getHoodTeams, function(team, index) {
+            return _c(
+              "div",
+              { staticClass: "col-lg-3 col-md-4 col-6 col-xs-12" },
+              [
+                _c(
+                  "div",
+                  { staticClass: "team-box" },
+                  [
+                    _c("div", { staticClass: "img-holder" }, [
+                      _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: { src: team.image, alt: "img" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        attrs: { to: { name: "Team", params: { id: team.id } } }
+                      },
+                      [_vm._v(_vm._s(team.title))]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(team.about_us))])
+                  ],
+                  1
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "main-wrapper" }, [
-      _c("section", { staticClass: "leong" }, [
-        _c("div", { staticClass: "leong-banner" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row align-items-center" }, [
-              _c("div", { staticClass: "col-12" }, [
-                _c("h1", { staticClass: "common-h" }, [_vm._v("Leong")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 col-lg-5 col-xl-4" }, [
-                _c("div", { staticClass: "text" }, [
-                  _c("p", [
-                    _vm._v(
-                      "Dummy Text here, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "inner-img",
-                    attrs: {
-                      src: __webpack_require__(/*! @/images/svg/Lelong.svg */ "./resources/js/images/svg/Lelong.svg"),
-                      width: "100%",
-                      alt: "img"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("button", { staticClass: "btn btn-default block-btn" }, [
-                  _vm._v("Create Lelong")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col-md-5 offset-md-1 col-lg-5 offset-lg-2 col-xl-4 offset-xl-3"
-                },
-                [
-                  _c("img", {
-                    staticClass: "outer-img",
-                    attrs: {
-                      src: __webpack_require__(/*! @/images/svg/Lelong.svg */ "./resources/js/images/svg/Lelong.svg"),
-                      width: "100%",
-                      alt: "img"
-                    }
-                  })
-                ]
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ad-holder" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "ad" }, [_c("h1", [_vm._v("716 X 90")])])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("section", { staticClass: "featured" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
-              _c("div", { staticClass: "group" }, [
-                _c("div", { staticClass: "img-holder" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "images/dance.jpg", alt: "img" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Dancing")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v("Lorem ipsum dolor sit dummy text using heres")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
-              _c("div", { staticClass: "group" }, [
-                _c("div", { staticClass: "img-holder" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "images/dance.jpg", alt: "img" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Dancing")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v("Lorem ipsum dolor sit dummy text using heres")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-4 col-6 col-xs-12" }, [
-              _c("div", { staticClass: "group" }, [
-                _c("div", { staticClass: "img-holder" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "images/dance.jpg", alt: "img" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Dancing")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v("Lorem ipsum dolor sit dummy text using heres")
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h1", { staticClass: "common-h" }, [_vm._v("Teams")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text" }, [
+      _c("p", [
+        _vm._v(
+          "Create or join a team in your neighbourhood to share interests, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!"
+        )
+      ]),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "inner-img",
+        attrs: { src: __webpack_require__(/*! @/images/svg/Teams.svg */ "./resources/js/images/svg/Teams.svg"), alt: "img" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-md-5 offset-md-2 col-lg-4 offset-lg-3" },
+      [
+        _c("img", {
+          staticClass: "outer-img",
+          attrs: {
+            src: __webpack_require__(/*! @/images/svg/Teams.svg */ "./resources/js/images/svg/Teams.svg"),
+            width: "100%",
+            alt: "img"
+          }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -233,28 +302,28 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/images/svg/Lelong.svg":
-/*!********************************************!*\
-  !*** ./resources/js/images/svg/Lelong.svg ***!
-  \********************************************/
+/***/ "./resources/js/images/svg/Teams.svg":
+/*!*******************************************!*\
+  !*** ./resources/js/images/svg/Teams.svg ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Lelong.svg?152a618b744009e60790b31308652648";
+module.exports = "/images/Teams.svg?ec16c7dbf13cbbc46a27e684fbc66137";
 
 /***/ }),
 
-/***/ "./resources/js/views/AL/Lelong.vue":
-/*!******************************************!*\
-  !*** ./resources/js/views/AL/Lelong.vue ***!
-  \******************************************/
+/***/ "./resources/js/views/AL/Teams.vue":
+/*!*****************************************!*\
+  !*** ./resources/js/views/AL/Teams.vue ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Lelong_vue_vue_type_template_id_bd1108ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Lelong.vue?vue&type=template&id=bd1108ec& */ "./resources/js/views/AL/Lelong.vue?vue&type=template&id=bd1108ec&");
-/* harmony import */ var _Lelong_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Lelong.vue?vue&type=script&lang=js& */ "./resources/js/views/AL/Lelong.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Teams_vue_vue_type_template_id_9e663c9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Teams.vue?vue&type=template&id=9e663c9e& */ "./resources/js/views/AL/Teams.vue?vue&type=template&id=9e663c9e&");
+/* harmony import */ var _Teams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Teams.vue?vue&type=script&lang=js& */ "./resources/js/views/AL/Teams.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -264,9 +333,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Lelong_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Lelong_vue_vue_type_template_id_bd1108ec___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Lelong_vue_vue_type_template_id_bd1108ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Teams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Teams_vue_vue_type_template_id_9e663c9e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Teams_vue_vue_type_template_id_9e663c9e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -276,38 +345,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/AL/Lelong.vue"
+component.options.__file = "resources/js/views/AL/Teams.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/AL/Lelong.vue?vue&type=script&lang=js&":
-/*!*******************************************************************!*\
-  !*** ./resources/js/views/AL/Lelong.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************/
+/***/ "./resources/js/views/AL/Teams.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/views/AL/Teams.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Lelong_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Lelong.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Lelong.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Lelong_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Teams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Teams.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Teams.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Teams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/AL/Lelong.vue?vue&type=template&id=bd1108ec&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/views/AL/Lelong.vue?vue&type=template&id=bd1108ec& ***!
-  \*************************************************************************/
+/***/ "./resources/js/views/AL/Teams.vue?vue&type=template&id=9e663c9e&":
+/*!************************************************************************!*\
+  !*** ./resources/js/views/AL/Teams.vue?vue&type=template&id=9e663c9e& ***!
+  \************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Lelong_vue_vue_type_template_id_bd1108ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Lelong.vue?vue&type=template&id=bd1108ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Lelong.vue?vue&type=template&id=bd1108ec&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Lelong_vue_vue_type_template_id_bd1108ec___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Teams_vue_vue_type_template_id_9e663c9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Teams.vue?vue&type=template&id=9e663c9e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AL/Teams.vue?vue&type=template&id=9e663c9e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Teams_vue_vue_type_template_id_9e663c9e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Lelong_vue_vue_type_template_id_bd1108ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Teams_vue_vue_type_template_id_9e663c9e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

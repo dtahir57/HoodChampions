@@ -136,7 +136,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
-import { config } from '@/config/config'
+import { config } from '@/config/'
 
 export default {
 	components: {
@@ -156,9 +156,14 @@ export default {
 	methods: {
 		logout () {
 			let uri = '/api/user/logout';
-			axios.post(uri, {}, config).then(response => {
-				this.api_token = localStorage.removeItem('user_api_token')
-				this.$store.dispatch('setApiToken', this.api_token)
+			axios.post(uri, {}, {
+				headers: {
+					"Accept": "application/json",
+				 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+				}
+			}).then(response => {
+				localStorage.removeItem('user_api_token')
+				this.$store.dispatch('setApiToken', '')
 				this.$router.push({ name: 'Login' })
 				console.log(response.data)
 			}).catch(error => {
