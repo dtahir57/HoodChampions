@@ -169,11 +169,12 @@ export default {
 	 			}).then(response => {
 	 				this.comments = response.data.posts
 	 				console.log(response.data)
-	 				this.comment = ''
+	 				
 	 			}).catch(error => {
 	 				console.log(error.response)
 	 			})
 			}
+			this.comment = ''
 		}
 	},
 	created () {

@@ -184,11 +184,12 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           _this2.comments = response.data.posts;
           console.log(response.data);
-          _this2.comment = '';
         })["catch"](function (error) {
           console.log(error.response);
         });
       }
+
+      this.comment = '';
     }
   },
   created: function created() {
