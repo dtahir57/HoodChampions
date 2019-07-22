@@ -35,7 +35,7 @@
 						<router-link to="/teams">TEAMS</router-link>
 						</li>
 						<li>
-						<a href="#">Ang Mo Kio</a>
+						<a href="#">{{ user.hood_name }}</a>
 						</li>
 						<li>
 						<a href="#">Other Hoods</a>

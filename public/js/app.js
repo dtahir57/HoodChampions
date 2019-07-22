@@ -49247,11 +49247,15 @@ var render = function() {
                           1
                         ),
                         _vm._v(" "),
+                        _c("li", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(_vm._s(_vm.user.hood_name))
+                          ])
+                        ]),
+                        _vm._v(" "),
                         _vm._m(2),
                         _vm._v(" "),
                         _vm._m(3),
-                        _vm._v(" "),
-                        _vm._m(4),
                         _vm._v(" "),
                         _c(
                           "li",
@@ -49294,10 +49298,10 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("li", { staticClass: "nav-item" }, [
-                      _vm._m(5),
+                      _vm._m(4),
                       _vm._v(" "),
                       _c("ul", { staticClass: "sub-drop" }, [
-                        _vm._m(6),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c(
                           "li",
@@ -49314,7 +49318,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("li", { staticClass: "nav-item profile-item" }, [
-                      _vm._m(7),
+                      _vm._m(6),
                       _vm._v(" "),
                       _c("ul", { staticClass: "sub-drop" }, [
                         _c(
@@ -49364,7 +49368,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(8)
+      _vm._m(7)
     ],
     1
   )
@@ -49389,12 +49393,6 @@ var staticRenderFns = [
       { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
       [_vm._v("Hood "), _c("i", { staticClass: "far fa-chevron-down" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Ang Mo Kio")])])
   },
   function() {
     var _vm = this
