@@ -154,7 +154,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           console.log(response.data);
 
-          _this.$route.push({
+          _this.$router.push({
             name: 'Team',
             params: {
               id: response.data.team.id

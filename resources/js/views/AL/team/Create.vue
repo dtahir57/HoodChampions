@@ -140,7 +140,7 @@ export default {
         		})
         		.then(response => {
         			console.log(response.data)
-        			this.$route.push({ name: 'Team', params: {id: response.data.team.id} })
+        			this.$router.push({ name: 'Team', params: {id: response.data.team.id} })
         		}).catch(error => {
         			console.log(error.response)
         		})
