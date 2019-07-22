@@ -105,6 +105,7 @@ class BattleController extends Controller
         $battle = Battle::find($id);
         $exists = $battle->users->contains($user->id);
         return response()->json([
+            'code' => 200,
             'battle' => new BattleResource($battle),
             'user' => new UserResource($user),
             'teams' => TeamResource::collection($battle->teams),
