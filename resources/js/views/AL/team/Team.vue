@@ -33,7 +33,8 @@
 	              <span><i class="fal fa-user-circle"></i> {{ users.length }}</span>
 	              <p>{{ team.description }}</p>
 	            </div>
-	            <button class="bt btn-default btn-block">Join</button>
+	            <button class="bt btn-outline btn-block" v-if="is_joined" disabled>Joined</button>
+	            <button class="bt btn-default btn-block" v-if="!is_joined" @click="join">Joined</button>
 	          </div>
 	        </div>
 	      </div>
@@ -123,6 +124,29 @@ export default {
 		return {
 			team: {},
 			users: [],
+			user: {},
+			is_joined: null
+		}
+	},
+	methods: {
+		join () {
+			let uri = '/api/team/join';
+			axios.post(uri, {
+				id: this.team.id
+			}, {
+				headers: {
+					"Accept": "application/json",
+				 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+				}
+			}).then(response => {
+				this.team = response.data.team
+				this.users = response.data.users
+				this.user = response.data.user
+				this.is_joined = response.data.is_join
+				console.log(response.data)
+			}).catch(error => {
+				console.log(error.response)
+			})
 		}
 	},
 	created () {
@@ -135,6 +159,7 @@ export default {
 		}).then(response => {
 			this.team = response.data.team,
 			this.users = response.data.users
+			this.is_joined = response.data.is_join
 		}).catch(error => {
 			console.log(error.response)
 		})

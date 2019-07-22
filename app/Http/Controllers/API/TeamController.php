@@ -106,12 +106,32 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $team = Team::find($id);
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        $exists = $team->users->contains($user->id);
         return response()->json([
             'team' => new TeamResource($team),
-            'users' => UserResource::collection($team->users)
+            'users' => UserResource::collection($team->users),
+            'user' => new UserResource($user),
+            'is_join' => $exists
+        ]);
+    }
+
+    public function join(Request $request)
+    {
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        $team = Team::find($request->id);
+        $team->users()->attach($user);
+        $exists = $team->users->contains($user->id);
+        return response()->json([
+            'team' => new TeamResource($team),
+            'users' => UserResource::collection($team->users),
+            'user' => new UserResource($user),
+            'is_join' => $exists
         ]);
     }
 

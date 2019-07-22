@@ -127,17 +127,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Team',
   data: function data() {
     return {
       team: {},
-      users: []
+      users: [],
+      user: {},
+      is_joined: null
     };
   },
+  methods: {
+    join: function join() {
+      var _this = this;
+
+      var uri = '/api/team/join';
+      axios.post(uri, {
+        id: this.team.id
+      }, {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
+        }
+      }).then(function (response) {
+        _this.team = response.data.team;
+        _this.users = response.data.users;
+        _this.user = response.data.user;
+        _this.is_joined = response.data.is_join;
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     var uri = "/api/team/".concat(this.$route.params.id);
     axios.get(uri, {
@@ -146,7 +172,8 @@ __webpack_require__.r(__webpack_exports__);
         "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
       }
     }).then(function (response) {
-      _this.team = response.data.team, _this.users = response.data.users;
+      _this2.team = response.data.team, _this2.users = response.data.users;
+      _this2.is_joined = response.data.is_join;
     })["catch"](function (error) {
       console.log(error.response);
     });
@@ -195,9 +222,27 @@ var render = function() {
                 _c("p", [_vm._v(_vm._s(_vm.team.description))])
               ]),
               _vm._v(" "),
-              _c("button", { staticClass: "bt btn-default btn-block" }, [
-                _vm._v("Join")
-              ])
+              _vm.is_joined
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "bt btn-outline btn-block",
+                      attrs: { disabled: "" }
+                    },
+                    [_vm._v("Joined")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.is_joined
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "bt btn-default btn-block",
+                      on: { click: _vm.join }
+                    },
+                    [_vm._v("Joined")]
+                  )
+                : _vm._e()
             ])
           ])
         ])
