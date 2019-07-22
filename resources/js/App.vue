@@ -6,10 +6,10 @@
 		    <router-link class="navbar-brand" to="/">
 		      <img src="@/images/svg/HoodChampions Logo.svg" alt="logo">
 		    </router-link>
-		    <button class="navbar-toggler" type="button">
+		    <button class="navbar-toggler" type="button" @click="show">
 		        <i class="fal fa-bars"></i>
 		    </button>
-			<div class="navbar-holder ml-auto">
+			<div :class="[{ 'visible': visible }, 'navbar-holder', 'ml-auto']" v-if="toggle">
 				<ul class="navbar-nav ml-auto" v-if="!apiToken">
 				<li class="nav-item">
 					<router-link class="nav-link" to="/">Home</router-link>
@@ -41,7 +41,7 @@
 						<a href="#">Other Hoods</a>
 						</li>
 						<li>
-						<a href="#">Hood Services</a>
+						<router-link to="/services">Hood Services</router-link>
 						</li>
 						<li>
 						<router-link to="/lelong">Lelong!</router-link>
@@ -145,7 +145,9 @@ export default {
 	data () {
 		return {
 			api_token: null,
-			user: {}
+			user: {},
+			toggle: true,
+			visible: false
 		}
 	},
 	computed: {
@@ -165,6 +167,13 @@ export default {
 			}).catch(error => {
 				console.log(error.response)
 			})
+		},
+		show () {
+			if (this.visible) {
+				this.visible = false
+			} else {
+				this.visible = true
+			}
 		}
 	},
 	created () {
@@ -174,7 +183,6 @@ export default {
 		axios.post(uri, {}, config).then(response => {
 			this.user = response.data.user
 			this.$store.dispatch('setCurrentUser', this.user)
-			console.log(response.data)
 		}).catch(error => {
 			console.log(error.response)
 		})
@@ -192,5 +200,8 @@ export default {
 }
 .app .main-wrapper{
 	flex-grow:1;
+}
+.visible {
+	display: inline-block !important;
 }
 </style>

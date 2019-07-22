@@ -11458,7 +11458,6 @@ textarea.form-control:focus {
 
 @media (max-width: 991px) {
   .navbar .navbar-holder {
-    display: inline-block;
     display: none;
     position: absolute;
     top: 100%;
@@ -11471,6 +11470,12 @@ textarea.form-control:focus {
     overflow-y: scroll;
     z-index: 1090;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar .visible {
+    display: inline-block !important;
   }
 }
 
@@ -11553,6 +11558,7 @@ textarea.form-control:focus {
     display: block;
     background-color: #fff;
     background: #fffbf8;
+    top: 0px;
   }
 }
 

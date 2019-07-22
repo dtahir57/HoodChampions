@@ -4,23 +4,11 @@
 	    <div class="container">
 	      <div class="row">
 	        <div class="col-12">
-	          <h1 class="common-h">Create Interest Group</h1>
+	          <h1 class="common-h">CREATE YOUR SERVICE</h1>
 	        </div>
 	      </div>
 	      <div class="row"> 
 	        <div class="col-lg-5 col-sm-6">
-	        	<div class="form-group">
-	        		<label>Category</label>
-	        		<model-list-select :list="categories"
-	        		                     v-model="data.category"
-	        		                     v-validate="'required'"
-	        		                     option-value="id"
-	        		                     name="Category"
-	        		                     option-text="title"
-	        		                     placeholder="Select Category">
-	        		  </model-list-select>
-	        		  <span class="text-danger">{{ errors.first('Category') }}</span>
-	        	</div>
 	          <div class="form-group">
 	            <label for="ttl">Title <span>Max. 30</span></label>
 	            <input id="ttl" name="Title" v-model="data.title" v-validate="'required|max:30'" type="text" class="form-control">
@@ -32,9 +20,9 @@
 	            <span class="text-danger">{{ errors.first('Description') }}</span>
 	          </div>
 	          <div class="form-group">
-	            <label for="about">About Us <span>Max. 30</span></label>
-	            <input id="about" name="About Us" v-model="data.about_us" v-validate="'required|max:30'" type="text" class="form-control">
-	            <span class="text-danger">{{ errors.first('About Us') }}</span>
+	            <label for="about">Price <span>Max. 30</span></label>
+	            <input id="about" name="Price" v-model="data.price" v-validate="'required|numeric'" type="text" class="form-control">
+	            <span class="text-danger">{{ errors.first('Price') }}</span>
 	          </div>
 	          <div class="form-group">
 	            <label for="mail">Email <span>Max. 30</span></label>
@@ -47,11 +35,6 @@
 	            <label for="cnumber">Contact Number</label>
 	            <input id="cnumber" name="Contact Number" v-model="data.contact_no" v-validate="'required'" type="text" class="form-control">
 	            <span class="text-danger">{{ errors.first('Contact Number') }}</span>
-	          </div>
-	          <div class="form-group">
-	            <label for="mplace">Meetup place</label>
-	            <input id="mplace" name="Meetup Place" v-model="data.meetup_place" v-validate="'required'" type="text" class="form-control">
-	            <span class="text-danger">{{ errors.first('Meetup Place') }}</span>
 	          </div>
 	          <div class="form-group">
 	            <div v-if="data.image">
@@ -87,29 +70,20 @@
 </template>
 <script>
 import { config } from '@/config/'
-import { ModelListSelect } from 'vue-search-select'
 
 export default {
-	name: 'CreateGroup',
-	components: {
-		ModelListSelect
-	},
+	name: 'CreateTeam',
 	data () {
 		return {
 			data: {
-				category: null,
 				title: '',
 				description: '',
-				about_us: '',
+				price: null,
 				email: '',
 				contact_no: '',
-				meetup_place: '',
 				image: ''
 			},
-			categories: [],
-			agreed: false,
-			valid: false,
-			photo: ''
+			agreed: false
 		}
 	},
 	methods: {
@@ -132,44 +106,23 @@ export default {
         	this.data.image = ''
         },
         save () {
-        	this.$validator.validate()
-        	if (!this.valid) {
-        		let uri = '/api/interest_group';
+        	if (this.$validator.validate()) {
+        		let uri = '/api/service';
         		axios.post(uri, {
-        			category_id: this.data.category,
         			title: this.data.title,
         			description: this.data.description,
-        			about_us: this.data.about_us,
+        			price: this.data.price,
         			email: this.data.email,
         			contact_no: this.data.contact_no,
-        			meetup_place: this.data.meetup_place,
-        			photo: this.data.image
+        			image: this.data.image
         		}, config)
         		.then(response => {
-        			console.log(response.data)
-        			if (response.data.code == 200) {
-        				this.$router.push({ name: 'SingleGroup', params: {id: response.data.group.id} })
-        			}
+        			this.$router.push({ name: 'ServiceView', params: {id: response.data.service.id} })
         		}).catch(error => {
         			console.log(error.response)
         		})
         	}
         }
-	},
-	created () {
-		let uri = '/api/interest_groups/create';
-		axios.get(uri, config).then(response => {
-			this.categories = response.data.categories
-		}).catch(error => {
-			console.log(error.response)
-		})
-	},
-	updated () {
-		if (this.errors.items.length > 0) {
-		    this.valid = true
-		} else {
-			this.valid = false
-		}
 	}
 }
 </script>

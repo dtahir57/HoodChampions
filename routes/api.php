@@ -33,6 +33,36 @@ Route::group(['middleware' => 'auth:api'], function() {
 	 * Ending Routes For TeamController
 	 */
 	/**
+	 * Starting Routes For LostAndFoundController
+	 */
+	Route::get('/lost_and_founds', 'API\LostAndFoundController@index');
+	Route::get('/lost_and_found/create', 'API\LostAndFoundController@create');
+	Route::post('/lost_and_found', 'API\LostAndFoundController@store');
+	/**
+	 * Ending Rotues For LostAndFoundController
+	 */
+	/**
+	 * Starting Routes For ServiceController
+	 */
+	Route::get('/services', 'API\ServiceController@index');
+	Route::post('/service', 'API\ServiceController@store');
+	Route::get('/service/{id}', 'API\ServiceController@show');
+	Route::post('/service/{id}', 'API\ServiceController@update');
+	/**
+	 * Ending Routes For ServiceController
+	 */
+	/**
+	 * Starting Routes For GroupController
+	 */
+	Route::get('/interest_groups', 'API\GroupController@index');
+	Route::get('/interest_group/category/{id}', 'API\GroupController@getCategory');
+	Route::get('/interest_groups/create', 'API\GroupController@create');
+	Route::post('/interest_group', 'API\GroupController@store');
+	Route::get('/interest_group/{id}', 'API\GroupController@show');
+	/**
+	 * Ending Routes For GroupController
+	 */
+	/**
 	 * Starting Routes For UserController
 	 */
 	Route::post('/user/auth', 'API\UserController@index');

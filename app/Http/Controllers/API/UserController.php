@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BattleResource;
 use App\Http\Resources\InterestGroupResource;
+use App\Http\Resources\ServiceResource;
 use App\Http\Resources\TeamResource;
 use App\Http\Resources\UserResource;
 use App\User;
@@ -60,7 +61,8 @@ class UserController extends Controller
             'user' => new UserResource($user),
             'groups' => InterestGroupResource::collection($user->interest_groups),
             'teams' => TeamResource::collection($user->teams),
-            'battles' => BattleResource::collection($user->battles)
+            'battles' => BattleResource::collection($user->battles),
+            'services' => ServiceResource::collection($user->services)
         ]);
     }
 

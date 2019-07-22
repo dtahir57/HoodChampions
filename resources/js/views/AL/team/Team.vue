@@ -50,7 +50,7 @@
 	              <img src="@/images/person.jpg" alt="img">
 	            </div>
 	            <div >
-	              <textarea class="info-msg" placeholder="Click this space to start posting in this group. Please do not comment anything." name="Comment" v-validate="'required'" v-model="comment"></textarea>
+	              <textarea class="info-msg form-control" style="background-color: #fff3e6;" rows="3" placeholder="Click this space to start posting in this group. Please do not comment anything." name="Comment" v-validate="'required'" v-model="comment"></textarea>
 	              <span class="text-danger">{{ errors.first('Comment') }}</span>
 	            </div>
 	            <button class="btn btn-default btn-block" @click="saveComment">Publish</button>
@@ -102,7 +102,7 @@
 	            <div class="row">
 	              <div class="col-xl-3 col-md-4 col-6" v-for="(user, index) in users">
 	                <div class="single-member">
-	                  <a href="#">
+	                  <router-link :to="{ name: 'KakiProfile', params: { id: user.id } }">
 	                    <div class="img-holder">
 	                      <img src="images/person.jpg" alt="img">
 	                    </div>
@@ -110,7 +110,7 @@
 	                      <h4>{{ user.name }}</h4>
 	                      <p><i class="fal fa-map-marker-alt"></i> {{ user.hood_name }}</p>
 	                    </div>
-	                  </a>
+	                  </router-link>
 	                </div>
 	              </div>
 	            </div>

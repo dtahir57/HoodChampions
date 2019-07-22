@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceResource extends JsonResource
 {
@@ -24,7 +25,7 @@ class ServiceResource extends JsonResource
             'price' => $this->price,
             'email' => $this->email,
             'contact_no' => $this->contact_no,
-            'image' => $this->image
+            'image' => Storage::url($this->image)
         ];
     }
 }

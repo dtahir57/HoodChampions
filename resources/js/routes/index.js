@@ -18,13 +18,27 @@ const SingleTeam = () => import('@/views/AL/team/Team.vue');
 // Team Components Ends here
 const Activity = () => import('@/views/AL/Activity.vue');
 const Explore = () => import('@/views/AL/Explore.vue');
+// Starting Routes For LostAndFound Views
 const LostAndFound = () => import('@/views/AL/LostAndFound.vue');
+const LostAndFoundCreate = () => import('@/views/AL/lost_and_found/Create.vue')
+// Ending Routes For LostAndFound Views
+
+//Starting Routes For Services
+const Services = () => import('@/views/AL/Services.vue');
+const ServiceView = () => import('@/views/AL/service/Service.vue');
+const CreateService = () => import('@/views/AL/service/Create.vue');
+const EditService = () => import('@/views/AL/service/Edit.vue');
+//Ending Routes For Services 
 const Lelong = () => import('@/views/AL/Lelong.vue');
 const Kakis = () => import('@/views/AL/Kaki.vue');
 const KakiRequest = () => import('@/views/AL/KakiRequest.vue');
 const KakiProfile = () => import('@/views/AL/KakiProfile.vue');
+// Group Routes Starts here
 const Group = () => import('@/views/AL/Group.vue');
-const SingleGroup = () => import('@/views/AL/group/Group.vue');
+const GroupsByCategory = () => import('@/views/AL/group/Group.vue');
+const SingleGroup = () => import('@/views/AL/group/GroupView.vue');
+const CreateGroup = () => import('@/views/AL/group/Create.vue');
+// Group Routes Ends here
 
 Vue.use(VueRouter);
 
@@ -87,6 +101,14 @@ const routes = [
 		}
 	},
 	{
+		path: '/lost-and-found/create',
+		name: 'LostAndFoundCreate',
+		component: LostAndFoundCreate,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
 		path: '/lelong',
 		name: 'Lelong',
 		component: Lelong,
@@ -127,9 +149,25 @@ const routes = [
 		}
 	},
 	{
-		path: '/interest-group',
+		path: '/interest-groups/create',
+		name: 'CreateGroup',
+		component: CreateGroup,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/interest_group/:id',
 		name: 'SingleGroup',
 		component: SingleGroup,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/interest-group/:id',
+		name: 'GroupsByCategory',
+		component: GroupsByCategory,
 		meta: {
 			requiresAuth: true
 		}
@@ -146,6 +184,38 @@ const routes = [
 		path: '/team/:id',
 		name: 'Team',
 		component: SingleTeam,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/services',
+		name: 'Services',
+		component: Services,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/service/:id',
+		name: 'ServiceView',
+		component: ServiceView,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/services/create',
+		name: 'CreateService',
+		component: CreateService,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/services/:id/edit',
+		name: 'EditService',
+		component: EditService,
 		meta: {
 			requiresAuth: true
 		}

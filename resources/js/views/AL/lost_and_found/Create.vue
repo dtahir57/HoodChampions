@@ -67,7 +67,7 @@
 </template>
 <script>
 import { ModelListSelect } from 'vue-search-select'
-import { config } from '@/config/config'
+import { config } from '@/config/'
 
 export default {
 	name: 'LostAndFoundCreate',

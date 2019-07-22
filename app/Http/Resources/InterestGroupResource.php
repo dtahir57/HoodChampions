@@ -26,7 +26,8 @@ class InterestGroupResource extends JsonResource
             'email' => $this->email,
             'contact_no' => $this->contact_no,
             'meetup_place' => $this->meetup_place,
-            'photo' => Storage::url($this->photo)
+            'photo' => Storage::url($this->photo),
+            'users' => count($this->users)
         ];
     }
 }

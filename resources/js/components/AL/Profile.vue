@@ -17,11 +17,11 @@
 	            <!-- <button class="btn btn-outline">Your Kaki</button> -->
 	            <div class="hood-services">
 	            <h1 class="common-h">Hood Services</h1>
-	              <ul>
+	              <ul v-for="(service, index) in services">
 	                <li>
-	                  <h5>Professional Networking</h5>
-	                  <p>Partner & Co-Founder</p>
-	                  <p>Krome</p>
+	                  <h5>{{ service.title }}</h5>
+	                  <p>{{ service.email }}</p>
+	                  <p>{{ service.description }}</p>
 	                </li>
 	              </ul>
 	            </div>
@@ -103,6 +103,10 @@ export default {
 			required: true
 		},
 		battles: {
+			type: Array,
+			required: true
+		},
+		services: {
 			type: Array,
 			required: true
 		}

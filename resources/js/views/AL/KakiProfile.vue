@@ -1,6 +1,6 @@
 <template>
 	<div class="main-wrapper">
-	  <profile :user="user" :groups="groups" :teams="teams" :battles="battles"></profile>
+	  <profile :user="user" :groups="groups" :teams="teams" :battles="battles" :services="services"></profile>
 	</div>
 </template>
 <script>
@@ -16,7 +16,8 @@ export default {
 			user: {},
 			groups: [],
 			teams: [],
-			battles: []
+			battles: [],
+			services: []
 		}
 	},
 	created () {
@@ -31,6 +32,7 @@ export default {
 			this.groups = response.data.groups
 			this.teams = response.data.teams
 			this.battles = response.data.battles
+			this.services = response.data.services
 			console.log(response.data)
 		}).catch(error => {
 			console.log(error.response)

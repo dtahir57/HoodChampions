@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class LostAndFoundResource extends JsonResource
 {
@@ -22,7 +23,7 @@ class LostAndFoundResource extends JsonResource
             'type' => $this->type,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image
+            'image' => Storage::url($this->image)
         ];
     }
 }

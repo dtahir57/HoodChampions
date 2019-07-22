@@ -12,7 +12,7 @@
 	              <p>Dummy Text here, resources, contacts and ideas. Start a community action team to make things better in the neighbourhood!</p>
 	            	<img src="@/images/svg/Lost and Found.svg" class="inner-img" width="100%" alt="img">
 				</div>
-				<button class="btn btn-default block-btn">Create Lost And Found</button>
+				<router-link class="btn btn-default block-btn" to="/lost-and-found/create">Create Lost And Found</router-link>
 	          </div>
 	          <div class="col-md-5 offset-md-1 col-lg-5 offset-lg-2 col-xl-4 offset-xl-3">
 	            <img src="@/images/svg/Lost and Found.svg" class="outer-img" width="100%" alt="img">
@@ -31,33 +31,13 @@
 	  <section class="featured">
 	    <div class="container">
 	      <div class="row">
-	        <div class="col-lg-4 col-6 col-xs-12">
+	        <div class="col-lg-4 col-6 col-xs-12" v-for="(data, index) in lost_and_founds" :key="index">
 	          <div class="group">
 	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
+	              <img :src="data.image" class="img-fluid" alt="img">
 	            </div>
-	            <a href="#">Dancing</a>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        
-	        <div class="col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Dancing</a>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        
-	        <div class="col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Dancing</a>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
+	            <a href="#">{{ data.title }}</a>
+	            <p>{{ data.description }}</p>
 	          </div>
 	        </div>
 	        
@@ -67,12 +47,22 @@
 	</div>
 </template>
 <script>
+import { config } from '@/config/'
+
 export default {
 	name: 'LostAndFound',
 	data () {
 		return {
-			// 
+			lost_and_founds: []
 		}
+	},
+	created () {
+		let uri = '/api/lost_and_founds';
+		axios.get(uri, config).then(response => {
+			this.lost_and_founds = response.data.lost_and_founds
+		}).catch(error => {
+			console.log(error.response)
+		})
 	}
 }
 </script>
