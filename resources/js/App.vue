@@ -66,14 +66,14 @@
 					</ul>
 					</li>
 					<li class="nav-item profile-item">
-					<router-link class="nav-link" to="/kaki-profile">
+					<a class="nav-link">
 						<div class="profile-circle">
 						<img src="@/images/person.jpg" alt="profile">
 						</div>
-					</router-link>
+					</a>
 					<ul class="sub-drop">
 						<li>
-						<a href="#"><i class="far fa-user"></i> Profile</a>
+						<router-link :to="{ name: 'KakiProfile', params: { id: this.user.id } }"><i class="far fa-user"></i> Profile</router-link>
 						</li>
 						<li>
 						<a href="javascript:void(0)" @click="logout"><i class="far fa-sign-out"></i> Logout</a>
@@ -144,7 +144,8 @@ export default {
 	},
 	data () {
 		return {
-			api_token: null
+			api_token: null,
+			user: {}
 		}
 	},
 	computed: {
@@ -173,16 +174,24 @@ export default {
 	},
 	created () {
 		this.api_token = localStorage.getItem('user_api_token');
+		console.log(localStorage.getItem('user_api_token'))
 		this.$store.dispatch('setApiToken', this.api_token)
-		if (this.api_token) {
-			let uri = '/api/user/auth';
-			axios.post(uri, {}, config).then(response => {
-				this.$store.dispatch('setCurrentUser', response.data.user)
-				console.log(response.data)
-			}).catch(error => {
-				console.log(error.response)
-			})
-		}
+		let uri = '/api/user/auth';
+		axios.post(uri, {}, {
+			headers: {
+				"Accept": "application/json",
+			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			 	// "Content-Type": "multipart/form-data"
+			}
+		}).then(response => {
+			this.user = response.data.user
+			console.log(response.data)
+		}).catch(error => {
+			console.log(error.response)
+		})
+	},
+	updated () {
+		this.api_token = this.apiToken
 	}
 }
 </script>

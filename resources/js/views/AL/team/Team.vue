@@ -116,7 +116,7 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/config'
+import { config } from '@/config/'
 export default {
 	name: 'Team',
 	data () {
@@ -127,7 +127,12 @@ export default {
 	},
 	created () {
 		let uri = `/api/team/${this.$route.params.id}`;
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.team = response.data.team,
 			this.users = response.data.users
 		}).catch(error => {

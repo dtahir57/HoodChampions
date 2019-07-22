@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class InterestGroupResource extends JsonResource
 {
@@ -25,7 +26,7 @@ class InterestGroupResource extends JsonResource
             'email' => $this->email,
             'contact_no' => $this->contact_no,
             'meetup_place' => $this->meetup_place,
-            'photo' => $this->photo
+            'photo' => Storage::url($this->photo)
         ];
     }
 }

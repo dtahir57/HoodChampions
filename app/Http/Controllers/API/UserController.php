@@ -61,7 +61,6 @@ class UserController extends Controller
             'groups' => InterestGroupResource::collection($user->interest_groups),
             'teams' => TeamResource::collection($user->teams),
             'battles' => BattleResource::collection($user->battles)
-            // 'services' => 
         ]);
     }
 

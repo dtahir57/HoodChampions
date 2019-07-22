@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Battle extends Model
 {
@@ -40,5 +41,10 @@ class Battle extends Model
     public function standings()
     {
         return $this->hasMany(Standing::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

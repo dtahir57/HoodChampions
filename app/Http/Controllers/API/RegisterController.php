@@ -4,6 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\UserRequest;
+use App\Http\Resources\BattleResource;
+use App\Http\Resources\InterestGroupResource;
+use App\Http\Resources\TeamResource;
+use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;

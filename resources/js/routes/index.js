@@ -111,7 +111,7 @@ const routes = [
 		}
 	},
 	{
-		path: '/kaki-profile',
+		path: '/kaki/:id',
 		name: 'KakiProfile',
 		component: KakiProfile,
 		meta: {

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Models\Activity;
+use App\Http\Models\Battle;
 use App\Http\Models\Hood;
 use App\Http\Models\InterestGroup;
 use App\Http\Models\LostAndFound;
@@ -74,5 +75,8 @@ class User extends Authenticatable
     public function lost_and_founds()
     {
         return $this->hasMany(LostAndFound::class);
+    }
+    public function battles() {
+        return $this->belongsToMany(Battle::class);
     }
 }

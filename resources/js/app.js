@@ -4,6 +4,7 @@ require('./bootstrap');
 import '@/css/select.css';
 // import '@/css/master.css';
 import '@/font-awesome/css/all.css';
+import { config } from '@/config/'
 
 import Vue from 'vue';
 import router from './routes'

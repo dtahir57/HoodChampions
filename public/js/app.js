@@ -1961,7 +1961,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      api_token: null
+      api_token: null,
+      user: {}
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['apiToken', 'getAuthenticatedUser'])),
@@ -1994,18 +1995,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this2 = this;
 
     this.api_token = localStorage.getItem('user_api_token');
+    console.log(localStorage.getItem('user_api_token'));
     this.$store.dispatch('setApiToken', this.api_token);
+    var uri = '/api/user/auth';
+    axios.post(uri, {}, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
 
-    if (this.api_token) {
-      var uri = '/api/user/auth';
-      axios.post(uri, {}, _config___WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
-        _this2.$store.dispatch('setCurrentUser', response.data.user);
-
-        console.log(response.data);
-      })["catch"](function (error) {
-        console.log(error.response);
-      });
-    }
+      }
+    }).then(function (response) {
+      _this2.user = response.data.user;
+      console.log(response.data);
+    })["catch"](function (error) {
+      console.log(error.response);
+    });
+  },
+  updated: function updated() {
+    this.api_token = this.apiToken;
   }
 });
 
@@ -49304,48 +49311,47 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item profile-item" },
-                      [
+                    _c("li", { staticClass: "nav-item profile-item" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "sub-drop" }, [
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: "/kaki-profile" }
-                          },
+                          "li",
                           [
-                            _c("div", { staticClass: "profile-circle" }, [
-                              _c("img", {
-                                attrs: {
-                                  src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"),
-                                  alt: "profile"
-                                }
-                              })
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "sub-drop" }, [
-                          _vm._m(7),
-                          _vm._v(" "),
-                          _c("li", [
                             _c(
-                              "a",
+                              "router-link",
                               {
-                                attrs: { href: "javascript:void(0)" },
-                                on: { click: _vm.logout }
+                                attrs: {
+                                  to: {
+                                    name: "KakiProfile",
+                                    params: { id: this.user.id }
+                                  }
+                                }
                               },
                               [
-                                _c("i", { staticClass: "far fa-sign-out" }),
-                                _vm._v(" Logout")
+                                _c("i", { staticClass: "far fa-user" }),
+                                _vm._v(" Profile")
                               ]
                             )
-                          ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "javascript:void(0)" },
+                              on: { click: _vm.logout }
+                            },
+                            [
+                              _c("i", { staticClass: "far fa-sign-out" }),
+                              _vm._v(" Logout")
+                            ]
+                          )
                         ])
-                      ],
-                      1
-                    )
+                      ])
+                    ])
                   ])
                 : _vm._e()
             ])
@@ -49424,10 +49430,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "far fa-user" }),
-        _vm._v(" Profile")
+    return _c("a", { staticClass: "nav-link" }, [
+      _c("div", { staticClass: "profile-circle" }, [
+        _c("img", {
+          attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "profile" }
+        })
       ])
     ])
   },
@@ -65454,11 +65461,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_select_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_select_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/font-awesome/css/all.css */ "./resources/js/font-awesome/css/all.css");
 /* harmony import */ var _font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_font_awesome_css_all_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/config/ */ "./resources/js/config/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes */ "./resources/js/routes/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
  // import '@/css/master.css';
@@ -65468,12 +65476,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vee_validate__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
-var app = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
-  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vee_validate__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('app', __webpack_require__(/*! @/App.vue */ "./resources/js/App.vue")["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
+  store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
   el: '#app',
-  router: _routes__WEBPACK_IMPORTED_MODULE_3__["default"]
+  router: _routes__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 /***/ }),
@@ -65948,7 +65957,7 @@ var Login = function Login() {
 };
 
 var Register = function Register() {
-  return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
 };
 
 var Terms = function Terms() {
@@ -65961,36 +65970,36 @@ var VerifyOTP = function VerifyOTP() {
 
 
 var Teams = function Teams() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
 };
 
 var TeamCreate = function TeamCreate() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! @/views/AL/team/Create.vue */ "./resources/js/views/AL/team/Create.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! @/views/AL/team/Create.vue */ "./resources/js/views/AL/team/Create.vue"));
 };
 
 var SingleTeam = function SingleTeam() {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
 }; // Team Components Ends here
 
 
 var Activity = function Activity() {
-  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
 };
 
 var Explore = function Explore() {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
 };
 
 var LostAndFound = function LostAndFound() {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
 };
 
 var Lelong = function Lelong() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
 };
 
 var Kakis = function Kakis() {
-  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
 };
 
 var KakiRequest = function KakiRequest() {
@@ -65998,7 +66007,7 @@ var KakiRequest = function KakiRequest() {
 };
 
 var KakiProfile = function KakiProfile() {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
 };
 
 var Group = function Group() {
@@ -66080,7 +66089,7 @@ var routes = [{
     requiresAuth: true
   }
 }, {
-  path: '/kaki-profile',
+  path: '/kaki/:id',
   name: 'KakiProfile',
   component: KakiProfile,
   meta: {

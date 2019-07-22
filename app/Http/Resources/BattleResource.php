@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class BattleResource extends JsonResource
 {
@@ -26,7 +27,7 @@ class BattleResource extends JsonResource
             'email' => $this->email,
             'contact_no' => $this->contact_no,
             'meetup_place' => $this->meetup_place,
-            'image' => $this->image,
+            'image' => Storage::url($this->image),
             'is_featured' => $this->is_featured
         ];
     }

@@ -136,11 +136,11 @@ export default {
         			headers: {
         				"Accept": "application/json",
         			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
-        			 	// "Content-Type": "multipart/form-data"
         			}
         		})
         		.then(response => {
         			console.log(response.data)
+        			this.$route.push({ name: 'Team', params: {id: response.data.team.id} })
         		}).catch(error => {
         			console.log(error.response)
         		})

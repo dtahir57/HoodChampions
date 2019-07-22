@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	 * Starting Routes For UserController
 	 */
 	Route::post('/user/auth', 'API\UserController@index');
+	Route::get('/user/details/{id}', 'API\UserController@show');
 	/**
 	 * Ending Routes For UserController
 	 */
@@ -43,6 +44,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/lost_and_founds', 'API\LostAndFoundController@index');
 	Route::get('/battles', 'API\BattleController@index');
 
-	
+
 	Route::post('/user/logout', 'API\RegisterController@logout');
 });
