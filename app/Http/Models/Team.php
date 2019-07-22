@@ -2,9 +2,9 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\TeamPost;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Concerns\withPivot;
 
 class Team extends Model
 {
@@ -39,5 +39,10 @@ class Team extends Model
     public function standings()
     {
         return $this->hasMany(Standing::class);
+    }
+
+    public function team_posts()
+    {
+        return $this->hasMany(TeamPost::class);
     }
 }

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Hood;
 use App\Http\Models\Team;
+use App\Http\Models\TeamPost;
 use App\Http\Resources\TeamResource;
 use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\TeamPost as TeamPostResource;
 
 class TeamController extends Controller
 {
@@ -112,11 +114,13 @@ class TeamController extends Controller
         $token = $request->bearerToken();
         $user = User::where('api_token', $token)->first();
         $exists = $team->users->contains($user->id);
+        $posts = TeamPost::where('team_id', $team->id)->latest()->get();
         return response()->json([
             'team' => new TeamResource($team),
             'users' => UserResource::collection($team->users),
             'user' => new UserResource($user),
-            'is_join' => $exists
+            'is_join' => $exists,
+            'team_posts' => $posts
         ]);
     }
 
@@ -135,6 +139,18 @@ class TeamController extends Controller
         ]);
     }
 
+    public function post(Request $request)
+    {
+        $post = new TeamPost;
+        $post->team_id = $request->team_id;
+        $post->post = $request->comment;
+
+        $post->save();
+        $posts = TeamPost::where('team_id', $request->team_id)->latest()->get();
+        return response()->json([
+            'posts' => $posts
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -128,6 +128,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Team',
@@ -136,7 +140,9 @@ __webpack_require__.r(__webpack_exports__);
       team: {},
       users: [],
       user: {},
-      is_joined: null
+      is_joined: null,
+      comment: '',
+      comments: []
     };
   },
   methods: {
@@ -160,10 +166,33 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.response);
       });
+    },
+    saveComment: function saveComment() {
+      var _this2 = this;
+
+      if (this.$validator.validate()) {
+        var uri = '/api/team/post';
+        console.log(uri);
+        axios.post(uri, {
+          comment: this.comment,
+          team_id: this.team.id
+        }, {
+          headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
+          }
+        }).then(function (response) {
+          _this2.comments = response.data.posts;
+          console.log(response.data);
+          _this2.comment = '';
+        })["catch"](function (error) {
+          console.log(error.response);
+        });
+      }
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     var uri = "/api/team/".concat(this.$route.params.id);
     axios.get(uri, {
@@ -172,8 +201,10 @@ __webpack_require__.r(__webpack_exports__);
         "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
       }
     }).then(function (response) {
-      _this2.team = response.data.team, _this2.users = response.data.users;
-      _this2.is_joined = response.data.is_join;
+      _this3.team = response.data.team, _this3.users = response.data.users;
+      _this3.is_joined = response.data.is_join;
+      _this3.comments = response.data.team_posts;
+      console.log(response.data);
     })["catch"](function (error) {
       console.log(error.response);
     });
@@ -249,7 +280,93 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1),
+    _c("section", { staticClass: "team-posts" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-xl-3 col-md-4" }, [
+            _c("div", { staticClass: "publisher" }, [
+              _c("h1", { staticClass: "common-h" }, [_vm._v("Wall")]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    },
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.comment,
+                      expression: "comment"
+                    }
+                  ],
+                  staticClass: "info-msg",
+                  attrs: {
+                    placeholder:
+                      "Click this space to start posting in this group. Please do not comment anything.",
+                    name: "Comment"
+                  },
+                  domProps: { value: _vm.comment },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.comment = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.errors.first("Comment")))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default btn-block",
+                  on: { click: _vm.saveComment }
+                },
+                [_vm._v("Publish")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-7 col-md-8 offset-xl-2 offset-lg-1" },
+            [
+              _c(
+                "div",
+                { staticClass: "posts" },
+                [
+                  !_vm.comments.length > 0
+                    ? _c("div", { staticClass: "info-msg" }, [
+                        _c("p", [
+                          _vm._v("There are no posts. Why not post somthing?")
+                        ])
+                      ])
+                    : _vm._l(_vm.comments, function(comment, index) {
+                        return _c(
+                          "div",
+                          { key: index, staticClass: "info-msg" },
+                          [_c("p", [_vm._v(_vm._s(comment.post))])]
+                        )
+                      })
+                ],
+                2
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("section", { staticClass: "team-details" }, [
       _c("div", { staticClass: "container" }, [
@@ -367,48 +484,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "team-posts" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-xl-3 col-md-4" }, [
-            _c("div", { staticClass: "publisher" }, [
-              _c("h1", { staticClass: "common-h" }, [_vm._v("Wall")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "img-holder" }, [
-                _c("img", {
-                  attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "img" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "info-msg" }, [
-                _c("p", [
-                  _vm._v(
-                    "Click this space to start posting in this group. Please do not comment anything."
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("button", { staticClass: "btn btn-default btn-block" }, [
-                _vm._v("Publish")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-lg-7 col-md-8 offset-xl-2 offset-lg-1" },
-            [
-              _c("div", { staticClass: "posts" }, [
-                _c("div", { staticClass: "info-msg" }, [
-                  _c("p", [
-                    _vm._v("There are no posts. Why not post somthing?")
-                  ])
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
+    return _c("div", { staticClass: "img-holder" }, [
+      _c("img", { attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "img" } })
     ])
   },
   function() {

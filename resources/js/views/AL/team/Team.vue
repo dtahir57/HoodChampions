@@ -49,16 +49,20 @@
 	            <div class="img-holder">
 	              <img src="@/images/person.jpg" alt="img">
 	            </div>
-	            <div class="info-msg">
-	              <p>Click this space to start posting in this group. Please do not comment anything.</p>
+	            <div >
+	              <textarea class="info-msg" placeholder="Click this space to start posting in this group. Please do not comment anything." name="Comment" v-validate="'required'" v-model="comment"></textarea>
+	              <span class="text-danger">{{ errors.first('Comment') }}</span>
 	            </div>
-	            <button class="btn btn-default btn-block">Publish</button>
+	            <button class="btn btn-default btn-block" @click="saveComment">Publish</button>
 	          </div>
 	        </div>
 	        <div class="col-lg-7 col-md-8 offset-xl-2 offset-lg-1">
 	          <div class="posts">
-	            <div class="info-msg">
-	              <p>There are no posts. Why not post somthing?</p>
+	          	<div class="info-msg" v-if="!comments.length > 0">
+	          		<p>There are no posts. Why not post somthing?</p>
+	          	</div>
+	            <div class="info-msg" v-else v-for="(comment, index) in comments" :key="index">
+	              <p>{{ comment.post }}</p>
 	            </div>
 	          </div>
 	        </div>
@@ -125,7 +129,9 @@ export default {
 			team: {},
 			users: [],
 			user: {},
-			is_joined: null
+			is_joined: null,
+			comment: '',
+			comments: []
 		}
 	},
 	methods: {
@@ -147,6 +153,27 @@ export default {
 			}).catch(error => {
 				console.log(error.response)
 			})
+		},
+		saveComment () {
+			if (this.$validator.validate()) {
+				let uri = '/api/team/post';
+				console.log(uri)
+				axios.post(uri, {
+					comment: this.comment,
+					team_id: this.team.id
+	 			}, {
+	 				headers: {
+	 					"Accept": "application/json",
+	 				 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+	 				}
+	 			}).then(response => {
+	 				this.comments = response.data.posts
+	 				console.log(response.data)
+	 				this.comment = ''
+	 			}).catch(error => {
+	 				console.log(error.response)
+	 			})
+			}
 		}
 	},
 	created () {
@@ -160,6 +187,8 @@ export default {
 			this.team = response.data.team,
 			this.users = response.data.users
 			this.is_joined = response.data.is_join
+			this.comments = response.data.team_posts
+			console.log(response.data)
 		}).catch(error => {
 			console.log(error.response)
 		})
