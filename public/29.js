@@ -164,34 +164,18 @@ var render = function() {
               "carousel",
               { attrs: { autoplay: true, centerMode: true, easing: "ease" } },
               _vm._l(_vm.categories, function(category, index) {
-                return _c(
-                  "slide",
-                  { key: index },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        attrs: {
-                          to: {
-                            name: "GroupsByCategory",
-                            params: { id: category.id }
-                          }
-                        }
-                      },
-                      [
-                        _c("img", {
-                          staticStyle: { height: "100px", width: "100px" },
-                          attrs: { src: category.image, alt: "Category Image" }
-                        }),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "mt-3" }, [
-                          _vm._v(_vm._s(category.title))
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                )
+                return _c("slide", { key: index }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _c("img", {
+                      staticStyle: { height: "100px", width: "100px" },
+                      attrs: { src: category.image, alt: "Category Image" }
+                    }),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "mt-3" }, [
+                      _vm._v(_vm._s(category.title))
+                    ])
+                  ])
+                ])
               }),
               1
             )

@@ -24,10 +24,10 @@
 	      <div class="categories-slider owl-carousel">
 	        <carousel :autoplay="true" :centerMode="true" :easing="'ease'">
 		  		<slide v-for="(category, index) in categories" :key="index">
-		  			<router-link :to="{ name: 'GroupsByCategory', params: { id: category.id } }">
+		  			<a href="#">
 			  			<img :src="category.image" style="height: 100px; width: 100px;" alt="Category Image" />
 			  			<h5 class="mt-3">{{ category.title }}</h5>
-			  		</router-link>
+			  		</a>
 		  		</slide>
 		  	</carousel>
 	      </div>
