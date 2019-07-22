@@ -174,7 +174,6 @@ export default {
 	},
 	created () {
 		this.api_token = localStorage.getItem('user_api_token');
-		console.log(localStorage.getItem('user_api_token'))
 		this.$store.dispatch('setApiToken', this.api_token)
 		let uri = '/api/user/auth';
 		axios.post(uri, {}, {
@@ -185,6 +184,7 @@ export default {
 			}
 		}).then(response => {
 			this.user = response.data.user
+			this.$store.dispatch('setCurrentUser', this.user)
 			console.log(response.data)
 		}).catch(error => {
 			console.log(error.response)

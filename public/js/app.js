@@ -1995,7 +1995,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this2 = this;
 
     this.api_token = localStorage.getItem('user_api_token');
-    console.log(localStorage.getItem('user_api_token'));
     this.$store.dispatch('setApiToken', this.api_token);
     var uri = '/api/user/auth';
     axios.post(uri, {}, {
@@ -2006,6 +2005,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }).then(function (response) {
       _this2.user = response.data.user;
+
+      _this2.$store.dispatch('setCurrentUser', _this2.user);
+
       console.log(response.data);
     })["catch"](function (error) {
       console.log(error.response);
