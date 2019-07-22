@@ -8,7 +8,7 @@
 	            <div class="text">
 	              <h1 class="common-h">Battles</h1>
                   <p>Create a Battle for InnerHood Competitions</p>
-                  <router-link class="btn btn-default block-btn" to="/battles/create">Create Battle</router-link>
+                  <router-link class="btn btn-default block-btn" to="/battle/create">Create Battle</router-link>
 	            </div>
 	          </div>
 	          <div class="col-md-5 offset-md-1 col-lg-5 offset-lg-2 col-xl-4 offset-xl-3">
@@ -22,20 +22,20 @@
 	    <div class="container">
 	      <div class="common-h">Categories</div>
 	      <div class="categories-slider owl-carousel">
-	        <carousel :autoplay="true" :nav="false" :items="categories.length" :loop="true">
-	        	<template slot="prev"><span class="prev">prev</span></template>
-	        	<div v-for="(category, index) in categories">
-	        		<img :src="category.image" />
-	        		{{ category.title }}
-	        	</div>
-	        	<template slot="next"><span class="next">next</span></template>
-	        </carousel>
+	        <carousel :autoplay="true" :centerMode="true" :easing="'ease'">
+		  		<slide v-for="(category, index) in categories" :key="index">
+		  			<router-link :to="{ name: 'GroupsByCategory', params: { id: category.id } }">
+			  			<img :src="category.image" style="height: 100px; width: 100px;" alt="Category Image" />
+			  			<h5 class="mt-3">{{ category.title }}</h5>
+			  		</router-link>
+		  		</slide>
+		  	</carousel>
 	      </div>
 	    </div>
 	  </div>
 	  <section class="featured mi-groups">
 	    <div class="container">
-	      <div class="common-h">Battles in {{ getHoodName }}</div>
+	      <div class="common-h">Battles in {{ getAuthenticatedUser.hood_name }}</div>
 	      <div class="row">
 	        <div class="col-lg-4 col-6 col-xs-12" v-for="(battle, index) in battles" :key="index">
 	          <div class="group">
@@ -50,118 +50,19 @@
 	      </div>
 	    </div>
 	  </section>
-	  <section class="featured">
-	    <div class="container">
-	      <div class="head-title-icon">
-	        <div class="common-h">All Interest Groups</div>
-	        <div class="icon">
-	          <img src="images/svg/decor.svg" alt="img">
-	        </div>
-	      </div>
-	      <div class="row">
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Dancing</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/swim.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Swiming</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit du um dolor sit duv um dolor sit duum dolor sit duum dolor sit du um dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/abstract.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Painting</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Dancing</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/swim.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Swiming</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit du um dolor sit duv um dolor sit duum dolor sit duum dolor sit du um dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/abstract.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Painting</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/dance.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Dancing</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/swim.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Swiming</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit du um dolor sit duv um dolor sit duum dolor sit duum dolor sit du um dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	        <div class="col-xl-3 col-lg-4 col-6 col-xs-12">
-	          <div class="group">
-	            <div class="img-holder">
-	              <img src="images/abstract.jpg" class="img-fluid" alt="img">
-	            </div>
-	            <a href="#">Painting</a>
-	            <p><i class="fal fa-user-circle"></i> 15</p>
-	            <p>Lorem ipsum dolor sit dummy text using heres</p>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </section>
 	</div>
 </template>
 <script>
-import { config } from '@/config/config'
-import carousel from 'vue-owl-carousel'
+import { config } from '@/config/'
 import { mapGetters } from 'vuex'
+import { Carousel, Slide } from 'vue-carousel';
 
 export default {
 	name: 'Battle',
-	components: { carousel },
+	components: {
+	    Carousel,
+	    Slide
+	  },
 	data () {
 		return {
 			battles: [],
@@ -169,7 +70,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getHoodName'])
+		...mapGetters(['getAuthenticatedUser'])
 	},
 	created () {
 		let uri = '/api/battles';

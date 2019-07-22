@@ -40,6 +40,12 @@ const SingleGroup = () => import('@/views/AL/group/GroupView.vue');
 const CreateGroup = () => import('@/views/AL/group/Create.vue');
 // Group Routes Ends here
 
+// Starting Routes For Battles
+const Battles = () => import('@/views/AL/Battle.vue');
+const CreateBattle = () => import('@/views/AL/battle/Create.vue');
+const BattleView = () => import('@/views/AL/battle/Battle.vue');
+// Ending Routes For Battles
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -216,6 +222,30 @@ const routes = [
 		path: '/services/:id/edit',
 		name: 'EditService',
 		component: EditService,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/battles',
+		name: 'Battles',
+		component: Battles,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/battle/create',
+		name: 'CreateBattle',
+		component: CreateBattle,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/battles/:id',
+		name: 'BattleView',
+		component: BattleView,
 		meta: {
 			requiresAuth: true
 		}

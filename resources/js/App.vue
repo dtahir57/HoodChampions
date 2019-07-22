@@ -35,7 +35,7 @@
 						<router-link to="/teams">TEAMS</router-link>
 						</li>
 						<li>
-						<a href="#">{{ user.hood_name }}</a>
+						<router-link to="/battles">{{ user.hood_name }}</router-link>
 						</li>
 						<li>
 						<a href="#">Other Hoods</a>

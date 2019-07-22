@@ -232,7 +232,7 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/config'
+import { config } from '@/config/'
 export default {
 	name: 'BattleView',
 	data () {

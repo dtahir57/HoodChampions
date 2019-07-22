@@ -73,10 +73,16 @@ Route::group(['middleware' => 'auth:api'], function() {
 	 * Ending Routes For UserController
 	 */
 	Route::get('/activities', 'API\ActivityController@index');
-	Route::get('/interest_groups', 'API\GroupController@index');
-	Route::get('/services', 'API\ServiceController@index');
-	Route::get('/lost_and_founds', 'API\LostAndFoundController@index');
+	/**
+	 * Starting Routes For BattleController
+	 */
 	Route::get('/battles', 'API\BattleController@index');
+	Route::get('/battles/create', 'API\BattleController@create');
+	Route::post('/battle', 'API\BattleController@store');
+	Route::get('/battle/{id}', 'API\BattleController@show');
+	/**
+	 * Ending Routes For BattleController
+	 */
 
 
 	Route::post('/user/logout', 'API\RegisterController@logout');

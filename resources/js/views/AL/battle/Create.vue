@@ -91,7 +91,7 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/config'
+import { config } from '@/config/'
 import { ModelListSelect } from 'vue-search-select'
 
 export default {

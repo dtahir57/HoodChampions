@@ -49269,11 +49269,17 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v(_vm._s(_vm.user.hood_name))
-                                ])
-                              ]),
+                              _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    { attrs: { to: "/battles" } },
+                                    [_vm._v(_vm._s(_vm.user.hood_name))]
+                                  )
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _vm._m(1),
                               _vm._v(" "),
@@ -66068,6 +66074,20 @@ var SingleGroup = function SingleGroup() {
 var CreateGroup = function CreateGroup() {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(26)]).then(__webpack_require__.bind(null, /*! @/views/AL/group/Create.vue */ "./resources/js/views/AL/group/Create.vue"));
 }; // Group Routes Ends here
+// Starting Routes For Battles
+
+
+var Battles = function Battles() {
+  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(29)]).then(__webpack_require__.bind(null, /*! @/views/AL/Battle.vue */ "./resources/js/views/AL/Battle.vue"));
+};
+
+var CreateBattle = function CreateBattle() {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(28)]).then(__webpack_require__.bind(null, /*! @/views/AL/battle/Create.vue */ "./resources/js/views/AL/battle/Create.vue"));
+};
+
+var BattleView = function BattleView() {
+  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! @/views/AL/battle/Battle.vue */ "./resources/js/views/AL/battle/Battle.vue"));
+}; // Ending Routes For Battles
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -66221,6 +66241,27 @@ var routes = [{
   path: '/services/:id/edit',
   name: 'EditService',
   component: EditService,
+  meta: {
+    requiresAuth: true
+  }
+}, {
+  path: '/battles',
+  name: 'Battles',
+  component: Battles,
+  meta: {
+    requiresAuth: true
+  }
+}, {
+  path: '/battle/create',
+  name: 'CreateBattle',
+  component: CreateBattle,
+  meta: {
+    requiresAuth: true
+  }
+}, {
+  path: '/battles/:id',
+  name: 'BattleView',
+  component: BattleView,
   meta: {
     requiresAuth: true
   }
