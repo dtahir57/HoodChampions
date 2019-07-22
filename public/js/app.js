@@ -1971,12 +1971,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var uri = '/api/user/logout';
-      axios.post(uri, {}, {
-        headers: {
-          "Accept": "application/json",
-          "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
-        }
-      }).then(function (response) {
+      axios.post(uri, {}, _config___WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
         localStorage.removeItem('user_api_token');
 
         _this.$store.dispatch('setApiToken', '');
@@ -1997,13 +1992,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.api_token = localStorage.getItem('user_api_token');
     this.$store.dispatch('setApiToken', this.api_token);
     var uri = '/api/user/auth';
-    axios.post(uri, {}, {
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token')) // "Content-Type": "multipart/form-data"
-
-      }
-    }).then(function (response) {
+    axios.post(uri, {}, _config___WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
       _this2.user = response.data.user;
 
       _this2.$store.dispatch('setCurrentUser', _this2.user);

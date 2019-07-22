@@ -67,7 +67,7 @@
 	          </div>
 	        </div>
 	      </div>
-	      <div class="info-msg">Join a Team to post on a wall</div>
+	      <div class="info-msg" v-else>Join a Team to post on a wall</div>
 	    </div>
 	  </section>
 	  <section class="team-details">
@@ -162,12 +162,7 @@ export default {
 				axios.post(uri, {
 					comment: this.comment,
 					team_id: this.team.id
-	 			}, {
-	 				headers: {
-	 					"Accept": "application/json",
-	 				 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
-	 				}
-	 			}).then(response => {
+	 			}, config).then(response => {
 	 				this.comments = response.data.posts
 	 				console.log(response.data)
 	 				

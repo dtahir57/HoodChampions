@@ -157,12 +157,7 @@ export default {
 	methods: {
 		logout () {
 			let uri = '/api/user/logout';
-			axios.post(uri, {}, {
-				headers: {
-					"Accept": "application/json",
-				 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
-				}
-			}).then(response => {
+			axios.post(uri, {}, config).then(response => {
 				localStorage.removeItem('user_api_token')
 				this.$store.dispatch('setApiToken', '')
 				this.$router.push({ name: 'Login' })
@@ -176,13 +171,7 @@ export default {
 		this.api_token = localStorage.getItem('user_api_token');
 		this.$store.dispatch('setApiToken', this.api_token)
 		let uri = '/api/user/auth';
-		axios.post(uri, {}, {
-			headers: {
-				"Accept": "application/json",
-			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
-			 	// "Content-Type": "multipart/form-data"
-			}
-		}).then(response => {
+		axios.post(uri, {}, config).then(response => {
 			this.user = response.data.user
 			this.$store.dispatch('setCurrentUser', this.user)
 			console.log(response.data)

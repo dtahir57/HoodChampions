@@ -177,12 +177,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post(uri, {
           comment: this.comment,
           team_id: this.team.id
-        }, {
-          headers: {
-            "Accept": "application/json",
-            "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
-          }
-        }).then(function (response) {
+        }, _config___WEBPACK_IMPORTED_MODULE_0__["config"]).then(function (response) {
           _this2.comments = response.data.posts;
           console.log(response.data);
         })["catch"](function (error) {
@@ -370,11 +365,9 @@ var render = function() {
                 ]
               )
             ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "info-msg" }, [
-          _vm._v("Join a Team to post on a wall")
-        ])
+          : _c("div", { staticClass: "info-msg" }, [
+              _vm._v("Join a Team to post on a wall")
+            ])
       ])
     ]),
     _vm._v(" "),
