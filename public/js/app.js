@@ -66054,7 +66054,7 @@ var KakiProfile = function KakiProfile() {
 
 
 var Group = function Group() {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(27)]).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
 };
 
 var GroupsByCategory = function GroupsByCategory() {

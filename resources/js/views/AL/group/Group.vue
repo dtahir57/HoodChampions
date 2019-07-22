@@ -30,7 +30,7 @@
 	              <div class="img-holder">
 	                <img :src="group.photo" class="img-fluid" alt="img">
 	              </div>
-	              <a href="#">{{ group.title }}</a>
+	              <router-link :to="{ name: 'SingleGroup', params: {id: group.id} }">{{ group.title }}</router-link>
 	              <p><i class="fal fa-user-circle"></i> {{ group.users }}</p>
 	              <p>{{ group.description }}</p>
 	            </div>

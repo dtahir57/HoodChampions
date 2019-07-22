@@ -33,7 +33,7 @@
 	              <span><i class="fal fa-user-circle"></i> {{ group.users }}</span>
 	              <p>{{ group.description }}</p>
 	            </div>
-	            <button class="bt btn-default btn-block" v-if="!is_member">Join</button>
+	            <button class="bt btn-default btn-block" v-if="!is_member" @click="join">Join</button>
 	            <button class="bt btn-outline btn-block" disabled v-if="is_member">Joined</button>
 	          </div>
 	        </div>
@@ -42,32 +42,33 @@
 	  </section>
 	  <!-- ig stands for Interest Groups-->
 	  <section class="ig-activities">
-	    <div class="container">
+	    <div class="container" v-if="is_member">
 	      <div class="row">
 	        <div class="col-xl-3 col-md-4">
 	          <div class="publisher">
 	            <h1 class="common-h">Wall</h1>
 	            <div class="img-holder">
-	              <img src="images/person.jpg" alt="img">
+	              <img src="@/images/person.jpg" alt="img">
 	            </div>
-	            <div class="info-msg">
-	              <p>Click this space to start posting in this group. Please do not comment anything.</p>
-	            </div>
-	            <button class="btn btn-default btn-block">Publish</button>
+	            <textarea class="info-msg form-control" style="background-color: #fff3e6;" rows="3" placeholder="Click this space to start posting in this group. Please do not comment anything." name="Comment" v-validate="'required'" v-model="comment">
+	            </textarea>
+	              <span class="text-danger">{{ errors.first('Comment') }}</span>
+	            <button class="btn btn-default btn-block" @click="saveComment">Publish</button>
 	          </div>
 	        </div>
 	        <div class="col-lg-7 col-md-8 offset-xl-2 offset-lg-1">
 	          <div class="activities">
+	          	<div class="info-msg" v-if="!comments.length > 0"><p>There are no posts. Why not post somthing?</p></div>
 	            <ul>
-	              <li>
+	              <li v-for="(comment, index) in comments" :key="index">
 	                <div class="strip">
-	                  <p>First activity would be on 19 March 2019!</p>
+	                  <p>{{ comment.post }}</p>
 	                  <div class="img-holder">
-	                    <img src="images/person.jpg" alt="img">
+	                    <img src="@/images/person.jpg" alt="img">
 	                  </div>
 	                </div>
 	                <div class="adate">
-	                  <a href="#" class="trash"><i class="fas fa-trash"></i></a>
+	                  <a href="#" class="trash" v-if="comment.user.id === getAuthenticatedUser.id"><i class="fas fa-trash"></i></a>
 	                  <ul class="remove-action">
 	                    <li>
 	                      <a href="#">Yes</a>
@@ -76,93 +77,18 @@
 	                      <a href="#" class="dismiss">Cancel</a>
 	                    </li>
 	                  </ul>
-	                  <span>1 March 2019, 12:00 AM</span>
-	                </div>
-	              </li>
-	              <li>
-	                <div class="strip">
-	                  <p>First activity would be on 19 March 2019!</p>
-	                  <div class="img-holder">
-	                    <img src="images/person.jpg" alt="img">
-	                  </div>
-	                </div>
-	                <div class="adate">
-	                  <a href="#" class="trash"><i class="fas fa-trash"></i></a>
-	                  <ul class="remove-action">
-	                    <li>
-	                      <a href="#">Yes</a>
-	                    </li>
-	                    <li>
-	                      <a href="#" class="dismiss">Cancel</a>
-	                    </li>
-	                  </ul>
-	                  <span>1 March 2019, 12:00 AM</span>
-	                </div>
-	              </li>
-	              <li>
-	                <div class="strip">
-	                  <p>First activity would be on 19 March 2019!</p>
-	                  <div class="img-holder">
-	                    <img src="images/person.jpg" alt="img">
-	                  </div>
-	                </div>
-	                <div class="adate">
-	                  <a href="#" class="trash"><i class="fas fa-trash"></i></a>
-	                  <ul class="remove-action">
-	                    <li>
-	                      <a href="#">Yes</a>
-	                    </li>
-	                    <li>
-	                      <a href="#" class="dismiss">Cancel</a>
-	                    </li>
-	                  </ul>
-	                  <span>1 March 2019, 12:00 AM</span>
-	                </div>
-	              </li>
-	              <li>
-	                <div class="strip">
-	                  <p>First activity would be on 19 March 2019!</p>
-	                  <div class="img-holder">
-	                    <img src="images/person.jpg" alt="img">
-	                  </div>
-	                </div>
-	                <div class="adate">
-	                  <a href="#" class="trash"><i class="fas fa-trash"></i></a>
-	                  <ul class="remove-action">
-	                    <li>
-	                      <a href="#">Yes</a>
-	                    </li>
-	                    <li>
-	                      <a href="#" class="dismiss">Cancel</a>
-	                    </li>
-	                  </ul>
-	                  <span>1 March 2019, 12:00 AM</span>
-	                </div>
-	              </li>
-	              <li>
-	                <div class="strip">
-	                  <p>First activity would be on 19 March 2019!</p>
-	                  <div class="img-holder">
-	                    <img src="images/person.jpg" alt="img">
-	                  </div>
-	                </div>
-	                <div class="adate">
-	                  <a href="#" class="trash"><i class="fas fa-trash"></i></a>
-	                  <ul class="remove-action">
-	                    <li>
-	                      <a href="#">Yes</a>
-	                    </li>
-	                    <li>
-	                      <a href="#" class="dismiss">Cancel</a>
-	                    </li>
-	                  </ul>
-	                  <span>1 March 2019, 12:00 AM</span>
+	                  <span>{{ comment.created_at }}</span>
 	                </div>
 	              </li>
 	            </ul>
 	          </div>
 	        </div>
 	      </div>
+	    </div>
+	    <div class="container" v-else>
+	    	<div class="info-msg">
+	    	  <p>You need to join this group to start posting on wall</p>
+	    	</div>
 	    </div>
 	  </section>
 	  <section class="team-details">
@@ -218,6 +144,7 @@
 </template>
 <script>
 import { config } from '@/config/'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'SingleGroup',
@@ -225,8 +152,41 @@ export default {
 		return {
 			group: {},
 			members: [],
-			is_member: false
+			is_member: false,
+			comment: '',
+			comments: []
 		}
+	},
+	methods: {
+		join () {
+			let uri = '/api/interest_group/join';
+			axios.post(uri, {
+				id: this.group.id
+			}, config).then(response => {
+				this.group = response.data.group
+				this.members = response.data.users
+				this.is_member = response.data.is_member
+			}).catch(error => {
+				console.log(error.response)
+			})
+		},
+		saveComment () {
+			if (this.$validator.validate()) {
+				let uri = '/api/interest_group/post';
+				axios.post(uri, {
+					id: this.group.id,
+					comment: this.comment
+				}, config).then(response => {
+					this.comments = response.data.comments
+				}).catch(error => {
+					console.log(error.response)
+				})
+			}
+			this.comment = ''
+		}
+	},
+	computed: {
+		...mapGetters(['getAuthenticatedUser'])
 	},
 	created () {
 		let uri = `/api/interest_group/${this.$route.params.id}`;
@@ -234,6 +194,7 @@ export default {
 			this.group = response.data.group
 			this.members = response.data.users
 			this.is_member = response.data.is_member
+			this.comments = response.data.comments
 		}).catch(error => {
 			console.log(error.response)
 		})
@@ -242,6 +203,6 @@ export default {
 </script>
 <style scoped>
 .remove-action {
-	
+
 }
 </style>

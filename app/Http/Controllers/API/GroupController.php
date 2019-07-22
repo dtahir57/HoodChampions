@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Category;
 use App\Http\Models\InterestGroup;
+use App\Http\Models\InterestGroupPost;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\InterestGroupPostResponse;
 use App\Http\Resources\InterestGroupResource;
 use App\Http\Resources\UserResource;
 use App\User;
@@ -104,9 +106,11 @@ class GroupController extends Controller
         $token = $request->bearerToken();
         $user = User::where('api_token', $token)->first();
         $is_member = $group->users->contains($user->id);
+        $comments = InterestGroupPost::where('interest_group_id', $group->id)->latest()->get();
         return response()->json([
             'group' => new InterestGroupResource($group),
             'users' => UserResource::collection($group->users),
+            'comments' => InterestGroupPostResponse::collection($comments),
             'is_member' => $is_member
         ]);
     }
@@ -118,6 +122,38 @@ class GroupController extends Controller
             'groups' => InterestGroupResource::collection($category->interest_groups),
             'category' => new CategoryResource($category)
         ]);
+    }
+
+    public function join(Request $request)
+    {
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        $group = InterestGroup::find($request->id);
+        $group->users()->attach($user);
+        $is_member = $group->users->contains($user->id);
+        return response()->json([
+            'group' => new InterestGroupResource($group),
+            'users' => UserResource::collection($group->users),
+            'is_member' => $is_member
+        ]);
+    }
+
+    public function post(Request $request)
+    {
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        $post = new InterestGroupPost;
+        $post->interest_group_id = $request->id;
+        $post->user_id = $user->id;
+        $post->post = $request->comment;
+        $post->save();
+
+        $group = InterestGroup::find($request->id);
+        $comments = InterestGroupPost::where('interest_group_id', $group->id)->latest()->get();
+        return response()->json([
+            'comments' => InterestGroupPostResponse::collection($comments)
+        ]);
+
     }
 
     /**

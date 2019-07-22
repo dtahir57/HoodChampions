@@ -79,4 +79,9 @@ class User extends Authenticatable
     public function battles() {
         return $this->belongsToMany(Battle::class);
     }
+
+    public function interest_group_posts()
+    {
+        return $this->hasMany(InterestGroupPost::class);
+    }
 }

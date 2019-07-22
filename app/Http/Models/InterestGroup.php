@@ -21,4 +21,9 @@ class InterestGroup extends Model
     {
     	return $this->belongsToMany(User::class);
     }
+
+    public function interest_group_posts()
+    {
+        return $this->hasMany(InterestGroupPost::class);
+    }
 }

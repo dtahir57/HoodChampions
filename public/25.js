@@ -10,6 +10,11 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/config/ */ "./resources/js/config/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } else { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -154,80 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SingleGroup',
@@ -235,17 +167,54 @@ __webpack_require__.r(__webpack_exports__);
     return {
       group: {},
       members: [],
-      is_member: false
+      is_member: false,
+      comment: '',
+      comments: []
     };
   },
+  methods: {
+    join: function join() {
+      var _this = this;
+
+      var uri = '/api/interest_group/join';
+      axios.post(uri, {
+        id: this.group.id
+      }, _config___WEBPACK_IMPORTED_MODULE_0__["config"]).then(function (response) {
+        _this.group = response.data.group;
+        _this.members = response.data.users;
+        _this.is_member = response.data.is_member;
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    },
+    saveComment: function saveComment() {
+      var _this2 = this;
+
+      if (this.$validator.validate()) {
+        var uri = '/api/interest_group/post';
+        axios.post(uri, {
+          id: this.group.id,
+          comment: this.comment
+        }, _config___WEBPACK_IMPORTED_MODULE_0__["config"]).then(function (response) {
+          _this2.comments = response.data.comments;
+        })["catch"](function (error) {
+          console.log(error.response);
+        });
+      }
+
+      this.comment = '';
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getAuthenticatedUser'])),
   created: function created() {
-    var _this = this;
+    var _this3 = this;
 
     var uri = "/api/interest_group/".concat(this.$route.params.id);
     axios.get(uri, _config___WEBPACK_IMPORTED_MODULE_0__["config"]).then(function (response) {
-      _this.group = response.data.group;
-      _this.members = response.data.users;
-      _this.is_member = response.data.is_member;
+      _this3.group = response.data.group;
+      _this3.members = response.data.users;
+      _this3.is_member = response.data.is_member;
+      _this3.comments = response.data.comments;
     })["catch"](function (error) {
       console.log(error.response);
     });
@@ -380,9 +349,14 @@ var render = function() {
               ]),
               _vm._v(" "),
               !_vm.is_member
-                ? _c("button", { staticClass: "bt btn-default btn-block" }, [
-                    _vm._v("Join")
-                  ])
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "bt btn-default btn-block",
+                      on: { click: _vm.join }
+                    },
+                    [_vm._v("Join")]
+                  )
                 : _vm._e(),
               _vm._v(" "),
               _vm.is_member
@@ -401,7 +375,115 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2),
+    _c("section", { staticClass: "ig-activities" }, [
+      _vm.is_member
+        ? _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-xl-3 col-md-4" }, [
+                _c("div", { staticClass: "publisher" }, [
+                  _c("h1", { staticClass: "common-h" }, [_vm._v("Wall")]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required",
+                        expression: "'required'"
+                      },
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.comment,
+                        expression: "comment"
+                      }
+                    ],
+                    staticClass: "info-msg form-control",
+                    staticStyle: { "background-color": "#fff3e6" },
+                    attrs: {
+                      rows: "3",
+                      placeholder:
+                        "Click this space to start posting in this group. Please do not comment anything.",
+                      name: "Comment"
+                    },
+                    domProps: { value: _vm.comment },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.comment = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.first("Comment")))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default btn-block",
+                      on: { click: _vm.saveComment }
+                    },
+                    [_vm._v("Publish")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-lg-7 col-md-8 offset-xl-2 offset-lg-1" },
+                [
+                  _c("div", { staticClass: "activities" }, [
+                    !_vm.comments.length > 0
+                      ? _c("div", { staticClass: "info-msg" }, [
+                          _c("p", [
+                            _vm._v("There are no posts. Why not post somthing?")
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(_vm.comments, function(comment, index) {
+                        return _c("li", { key: index }, [
+                          _c("div", { staticClass: "strip" }, [
+                            _c("p", [_vm._v(_vm._s(comment.post))]),
+                            _vm._v(" "),
+                            _vm._m(3, true)
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "adate" }, [
+                            comment.user.id === _vm.getAuthenticatedUser.id
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "trash",
+                                    attrs: { href: "#" }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-trash" })]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._m(4, true),
+                            _vm._v(" "),
+                            _c("span", [_vm._v(_vm._s(comment.created_at))])
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        : _c("div", { staticClass: "container" }, [_vm._m(5)])
+    ]),
     _vm._v(" "),
     _c("section", { staticClass: "team-details" }, [
       _c("div", { staticClass: "container" }, [
@@ -536,222 +618,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "ig-activities" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-xl-3 col-md-4" }, [
-            _c("div", { staticClass: "publisher" }, [
-              _c("h1", { staticClass: "common-h" }, [_vm._v("Wall")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "img-holder" }, [
-                _c("img", { attrs: { src: "images/person.jpg", alt: "img" } })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "info-msg" }, [
-                _c("p", [
-                  _vm._v(
-                    "Click this space to start posting in this group. Please do not comment anything."
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("button", { staticClass: "btn btn-default btn-block" }, [
-                _vm._v("Publish")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-lg-7 col-md-8 offset-xl-2 offset-lg-1" },
-            [
-              _c("div", { staticClass: "activities" }, [
-                _c("ul", [
-                  _c("li", [
-                    _c("div", { staticClass: "strip" }, [
-                      _c("p", [
-                        _vm._v("First activity would be on 19 March 2019!")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "img-holder" }, [
-                        _c("img", {
-                          attrs: { src: "images/person.jpg", alt: "img" }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "adate" }, [
-                      _c("a", { staticClass: "trash", attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fas fa-trash" })
-                      ]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "remove-action" }, [
-                        _c("li", [
-                          _c("a", { attrs: { href: "#" } }, [_vm._v("Yes")])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            { staticClass: "dismiss", attrs: { href: "#" } },
-                            [_vm._v("Cancel")]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("1 March 2019, 12:00 AM")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "strip" }, [
-                      _c("p", [
-                        _vm._v("First activity would be on 19 March 2019!")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "img-holder" }, [
-                        _c("img", {
-                          attrs: { src: "images/person.jpg", alt: "img" }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "adate" }, [
-                      _c("a", { staticClass: "trash", attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fas fa-trash" })
-                      ]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "remove-action" }, [
-                        _c("li", [
-                          _c("a", { attrs: { href: "#" } }, [_vm._v("Yes")])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            { staticClass: "dismiss", attrs: { href: "#" } },
-                            [_vm._v("Cancel")]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("1 March 2019, 12:00 AM")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "strip" }, [
-                      _c("p", [
-                        _vm._v("First activity would be on 19 March 2019!")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "img-holder" }, [
-                        _c("img", {
-                          attrs: { src: "images/person.jpg", alt: "img" }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "adate" }, [
-                      _c("a", { staticClass: "trash", attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fas fa-trash" })
-                      ]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "remove-action" }, [
-                        _c("li", [
-                          _c("a", { attrs: { href: "#" } }, [_vm._v("Yes")])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            { staticClass: "dismiss", attrs: { href: "#" } },
-                            [_vm._v("Cancel")]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("1 March 2019, 12:00 AM")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "strip" }, [
-                      _c("p", [
-                        _vm._v("First activity would be on 19 March 2019!")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "img-holder" }, [
-                        _c("img", {
-                          attrs: { src: "images/person.jpg", alt: "img" }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "adate" }, [
-                      _c("a", { staticClass: "trash", attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fas fa-trash" })
-                      ]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "remove-action" }, [
-                        _c("li", [
-                          _c("a", { attrs: { href: "#" } }, [_vm._v("Yes")])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            { staticClass: "dismiss", attrs: { href: "#" } },
-                            [_vm._v("Cancel")]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("1 March 2019, 12:00 AM")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "strip" }, [
-                      _c("p", [
-                        _vm._v("First activity would be on 19 March 2019!")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "img-holder" }, [
-                        _c("img", {
-                          attrs: { src: "images/person.jpg", alt: "img" }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "adate" }, [
-                      _c("a", { staticClass: "trash", attrs: { href: "#" } }, [
-                        _c("i", { staticClass: "fas fa-trash" })
-                      ]),
-                      _vm._v(" "),
-                      _c("ul", { staticClass: "remove-action" }, [
-                        _c("li", [
-                          _c("a", { attrs: { href: "#" } }, [_vm._v("Yes")])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            { staticClass: "dismiss", attrs: { href: "#" } },
-                            [_vm._v("Cancel")]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("1 March 2019, 12:00 AM")])
-                    ])
-                  ])
-                ])
-              ])
-            ]
-          )
+    return _c("div", { staticClass: "img-holder" }, [
+      _c("img", { attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "img" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "img-holder" }, [
+      _c("img", { attrs: { src: __webpack_require__(/*! @/images/person.jpg */ "./resources/js/images/person.jpg"), alt: "img" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "remove-action" }, [
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Yes")])]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { staticClass: "dismiss", attrs: { href: "#" } }, [
+          _vm._v("Cancel")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info-msg" }, [
+      _c("p", [_vm._v("You need to join this group to start posting on wall")])
     ])
   }
 ]

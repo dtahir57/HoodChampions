@@ -134,25 +134,36 @@ var render = function() {
               "div",
               { key: index, staticClass: "col-lg-4 col-6 col-xs-12" },
               [
-                _c("div", { staticClass: "group" }, [
-                  _c("div", { staticClass: "img-holder" }, [
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      attrs: { src: group.photo, alt: "img" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v(_vm._s(group.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _c("i", { staticClass: "fal fa-user-circle" }),
-                    _vm._v(" " + _vm._s(group.users))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(group.description))])
-                ])
+                _c(
+                  "div",
+                  { staticClass: "group" },
+                  [
+                    _c("div", { staticClass: "img-holder" }, [
+                      _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: { src: group.photo, alt: "img" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: { name: "SingleGroup", params: { id: group.id } }
+                        }
+                      },
+                      [_vm._v(_vm._s(group.title))]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("i", { staticClass: "fal fa-user-circle" }),
+                      _vm._v(" " + _vm._s(group.users))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(group.description))])
+                  ],
+                  1
+                )
               ]
             )
           }),

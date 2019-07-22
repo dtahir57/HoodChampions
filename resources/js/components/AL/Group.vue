@@ -21,12 +21,15 @@
 	      </div>
 	    </div>
 	  </section>
-	  <div class="categories">
-	    <ul>
-	    	<li v-for="(category, index) in categories" :key="index">
-	    		<router-link :to="{ name: 'GroupsByCategory', params: { id: category.id } }">{{ category.title }}</router-link>
-	    	</li>
-	    </ul>
+	  <div class="categories container">
+	  	<carousel :autoplay="true" :centerMode="true" :easing="'ease'">
+	  		<slide v-for="(category, index) in categories" :key="index">
+	  			<router-link :to="{ name: 'GroupsByCategory', params: { id: category.id } }">
+		  			<img :src="category.image" style="height: 100px; width: 100px;" alt="Category Image" />
+		  			<h5 class="mt-3">{{ category.title }}</h5>
+		  		</router-link>
+	  		</slide>
+	  	</carousel>
 	  </div>
 	  <section class="featured mi-groups">
 	    <div class="container">
@@ -70,7 +73,13 @@
 	</div>
 </template>
 <script>
+import { Carousel, Slide } from 'vue-carousel';
+
 export default {
+	components: {
+	    Carousel,
+	    Slide
+	  },
 	props: {
 		categories: {
 			type: Array,

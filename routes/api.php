@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/interest_groups/create', 'API\GroupController@create');
 	Route::post('/interest_group', 'API\GroupController@store');
 	Route::get('/interest_group/{id}', 'API\GroupController@show');
+	Route::post('/interest_group/join', 'API\GroupController@join');
+	Route::post('/interest_group/post', 'API\GroupController@post');
 	/**
 	 * Ending Routes For GroupController
 	 */
