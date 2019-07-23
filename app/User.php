@@ -9,6 +9,7 @@ use App\Http\Models\InterestGroup;
 use App\Http\Models\LostAndFound;
 use App\Http\Models\Service;
 use App\Http\Models\Team;
+use App\Traits\Friendable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\Concerns\withPivot;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +19,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, HasRoles;
+    use HasApiTokens, Notifiable, HasRoles, Friendable;
 
     /**
      * The attributes that are mass assignable.
