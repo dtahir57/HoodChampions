@@ -36,7 +36,7 @@
 	            <div class="img-holder">
 	              <img :src="data.image" class="img-fluid" alt="img">
 	            </div>
-	            <a href="#">{{ data.title }}</a>
+	            <router-link :to="{ name: 'LostAndFoundView', params: {id: data.id} }">{{ data.title }}</router-link>
 	            <p>{{ data.description }}</p>
 	          </div>
 	        </div>

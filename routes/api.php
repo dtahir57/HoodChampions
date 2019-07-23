@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/lost_and_founds', 'API\LostAndFoundController@index');
 	Route::get('/lost_and_found/create', 'API\LostAndFoundController@create');
 	Route::post('/lost_and_found', 'API\LostAndFoundController@store');
+	Route::get('/lost_and_founds/{id}', 'API\LostAndFoundController@show');
+	Route::post('/lost_and_founds/update', 'API\LostAndFoundController@update');
 	/**
 	 * Ending Rotues For LostAndFoundController
 	 */

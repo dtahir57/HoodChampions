@@ -75,7 +75,7 @@ class LostAndFoundController extends Controller
         $lost_and_found->save();
         return response()->json([
             'code' => 200,
-            'lost_and_found' => $lost_and_found
+            'lost_and_found' => new LostAndFoundResource($lost_and_found)
         ]);
     }
 
@@ -85,9 +85,12 @@ class LostAndFoundController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $lost_and_found = LostAndFound::find($id);
+        return response()->json([
+            'lost_and_found' => new LostAndFoundResource($lost_and_found)
+        ]);
     }
 
     /**
@@ -108,9 +111,36 @@ class LostAndFoundController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $token = $request->bearerToken();
+        $user = User::where('api_token', $token)->first();
+        $lost_and_found = LostAndFound::find($request->id);
+        $lost_and_found->hood_id = $user->hood->id;
+        $lost_and_found->category_id = $request->category_id;
+        $lost_and_found->user_id = $user->id;
+        $lost_and_found->title = $request->title;
+        $lost_and_found->description = $request->description;
+        /**
+         * Image base64 converting code starts from here
+         */
+            $image = $request->input('image'); // image base64 encoded
+        if ($image) {
+             preg_match("/data:image\/(.*?);/",$image,$image_extension); // extract the image extension
+             $image = preg_replace('/data:image\/(.*?);base64,/','',$image); // remove the type part
+             $image = str_replace(' ', '+', $image);
+             $imageName = 'lost_and_found_' . time() . '.' . $image_extension[1]; //generating unique file name;
+             $file = \File::put(storage_path().'/app/public/lost_and_founds/'.$imageName, base64_decode($image));
+             $lost_and_found->image = 'public/lost_and_founds/'.$imageName;
+        }
+        /**
+         * Image code ends here
+         */
+        $lost_and_found->save();
+        return response()->json([
+            'code' => 200,
+            'lost_and_found' => new LostAndFoundResource($lost_and_found)
+        ]);
     }
 
     /**

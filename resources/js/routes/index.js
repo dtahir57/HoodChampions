@@ -21,6 +21,8 @@ const Explore = () => import('@/views/AL/Explore.vue');
 // Starting Routes For LostAndFound Views
 const LostAndFound = () => import('@/views/AL/LostAndFound.vue');
 const LostAndFoundCreate = () => import('@/views/AL/lost_and_found/Create.vue')
+const LostAndFoundView = () => import('@/views/AL/lost_and_found/Index.vue');
+const LostAndFoundEdit = () => import('@/views/AL/lost_and_found/Edit.vue');
 // Ending Routes For LostAndFound Views
 
 //Starting Routes For Services
@@ -110,6 +112,22 @@ const routes = [
 		path: '/lost-and-found/create',
 		name: 'LostAndFoundCreate',
 		component: LostAndFoundCreate,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/lost-and-found/:id',
+		name: 'LostAndFoundView',
+		component: LostAndFoundView,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/lost-and-found/:id/edit',
+		name: 'LostAndFoundEdit',
+		component: LostAndFoundEdit,
 		meta: {
 			requiresAuth: true
 		}
