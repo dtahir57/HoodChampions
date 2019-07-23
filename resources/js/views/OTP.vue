@@ -73,7 +73,8 @@ export default {
 				if (response.data.code == 200) {
 					console.log(response.data)
 					localStorage.setItem('user_api_token', response.data.success.token)
-					this.$store.dispatch('setApiToken', response.data.success.token);
+					this.$store.dispatch('setApiToken', response.data.success.token)
+					this.$store.dispatch('setCurrentUser', response.data.user)
 					this.$router.push("/")
 				} else if(response.data.code == 400) {
 					console.log(response.data.message)

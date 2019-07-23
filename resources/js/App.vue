@@ -35,7 +35,7 @@
 						<router-link to="/teams">TEAMS</router-link>
 						</li>
 						<li>
-						<router-link to="/battles">{{ user.hood_name }}</router-link>
+						<router-link to="/battles">{{ getAuthenticatedUser.hood_name }}</router-link>
 						</li>
 						<li>
 						<a href="#">Other Hoods</a>
@@ -73,7 +73,7 @@
 					</a>
 					<ul class="sub-drop">
 						<li>
-						<router-link :to="{ name: 'KakiProfile', params: { id: this.user.id } }"><i class="far fa-user"></i> Profile</router-link>
+						<router-link :to="{ name: 'KakiProfile', params: { id: getAuthenticatedUser.id } }"><i class="far fa-user"></i> Profile</router-link>
 						</li>
 						<li>
 						<a href="javascript:void(0)" @click="logout"><i class="far fa-sign-out"></i> Logout</a>
@@ -136,7 +136,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
-import { config } from '@/config/'
 
 export default {
 	components: {
@@ -159,9 +158,15 @@ export default {
 	methods: {
 		logout () {
 			let uri = '/api/user/logout';
-			axios.post(uri, {}, config).then(response => {
+			axios.post(uri, {}, {
+				headers: {
+					"Accept": "application/json",
+					"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+				}
+			}).then(response => {
 				localStorage.removeItem('user_api_token')
 				this.$store.dispatch('setApiToken', '')
+				this.$store.dispatch('setCurrentUser', '')
 				this.$router.push({ name: 'Login' })
 				console.log(response.data)
 			}).catch(error => {
@@ -177,18 +182,26 @@ export default {
 		}
 	},
 	created () {
-		this.api_token = localStorage.getItem('user_api_token');
-		this.$store.dispatch('setApiToken', this.api_token)
-		let uri = '/api/user/auth';
-		axios.post(uri, {}, config).then(response => {
-			this.user = response.data.user
-			this.$store.dispatch('setCurrentUser', this.user)
-		}).catch(error => {
-			console.log(error.response)
-		})
+		if (localStorage.getItem('user_api_token')) {
+			this.api_token = localStorage.getItem('user_api_token');
+			this.$store.dispatch('setApiToken', this.api_token)
+			let uri = '/api/user/auth';
+			axios.post(uri, {}, {
+				headers: {
+					"Accept": "application/json",
+					"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+				}
+			}).then(response => {
+				this.user = response.data.user
+				this.$store.dispatch('setCurrentUser', this.user)
+				console.log(response.data)
+			}).catch(error => {
+				console.log(error.response)
+			})			
+		}
 	},
 	updated () {
-		this.api_token = this.apiToken
+		this.api_token = this.setApiToken
 	}
 }
 </script>

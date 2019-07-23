@@ -51,7 +51,6 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { config } from '@/config/'
 
 export default {
 	name: 'ServiceView',
@@ -65,7 +64,12 @@ export default {
 	},
 	created () {
 		let uri = `/api/service/${this.$route.params.id}`
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.service = response.data.service
 		}).catch(error => {
 			console.log(error.response)

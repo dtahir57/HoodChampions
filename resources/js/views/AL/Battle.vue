@@ -74,7 +74,12 @@ export default {
 	},
 	created () {
 		let uri = '/api/battles';
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.battles = response.data.battles
 			this.categories = response.data.categories
 		}).catch(error => {

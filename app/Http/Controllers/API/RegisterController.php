@@ -134,7 +134,8 @@ class RegisterController extends Controller
             Cache::forget('otp_'.$request->id);
             return response()->json([
                 'code' => 200,
-                'success' => $success
+                'success' => $success,
+                'user' => new UserResource($user)
             ]);
         } else if(Cache::get('otp_'.$user->id) !== $request->otp) {
           return response()->json([

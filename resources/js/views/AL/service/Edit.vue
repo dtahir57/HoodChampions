@@ -69,7 +69,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
 
 export default {
 	name: 'EditService',
@@ -108,7 +107,12 @@ export default {
         			email: this.data.email,
         			contact_no: this.data.contact_no,
         			image: this.data.image
-        		}, config)
+        		}, {
+        			headers: {
+        				"Accept": "application/json",
+        				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+        			}
+        		})
         		.then(response => {
         			this.$router.push({ name: 'ServiceView', params: {id: response.data.service.id} })
         		}).catch(error => {
@@ -119,7 +123,12 @@ export default {
 	},
 	created () {
 		let uri = `/api/service/${this.$route.params.id}`;
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.data = response.data.service
 		}).catch(error => {
 			console.log(error)

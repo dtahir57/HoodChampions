@@ -69,7 +69,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
 
 export default {
 	name: 'CreateTeam',
@@ -115,7 +114,12 @@ export default {
         			email: this.data.email,
         			contact_no: this.data.contact_no,
         			image: this.data.image
-        		}, config)
+        		}, {
+        			headers: {
+        				"Accept": "application/json",
+        				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+        			}
+        		})
         		.then(response => {
         			this.$router.push({ name: 'ServiceView', params: {id: response.data.service.id} })
         		}).catch(error => {

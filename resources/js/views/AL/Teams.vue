@@ -58,7 +58,6 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { config } from '@/config/'
 
 export default {
 	name: 'Teams',
@@ -78,7 +77,6 @@ export default {
 			headers: {
 				"Accept": "application/json",
 			 	"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
-			 	// "Content-Type": "multipart/form-data"
 			}
 		}).then(response => {
 			this.user_teams = response.data.user_teams

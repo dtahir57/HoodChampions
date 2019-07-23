@@ -86,7 +86,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
 import { ModelListSelect } from 'vue-search-select'
 
 export default {
@@ -144,7 +143,12 @@ export default {
         			contact_no: this.data.contact_no,
         			meetup_place: this.data.meetup_place,
         			photo: this.data.image
-        		}, config)
+        		}, {
+        			headers: {
+						"Accept": "application/json",
+						"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+					}
+        		})
         		.then(response => {
         			console.log(response.data)
         			if (response.data.code == 200) {
@@ -158,7 +162,12 @@ export default {
 	},
 	created () {
 		let uri = '/api/interest_groups/create';
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.categories = response.data.categories
 		}).catch(error => {
 			console.log(error.response)

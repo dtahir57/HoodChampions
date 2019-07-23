@@ -67,7 +67,6 @@
 </template>
 <script>
 import { ModelListSelect } from 'vue-search-select'
-import { config } from '@/config/'
 
 export default {
 	name: 'LostAndFoundCreate',
@@ -114,7 +113,12 @@ export default {
         			title: this.data.title,
         			description: this.data.description,
         			image: this.data.image
-        		}, config)
+        		}, {
+        			headers: {
+        				"Accept": "application/json",
+        				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+        			}
+        		})
         		.then(response => {
         			console.log(response.data)
         			if (response.data.code == 200) {
@@ -128,7 +132,12 @@ export default {
 	},
 	created () {
 		let uri = '/api/lost_and_found/create';
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.categories = response.data.categories
 			console.log(response.data)
 		}).catch(error => {

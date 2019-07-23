@@ -6,6 +6,12 @@
               <div class="col-lg-5 col-md-8 col-sm-9 col-12 text-center">
                 <h1 class="common-h">login</h1>
                 <li class="alert alert-danger" v-if="server_error">{{ server_error }}</li>
+                <!-- <facebook-login class="button"
+                      appId="369760443724755"
+                      @login="getUserData"
+                      @logout="onLogout"
+                      @get-initial-status="getUserData">
+                    </facebook-login> -->
                 <button class="btn btn-fb block-btn"><i class="fab fa-facebook"></i> Countinue with Facebook</button>
                 <div class="or">
                   <p>or</p>
@@ -51,8 +57,13 @@
       </div>
 </template>
 <script>
+import facebookLogin from 'facebook-login-vuejs';
+
 export default {
 	name: 'Login',
+  components: {
+        facebookLogin
+    },
 	data () {
 		return {
 			phoneNumber: '',

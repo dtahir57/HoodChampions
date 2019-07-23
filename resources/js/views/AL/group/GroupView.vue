@@ -143,7 +143,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -162,7 +161,12 @@ export default {
 			let uri = '/api/interest_group/join';
 			axios.post(uri, {
 				id: this.group.id
-			}, config).then(response => {
+			}, {
+				headers: {
+					"Accept": "application/json",
+					"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+				}
+			}).then(response => {
 				this.group = response.data.group
 				this.members = response.data.users
 				this.is_member = response.data.is_member
@@ -176,7 +180,12 @@ export default {
 				axios.post(uri, {
 					id: this.group.id,
 					comment: this.comment
-				}, config).then(response => {
+				}, {
+					headers: {
+						"Accept": "application/json",
+						"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+					}
+				}).then(response => {
 					this.comments = response.data.comments
 				}).catch(error => {
 					console.log(error.response)
@@ -190,7 +199,12 @@ export default {
 	},
 	created () {
 		let uri = `/api/interest_group/${this.$route.params.id}`;
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.group = response.data.group
 			this.members = response.data.users
 			this.is_member = response.data.is_member

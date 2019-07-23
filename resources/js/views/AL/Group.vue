@@ -5,7 +5,6 @@
 </template>
 <script>
 import Group from '@/components/AL/Group.vue'
-import { config } from '@/config/'
 
 export default {
 	name: 'Group',
@@ -21,7 +20,12 @@ export default {
 	},
 	created () {
 		let uri = '/api/interest_groups';
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.groups = response.data.interest_groups
 			this.hoodgroups = response.data.hood_groups
 			this.categories = response.data.categories

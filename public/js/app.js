@@ -1813,7 +1813,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _config___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/config/ */ "./resources/js/config/index.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } else { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1955,7 +1954,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {// 
   },
@@ -1973,10 +1971,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var uri = '/api/user/logout';
-      axios.post(uri, {}, _config___WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
+      axios.post(uri, {}, {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
+        }
+      }).then(function (response) {
         localStorage.removeItem('user_api_token');
 
         _this.$store.dispatch('setApiToken', '');
+
+        _this.$store.dispatch('setCurrentUser', '');
 
         _this.$router.push({
           name: 'Login'
@@ -1998,19 +2003,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this2 = this;
 
-    this.api_token = localStorage.getItem('user_api_token');
-    this.$store.dispatch('setApiToken', this.api_token);
-    var uri = '/api/user/auth';
-    axios.post(uri, {}, _config___WEBPACK_IMPORTED_MODULE_1__["config"]).then(function (response) {
-      _this2.user = response.data.user;
+    if (localStorage.getItem('user_api_token')) {
+      this.api_token = localStorage.getItem('user_api_token');
+      this.$store.dispatch('setApiToken', this.api_token);
+      var uri = '/api/user/auth';
+      axios.post(uri, {}, {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer ".concat(localStorage.getItem('user_api_token'))
+        }
+      }).then(function (response) {
+        _this2.user = response.data.user;
 
-      _this2.$store.dispatch('setCurrentUser', _this2.user);
-    })["catch"](function (error) {
-      console.log(error.response);
-    });
+        _this2.$store.dispatch('setCurrentUser', _this2.user);
+
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
   },
   updated: function updated() {
-    this.api_token = this.apiToken;
+    this.api_token = this.setApiToken;
   }
 });
 
@@ -49275,7 +49289,13 @@ var render = function() {
                                   _c(
                                     "router-link",
                                     { attrs: { to: "/battles" } },
-                                    [_vm._v(_vm._s(_vm.user.hood_name))]
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.getAuthenticatedUser.hood_name
+                                        )
+                                      )
+                                    ]
                                   )
                                 ],
                                 1
@@ -49370,7 +49390,9 @@ var render = function() {
                                       attrs: {
                                         to: {
                                           name: "KakiProfile",
-                                          params: { id: this.user.id }
+                                          params: {
+                                            id: _vm.getAuthenticatedUser.id
+                                          }
                                         }
                                       }
                                     },
@@ -65969,124 +65991,124 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! @/views/BL/home.vue */ "./resources/js/views/BL/home.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! @/views/BL/home.vue */ "./resources/js/views/BL/home.vue"));
 };
 
 var About = function About() {
-  return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! @/views/BL/About.vue */ "./resources/js/views/BL/About.vue"));
+  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! @/views/BL/About.vue */ "./resources/js/views/BL/About.vue"));
 };
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! @/views/Login.vue */ "./resources/js/views/Login.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(30), __webpack_require__.e(27)]).then(__webpack_require__.bind(null, /*! @/views/Login.vue */ "./resources/js/views/Login.vue"));
 };
 
 var Register = function Register() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(31), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! @/views/Register.vue */ "./resources/js/views/Register.vue"));
 };
 
 var Terms = function Terms() {
-  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! @/views/Terms.vue */ "./resources/js/views/Terms.vue"));
+  return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! @/views/Terms.vue */ "./resources/js/views/Terms.vue"));
 };
 
 var VerifyOTP = function VerifyOTP() {
-  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! @/views/OTP.vue */ "./resources/js/views/OTP.vue"));
+  return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! @/views/OTP.vue */ "./resources/js/views/OTP.vue"));
 }; // Team Components Starts
 
 
 var Teams = function Teams() {
-  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
+  return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! @/views/AL/Teams.vue */ "./resources/js/views/AL/Teams.vue"));
 };
 
 var TeamCreate = function TeamCreate() {
-  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! @/views/AL/team/Create.vue */ "./resources/js/views/AL/team/Create.vue"));
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! @/views/AL/team/Create.vue */ "./resources/js/views/AL/team/Create.vue"));
 };
 
 var SingleTeam = function SingleTeam() {
-  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
+  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! @/views/AL/team/Team.vue */ "./resources/js/views/AL/team/Team.vue"));
 }; // Team Components Ends here
 
 
 var Activity = function Activity() {
-  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
+  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! @/views/AL/Activity.vue */ "./resources/js/views/AL/Activity.vue"));
 };
 
 var Explore = function Explore() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! @/views/AL/Explore.vue */ "./resources/js/views/AL/Explore.vue"));
 }; // Starting Routes For LostAndFound Views
 
 
 var LostAndFound = function LostAndFound() {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
+  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! @/views/AL/LostAndFound.vue */ "./resources/js/views/AL/LostAndFound.vue"));
 };
 
 var LostAndFoundCreate = function LostAndFoundCreate() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! @/views/AL/lost_and_found/Create.vue */ "./resources/js/views/AL/lost_and_found/Create.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! @/views/AL/lost_and_found/Create.vue */ "./resources/js/views/AL/lost_and_found/Create.vue"));
 }; // Ending Routes For LostAndFound Views
 //Starting Routes For Services
 
 
 var Services = function Services() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! @/views/AL/Services.vue */ "./resources/js/views/AL/Services.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! @/views/AL/Services.vue */ "./resources/js/views/AL/Services.vue"));
 };
 
 var ServiceView = function ServiceView() {
-  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! @/views/AL/service/Service.vue */ "./resources/js/views/AL/service/Service.vue"));
+  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! @/views/AL/service/Service.vue */ "./resources/js/views/AL/service/Service.vue"));
 };
 
 var CreateService = function CreateService() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/service/Create.vue */ "./resources/js/views/AL/service/Create.vue"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/service/Create.vue */ "./resources/js/views/AL/service/Create.vue"));
 };
 
 var EditService = function EditService() {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! @/views/AL/service/Edit.vue */ "./resources/js/views/AL/service/Edit.vue"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! @/views/AL/service/Edit.vue */ "./resources/js/views/AL/service/Edit.vue"));
 }; //Ending Routes For Services 
 
 
 var Lelong = function Lelong() {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
+  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! @/views/AL/Lelong.vue */ "./resources/js/views/AL/Lelong.vue"));
 };
 
 var Kakis = function Kakis() {
-  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
+  return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! @/views/AL/Kaki.vue */ "./resources/js/views/AL/Kaki.vue"));
 };
 
 var KakiRequest = function KakiRequest() {
-  return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! @/views/AL/KakiRequest.vue */ "./resources/js/views/AL/KakiRequest.vue"));
+  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! @/views/AL/KakiRequest.vue */ "./resources/js/views/AL/KakiRequest.vue"));
 };
 
 var KakiProfile = function KakiProfile() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! @/views/AL/KakiProfile.vue */ "./resources/js/views/AL/KakiProfile.vue"));
 }; // Group Routes Starts here
 
 
 var Group = function Group() {
-  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(27)]).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! @/views/AL/Group.vue */ "./resources/js/views/AL/Group.vue"));
 };
 
 var GroupsByCategory = function GroupsByCategory() {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! @/views/AL/group/Group.vue */ "./resources/js/views/AL/group/Group.vue"));
+  return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! @/views/AL/group/Group.vue */ "./resources/js/views/AL/group/Group.vue"));
 };
 
 var SingleGroup = function SingleGroup() {
-  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! @/views/AL/group/GroupView.vue */ "./resources/js/views/AL/group/GroupView.vue"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! @/views/AL/group/GroupView.vue */ "./resources/js/views/AL/group/GroupView.vue"));
 };
 
 var CreateGroup = function CreateGroup() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(26)]).then(__webpack_require__.bind(null, /*! @/views/AL/group/Create.vue */ "./resources/js/views/AL/group/Create.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! @/views/AL/group/Create.vue */ "./resources/js/views/AL/group/Create.vue"));
 }; // Group Routes Ends here
 // Starting Routes For Battles
 
 
 var Battles = function Battles() {
-  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(29)]).then(__webpack_require__.bind(null, /*! @/views/AL/Battle.vue */ "./resources/js/views/AL/Battle.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! @/views/AL/Battle.vue */ "./resources/js/views/AL/Battle.vue"));
 };
 
 var CreateBattle = function CreateBattle() {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(28)]).then(__webpack_require__.bind(null, /*! @/views/AL/battle/Create.vue */ "./resources/js/views/AL/battle/Create.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! @/views/AL/battle/Create.vue */ "./resources/js/views/AL/battle/Create.vue"));
 };
 
 var BattleView = function BattleView() {
-  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! @/views/AL/battle/Battle.vue */ "./resources/js/views/AL/battle/Battle.vue"));
+  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! @/views/AL/battle/Battle.vue */ "./resources/js/views/AL/battle/Battle.vue"));
 }; // Ending Routes For Battles
 
 

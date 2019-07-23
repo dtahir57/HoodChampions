@@ -232,7 +232,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
 export default {
 	name: 'BattleView',
 	data () {
@@ -250,7 +249,12 @@ export default {
 	},
 	created () {
 		let uri = `/api/battle/${this.$route.params.id}`;
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.battle = response.data.battle
 			this.user = response.data.user
 			this.teams = response.data.teams

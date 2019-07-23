@@ -41,7 +41,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
 
 export default {
 	name: 'GroupsByCategory',
@@ -53,7 +52,12 @@ export default {
 	},
 	created () {
 		let uri = `/api/interest_group/category/${this.$route.params.id}`;
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.groups = response.data.groups
 			this.category = response.data.category
 		}).catch(error => {

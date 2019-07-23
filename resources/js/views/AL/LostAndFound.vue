@@ -47,8 +47,6 @@
 	</div>
 </template>
 <script>
-import { config } from '@/config/'
-
 export default {
 	name: 'LostAndFound',
 	data () {
@@ -58,7 +56,12 @@ export default {
 	},
 	created () {
 		let uri = '/api/lost_and_founds';
-		axios.get(uri, config).then(response => {
+		axios.get(uri, {
+			headers: {
+				"Accept": "application/json",
+				"Authorization": `Bearer ${localStorage.getItem('user_api_token')}`
+			}
+		}).then(response => {
 			this.lost_and_founds = response.data.lost_and_founds
 		}).catch(error => {
 			console.log(error.response)
