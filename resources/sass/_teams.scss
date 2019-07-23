@@ -16,11 +16,11 @@
       }
       @media (max-width:767px) {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
       }
       .inner-img
       {
-        width: 100px;
+        min-width: 100px;
         margin-left:20px;
         @media (min-width:768px) {
           display: none;

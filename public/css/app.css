@@ -11401,6 +11401,15 @@ textarea.form-control:focus {
           flex-grow: 1;
 }
 
+p {
+  font-size: 0.875rem !important;
+}
+
+h1,
+h2 {
+  font-size: 1rem !important;
+}
+
 .navbar {
   border: none;
   border-radius: 0px;
@@ -11416,6 +11425,7 @@ textarea.form-control:focus {
 
 .navbar .navbar-brand {
   padding: 0px 0px 6px;
+  margin-right: 0px;
 }
 
 @media (max-width: 991px) {
@@ -11559,7 +11569,12 @@ textarea.form-control:focus {
     background-color: #fff;
     background: #fffbf8;
     top: 0px;
+    display: none;
   }
+}
+
+.navbar .navbar-nav .nav-item > ul.sub-drop.visible {
+  display: block !important;
 }
 
 .navbar .navbar-nav .nav-item > ul.sub-drop li {
@@ -11603,9 +11618,11 @@ textarea.form-control:focus {
   color: #dd2927;
 }
 
-.navbar .navbar-nav .nav-item:hover .sub-drop,
-.navbar .navbar-nav .nav-item .sub-drop:hover {
-  display: block;
+@media (min-width: 992px) {
+  .navbar .navbar-nav .nav-item:hover .sub-drop,
+  .navbar .navbar-nav .nav-item .sub-drop:hover {
+    display: block;
+  }
 }
 
 .navbar .navbar-nav .profile-item .nav-link {
@@ -11615,6 +11632,12 @@ textarea.form-control:focus {
 @media (max-width: 991px) {
   .navbar .navbar-nav .profile-item .nav-link {
     display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar .navbar-nav .profile-item .sub-drop {
+    display: block !important;
   }
 }
 
@@ -13004,13 +13027,13 @@ textarea.form-control:focus {
   .teams .create-team-banner .text {
     display: -webkit-box;
     display: flex;
-    -webkit-box-align: start;
-            align-items: flex-start;
+    -webkit-box-align: center;
+            align-items: center;
   }
 }
 
 .teams .create-team-banner .text .inner-img {
-  width: 100px;
+  min-width: 100px;
   margin-left: 20px;
 }
 

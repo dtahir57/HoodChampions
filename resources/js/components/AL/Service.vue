@@ -10,7 +10,7 @@
 	          <div class="col-md-5 col-lg-4">
 	            <div class="text">
 	              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ipsum velit voluptates et blanditiis delectus dolorem neque aperiam inventore ea.</p>
-					<img class="inner-img" src="@/images/svg/Hood Services.svg" alt="img">
+					<img class="inner-img" src="@/images/svg/Teams.svg" alt="img">
 	            </div>
 				  <router-link class="btn btn-default block-btn" to="/services/create">Create Services</router-link>
 	          </div>

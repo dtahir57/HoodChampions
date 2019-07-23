@@ -676,6 +676,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-default block-btn my-4",
+                        attrs: { "data-dismiss": "modal" },
                         on: {
                           click: function($event) {
                             return _vm.confirm()

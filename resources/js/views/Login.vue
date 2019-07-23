@@ -49,7 +49,7 @@
                 <div class="modal-body">
                   <h1 class="common-h">Verify Your phone</h1>
                   <p>We'll text your verification code to <strong>{{ phoneNumber }}</strong> <br> Standard fees may apply.</p>
-                  <button class="btn btn-default block-btn my-4" @click="login">Confirm</button>
+                  <button class="btn btn-default block-btn my-4" @click="login" data-dismiss="modal">Confirm</button>
                 </div>
               </div>
             </div>

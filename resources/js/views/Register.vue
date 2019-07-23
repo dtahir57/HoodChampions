@@ -95,7 +95,7 @@
 	        <div class="modal-body">
 	          <h1 class="common-h">Verify Your phone</h1>
 	          <p>We'll text your verification code to <strong>{{ phone_number }}</strong> <br> Standard fees may apply.</p>
-	          <button class="btn btn-default block-btn my-4" @click="confirm()">Confirm</button>
+	          <button class="btn btn-default block-btn my-4" @click="confirm()" data-dismiss="modal">Confirm</button>
 	        </div>
 	      </div>
 	    </div>

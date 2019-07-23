@@ -11,6 +11,7 @@
     .navbar-brand
     {
         padding: 0px 0px 6px;
+        margin-right:0px;
         @media (max-width:991px) {
             padding: 10px 15px 15px;
         }
@@ -125,6 +126,10 @@
                     background-color: #fff;           
                     background: $background;
                     top:0px;
+                    display:none;
+                }
+                &.visible {
+                    display: block !important;
                 }
                 li 
                 {
@@ -162,9 +167,12 @@
             {
                 color:$red;
             }
-            &:hover .sub-drop, .sub-drop:hover 
+            @media (min-width:992px)
             {
-                display: block;
+                &:hover .sub-drop, .sub-drop:hover 
+                {
+                    display: block;
+                }
             }
         }
         .profile-item
@@ -178,6 +186,10 @@
             }
             .sub-drop
             {
+                @media (max-width:991px)
+                {
+                    display:block !important;
+                }
                 li
                 {
                     a

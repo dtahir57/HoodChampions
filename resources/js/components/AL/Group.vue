@@ -22,7 +22,7 @@
 	    </div>
 	  </section>
 	  <div class="categories container">
-	  	<carousel :autoplay="true" :centerMode="true" :easing="'ease'">
+	  	<carousel :autoplay="true" :easing="'ease'" :perPage="8" :perPageCustom="[[100, 1],[200,2],[300,3],[600,4],[1000,8]]">
 	  		<slide v-for="(category, index) in categories" :key="index">
 	  			<router-link :to="{ name: 'GroupsByCategory', params: { id: category.id } }">
 		  			<img :src="category.image" style="height: 100px; width: 100px;" alt="Category Image" />

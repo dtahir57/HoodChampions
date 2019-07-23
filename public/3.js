@@ -210,7 +210,14 @@ var render = function() {
       [
         _c(
           "carousel",
-          { attrs: { autoplay: true, centerMode: true, easing: "ease" } },
+          {
+            attrs: {
+              autoplay: true,
+              easing: "ease",
+              perPage: 8,
+              perPageCustom: [[100, 1], [200, 2], [300, 3], [600, 4], [1000, 8]]
+            }
+          },
           _vm._l(_vm.categories, function(category, index) {
             return _c(
               "slide",

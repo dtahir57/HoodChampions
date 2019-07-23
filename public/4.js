@@ -216,7 +216,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("img", {
         staticClass: "inner-img",
-        attrs: { src: __webpack_require__(/*! @/images/svg/Hood Services.svg */ "./resources/js/images/svg/Hood Services.svg"), alt: "img" }
+        attrs: { src: __webpack_require__(/*! @/images/svg/Teams.svg */ "./resources/js/images/svg/Teams.svg"), alt: "img" }
       })
     ])
   },
@@ -341,17 +341,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Service_vue_vue_type_template_id_49a768bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/images/svg/Hood Services.svg":
-/*!***************************************************!*\
-  !*** ./resources/js/images/svg/Hood Services.svg ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/Hood Services.svg?e13fb313963d8122867845b8fc987c90";
 
 /***/ }),
 

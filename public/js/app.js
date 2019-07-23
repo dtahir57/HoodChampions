@@ -1962,7 +1962,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       api_token: null,
       user: {},
       toggle: true,
-      visible: false
+      visible: false,
+      hood_visible: false,
+      kaki_visible: false
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['apiToken', 'getAuthenticatedUser'])),
@@ -1997,6 +1999,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.visible = false;
       } else {
         this.visible = true;
+      }
+    },
+    hood_show: function hood_show() {
+      if (this.hood_visible) {
+        this.hood_visible = false;
+      } else {
+        this.hood_visible = true;
+      }
+    },
+    kaki_show: function kaki_show() {
+      if (this.kaki_visible) {
+        this.kaki_visible = false;
+      } else {
+        this.kaki_visible = true;
       }
     }
   },
@@ -6526,7 +6542,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.app {\n\tdisplay:-webkit-box;\n\tdisplay:flex;\n\t-webkit-box-orient:vertical;\n\t-webkit-box-direction:normal;\n\t        flex-direction:column;\n\tmin-height:100vh;\n}\n.app .main-wrapper{\n\t-webkit-box-flex:1;\n\t        flex-grow:1;\n}\n.visible {\n\tdisplay: inline-block !important;\n}\n", ""]);
+exports.push([module.i, "\n.app {\n\tdisplay:-webkit-box;\n\tdisplay:flex;\n\t-webkit-box-orient:vertical;\n\t-webkit-box-direction:normal;\n\t        flex-direction:column;\n\tmin-height:100vh;\n}\n.app .main-wrapper{\n\t-webkit-box-flex:1;\n\t        flex-grow:1;\n}\n", ""]);
 
 // exports
 
@@ -49268,77 +49284,98 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("li", { staticClass: "nav-item" }, [
-                            _vm._m(0),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { href: "javascript:void(0)" },
+                                on: { click: _vm.hood_show }
+                              },
+                              [
+                                _vm._v("Hood "),
+                                _c("i", { staticClass: "far fa-chevron-down" })
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("ul", { staticClass: "sub-drop" }, [
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/teams" } },
-                                    [_vm._v("TEAMS")]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/battles" } },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.getAuthenticatedUser.hood_name
+                            _c(
+                              "ul",
+                              {
+                                class: [
+                                  { visible: _vm.hood_visible },
+                                  "menu-drop",
+                                  "sub-drop"
+                                ]
+                              },
+                              [
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "/teams" } },
+                                      [_vm._v("TEAMS")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "/battles" } },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.getAuthenticatedUser.hood_name
+                                          )
                                         )
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _vm._m(1),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/services" } },
-                                    [_vm._v("Hood Services")]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/lelong" } },
-                                    [_vm._v("Lelong!")]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/lost-and-found" } },
-                                    [_vm._v("Lost and found!")]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm._m(0),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "/services" } },
+                                      [_vm._v("Hood Services")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "/lelong" } },
+                                      [_vm._v("Lelong!")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "/lost-and-found" } },
+                                      [_vm._v("Lost and found!")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
                           _c(
@@ -49358,27 +49395,48 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("li", { staticClass: "nav-item" }, [
-                            _vm._m(2),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { href: "javascript:void(0)" },
+                                on: { click: _vm.kaki_show }
+                              },
+                              [
+                                _vm._v("Kakis "),
+                                _c("i", { staticClass: "far fa-chevron-down" })
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("ul", { staticClass: "sub-drop" }, [
-                              _vm._m(3),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    { attrs: { to: "/kaki-request" } },
-                                    [_vm._v("KAKIS REQUESTS")]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
+                            _c(
+                              "ul",
+                              {
+                                class: [
+                                  { visible: _vm.kaki_visible },
+                                  "menu-drop",
+                                  "sub-drop"
+                                ]
+                              },
+                              [
+                                _vm._m(1),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      { attrs: { to: "/kaki-request" } },
+                                      [_vm._v("KAKIS REQUESTS")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("li", { staticClass: "nav-item profile-item" }, [
-                            _vm._m(4),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("ul", { staticClass: "sub-drop" }, [
                               _c(
@@ -49432,7 +49490,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(3)
     ],
     1
   )
@@ -49442,29 +49500,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
-      [_vm._v("Hood "), _c("i", { staticClass: "far fa-chevron-down" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Other Hoods")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "nav-link", attrs: { href: "javascript:void(0)" } },
-      [_vm._v("Kakis "), _c("i", { staticClass: "far fa-chevron-down" })]
-    )
   },
   function() {
     var _vm = this

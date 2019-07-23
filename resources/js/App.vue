@@ -29,8 +29,8 @@
 						<router-link class="nav-link" to="/start-activity">Start Activity</router-link>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="javascript:void(0)">Hood <i class="far fa-chevron-down"></i></a>
-					<ul class="sub-drop">
+					<a class="nav-link" href="javascript:void(0)" @click="hood_show">Hood <i class="far fa-chevron-down"></i></a>
+					<ul :class="[{ 'visible': hood_visible }, 'menu-drop', 'sub-drop']">
 						<li>
 						<router-link to="/teams">TEAMS</router-link>
 						</li>
@@ -55,8 +55,8 @@
 					<router-link class="nav-link" to="/interest-groups">Group</router-link>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="javascript:void(0)">Kakis <i class="far fa-chevron-down"></i></a>
-					<ul class="sub-drop">
+					<a class="nav-link" href="javascript:void(0)" @click="kaki_show">Kakis <i class="far fa-chevron-down"></i></a>
+					<ul :class="[{ 'visible' : kaki_visible },'menu-drop', 'sub-drop']">
 						<li>
 						<a href="#">MY KAKIS</a>
 						</li>
@@ -146,7 +146,9 @@ export default {
 			api_token: null,
 			user: {},
 			toggle: true,
-			visible: false
+			visible: false,
+			hood_visible: false,
+			kaki_visible: false
 		}
 	},
 	computed: {
@@ -178,6 +180,20 @@ export default {
 				this.visible = false
 			} else {
 				this.visible = true
+			}
+		},
+		hood_show () {
+			if (this.hood_visible) {
+				this.hood_visible = false
+			} else {
+				this.hood_visible = true
+			}
+		},
+		kaki_show () {
+			if (this.kaki_visible) {
+				this.kaki_visible = false
+			} else {
+				this.kaki_visible = true
 			}
 		}
 	},
@@ -213,8 +229,5 @@ export default {
 }
 .app .main-wrapper{
 	flex-grow:1;
-}
-.visible {
-	display: inline-block !important;
 }
 </style>
